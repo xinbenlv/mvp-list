@@ -1,0 +1,29 @@
+{
+  "schema_version": "mvp-list.place.v1",
+  "name": null,
+  "place_type": null,
+  "status": "candidate",
+  "site_ids": [],
+  "location": {
+    "lat": null,
+    "lon": null,
+    "normalized_address": null,
+    "city": null,
+    "region": null,
+    "country": null
+  },
+  "open_hours": {
+    "raw": null,
+    "timezone": null,
+    "source_url": null,
+    "retrieved_at": null
+  },
+  "family_context": {
+    "visited": null,
+    "liked_if_visited": null,
+    "baby_friendly_notes": null
+  },
+  "tags": [],
+  "sources": [],
+  "confidence_notes": []
+}

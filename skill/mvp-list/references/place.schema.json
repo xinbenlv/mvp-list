@@ -1,0 +1,551 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/mvp-list/place.schema.json",
+  "title": "MVP List Place",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "name",
+    "place_type",
+    "status",
+    "site_ids",
+    "location",
+    "open_hours",
+    "family_context",
+    "tags",
+    "sources",
+    "confidence_notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "mvp-list.place.v1"
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "place_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "restaurant",
+        "point_of_attraction",
+        null
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "indexed",
+        "needs_disambiguation",
+        "needs_review"
+      ]
+    },
+    "site_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/site_id"
+      }
+    },
+    "location": {
+      "$ref": "#/$defs/location"
+    },
+    "open_hours": {
+      "$ref": "#/$defs/open_hours"
+    },
+    "family_context": {
+      "$ref": "#/$defs/family_context"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "confidence_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "restaurant": {
+      "$ref": "#/$defs/restaurant"
+    },
+    "point_of_attraction": {
+      "$ref": "#/$defs/point_of_attraction"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "place_type": {
+            "const": "restaurant"
+          }
+        },
+        "required": [
+          "place_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "restaurant"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "place_type": {
+            "const": "point_of_attraction"
+          }
+        },
+        "required": [
+          "place_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "point_of_attraction"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "site_id": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "site",
+        "id",
+        "url",
+        "confidence"
+      ],
+      "properties": {
+        "site": {
+          "type": "string",
+          "enum": [
+            "google_maps",
+            "yelp",
+            "apple_maps",
+            "official_site",
+            "other"
+          ]
+        },
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lat",
+        "lon",
+        "normalized_address",
+        "city",
+        "region",
+        "country"
+      ],
+      "properties": {
+        "lat": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -180,
+          "maximum": 180
+        },
+        "normalized_address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "region": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "open_hours": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw",
+        "timezone",
+        "source_url",
+        "retrieved_at"
+      ],
+      "properties": {
+        "raw": {
+          "type": [
+            "string",
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "timezone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "retrieved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      }
+    },
+    "family_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visited",
+        "liked_if_visited",
+        "baby_friendly_notes"
+      ],
+      "properties": {
+        "visited": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "liked_if_visited": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "baby_friendly_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "title",
+        "retrieved_at",
+        "used_for"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "used_for": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "identity",
+              "address",
+              "hours",
+              "rating",
+              "price",
+              "dishes",
+              "attractions",
+              "other"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "restaurant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cuisine_type",
+        "ratings",
+        "top_dishes",
+        "price_range",
+        "vibe"
+      ],
+      "properties": {
+        "cuisine_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ratings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rating"
+          }
+        },
+        "top_dishes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/top_dish"
+          }
+        },
+        "price_range": {
+          "$ref": "#/$defs/price_range"
+        },
+        "vibe": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "rating": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "site",
+        "rating",
+        "review_count",
+        "source_url",
+        "retrieved_at"
+      ],
+      "properties": {
+        "site": {
+          "type": "string",
+          "enum": [
+            "google_maps",
+            "yelp",
+            "apple_maps",
+            "michelin",
+            "other"
+          ]
+        },
+        "rating": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "review_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "top_dish": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "source_url"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      }
+    },
+    "price_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "symbol",
+        "text",
+        "source_url"
+      ],
+      "properties": {
+        "symbol": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "$",
+            "$$",
+            "$$$",
+            "$$$$",
+            null
+          ]
+        },
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      }
+    },
+    "point_of_attraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attractions",
+        "estimated_visit_duration",
+        "category"
+      ],
+      "properties": {
+        "attractions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attraction"
+          }
+        },
+        "estimated_visit_duration": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "category": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "museum",
+            "park",
+            "national_park",
+            "landmark",
+            "beach",
+            "garden",
+            "trail",
+            "other",
+            null
+          ]
+        }
+      }
+    },
+    "attraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "source_url"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      }
+    }
+  }
+}
