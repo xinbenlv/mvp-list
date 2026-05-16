@@ -50,11 +50,11 @@ Restart Claude after installing the symlink so the skill metadata is reloaded.
 
 ## Configure GBrain
 
-The skill can still produce a JSON draft without gbrain. To let it write directly into gbrain, configure one of these paths:
+The skill can still produce a Markdown draft without gbrain. To let it write directly into gbrain, configure one of these paths:
 
 1. Install the `gbrain` CLI and make sure it is on `PATH`.
 2. Set `GBRAIN_REPO` to the local gbrain repository path.
-3. Make sure the gbrain repository documents or exposes a write/import entrypoint for structured place records.
+3. Make sure the gbrain repository documents or exposes a write/import entrypoint for Markdown place records.
 
 Example shell setup:
 
@@ -62,7 +62,7 @@ Example shell setup:
 export GBRAIN_REPO=/path/to/gbrain
 ```
 
-If gbrain is missing or no write entrypoint can be found, the skill should pause and ask the user to install or configure gbrain. It should only output the JSON draft and must not claim the place was indexed.
+If gbrain is missing or no Markdown write entrypoint can be found, the skill should pause and ask the user to install or configure gbrain. It should only output the Markdown draft and must not claim the place was indexed.
 
 ## Validate The Skill Files
 

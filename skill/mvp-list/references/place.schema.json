@@ -391,6 +391,8 @@
             "google_maps",
             "yelp",
             "apple_maps",
+            "opentable",
+            "ubereats",
             "michelin",
             "other"
           ]
