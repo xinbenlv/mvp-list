@@ -4,6 +4,8 @@ MVP List is a small project for planning family getaway trips from a growing bac
 
 The current focus is the curation and indexing stage: take a place from a URL or image, resolve a canonical reference for it, enrich the place with structured metadata, and prepare it for gbrain indexing.
 
+![MVP List deck animation](images-v2.1/mvp-list-animation.gif)
+
 ## Current Scope
 
 - Curate places discovered from social media, search, map links, screenshots, or photos.
