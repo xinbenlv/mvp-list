@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Composer — V4 Metro Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Major+Mono+Display&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E0E10;--paper:#FAFAF7;--line:#D32F2F;--line-soft:#FFCDD2;
+  --gold:#F9A825;--slate:#546E7A;--green:#2E7D32;--mute:#8a8a8a;--grid:#e4e4e0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'Archivo',sans-serif;font-size:14px;line-height:1.55;
+  overflow-x:hidden;padding-bottom:100px;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(to right,var(--grid) 1px,transparent 1px),linear-gradient(to bottom,var(--grid) 1px,transparent 1px);
+  background-size:40px 40px;opacity:.35;
+}
+.variant-label{
+  position:fixed;top:14px;right:14px;background:var(--line);color:#fff;
+  padding:8px 14px;font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:10px;letter-spacing:.16em;z-index:999;text-transform:uppercase;
+}
+/* HEADER */
+.header{
+  border-bottom:6px solid var(--ink);padding:36px 40px 30px;background:var(--paper);
+  position:relative;
+}
+.header-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:30px;border-bottom:1px solid var(--ink);padding-bottom:14px;
+}
+.brand{
+  display:flex;align-items:center;gap:14px;
+}
+.brand-mark{
+  width:48px;height:48px;background:var(--line);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Archivo',sans-serif;font-weight:900;font-size:22px;border-radius:50%;
+  letter-spacing:-.04em;
+}
+.brand-text{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase}
+.brand-text small{display:block;font-weight:400;font-size:10px;letter-spacing:.2em;color:var(--mute);margin-top:2px}
+.header-meta{display:flex;gap:30px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.header-meta b{display:block;font-weight:700;color:var(--ink);font-size:12px}
+.header-meta span{color:var(--mute);font-size:10px;display:block;margin-bottom:2px}
+.line-id{
+  font-family:'Major Mono Display',monospace;font-size:14px;letter-spacing:.2em;
+  color:var(--line);margin-bottom:14px;text-transform:uppercase;
+}
+.day-theme{
+  font-family:'Archivo',sans-serif;font-weight:900;font-size:88px;line-height:.9;
+  letter-spacing:-.04em;color:var(--ink);margin-bottom:18px;
+}
+.day-theme em{font-style:normal;color:var(--line)}
+.subtitle{
+  font-family:'Archivo',sans-serif;font-weight:500;font-size:18px;
+  letter-spacing:-.01em;color:var(--ink);max-width:680px;line-height:1.4;
+  border-left:6px solid var(--line);padding-left:16px;margin-bottom:24px;
+}
+.mood-strip{
+  display:flex;gap:0;flex-wrap:wrap;border:2px solid var(--ink);max-width:fit-content;
+}
+.mood-cell{
+  font-family:'Archivo',sans-serif;font-weight:600;font-size:11px;
+  padding:8px 14px;text-transform:uppercase;letter-spacing:.12em;
+  border-right:2px solid var(--ink);background:var(--paper);
+}
+.mood-cell:last-child{border-right:none}
+.mood-cell.hot{background:var(--line);color:#fff}
+.endpoints{
+  margin-top:30px;display:grid;grid-template-columns:1fr auto 1fr;gap:20px;
+  align-items:center;padding-top:24px;border-top:2px solid var(--ink);
+}
+.endpoint{display:flex;align-items:center;gap:14px}
+.endpoint-dot{width:18px;height:18px;border-radius:50%;background:var(--line);border:3px solid var(--ink);flex-shrink:0}
+.endpoint-info{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.endpoint-info b{display:block;font-size:14px;font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:.02em}
+.endpoint-info small{color:var(--mute);display:block;margin-top:2px;font-size:10px}
+.endpoint-line{
+  height:6px;background:var(--line);position:relative;
+  background-image:repeating-linear-gradient(90deg,var(--line) 0,var(--line) 10px,#fff 10px,#fff 14px);
+}
+.endpoint.right{justify-content:flex-end}
+/* ARC as service quality chart */
+.arc-section{
+  padding:40px;border-bottom:2px solid var(--ink);background:var(--paper);
+}
+.arc-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:6px;
+}
+.arc-title{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:32px;
+  letter-spacing:-.02em;color:var(--ink);margin-bottom:24px;
+}
+.arc-card{
+  border:2px solid var(--ink);padding:30px 26px;background:#fff;position:relative;
+}
+.arc-svg{width:100%;height:200px;display:block}
+.arc-svg .grid-h{stroke:var(--grid);stroke-width:1}
+.arc-svg .axis{stroke:var(--ink);stroke-width:2}
+.arc-svg .line-path{stroke:var(--line);stroke-width:4;fill:none;stroke-linejoin:miter}
+.arc-svg .fill-area{fill:var(--line-soft);opacity:.55}
+.arc-svg circle.station{fill:#fff;stroke:var(--ink);stroke-width:3}
+.arc-svg circle.station-core{fill:var(--line)}
+.arc-svg text{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--ink);letter-spacing:.1em;text-transform:uppercase}
+.arc-svg text.lbl{font-family:'Archivo',sans-serif;font-weight:700;font-size:11px;fill:var(--ink);letter-spacing:.06em}
+.arc-svg text.val{font-family:'Major Mono Display',monospace;font-size:11px;fill:var(--line)}
+.arc-legend{
+  margin-top:16px;display:flex;gap:24px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+}
+.arc-legend span{display:flex;align-items:center;gap:8px}
+.arc-legend span::before{content:'';display:block;width:14px;height:4px;background:var(--line)}
+/* LINE / STATIONS */
+.line-section{padding:60px 40px 40px;position:relative}
+.line-section-title{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:32px;
+  letter-spacing:-.02em;margin-bottom:8px;
+}
+.line-section-sub{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:40px;
+}
+.stations{
+  display:grid;grid-template-columns:80px 1fr;gap:0;position:relative;
+  max-width:1100px;
+}
+/* the vertical line */
+.line-rail{
+  position:absolute;left:30px;top:30px;bottom:30px;width:8px;background:var(--line);
+  z-index:1;
+}
+.station{
+  display:contents;
+}
+.station-marker{
+  grid-column:1;display:flex;justify-content:center;padding-top:30px;position:relative;z-index:2;
+}
+.station-circle{
+  width:48px;height:48px;border-radius:50%;background:#fff;border:6px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Major Mono Display',monospace;font-size:18px;color:var(--ink);
+  font-weight:700;position:relative;
+}
+.station-circle.peak{background:var(--line);color:#fff;width:56px;height:56px;font-size:20px}
+.station-info{
+  grid-column:2;padding:24px 0 50px 32px;border-bottom:1px dashed var(--grid);
+}
+.station:last-child .station-info{border-bottom:none}
+.station-top{
+  display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:14px;
+}
+.station-name{
+  font-family:'Archivo',sans-serif;font-weight:900;font-size:42px;letter-spacing:-.02em;
+  line-height:1;color:var(--ink);
+}
+.station-name small{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:400;
+  color:var(--mute);letter-spacing:.14em;text-transform:uppercase;margin-top:8px;
+}
+.station-time{
+  font-family:'Major Mono Display',monospace;font-size:42px;letter-spacing:.04em;
+  color:var(--line);line-height:1;
+}
+.station-time small{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--mute);letter-spacing:.18em;text-transform:uppercase;margin-top:6px;font-weight:400}
+.station-headline{
+  font-family:'Archivo',sans-serif;font-weight:600;font-size:18px;color:var(--ink);
+  margin-bottom:14px;letter-spacing:-.01em;border-left:4px solid var(--line);padding-left:12px;
+}
+.station-why{font-size:14.5px;line-height:1.7;color:#222;margin-bottom:18px;max-width:640px}
+.station-meta{
+  display:flex;gap:0;flex-wrap:wrap;border:2px solid var(--ink);max-width:fit-content;margin-bottom:12px;
+}
+.meta-cell{
+  padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;border-right:2px solid var(--ink);
+}
+.meta-cell:last-child{border-right:none}
+.meta-cell b{display:block;font-weight:700;font-size:11px}
+.meta-cell.warn{background:var(--gold);color:var(--ink)}
+.meta-cell.no{background:var(--ink);color:#fff}
+.station-tip{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink);
+  border-left:4px solid var(--gold);padding:6px 14px;margin:14px 0;background:#fff;
+  letter-spacing:.02em;line-height:1.5;
+}
+.station-tip::before{content:'TIP · ';font-weight:700;color:var(--gold)}
+.book-btn{
+  display:inline-block;background:var(--ink);color:#fff;padding:11px 22px;
+  text-decoration:none;font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-top:10px;
+  border:2px solid var(--ink);
+}
+.book-btn:hover{background:var(--paper);color:var(--ink)}
+.book-btn::after{content:' →'}
+/* transit between */
+.transit-row{
+  grid-column:1/3;display:grid;grid-template-columns:80px 1fr;align-items:center;
+  position:relative;
+}
+.transit-marker{display:flex;justify-content:center}
+.transit-marker::before{
+  content:'';width:8px;height:60px;background:var(--line);
+}
+.transit-info{
+  padding:12px 0 12px 32px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mute);display:flex;gap:18px;
+}
+.transit-info b{color:var(--ink);font-weight:700}
+/* MENU = TIMETABLE */
+.timetable{
+  margin-top:20px;border:2px solid var(--ink);background:#fff;
+}
+.timetable-head{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--ink);color:#fff;padding:14px 20px;
+}
+.timetable-title{font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+.timetable-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#bbb}
+.timetable table{width:100%;border-collapse:collapse}
+.timetable th,.timetable td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--grid);font-family:'JetBrains Mono',monospace;font-size:12px}
+.timetable th{background:var(--paper);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border-bottom:2px solid var(--ink)}
+.timetable td.num{color:var(--line);font-weight:700;font-family:'Major Mono Display',monospace;font-size:13px}
+.timetable td.role{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.timetable td.note{font-size:11px;color:var(--ink);font-style:italic}
+.timetable tr:last-child td{border-bottom:none}
+.timetable-foot{
+  background:var(--paper);padding:14px 20px;border-top:2px solid var(--ink);
+  font-family:'Archivo',sans-serif;font-size:13px;line-height:1.5;color:var(--ink);
+  font-weight:500;
+}
+.timetable-foot b{font-family:'JetBrains Mono',monospace;color:var(--line)}
+/* BRANCHES */
+.branches{
+  padding:50px 40px;border-top:6px solid var(--ink);background:#fff;
+}
+.branches-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:6px;
+}
+.branches-title{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:32px;
+  letter-spacing:-.02em;margin-bottom:30px;
+}
+.branch{
+  display:grid;grid-template-columns:60px 1fr;gap:20px;
+  padding:24px 0;border-top:2px solid var(--ink);align-items:center;
+}
+.branch-junction{
+  width:48px;height:48px;border:6px solid var(--ink);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Major Mono Display',monospace;font-size:18px;background:var(--gold);
+}
+.branch:nth-of-type(2) .branch-junction{background:var(--green);color:#fff}
+.branch-body{display:flex;gap:30px;align-items:center;flex-wrap:wrap}
+.branch-cond{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;
+  letter-spacing:-.01em;color:var(--ink);min-width:200px;
+}
+.branch-cond small{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:400;margin-top:4px}
+.branch-arrow{font-family:'Archivo',sans-serif;font-weight:900;font-size:24px;color:var(--ink)}
+.branch-alt{flex:1;font-size:14px;line-height:1.6;color:var(--ink);font-weight:500}
+.branch-alt strong{font-weight:700;color:var(--line);text-decoration:underline;text-underline-offset:3px}
+/* TERMINAL */
+.terminal{
+  text-align:center;padding:50px 40px;background:var(--ink);color:#fff;
+  border-top:6px solid var(--line);
+}
+.terminal-mark{
+  width:80px;height:80px;background:var(--line);color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 20px;
+  font-family:'Archivo',sans-serif;font-weight:900;font-size:38px;letter-spacing:-.04em;
+}
+.terminal-title{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:28px;
+  letter-spacing:-.02em;margin-bottom:8px;
+}
+.terminal-sub{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:#aaa;
+}
+/* REFINE */
+.refine{
+  position:fixed;bottom:0;left:0;right:0;background:var(--ink);color:#fff;
+  padding:14px 40px;display:flex;gap:10px;align-items:center;z-index:998;
+  border-top:6px solid var(--line);flex-wrap:wrap;
+}
+.refine-label{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--line);margin-right:6px;
+}
+.refine-chip{
+  background:transparent;border:2px solid #fff;color:#fff;padding:7px 12px;
+  font-family:'Archivo',sans-serif;font-weight:600;font-size:11px;cursor:pointer;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.refine-chip:hover{background:#fff;color:var(--ink)}
+.refine-input{
+  flex:1;min-width:180px;background:transparent;border:none;border-bottom:2px solid #fff;
+  color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;
+  padding:7px 4px;letter-spacing:.04em;text-transform:uppercase;
+}
+.refine-input::placeholder{color:#888;text-transform:none;font-family:'Archivo',sans-serif;font-weight:500}
+.refine-submit{
+  background:var(--line);color:#fff;border:none;padding:9px 18px;
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;cursor:pointer;
+}
+.refine-submit:hover{background:#fff;color:var(--line)}
+@media(max-width:780px){
+  .header{padding:24px 20px 20px}
+  .day-theme{font-size:54px}
+  .header-top{flex-direction:column;align-items:flex-start;gap:14px}
+  .header-meta{flex-wrap:wrap;gap:14px}
+  .endpoints{grid-template-columns:1fr}
+  .arc-section,.line-section,.branches,.terminal{padding:30px 20px}
+  .stations{grid-template-columns:60px 1fr}
+  .line-rail{left:22px}
+  .station-circle{width:36px;height:36px;border-width:4px;font-size:14px}
+  .station-circle.peak{width:44px;height:44px;font-size:16px}
+  .station-info{padding-left:18px}
+  .station-name{font-size:30px}
+  .station-time{font-size:30px}
+  .refine{padding:12px 16px}
+  .timetable th,.timetable td{padding:8px;font-size:11px}
+}
+</style>
+</head>
+<body>
+<div class="variant-label">V4 / Metro Map · Day Line 01</div>
+
+<section class="header">
+  <div class="header-top">
+    <div class="brand">
+      <div class="brand-mark">D1</div>
+      <div class="brand-text">Day Composer<small>Transit System · Bay Area</small></div>
+    </div>
+    <div class="header-meta">
+      <div><span>Service</span><b>Sat · Jan 10 · 2026</b></div>
+      <div><span>Window</span><b>14:30 → 22:00</b></div>
+      <div><span>Passengers</span><b>Mia · +1 · +baby</b></div>
+      <div><span>Vehicle</span><b>Car</b></div>
+    </div>
+  </div>
+
+  <div class="line-id">⬤  Day Line 01 — Bay Area Recovery Local</div>
+  <h1 class="day-theme">旧湾区 <em>·</em><br>恢复感的<em>一天</em></h1>
+  <p class="subtitle">A 4-station recovery service routing through Milpitas history, lakeside reset, neighborhood dinner, and downtown comedy. Local stops, no express.</p>
+
+  <div class="mood-strip">
+    <div class="mood-cell hot">reflective</div>
+    <div class="mood-cell">warm</div>
+    <div class="mood-cell">lightly exploratory</div>
+    <div class="mood-cell">not rushed</div>
+  </div>
+
+  <div class="endpoints">
+    <div class="endpoint">
+      <div class="endpoint-dot"></div>
+      <div class="endpoint-info"><b>Sunnyvale</b><small>Origin · 14:00 depart</small></div>
+    </div>
+    <div class="endpoint-line"></div>
+    <div class="endpoint right">
+      <div class="endpoint-info" style="text-align:right"><b>Downtown SJ</b><small>Terminal · 22:00 close</small></div>
+      <div class="endpoint-dot" style="background:var(--gold)"></div>
+    </div>
+  </div>
+</section>
+
+<section class="arc-section">
+  <div class="arc-eyebrow">Passenger Vibe Curve · Service Quality Index</div>
+  <h2 class="arc-title">Energy across the line</h2>
+  <div class="arc-card">
+    <svg class="arc-svg" viewBox="0 0 1000 200" preserveAspectRatio="none">
+      <line class="grid-h" x1="40" y1="50" x2="990" y2="50"/>
+      <line class="grid-h" x1="40" y1="100" x2="990" y2="100"/>
+      <line class="grid-h" x1="40" y1="150" x2="990" y2="150"/>
+      <line class="axis" x1="40" y1="180" x2="990" y2="180"/>
+      <line class="axis" x1="40" y1="10" x2="40" y2="180"/>
+      <text x="20" y="55" text-anchor="end">HIGH</text>
+      <text x="20" y="105" text-anchor="end">MED</text>
+      <text x="20" y="155" text-anchor="end">LOW</text>
+      <polygon class="fill-area" points="170,150 410,135 650,40 880,90 880,180 170,180"/>
+      <polyline class="line-path" points="170,150 410,135 650,40 880,90"/>
+      <g><circle class="station" cx="170" cy="150" r="10"/><circle class="station-core" cx="170" cy="150" r="5"/></g>
+      <g><circle class="station" cx="410" cy="135" r="10"/><circle class="station-core" cx="410" cy="135" r="5"/></g>
+      <g><circle class="station" cx="650" cy="40" r="12"/><circle class="station-core" cx="650" cy="40" r="6"/></g>
+      <g><circle class="station" cx="880" cy="90" r="10"/><circle class="station-core" cx="880" cy="90" r="5"/></g>
+      <text class="lbl" x="170" y="195" text-anchor="middle">14:30</text>
+      <text class="lbl" x="410" y="195" text-anchor="middle">15:00</text>
+      <text class="lbl" x="650" y="195" text-anchor="middle">18:30</text>
+      <text class="lbl" x="880" y="195" text-anchor="middle">20:00</text>
+      <text class="val" x="170" y="138" text-anchor="middle">0.25</text>
+      <text class="val" x="410" y="123" text-anchor="middle">0.40</text>
+      <text class="val" x="650" y="28" text-anchor="middle">0.85</text>
+      <text class="val" x="880" y="78" text-anchor="middle">0.55</text>
+    </svg>
+    <div class="arc-legend"><span>passenger energy</span><span style="display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 14 14" style="display:block"><circle cx="7" cy="7" r="5" fill="none" stroke="var(--ink)" stroke-width="2"/></svg> station marker</span></div>
+  </div>
+</section>
+
+<section class="line-section">
+  <h2 class="line-section-title">Stations · 4 stops</h2>
+  <div class="line-section-sub">Local service · all stations</div>
+
+  <div class="stations">
+    <div class="line-rail"></div>
+
+    <div class="station">
+      <div class="station-marker"><div class="station-circle">D1</div></div>
+      <div class="station-info">
+        <div class="station-top">
+          <div class="station-name">Alviso Adobe<small>2087 Alviso Adobe Ct · Milpitas, 95035</small></div>
+          <div class="station-time">14:30<small>Opening · arrival</small></div>
+        </div>
+        <div class="station-headline">A quiet historical opening</div>
+        <p class="station-why">保留于 19 世纪加州早期定居时期的 adobe 古建筑，作为小型历史展示空间对公众开放。今天想 restore 又不想完全静止——adobe 比大型 museum 轻盈，宝宝好带。每月第二个周六免费导览。</p>
+        <div class="station-meta">
+          <div class="meta-cell"><b>Parking</b>Easy</div>
+          <div class="meta-cell"><b>Baby</b>Friendly</div>
+          <div class="meta-cell"><b>Cost</b>Free</div>
+          <div class="meta-cell"><b>Duration</b>~45min</div>
+        </div>
+        <p class="station-tip">免费门票，但要提前在 Eventbrite 预约导览席位</p>
+        <a href="#" class="book-btn">Reserve tour</a>
+      </div>
+    </div>
+
+    <div class="transit-row"><div class="transit-marker"></div><div class="transit-info"><b>→ 5 min drive</b><span>Indoor narrative → outdoor breathing</span></div></div>
+
+    <div class="station">
+      <div class="station-marker"><div class="station-circle">D2</div></div>
+      <div class="station-info">
+        <div class="station-top">
+          <div class="station-name">Sandy Wool Lake<small>901 Downing Rd · Milpitas, 95035</small></div>
+          <div class="station-time">15:00<small>Breathing</small></div>
+        </div>
+        <div class="station-headline">Lakeside breathing</div>
+        <p class="station-why">距离 Alviso Adobe 很近的湖边公园，适合观鸟、钓鱼、轻徒步和野炊。带孩子接近大自然，下午的湖面安静好看。</p>
+        <div class="station-meta">
+          <div class="meta-cell"><b>Parking</b>Easy</div>
+          <div class="meta-cell"><b>Baby</b>Stroller OK</div>
+          <div class="meta-cell"><b>Type</b>Outdoor</div>
+        </div>
+        <p class="station-tip">停在湖边圆盘停车场</p>
+      </div>
+    </div>
+
+    <div class="transit-row"><div class="transit-marker"></div><div class="transit-info"><b>→ 22 min drive</b><span>Outdoor reset → appetite-opening</span></div></div>
+
+    <div class="station">
+      <div class="station-marker"><div class="station-circle peak">D3</div></div>
+      <div class="station-info">
+        <div class="station-top">
+          <div class="station-name">Dong Que · Junction<small>2852 Alum Rock Ave · San Jose · WALK-IN</small></div>
+          <div class="station-time">18:30<small>Peak · meal service</small></div>
+        </div>
+        <div class="station-headline">A lively neighborhood dinner</div>
+        <p class="station-why">你说不想 touristy；这是 walk-in only 的本地越南/广东融合馆，烟火气十足。点了 9 道招牌菜，正好把白天的安静节奏接回到热闹收尾。</p>
+        <div class="station-meta">
+          <div class="meta-cell"><b>Parking</b>Street/Lot</div>
+          <div class="meta-cell"><b>Baby</b>Friendly</div>
+          <div class="meta-cell warn"><b>Booking</b>Walk-in</div>
+        </div>
+
+        <div class="timetable">
+          <div class="timetable-head">
+            <div class="timetable-title">Dish Service Timetable · 9 plates</div>
+            <div class="timetable-sub">Order of fire ↓</div>
+          </div>
+          <table>
+            <thead><tr><th>No.</th><th>Dish</th><th>Service</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td class="num">88</td><td>烤生蚝 · grilled oyster</td><td class="role">apéritif</td><td class="note">开胃</td></tr>
+              <tr><td class="num">92</td><td>鱼籽扇贝 · roe scallop</td><td class="role">apéritif</td><td></td></tr>
+              <tr><td class="num">98</td><td>蒜香海蜗牛 · garlic conch</td><td class="role">apéritif</td><td></td></tr>
+              <tr><td class="num">84</td><td>芝士焗蛤蜊 · cheese clam</td><td class="role">apéritif</td><td></td></tr>
+              <tr><td class="num">15</td><td>香松腊肠锅巴饭 · lap cheong rice</td><td class="role" style="color:var(--line);font-weight:700">★ signature</td><td class="note">先点，要等</td></tr>
+              <tr><td class="num">103</td><td>铁板螺丝 · iron-plate snail</td><td class="role">main</td><td></td></tr>
+              <tr><td class="num">5</td><td>烤鹌鹑 · roast quail</td><td class="role">main</td><td></td></tr>
+              <tr><td class="num">68</td><td>炒牛蛙腿 · stir-fried frog leg</td><td class="role">main</td><td></td></tr>
+              <tr><td class="num">93</td><td>蛏子烤空心海菜 · razor clam greens</td><td class="role">side</td><td></td></tr>
+            </tbody>
+          </table>
+          <div class="timetable-foot">先开 <b>88 / 92</b> 两道海鲜小盘开胃，主菜 <b>15 / 103 / 68</b> 同时上桌做火候节奏，<b>5 / 93</b> 收尾。带宝宝的话 <b>15</b> 最稳。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="transit-row"><div class="transit-marker"></div><div class="transit-info"><b>→ 15 min drive</b><span>Warm fullness → social light closing</span></div></div>
+
+    <div class="station">
+      <div class="station-marker"><div class="station-circle">D4</div></div>
+      <div class="station-info">
+        <div class="station-top">
+          <div class="station-name">Spaced Out · Terminal<small>28 N Almaden Ave #30 · Downtown San Jose</small></div>
+          <div class="station-time">20:00<small>Closing · last service</small></div>
+        </div>
+        <div class="station-headline">Standup comedy to close</div>
+        <p class="station-why">Downtown San Jose 小场地脱口秀，$12.99/人。把一天从安静→自然→烟火气→社交轻收尾，4 个 mood 走完一个完整的弧。</p>
+        <div class="station-meta">
+          <div class="meta-cell"><b>Parking</b>Paid Garage</div>
+          <div class="meta-cell no"><b>Baby</b>NOT ALLOWED</div>
+          <div class="meta-cell"><b>Cost</b>$12.99</div>
+        </div>
+        <p class="station-tip">停车去 Almaden Financial Plaza ($8 evening rate)，或打车往返 $40-50</p>
+        <a href="#" class="book-btn">Buy ticket</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="branches">
+  <div class="branches-eyebrow">Service Alerts · Alternate Routing</div>
+  <h2 class="branches-title">Transfers &amp; detours</h2>
+
+  <div class="branch">
+    <div class="branch-junction">A</div>
+    <div class="branch-body">
+      <div class="branch-cond">If 宝宝困了<small>Tired-Passenger Alert</small></div>
+      <div class="branch-arrow">→</div>
+      <div class="branch-alt">Skip D4 terminal. Route to dessert via local lines · <strong>Phin Coffee</strong> or <strong>Bambu</strong></div>
+    </div>
+  </div>
+
+  <div class="branch">
+    <div class="branch-junction">B</div>
+    <div class="branch-body">
+      <div class="branch-cond">If energy 还高<small>Extended-Service Available</small></div>
+      <div class="branch-arrow">→</div>
+      <div class="branch-alt">After D4, add wine-bar extension · <strong>Cafe Stritch</strong> or <strong>Paper Plane</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="terminal">
+  <div class="terminal-mark">D∞</div>
+  <div class="terminal-title">End of service — composed, not scheduled.</div>
+  <div class="terminal-sub">Day Composer · Bay Area Recovery Local · 2026.01.10</div>
+</section>
+
+<div class="refine">
+  <span class="refine-label">↻ Re-route</span>
+  <button class="refine-chip">更安静一点</button>
+  <button class="refine-chip">加一个酒吧</button>
+  <button class="refine-chip">宝宝今天很累</button>
+  <input class="refine-input" placeholder="adjust route...">
+  <button class="refine-submit">Recompose</button>
+</div>
+
+</body>
+</html>

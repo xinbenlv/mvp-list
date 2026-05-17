@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Composer — Template · Cinematic Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700;1,6..96,900&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* PALETTE — Vogue / AnOther / Helmut Newton fashion editorial
+   COOL & SHARP, never warm/earthy. ONE accent color (true red), nothing else competes.
+   Ivory (cool, not yellow) + jet black + electric Vogue red + ash silver.
+   Image gradients lean deep navy / charcoal, NOT brown. */
+:root{
+  --ivory:#F8F6F0;     /* cool ivory — minimal warmth, not yellow */
+  --paper:#FAF9F4;     /* slightly lighter for cards */
+  --jet:#0A0A0A;       /* true near-black */
+  --noir:#15161A;      /* deep cool noir w/ blue undertone */
+  --red:#DD0F2C;       /* Vogue/Louboutin red — saturated, cool */
+  --red-deep:#A0061C;
+  --ash:#5A5C60;       /* cool gray */
+  --silver:#9D9FA3;
+  --whisper:rgba(248,246,240,.65);
+  --hairline:rgba(10,10,10,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ivory);color:var(--jet);
+  font-family:'DM Sans',sans-serif;font-weight:400;font-size:15px;line-height:1.65;
+  overflow-x:hidden;
+}
+.variant-label{
+  position:fixed;top:14px;right:14px;background:var(--jet);color:var(--ivory);
+  padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+  z-index:999;text-transform:uppercase;border-left:3px solid var(--red);
+}
+.palette-meta{
+  position:fixed;top:14px;left:14px;background:var(--ivory);
+  border:1px solid var(--jet);padding:10px 14px;z-index:999;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;line-height:1.5;max-width:280px;
+}
+.palette-meta b{display:block;color:var(--red);font-size:11px;letter-spacing:.2em;margin-bottom:4px;font-weight:700}
+.palette-meta .swatches{display:flex;gap:5px;margin-top:6px}
+.palette-meta .swatches i{width:18px;height:18px;display:block;border:1px solid var(--jet)}
+/* MASTHEAD */
+.masthead{
+  background:var(--jet);color:var(--ivory);
+  padding:14px 40px;display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+}
+.masthead-brand{font-family:'Bodoni Moda',serif;font-weight:900;font-size:16px;letter-spacing:0;text-transform:none}
+.masthead-brand em{font-style:italic;font-weight:400;color:var(--silver)}
+.masthead-brand::before{content:'';display:inline-block;width:8px;height:8px;background:var(--red);margin-right:10px;vertical-align:middle}
+.masthead-meta{display:flex;gap:28px;color:var(--silver)}
+.masthead-meta b{color:var(--ivory);font-weight:500}
+/* HERO — cinematic but COLD, never warm */
+.hero{
+  position:relative;height:100vh;min-height:720px;overflow:hidden;
+  background:linear-gradient(155deg,#1c2028 0%,#0a0d12 55%,#000 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  color:var(--ivory);padding:60px 50px 70px;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 75% 25%,rgba(221,15,44,.18) 0%,transparent 50%),
+    radial-gradient(ellipse at 25% 75%,rgba(255,255,255,.06) 0%,transparent 55%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.92' numOctaves='2' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 60%,rgba(0,0,0,.7) 100%);
+}
+.hero-content{position:relative;z-index:2;max-width:1200px}
+.issue-tag{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.5em;
+  color:var(--ivory);margin-bottom:36px;text-transform:uppercase;display:flex;align-items:center;gap:18px;
+}
+.issue-tag::before{content:'';width:60px;height:1px;background:var(--red)}
+.issue-tag em{color:var(--red);font-style:normal}
+.hero-title{
+  font-family:'Bodoni Moda',serif;font-weight:900;
+  font-size:clamp(72px,12vw,196px);line-height:.88;letter-spacing:-.05em;
+  margin-bottom:30px;color:var(--ivory);text-transform:none;
+}
+.hero-title em{font-style:italic;font-weight:400;display:block;color:var(--ivory)}
+.hero-title .accent-line{
+  display:inline-block;width:80px;height:6px;background:var(--red);
+  vertical-align:middle;margin:0 16px 28px;
+}
+.hero-sub{
+  font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:24px;line-height:1.4;
+  max-width:640px;margin-bottom:40px;color:var(--ivory);
+}
+.hero-meta{
+  display:flex;gap:0;border-top:1px solid rgba(248,246,240,.25);padding-top:24px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--silver);flex-wrap:wrap;gap:50px;
+}
+.hero-meta b{display:block;color:var(--ivory);font-size:15px;font-family:'Bodoni Moda',serif;font-weight:700;text-transform:none;letter-spacing:-.01em;margin-top:4px}
+/* TOC + ARC */
+.toc{padding:90px 50px;background:var(--ivory);position:relative}
+.section-label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:700;
+}
+.section-label::before{content:'— ';margin-right:4px}
+.section-title{
+  font-family:'Bodoni Moda',serif;font-weight:900;font-size:88px;
+  letter-spacing:-.04em;line-height:.95;margin-bottom:60px;color:var(--jet);
+}
+.section-title em{font-style:italic;font-weight:400}
+.section-title .red{color:var(--red)}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-start;max-width:1300px}
+.toc-arc{background:var(--jet);padding:40px 32px;color:var(--ivory);position:relative;border-left:6px solid var(--red)}
+.toc-arc::before{content:'EMOTIONAL ARC';position:absolute;top:-9px;left:24px;background:var(--jet);color:var(--red);padding:0 10px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.32em;font-weight:700}
+.toc-arc svg{width:100%;height:180px;display:block}
+.toc-arc .curve{stroke:var(--ivory);stroke-width:1.8;fill:none}
+.toc-arc .area{fill:var(--ivory);opacity:.08}
+.toc-arc circle.s{fill:var(--jet);stroke:var(--ivory);stroke-width:2}
+.toc-arc circle.peak{fill:var(--red);stroke:var(--ivory);stroke-width:2}
+.toc-arc text{font-family:'JetBrains Mono',monospace;font-size:9px;fill:var(--silver);letter-spacing:.14em;text-transform:uppercase}
+.toc-arc text.lbl{font-family:'Bodoni Moda',serif;font-style:italic;font-size:13px;fill:var(--ivory);letter-spacing:0;text-transform:none}
+.toc-list{display:flex;flex-direction:column;gap:0;border-top:3px solid var(--jet)}
+.toc-row{
+  display:grid;grid-template-columns:70px 1fr auto;gap:24px;align-items:baseline;
+  padding:22px 0;border-bottom:1px solid var(--hairline);text-decoration:none;color:var(--jet);
+  transition:padding-left .3s;
+}
+.toc-row:hover{padding-left:14px;border-left:3px solid var(--red)}
+.toc-num{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:42px;color:var(--red);line-height:.85}
+.toc-info h4{font-family:'Bodoni Moda',serif;font-weight:700;font-size:24px;line-height:1.1;letter-spacing:-.01em;margin-bottom:4px}
+.toc-info p{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+.toc-time{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--red);font-weight:700}
+/* SPREADS */
+.spread{padding:100px 50px 90px;border-top:1px solid var(--hairline);position:relative;background:var(--ivory)}
+.spread-num{
+  position:absolute;top:30px;left:50px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:var(--ash);
+}
+.spread-num strong{color:var(--red);font-family:'Bodoni Moda',serif;font-style:italic;font-size:20px;letter-spacing:0;margin-right:6px;font-weight:700;text-transform:none}
+.spread-row{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;max-width:1300px;margin:30px auto 0}
+.spread-row.flip .spread-img{order:2}
+.spread-img{
+  aspect-ratio:3/4;background:var(--noir);
+  position:relative;overflow:hidden;color:var(--ivory);display:flex;align-items:flex-end;padding:36px;
+}
+/* IMAGE gradients — COLD, never brown */
+.spread-img.s1{background:linear-gradient(155deg,#3a4554 0%,#1a2330 50%,#000 100%)}
+.spread-img.s2{background:linear-gradient(155deg,#3a5560 0%,#152830 50%,#000 100%)}
+.spread-img.s3{background:linear-gradient(155deg,#7a0a1c 0%,#3a0510 50%,#000 100%)}
+.spread-img.s4{background:linear-gradient(155deg,#1a1f30 0%,#0a0d18 60%,#000 100%)}
+.spread-img::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence baseFrequency='0.86' numOctaves='2' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E")}
+.spread-img::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,transparent 30%,rgba(0,0,0,.55) 100%)}
+.spread-img-tag{
+  position:absolute;top:24px;left:24px;font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--ivory);z-index:3;
+  padding:5px 10px;background:rgba(10,10,10,.6);backdrop-filter:blur(8px);border-left:2px solid var(--red);
+}
+.spread-img-cap{position:relative;z-index:2;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--silver)}
+.spread-img-cap em{display:block;font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:32px;line-height:1.05;letter-spacing:-.01em;text-transform:none;margin-bottom:8px;color:var(--ivory);text-shadow:0 2px 16px rgba(0,0,0,.6)}
+.spread-text{padding:10px 0}
+.spread-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:700}
+.spread-time{font-family:'Bodoni Moda',serif;font-weight:900;font-size:80px;color:var(--jet);line-height:.85;letter-spacing:-.04em;display:inline-block;margin-bottom:18px}
+.spread-time::after{content:'';display:block;width:60px;height:4px;background:var(--red);margin-top:14px}
+.spread-h{font-family:'Bodoni Moda',serif;font-weight:700;font-size:46px;line-height:1.02;letter-spacing:-.025em;color:var(--jet);margin-bottom:18px}
+.spread-h em{font-style:italic;font-weight:400}
+.spread-addr{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);margin-bottom:24px;padding-left:14px;border-left:3px solid var(--red)}
+.spread-why{font-size:16px;line-height:1.85;color:#1a1a1a;margin-bottom:24px;max-width:540px;font-weight:400}
+.logistics{display:flex;gap:0;flex-wrap:wrap;margin-bottom:20px;border:1px solid var(--jet);max-width:fit-content}
+.logistics span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-right:1px solid var(--jet);background:var(--ivory);color:var(--jet)}
+.logistics span:last-child{border-right:none}
+.tip{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:16px;color:var(--red);border-left:2px solid var(--red);padding-left:14px;margin:14px 0;line-height:1.5}
+.book{display:inline-block;background:var(--jet);color:var(--ivory);padding:15px 30px;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;margin-top:10px;border:1px solid var(--jet);font-weight:500;position:relative;transition:all .2s}
+.book::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--red);transition:width .25s;z-index:0}
+.book:hover::before{width:100%}
+.book span{position:relative;z-index:1}
+/* PULL QUOTE */
+.pullquote{padding:100px 50px;background:var(--jet);color:var(--ivory);text-align:center;position:relative;overflow:hidden}
+.pullquote::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--red)}
+.pullquote-mark{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:140px;color:var(--red);line-height:.4;margin-bottom:24px}
+.pullquote-text{
+  font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:48px;
+  line-height:1.25;max-width:920px;margin:0 auto 22px;color:var(--ivory);letter-spacing:-.02em;
+}
+.pullquote-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--red);font-weight:700}
+/* RESTAURANT — full-bleed COLD red, menu card pure ivory white */
+.restaurant{
+  position:relative;min-height:100vh;
+  background:linear-gradient(155deg,#7a0a1c 0%,#3a0510 50%,#0a0203 100%);
+  color:var(--ivory);padding:100px 50px;overflow:hidden;
+}
+.restaurant::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 65% 35%,rgba(221,15,44,.22) 0%,transparent 55%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n3'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2' seed='13'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n3)'/%3E%3C/svg%3E");
+}
+.restaurant::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 20%,rgba(0,0,0,.55) 100%)}
+.restaurant-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1300px;margin:0 auto;align-items:center}
+.restaurant-side .spread-eyebrow{color:var(--ivory);opacity:.85}
+.restaurant-side .spread-time{color:var(--ivory)}
+.restaurant-side .spread-time::after{background:var(--ivory)}
+.restaurant-side .spread-h{color:var(--ivory)}
+.restaurant-side .spread-addr{color:var(--whisper);border-left-color:var(--ivory)}
+.restaurant-side .spread-why{color:var(--whisper);max-width:none}
+.restaurant-side .logistics{border-color:var(--ivory)}
+.restaurant-side .logistics span{border-right-color:var(--ivory);background:transparent;color:var(--ivory)}
+/* Menu card — pure cool ivory, no warmth */
+.menu-card{
+  background:var(--ivory);color:var(--jet);padding:42px 36px;
+  box-shadow:0 40px 100px -20px rgba(0,0,0,.7);position:relative;
+  border-top:8px solid var(--red);
+}
+.menu-card::before{
+  content:'WHAT TO ORDER · BY THE COMPOSER';
+  position:absolute;top:-30px;left:0;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.36em;
+  color:var(--ivory);font-weight:700;
+}
+.menu-card-h{
+  font-family:'Bodoni Moda',serif;font-weight:900;font-size:42px;
+  line-height:.95;margin-bottom:6px;letter-spacing:-.03em;
+}
+.menu-card-h em{font-style:italic;font-weight:400}
+.menu-card-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ash);margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid var(--jet);font-weight:700}
+.dish{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--hairline)}
+.dish:last-of-type{border-bottom:none}
+.dish-n{font-family:'Bodoni Moda',serif;font-weight:900;font-size:20px;color:var(--red);line-height:1}
+.dish-nm{font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:var(--jet)}
+.dish-nm small{display:block;font-family:'Bodoni Moda',serif;font-style:italic;font-size:13px;color:var(--ash);font-weight:400;margin-top:2px}
+.dish-rl{font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:var(--ash);text-align:right;font-weight:500}
+.dish-rl.star{color:var(--red);font-weight:700}
+.menu-logic{margin-top:20px;padding-top:16px;border-top:2px solid var(--jet);font-family:'Bodoni Moda',serif;font-style:italic;font-size:16px;line-height:1.55;color:var(--jet)}
+/* BRANCHES */
+.branches{padding:90px 50px;background:var(--ivory);border-top:1px solid var(--hairline)}
+.branches-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1300px;margin:0 auto}
+.branch{background:var(--jet);color:var(--ivory);padding:40px 36px;position:relative;border-left:6px solid var(--red)}
+.branch::before{content:attr(data-label);position:absolute;top:-12px;left:30px;background:var(--jet);color:var(--red);padding:0 12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.36em;font-weight:700}
+.branch-cond{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:28px;color:var(--ivory);margin-bottom:16px;letter-spacing:-.01em}
+.branch-cond em{font-weight:700;font-style:normal}
+.branch-alt{font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;color:var(--whisper);font-weight:300}
+.branch-alt::before{content:'→ ';color:var(--red);font-weight:700;font-size:18px}
+.branch-alt strong{color:var(--ivory);font-weight:500;font-style:italic;font-family:'Bodoni Moda',serif}
+/* COLOPHON */
+.colophon{
+  padding:80px 50px;background:var(--jet);color:var(--whisper);
+  text-align:center;border-top:6px solid var(--red);
+}
+.colophon-q{font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;font-size:32px;color:var(--ivory);margin-bottom:24px;line-height:1.35;max-width:780px;margin-left:auto;margin-right:auto;letter-spacing:-.01em}
+.colophon-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--red);font-weight:700}
+/* REFINE */
+.refine{
+  position:fixed;bottom:0;left:0;right:0;background:var(--jet);color:var(--ivory);
+  padding:14px 40px;display:flex;gap:10px;align-items:center;z-index:998;
+  border-top:3px solid var(--red);flex-wrap:wrap;
+}
+.refine-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-right:6px;font-weight:700}
+.refine-chip{background:transparent;border:1px solid var(--ivory);color:var(--ivory);padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;letter-spacing:.04em}
+.refine-chip:hover{background:var(--red);color:var(--ivory);border-color:var(--red)}
+.refine-input{flex:1;min-width:160px;background:transparent;border:none;border-bottom:1px solid var(--ivory);color:var(--ivory);font-family:'Bodoni Moda',serif;font-style:italic;font-size:16px;outline:none;padding:6px 4px}
+.refine-input::placeholder{color:var(--ash);font-style:italic}
+.refine-submit{background:var(--red);color:var(--ivory);border:none;padding:10px 22px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;font-weight:700}
+.refine-submit:hover{background:var(--red-deep)}
+body{padding-bottom:80px}
+@media(max-width:780px){
+  .masthead{padding:12px 18px;flex-direction:column;gap:10px;align-items:flex-start}
+  .masthead-meta{flex-wrap:wrap;gap:14px}
+  .hero{padding:40px 24px 60px;min-height:580px}
+  .hero-title{font-size:72px}
+  .toc{padding:50px 24px}.section-title{font-size:54px}
+  .toc-grid{grid-template-columns:1fr;gap:30px}
+  .spread,.pullquote,.branches,.colophon,.restaurant{padding:50px 24px}
+  .spread-row,.spread-row.flip,.restaurant-inner,.branches-grid{grid-template-columns:1fr;gap:30px}
+  .spread-row.flip .spread-img{order:0}
+  .spread-time{font-size:54px}.spread-h{font-size:36px}
+  .pullquote-text{font-size:28px}
+  .palette-meta{display:none}
+  .menu-card-h{font-size:32px}
+}
+</style>
+</head>
+<body>
+<div class="variant-label">TEMPLATE · Cinematic Editorial</div>
+<div class="palette-meta">
+  <b>Palette · from trip vibe</b>
+  warm · reflective · peak-at-dinner<br>
+  → ivory · jet · vogue red · ash
+  <div class="swatches"><i style="background:#F8F6F0"></i><i style="background:#0A0A0A"></i><i style="background:#DD0F2C"></i><i style="background:#5A5C60"></i></div>
+</div>
+
+<div class="masthead">
+  <div class="masthead-brand">Day Composer · <em>Issue I</em></div>
+  <div class="masthead-meta"><span>Jan · <b>MMXXVI</b></span><span>Vol · <b>01</b></span><span>Saturday · <b>edition</b></span><span><b>$ 12.99</b></span></div>
+</div>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="issue-tag">Bay Area · <em>A Saturday Spread</em> · Look 01</div>
+    <h1 class="hero-title">A day<br>in the old<em>Bay Area.</em></h1>
+    <p class="hero-sub">"Recovering, but alive." — four stops, one arc. Opens slow, breathes, peaks at a neighborhood dinner you'll talk about for weeks, closes with the last laugh of the night.</p>
+    <div class="hero-meta">
+      <div><span>Date</span><b>Sat · Jan 10 · 2026</b></div>
+      <div><span>Window</span><b>14:30 → 22:00</b></div>
+      <div><span>Origin</span><b>Sunnyvale</b></div>
+      <div><span>Company</span><b>+1 · +baby</b></div>
+      <div><span>Vehicle</span><b>Car</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="toc">
+  <div class="section-label">Table of Contents</div>
+  <h2 class="section-title">Four <em>movements</em>,<br>one <span class="red">day.</span></h2>
+  <div class="toc-grid">
+    <div class="toc-arc">
+      <svg viewBox="0 0 1000 180" preserveAspectRatio="none">
+        <polygon class="area" points="125,140 375,118 625,30 875,90 875,180 125,180"/>
+        <path class="curve" d="M 125,140 C 220,134 290,124 375,118 C 470,112 540,32 625,30 C 720,28 800,72 875,90"/>
+        <circle class="s" cx="125" cy="140" r="8"/>
+        <circle class="s" cx="375" cy="118" r="8"/>
+        <circle class="peak" cx="625" cy="30" r="12"/>
+        <circle class="s" cx="875" cy="90" r="8"/>
+        <text x="125" y="170" text-anchor="middle">14:30</text>
+        <text x="375" y="170" text-anchor="middle">15:00</text>
+        <text x="625" y="170" text-anchor="middle">18:30</text>
+        <text x="875" y="170" text-anchor="middle">20:00</text>
+        <text class="lbl" x="125" y="18" text-anchor="middle">opening</text>
+        <text class="lbl" x="375" y="18" text-anchor="middle">breathing</text>
+        <text class="lbl" x="625" y="18" text-anchor="middle">peak</text>
+        <text class="lbl" x="875" y="18" text-anchor="middle">close</text>
+      </svg>
+    </div>
+    <div class="toc-list">
+      <a class="toc-row" href="#s1"><div class="toc-num">i</div><div class="toc-info"><h4>A quiet historical opening</h4><p>Alviso Adobe · Milpitas</p></div><div class="toc-time">14:30</div></a>
+      <a class="toc-row" href="#s2"><div class="toc-num">ii</div><div class="toc-info"><h4>Lakeside breathing</h4><p>Sandy Wool Lake</p></div><div class="toc-time">15:00</div></a>
+      <a class="toc-row" href="#s3"><div class="toc-num">iii</div><div class="toc-info"><h4>A lively neighborhood dinner</h4><p>Dong Que · San Jose</p></div><div class="toc-time">18:30</div></a>
+      <a class="toc-row" href="#s4"><div class="toc-num">iv</div><div class="toc-info"><h4>Standup comedy to close</h4><p>Spaced Out · DT San Jose</p></div><div class="toc-time">20:00</div></a>
+    </div>
+  </div>
+</section>
+
+<section class="spread" id="s1">
+  <div class="spread-num"><strong>i</strong> Movement I of IV</div>
+  <div class="spread-row">
+    <div class="spread-img s1">
+      <div class="spread-img-tag">Look 01</div>
+      <div class="spread-img-cap"><em>"The adobe holds its silence."</em>Milpitas · 1837</div>
+    </div>
+    <div class="spread-text">
+      <div class="spread-eyebrow">Opening</div>
+      <div class="spread-time">14:30</div>
+      <h2 class="spread-h"><em>A quiet</em> historical opening</h2>
+      <div class="spread-addr">Alviso Adobe Saturday Tour · 2087 Alviso Adobe Ct · Milpitas</div>
+      <p class="spread-why">保留于 19 世纪加州早期定居时期的 adobe 古建筑，作为小型历史展示空间对公众开放。今天想 restore 又不想完全静止——adobe 比大型 museum 轻盈，宝宝好带。每月第二个周六免费导览。</p>
+      <div class="logistics"><span>🅿 Easy</span><span>👶 Friendly</span><span>🎟 Free</span></div>
+      <p class="tip">免费门票，但要提前在 Eventbrite 预约导览席位</p>
+      <a href="#" class="book"><span>Reserve a tour →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="pullquote">
+  <div class="pullquote-mark">"</div>
+  <p class="pullquote-text">Indoor narrative<br>gives way to <em>outdoor breathing.</em></p>
+  <div class="pullquote-meta">Transition · 5 min drive</div>
+</section>
+
+<section class="spread" id="s2">
+  <div class="spread-num"><strong>ii</strong> Movement II of IV</div>
+  <div class="spread-row flip">
+    <div class="spread-img s2">
+      <div class="spread-img-tag">Look 02</div>
+      <div class="spread-img-cap"><em>"Birds, ducks, the pause."</em>Sandy Wool · cold afternoon</div>
+    </div>
+    <div class="spread-text">
+      <div class="spread-eyebrow">Breathing</div>
+      <div class="spread-time">15:00</div>
+      <h2 class="spread-h">Lakeside <em>breathing</em></h2>
+      <div class="spread-addr">Sandy Wool Lake · 901 Downing Rd · Milpitas</div>
+      <p class="spread-why">距离 Alviso Adobe 很近的湖边公园，适合观鸟、钓鱼、轻徒步和野炊。带孩子接近大自然，下午的湖面安静好看。</p>
+      <div class="logistics"><span>🅿 Easy</span><span>👶 Stroller</span><span>🚗 5 min</span></div>
+      <p class="tip">停在湖边圆盘停车场</p>
+    </div>
+  </div>
+</section>
+
+<section class="pullquote">
+  <div class="pullquote-mark">"</div>
+  <p class="pullquote-text">Outdoor reset<br>folds into <em>appetite.</em></p>
+  <div class="pullquote-meta">Transition · 22 min drive</div>
+</section>
+
+<section class="restaurant" id="s3">
+  <div class="spread-num" style="color:var(--silver)"><strong style="color:var(--red)">iii</strong> Movement III of IV · <em style="color:var(--ivory)">The Peak</em></div>
+  <div class="restaurant-inner">
+    <div class="restaurant-side">
+      <div class="spread-eyebrow">Peak</div>
+      <div class="spread-time">18:30</div>
+      <h2 class="spread-h"><em>A lively</em> neighborhood dinner</h2>
+      <div class="spread-addr">Dong Que · 2852 Alum Rock Ave · San Jose · Walk-in only</div>
+      <p class="spread-why">你说不想 touristy；这是 walk-in only 的本地越南/广东融合馆，烟火气十足。点了 9 道招牌菜，正好把白天的安静节奏接回到热闹收尾。</p>
+      <div class="logistics"><span>🅿 Street</span><span>👶 Friendly</span><span>🚗 22 min</span></div>
+    </div>
+    <div class="menu-card">
+      <h3 class="menu-card-h">What <em>to order</em></h3>
+      <div class="menu-card-sub">Nine plates · in order of fire</div>
+      <div class="dish"><div class="dish-n">88</div><div class="dish-nm">烤生蚝 · grilled oyster<small>开胃 — to wake the palate</small></div><div class="dish-rl">apéritif</div></div>
+      <div class="dish"><div class="dish-n">92</div><div class="dish-nm">鱼籽扇贝 · roe scallop</div><div class="dish-rl">apéritif</div></div>
+      <div class="dish"><div class="dish-n">98</div><div class="dish-nm">蒜香海蜗牛 · garlic conch</div><div class="dish-rl">apéritif</div></div>
+      <div class="dish"><div class="dish-n">84</div><div class="dish-nm">芝士焗蛤蜊 · cheese clam</div><div class="dish-rl">apéritif</div></div>
+      <div class="dish"><div class="dish-n">15</div><div class="dish-nm">香松腊肠锅巴饭 · lap cheong rice<small>★ signature — needs time</small></div><div class="dish-rl star">signature</div></div>
+      <div class="dish"><div class="dish-n">103</div><div class="dish-nm">铁板螺丝 · iron-plate snail</div><div class="dish-rl">main</div></div>
+      <div class="dish"><div class="dish-n">5</div><div class="dish-nm">烤鹌鹑 · roast quail</div><div class="dish-rl">main</div></div>
+      <div class="dish"><div class="dish-n">68</div><div class="dish-nm">炒牛蛙腿 · stir-fried frog leg</div><div class="dish-rl">main</div></div>
+      <div class="dish"><div class="dish-n">93</div><div class="dish-nm">蛏子烤空心海菜 · razor clam</div><div class="dish-rl">side</div></div>
+      <div class="menu-logic">"Open with 88 and 92 to wake the palate. Bring 15, 103, 68 simultaneously for the rhythm of fire. Close with 5 and 93 — quiet plates after the loud ones."</div>
+    </div>
+  </div>
+</section>
+
+<section class="pullquote">
+  <div class="pullquote-mark">"</div>
+  <p class="pullquote-text">Warm fullness<br>softens into <em>social light closing.</em></p>
+  <div class="pullquote-meta">Transition · 15 min drive</div>
+</section>
+
+<section class="spread" id="s4">
+  <div class="spread-num"><strong>iv</strong> Movement IV of IV</div>
+  <div class="spread-row">
+    <div class="spread-img s4">
+      <div class="spread-img-tag">Look 04</div>
+      <div class="spread-img-cap"><em>"The last laugh."</em>Spaced Out · downtown</div>
+    </div>
+    <div class="spread-text">
+      <div class="spread-eyebrow">Closing</div>
+      <div class="spread-time">20:00</div>
+      <h2 class="spread-h">Standup comedy <em>to close</em></h2>
+      <div class="spread-addr">Spaced Out · Mystérieux Brand · 28 N Almaden Ave #30 · DT San Jose</div>
+      <p class="spread-why">Downtown San Jose 小场地脱口秀，$12.99/人。把一天从安静→自然→烟火气→社交轻收尾，4 个 mood 走完一个完整的弧。</p>
+      <div class="logistics"><span>🅿 Garage</span><span>⚠ No baby</span><span>🎟 $12.99</span><span>🚗 15 min</span></div>
+      <p class="tip">停车去 Almaden Financial Plaza ($8 evening)，或打车往返 $40-50</p>
+      <a href="#" class="book"><span>Buy ticket →</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="branches">
+  <div class="section-label">Editor's Notes · Adaptive Branches</div>
+  <h2 class="section-title" style="font-size:68px;margin-bottom:50px"><em>If the day</em> <span class="red">bends.</span></h2>
+  <div class="branches-grid">
+    <div class="branch" data-label="ALTERNATE A">
+      <div class="branch-cond">If 宝宝困了 / 状态不好</div>
+      <div class="branch-alt">Skip the comedy. Route to dessert on the way home · <strong>Phin Coffee</strong> or <strong>Bambu</strong></div>
+    </div>
+    <div class="branch" data-label="ALTERNATE B">
+      <div class="branch-cond">If energy 还很高</div>
+      <div class="branch-alt">After the show, extend with downtown wine bar · <strong>Cafe Stritch</strong> or <strong>Paper Plane</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="colophon">
+  <p class="colophon-q">"A day rhythm, not four POIs. <em>A composition,</em> not a checklist."</p>
+  <div class="colophon-meta">Day Composer · Issue I · MMXXVI · composed, not scheduled</div>
+</section>
+
+<div class="refine">
+  <span class="refine-label">↻ Re-compose</span>
+  <button class="refine-chip">更安静一点</button>
+  <button class="refine-chip">加一个酒吧</button>
+  <button class="refine-chip">宝宝今天很累</button>
+  <input class="refine-input" placeholder="adjust this day…">
+  <button class="refine-submit">Recompose</button>
+</div>
+
+</body>
+</html>

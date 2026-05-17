@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day Composer · Variant Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #F4EFE6;
+    --ink: #1A1612;
+    --stone: #8C7F6B;
+    --hair: #C9BFAD;
+    --accent: #B5663A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', sans-serif; line-height: 1.6; min-height: 100vh; }
+
+  header {
+    padding: 8vh 7vw 5vh; border-bottom: 1px solid var(--hair);
+  }
+  header .top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 14px; border-bottom: 1px solid var(--hair); margin-bottom: 48px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; color: var(--stone);
+  }
+  header h1 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 76px); line-height: 1.05; letter-spacing: -0.025em;
+    margin-bottom: 18px;
+  }
+  header h1 em { font-style: italic; color: var(--accent); }
+  header p {
+    font-size: 17px; max-width: 720px; color: var(--ink); line-height: 1.6;
+  }
+  header .sub {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--stone); margin-top: 24px; letter-spacing: 0.04em;
+  }
+
+  main {
+    padding: 6vh 7vw 12vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 28px;
+    max-width: 1500px; margin: 0 auto;
+  }
+
+  a.card {
+    text-decoration: none; color: var(--ink);
+    background: #fff; border: 1px solid var(--hair);
+    display: flex; flex-direction: column;
+    min-height: 420px;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s ease, border-color 0.6s ease;
+    overflow: hidden;
+  }
+  a.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--ink);
+    box-shadow: 0 14px 40px rgba(26,22,18,0.12);
+  }
+  .preview {
+    height: 200px; position: relative; overflow: hidden;
+  }
+
+  /* Per-variant mini preview */
+  .preview.v1 {
+    background: #F4EFE6;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 24px;
+  }
+  .preview.v1::before {
+    content: ""; position: absolute; top: 18px; right: 18px;
+    width: 60%; height: 2px; background: #B5663A;
+  }
+  .preview.v1 h4 {
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: 28px;
+    color: #1A1612; line-height: 1.05; letter-spacing: -0.02em;
+  }
+  .preview.v1 .moods {
+    margin-top: 12px; font-family: 'Inter', sans-serif; font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: #8C7F6B;
+  }
+
+  .preview.v2 {
+    background: linear-gradient(160deg, #0a0806 0%, #2a1f12 100%);
+    display: flex; align-items: end; padding: 22px;
+    color: #FAF7F1;
+  }
+  .preview.v2::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1568734049547-2bf3eaae9aa2?w=800&q=70&auto=format');
+    background-size: cover; background-position: center; opacity: 0.5;
+  }
+  .preview.v2 > * { position: relative; z-index: 1; }
+  .preview.v2 h4 {
+    font-family: 'Fraunces', serif; font-weight: 200; font-size: 28px;
+    color: #FAF7F1; line-height: 1.0; letter-spacing: -0.02em;
+  }
+  .preview.v2 h4 em { color: #D9B074; font-style: italic; }
+
+  .preview.v3 {
+    background:
+      radial-gradient(circle at 30% 30%, rgba(178,90,56,0.08), transparent 50%),
+      #EAE0C9;
+    padding: 24px;
+  }
+  .preview.v3 h4 {
+    font-family: 'Fraunces', serif; font-weight: 400; font-size: 26px;
+    color: #2E2418; line-height: 1.1; letter-spacing: -0.015em;
+  }
+  .preview.v3 .scribble {
+    font-family: 'Caveat', cursive; font-size: 18px; color: #4A5A40;
+    margin-top: 8px; display: inline-block; transform: rotate(-2deg);
+  }
+  .preview.v3 .tags {
+    margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .preview.v3 .tags span {
+    border: 1px solid #2E2418; padding: 3px 10px; border-radius: 999px;
+    font-size: 10px; color: #3D3122; background: #F0E8D4;
+  }
+
+  .preview.v4 {
+    background: #fff; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  }
+  .preview.v4 .lt {
+    padding: 22px; border-right: 1px solid #E5E5E5;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .preview.v4 h4 {
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 28px;
+    color: #0A0A0A; line-height: 0.95; letter-spacing: -0.03em;
+  }
+  .preview.v4 h4 .accent { color: #FF5B2C; }
+  .preview.v4 .meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: #737373; letter-spacing: 0.06em;
+  }
+  .preview.v4 .rt {
+    background: #FF5B2C; color: #fff; padding: 22px;
+    display: flex; align-items: end;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    line-height: 1.4; letter-spacing: 0.04em; font-weight: 600;
+  }
+
+  .card-body {
+    padding: 24px 26px 26px; flex: 1; display: flex; flex-direction: column;
+  }
+  .card-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--accent); letter-spacing: 0.16em; margin-bottom: 12px;
+  }
+  .card-body h3 {
+    font-family: 'Fraunces', serif; font-weight: 400; font-size: 26px;
+    line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 12px;
+  }
+  .card-body p {
+    font-size: 14px; color: var(--ink); line-height: 1.6; margin-bottom: 14px; flex: 1;
+  }
+  .card-body .tags {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--stone);
+    padding-top: 14px; border-top: 1px solid var(--hair);
+  }
+  .card-body .open {
+    margin-top: 14px;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 3px;
+    width: fit-content; font-weight: 500;
+    transition: color 0.4s ease, border-color 0.4s ease;
+  }
+  a.card:hover .open { color: var(--accent); border-color: var(--accent); }
+
+  footer {
+    padding: 4vh 7vw 6vh; border-top: 1px solid var(--hair);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.06em; color: var(--stone); text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <div>Playgrounds / Day Composer</div>
+    <div>4 variants · satus family</div>
+  </div>
+  <h1>Pick a <em>direction</em>.</h1>
+  <p>Four self-contained HTML mockups rendering the same sample travel plan — Saturday, Jan 10, 2026, the "旧湾区与恢复感的一天" composition — in four distinct visual interpretations within the satus / Aman aesthetic family. Open each in a tab, compare, decide.</p>
+  <div class="sub">Sample plan · 4 stops · 14:30 → 22:00 · same data across all four files</div>
+</header>
+
+<main>
+
+  <a class="card" href="./variant-1-editorial-monochrome.html">
+    <div class="preview v1">
+      <h4>旧湾区与<em style="color:#8A4A23;font-style:italic;">恢复感</em>的一天</h4>
+      <div class="moods">REFLECTIVE · WARM · NOT RUSHED</div>
+    </div>
+    <div class="card-body">
+      <div class="card-num">01 — EDITORIAL MONOCHROME</div>
+      <h3>Pure satus aesthetic.</h3>
+      <p>Off-white background, near-black ink, one warm rust accent. Fraunces headlines, Inter body. Extreme whitespace, alternating L/R cards with hairline borders. Restaurant card inverts to dark. Stripe Press × Aman.</p>
+      <div class="tags">Cream · Rust · Hairlines · Slow</div>
+      <div class="open">Open variant →</div>
+    </div>
+  </a>
+
+  <a class="card" href="./variant-2-cinematic-fullbleed.html">
+    <div class="preview v2">
+      <h4>旧湾区<br/><em>恢复感</em></h4>
+    </div>
+    <div class="card-body">
+      <div class="card-num">02 — CINEMATIC FULL-BLEED</div>
+      <h3>Every section is a film frame.</h3>
+      <p>Edge-to-edge imagery throughout. White serif overlays on darkened photos. Arc curve floats over a continuous photo strip. Restaurant menu lives in a translucent lower-third over the food. Aman.com × Apple product page.</p>
+      <div class="tags">Dark · Gold · Cinematic · Slow</div>
+      <div class="open">Open variant →</div>
+    </div>
+  </a>
+
+  <a class="card" href="./variant-3-warm-earthy-paper.html">
+    <div class="preview v3">
+      <h4>旧湾区与恢复感的一天</h4>
+      <div class="scribble">— a slow, lightly-explored Saturday</div>
+      <div class="tags">
+        <span>reflective</span><span>warm</span><span>not rushed</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-num">03 — WARM EARTHY PAPER</div>
+      <h3>Travel zine on recycled paper.</h3>
+      <p>Aged-paper background with subtle noise texture. Fraunces optical 9pt + Caveat handwriting. Clay, sage, mustard. Inline SVG line icons instead of emojis. Hand-drawn arc with wiggle filter. Cereal magazine × Kinfolk.</p>
+      <div class="tags">Paper · Clay · Sage · Slow</div>
+      <div class="open">Open variant →</div>
+    </div>
+  </a>
+
+  <a class="card" href="./variant-4-modern-minimal-swiss.html">
+    <div class="preview v4">
+      <div class="lt">
+        <div class="meta">DAY-COMPOSER<br/>NO.01 / v1.0</div>
+        <h4>旧湾区与<br/><span class="accent">恢复感</span></h4>
+      </div>
+      <div class="rt">// 04 STOPS<br/>// 14:30 → 22:00<br/>// 1 ARC</div>
+    </div>
+    <div class="card-body">
+      <div class="card-num">04 — MODERN MINIMAL SWISS</div>
+      <h3>12-column grid, no nostalgia.</h3>
+      <p>Strict Swiss grid, sans-serif throughout, black/white with electric terracotta accent. Angular polyline arc instead of smooth curve. Restaurant menu as a tabular ledger. Square corners, snappy 0.3s motion. Linear × Apple iPad × Bauhaus.</p>
+      <div class="tags">White · Black · Terracotta · Snappy</div>
+      <div class="open">Open variant →</div>
+    </div>
+  </a>
+
+</main>
+
+<footer>
+  Built as a comparison tool · same JSON, four visual languages · Mia's pick decides v1 direction.
+</footer>
+
+</body>
+</html>

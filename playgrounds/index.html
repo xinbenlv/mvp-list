@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Composer · Playground Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0e10;--paper:#f4f1e8;--mute:#8a8a85;--accent:#c8102e;--accent2:#8b7355}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;
+  min-height:100vh;padding:60px 40px;
+}
+.head{
+  max-width:1280px;margin:0 auto 60px;border-bottom:3px solid var(--ink);padding-bottom:40px;
+}
+.eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);margin-bottom:20px}
+h1{
+  font-family:'Fraunces',serif;font-weight:300;font-size:72px;
+  letter-spacing:-.03em;line-height:1;margin-bottom:18px;
+}
+.sub{
+  font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:22px;
+  color:var(--mute);max-width:760px;
+}
+.meta{
+  margin-top:24px;display:flex;gap:30px;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--mute);flex-wrap:wrap;
+}
+.meta b{color:var(--ink)}
+.batch{max-width:1280px;margin:0 auto 80px}
+.batch-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding-bottom:14px;border-bottom:1px solid var(--ink);margin-bottom:30px;
+}
+.batch-title{font-family:'Fraunces',serif;font-weight:400;font-size:32px;letter-spacing:-.01em}
+.batch-meta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
+}
+.card{
+  background:#fff;border:2px solid var(--ink);padding:30px;
+  display:flex;flex-direction:column;gap:14px;
+  text-decoration:none;color:var(--ink);transition:transform .2s,box-shadow .2s;
+  position:relative;
+}
+.card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+.card-num{
+  position:absolute;top:14px;right:18px;font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.18em;color:var(--mute);
+}
+.card-tag{
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
+  font-weight:700;
+}
+.card-title{
+  font-family:'Fraunces',serif;font-weight:400;font-size:30px;letter-spacing:-.01em;
+  line-height:1.1;margin:4px 0 6px;
+}
+.card-blurb{font-size:13px;line-height:1.6;color:#444;margin-bottom:10px}
+.card-tone{
+  display:flex;gap:6px;flex-wrap:wrap;
+}
+.card-tone span{
+  border:1px solid var(--ink);padding:3px 9px;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.card-cta{
+  margin-top:auto;padding-top:14px;border-top:1px dashed var(--mute);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+}
+.card-cta::after{content:'OPEN →';color:var(--ink);font-weight:700}
+.card .swatch{
+  display:flex;height:32px;margin-bottom:6px;border:1px solid var(--ink);
+}
+.card .swatch div{flex:1}
+.tip{
+  max-width:1280px;margin:0 auto 40px;padding:24px 30px;background:#fff;border:2px solid var(--ink);
+  font-size:13px;line-height:1.7;
+}
+.tip b{color:var(--accent)}
+.foot{
+  max-width:1280px;margin:60px auto 0;padding-top:30px;border-top:1px solid var(--mute);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+}
+@media(max-width:780px){body{padding:30px 20px}h1{font-size:46px}.grid{grid-template-columns:1fr}.batch-head{flex-direction:column;align-items:flex-start;gap:10px}}
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div class="eyebrow">Day Composer · Playground Index</div>
+  <h1>Eight directions<br>for one day.</h1>
+  <p class="sub">Same Jan 10 plan, eight visual interpretations. Click any to open. Pick whichever feels most like the product you want to build.</p>
+  <div class="meta">
+    <span><b>Data</b> · Jan 10 2026 · 4 stops</span>
+    <span><b>Reference</b> · frontend-spec-v2.md</span>
+    <span><b>Batches</b> · 2 × 4 variants</span>
+  </div>
+</div>
+
+<div class="tip">
+  <b>How to use:</b> open each in a new tab, scan them side-by-side. The two batches are organized by aesthetic family — <b>Batch A</b> stays within the Aman-cinematic family the spec calls for; <b>Batch B</b> breaks that family on purpose so you can see what the "other extreme" looks like before committing. The goal is to pick a direction, not the final design.
+</div>
+
+<section class="batch">
+  <div class="batch-head">
+    <div class="batch-title">Batch A · Satus / Aman family</div>
+    <div class="batch-meta">4 variants · spec-aligned</div>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="satus/variant-1-editorial-monochrome.html">
+      <div class="card-num">A1</div>
+      <div class="swatch"><div style="background:#f5f0e8"></div><div style="background:#1a1a1a"></div><div style="background:#a05a2c"></div></div>
+      <div class="card-tag">Editorial · Disciplined</div>
+      <h2 class="card-title">Editorial Monochrome</h2>
+      <p class="card-blurb">Pure satus. One rust accent, Fraunces + whitespace, hairline borders, dark-inverted restaurant card. The strongest match to what the spec actually asks for.</p>
+      <div class="card-tone"><span>Cream</span><span>Black</span><span>Rust</span></div>
+      <div class="card-cta">RECOMMENDED</div>
+    </a>
+
+    <a class="card" href="satus/variant-2-cinematic-fullbleed.html">
+      <div class="card-num">A2</div>
+      <div class="swatch"><div style="background:#0e0e10"></div><div style="background:#fff"></div><div style="background:#896041"></div></div>
+      <div class="card-tag">Cinematic · Photo-heavy</div>
+      <h2 class="card-title">Cinematic Full-Bleed</h2>
+      <p class="card-blurb">Every section a film frame. White serif over darkened photos. Arc curve floats over a continuous photo strip. Visceral but photography-dependent.</p>
+      <div class="card-tone"><span>Black</span><span>Photo</span><span>Whisper</span></div>
+      <div class="card-cta">PHOTO-FIRST</div>
+    </a>
+
+    <a class="card" href="satus/variant-3-warm-earthy-paper.html">
+      <div class="card-num">A3</div>
+      <div class="swatch"><div style="background:#e8dcc0"></div><div style="background:#6b4f3a"></div><div style="background:#5c7159"></div></div>
+      <div class="card-tag">Magazine · Hand-drawn</div>
+      <h2 class="card-title">Warm Earthy Paper</h2>
+      <p class="card-blurb">Recycled-paper background tint, sage + clay accents, line illustrations, hand-drawn arc curve. Cereal × Kinfolk zine. Charming but feels more "artifact" than "live product".</p>
+      <div class="card-tone"><span>Paper</span><span>Sage</span><span>Clay</span></div>
+      <div class="card-cta">EDITORIAL ZINE</div>
+    </a>
+
+    <a class="card" href="satus/variant-4-modern-minimal-swiss.html">
+      <div class="card-num">A4</div>
+      <div class="swatch"><div style="background:#fafafa"></div><div style="background:#0a0a0a"></div><div style="background:#e35d2a"></div></div>
+      <div class="card-tag">Swiss · Graphic</div>
+      <h2 class="card-title">Modern Minimal Swiss</h2>
+      <p class="card-blurb">Strict grid, angular polyline arc, square-cornered cards, monospace menu ledger. Linear × Bauhaus. Bold tonal departure from spec — power-user feel.</p>
+      <div class="card-tone"><span>White</span><span>Ink</span><span>Terracotta</span></div>
+      <div class="card-cta">POWER-USER</div>
+    </a>
+
+  </div>
+</section>
+
+<section class="batch">
+  <div class="batch-head">
+    <div class="batch-title">Batch B · Bolder departures</div>
+    <div class="batch-meta">4 variants · across the spectrum</div>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="native/variant-1-brutalist-ticket.html">
+      <div class="card-num">B1</div>
+      <div class="swatch"><div style="background:#f2eee3"></div><div style="background:#0a0a0a"></div><div style="background:#FFD400"></div><div style="background:#C8102E"></div></div>
+      <div class="card-tag">Brutalist · High-contrast</div>
+      <h2 class="card-title">Brutalist Ticket Stub</h2>
+      <p class="card-blurb">A concert ticket / Mschf zine. Hazard yellow + blood red + heavy black borders + barcode + perforated edges. Restaurant menu as a receipt.</p>
+      <div class="card-tone"><span>Cream</span><span>Black</span><span>Hazard</span><span>Blood</span></div>
+      <div class="card-cta">MAXIMALIST</div>
+    </a>
+
+    <a class="card" href="native/variant-2-soft-aurora.html">
+      <div class="card-num">B2</div>
+      <div class="swatch"><div style="background:#C9B6E4"></div><div style="background:#FFD3D8"></div><div style="background:#B8E0D2"></div><div style="background:#FFE0C7"></div></div>
+      <div class="card-tag">Dreampop · Glassmorphic</div>
+      <h2 class="card-title">Soft Aurora Dreampop</h2>
+      <p class="card-blurb">Animated mesh gradient (lavender · blush · mint · peach), italic Cormorant Garamond, glassmorphic cards, glowing arc curve. Beam × Ghost newsletter.</p>
+      <div class="card-tone"><span>Lavender</span><span>Blush</span><span>Mint</span><span>Peach</span></div>
+      <div class="card-cta">FEMININE / SOFT</div>
+    </a>
+
+    <a class="card" href="native/variant-3-vintage-polaroid.html">
+      <div class="card-num">B3</div>
+      <div class="swatch"><div style="background:#f4ecd8"></div><div style="background:#8b6f47"></div><div style="background:#6b8e8e"></div><div style="background:#a13d32"></div></div>
+      <div class="card-tag">Scrapbook · Personal</div>
+      <h2 class="card-title">Vintage Polaroid Journal</h2>
+      <p class="card-blurb">Paper texture, tilted polaroids with handwritten captions, masking tape, passport stamps, Caveat handwriting. A travel journal page. Different from Batch A3 — more personal, more "memento" energy.</p>
+      <div class="card-tone"><span>Cream</span><span>Sepia</span><span>Teal</span><span>Stamp</span></div>
+      <div class="card-cta">JOURNAL / GIFT</div>
+    </a>
+
+    <a class="card" href="native/variant-4-metro-map.html">
+      <div class="card-num">B4</div>
+      <div class="swatch"><div style="background:#fafaf7"></div><div style="background:#0e0e10"></div><div style="background:#D32F2F"></div><div style="background:#F9A825"></div></div>
+      <div class="card-tag">Infographic · Transit</div>
+      <h2 class="card-title">Tokyo Metro Map</h2>
+      <p class="card-blurb">The day rendered as a transit line. Station markers, schedule typography, restaurant menu as a service timetable, branches as alternate routing. Massimo Vignelli × Tokyo Metro.</p>
+      <div class="card-tone"><span>White</span><span>Ink</span><span>Transit Red</span><span>Gold</span></div>
+      <div class="card-cta">INFOGRAPHIC</div>
+    </a>
+
+  </div>
+</section>
+
+<div class="foot">
+  <span>Generated · 2026-01 · Branch <b>mia/day-composer-v2-spec-yolo</b></span>
+  <span>Spec · <b>mvp-list/frontend-spec-v2.md</b></span>
+</div>
+
+</body>
+</html>
