@@ -1,0 +1,150 @@
+{
+  "plan": {
+    "plan_id": "garry_outdoor_exploratory",
+    "persona_id": "garry",
+    "version": "v1",
+    "day_theme": "街区暴走 + 港点收尾",
+    "theme_anchor": "outdoor_exploratory",
+    "pitch": "Valencia 徒步 → Chinatown 港点野餐 → Top of the Mark 日落 → True Laurel 鸡尾酒，最 cinematic 的 SF 街头一日游。",
+    "mood_tags": [],
+    "emotional_arc_text": "opening → breathing → peak → closing",
+    "emotional_arc_visual": "",
+    "stops": [
+      {
+        "stop_index": 0,
+        "time": "14:00",
+        "place_id": "valencia_street_corridor",
+        "place_name": "Valencia Street (16th–24th)",
+        "one_liner": "8 个街区的 Mission 独立书店 + 复古店 + 咖啡散步路径，每走 2 个 block 自然停一次。",
+        "why_fits_today": "你写的 taste_signature 是\"镜头感、信息密度极高且生命力充沛的电影感空间\" — Valencia 这条线就是 SF 本地版的涩谷街拍路径：Dog Eared Books 门口的二手黑胶、Heath Ceramics 的日系陶瓷墙、街角 taqueria 门口排队的 locals。你的 novelty_appetite 是 high，这一段 *opens* 你今天的探索状态 — 不用计划，走着走着自然发现 3 家新店。不是 Union Square 游客动线，是 locals 真正逛街的目的地。",
+        "logistics": {
+          "raw": "🚗 from downtown ~10min · 🅿️ 街趴很难，建议 16th BART 站出来走 · 👶 推车友好 · ⏰ 商店多 11:00–19:00 开",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": null,
+        "tip": "周日 Valencia 部分路段封车变 Slow Street，更适合散步。",
+        "transition_to_next": "独立街区 → 市井港点",
+        "transition_drive_min": 12,
+        "image_url": null
+      },
+      {
+        "stop_index": 1,
+        "time": "15:30",
+        "place_id": "",
+        "place_name": "Good Mong Kok Bakery 旺角",
+        "one_liner": "Stockton 街 Chinatown 心脏地带 — $1 叉烧包、$5 三个虾饺，收银机叮叮响的真港点。",
+        "why_fits_today": "你 liked SF 本土街头文化 + authentic 权重 0.9 — Good Mong Kok 不是给游客看的 Grant Ave，是 Stockton 这条 locals 排队的真 Chinatown。$10 吃 5-6 种 dim sum，柜台指着点（没英文 menu），takeaway 去 Portsmouth Square 公园边吃边看大爷下象棋。这一站 *regulates* 你从 Valencia 高密度视觉输入后的状态 — 坐在公园长椅上，手里一笼虾饺，脑子放空 20 分钟，为下一段登顶做缓冲。",
+        "logistics": {
+          "raw": "🚗 from Valencia ~12min BART (16th → Powell 换 30/45 bus) · 🅿️ Chinatown 停车难度 extreme，强烈建议 transit · 👶 takeaway 友好 · ⏰ 07:00–18:00，下午 3 点去不排队\n💰 transit estimate: BART + Muni day pass ~$10/人往返\n\n---",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": {
+          "menu_listed": [
+            "虾饺 $5/3个",
+            "叉烧包 $1.50/个",
+            "糯米鸡 $3/份",
+            "煎堆 $1/个",
+            "蛋挞 $1.50/个"
+          ],
+          "bold_picks": [],
+          "logic_text": "**虾饺 1笼 + 叉烧包 2个 + 糯米鸡 1份 + 蛋挞 1个** = $10 内吃饱。虾饺皮薄馅大开胃，叉烧包糖油烤面是童年记忆锚点，糯米鸡荷叶香当主食，蛋挞收尾。柜台指着玻璃柜点，拿了就走去 Portsmouth Square（1 block 外）坐下吃 — 这才是 SF Chinatown 的正确打开方式。"
+        },
+        "tip": null,
+        "transition_to_next": "市井呼吸 → 登顶眺望",
+        "transition_drive_min": 8,
+        "image_url": null
+      },
+      {
+        "stop_index": 2,
+        "time": "17:30",
+        "place_id": "top_of_the_mark",
+        "place_name": "Top of the Mark",
+        "one_liner": "19 楼 360° SF 全景酒廊 — 金门大桥、海湾、市中心灯火，赶 golden hour 城市点灯瞬间。",
+        "why_fits_today": "你的 vibe_weights 里 cinematic 0.95 排第一 — Top of the Mark 17:30 到刚好赶 golden hour，看整个 SF 从日光过渡到华灯初上。这一站是今天的 *peak* — 从街头走到制高点，视角拉开，刚才在 Chinatown 吃的那笼虾饺、Valencia 逛的那家书店，现在都在你脚下那片城市版图里。Reel 拍出来不用滤镜，是你说的\"前沿产品设计师美学敏锐度\"会欣赏的构图。",
+        "logistics": {
+          "raw": "🚗 from Portsmouth Square ~8min walk uphill (California St 爬坡) · 🅿️ Mark Hopkins 酒店有 valet parking $40 · 👶 酒廊允许，但 golden hour 时段人多 · ⏰ 17:00–23:30，17:30 到抢窗边位",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": null,
+        "tip": "不用消费最低，一杯 cocktail $18 起就能坐窗边。",
+        "transition_to_next": "日落眺望 → 温柔收尾",
+        "transition_drive_min": 15,
+        "image_url": null
+      },
+      {
+        "stop_index": 3,
+        "time": "19:30",
+        "place_id": "true_laurel_mission",
+        "place_name": "True Laurel",
+        "one_liner": "Lazy Bear 团队开的 Mission 创意鸡尾酒吧 — 黑胡桃吧台、暖灯、bartender 会问你心情然后调一杯对应的酒。",
+        "why_fits_today": "你 emotional_intent 写了 explore + reconnect — True Laurel 这一杯 *closes the loop*：前面走了街区、吃了港点、看了日落，现在需要一个温柔的、有对话的空间把今天 ground 住。这里不是 loud 的 club，是那种坐下来 bartender 会问\"今天怎么样\"然后给你调一杯 Phone Home（mezcal + 山楂 + 烟熏）的小诗空间。Hip 0.9 但不 pretentious，刚好匹配你\"硬核极客 + 美学敏锐度\"的双重身份。",
+        "logistics": {
+          "raw": "🚗 from Top of the Mark ~15min Uber · 🅿️ Alabama St 街趴难，Uber 省事 · ⏰ 17:00–00:00 (closed Mon)，19:30 到 walk-in 不等位\n💰 transit estimate: Uber 单程 ~$18",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": null,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": {
+          "menu_listed": [
+            "Phone Home (mezcal + 山楂 + 烟熏)",
+            "Laurel Tree (gin + laurel + 蜂蜜)",
+            "Mr. Kotter (rye + 苦艾 + 黑咖啡)",
+            "Bar Snacks Trio (炸鸡条 + 腌橄榄 + 焦糖花生)"
+          ],
+          "bold_picks": [
+            "Phone Home",
+            "Mr. Kotter",
+            "Bar Snacks Trio"
+          ],
+          "logic_text": "**Phone Home** 开场（轻量 highball，喝一口能想起童年某个味道），如果还有 capacity 再来一杯 **Mr. Kotter** 收尾（spirit-forward，深夜适配）。**Bar Snacks Trio** 垫胃但不当正餐 — 你下午吃了 Good Mong Kok，现在只需要脆口零食配酒。两杯 + snacks ~$50，坐 1 小时刚好。"
+        },
+        "tip": "坐吧台能看 bartender 调酒全程，比坐桌子有意思。",
+        "transition_to_next": null,
+        "transition_drive_min": null,
+        "image_url": null
+      }
+    ],
+    "adaptive_branches": [],
+    "markdown_full": "## 街区暴走 + 港点收尾\n\n> **一句话 pitch**: Valencia 徒步 → Chinatown 港点野餐 → Top of the Mark 日落 → True Laurel 鸡尾酒，最 cinematic 的 SF 街头一日游。\n\n> 你今天会从 Mission 独立书店街区走起，在 Chinatown 市井里吃一轮 $10 的真 dim sum，登顶看城市点灯，最后用一杯黑胡桃吧台的创意鸡尾酒把这一天收住 — vlog 友好，节奏紧凑但不 rushed。\n\n**Mood**: cinematic · lively · authentic · walkable\n**Pace**: 街区散步开场 → Chinatown 市井呼吸 → 日落眺望 peak → 酒吧温柔收尾\n\n```\n📚 街区散步 ──► 🥟 港点野餐 ──► 🌇 日落眺望 ──► 🍸 鸡尾酒收尾\n   14:00           15:30            17:30           19:30\n```\n\n---\n\n## 14:00 · Valencia Street (16th–24th)\n\n> 8 个街区的 Mission 独立书店 + 复古店 + 咖啡散步路径，每走 2 个 block 自然停一次。\n\n**Why this fits today**\n你写的 taste_signature 是\"镜头感、信息密度极高且生命力充沛的电影感空间\" — Valencia 这条线就是 SF 本地版的涩谷街拍路径：Dog Eared Books 门口的二手黑胶、Heath Ceramics 的日系陶瓷墙、街角 taqueria 门口排队的 locals。你的 novelty_appetite 是 high，这一段 *opens* 你今天的探索状态 — 不用计划，走着走着自然发现 3 家新店。不是 Union Square 游客动线，是 locals 真正逛街的目的地。\n\n**Logistics**\n🚗 from downtown ~10min · 🅿️ 街趴很难，建议 16th BART 站出来走 · 👶 推车友好 · ⏰ 商店多 11:00–19:00 开\n\n💡 *周日 Valencia 部分路段封车变 Slow Street，更适合散步。*\n\n---\n\n*(transition: 独立街区 → 市井港点 · ~12min drive/BART)*\n\n---\n\n## 15:30 · Good Mong Kok Bakery 旺角\n\n> Stockton 街 Chinatown 心脏地带 — $1 叉烧包、$5 三个虾饺，收银机叮叮响的真港点。\n\n**Why this fits today**\n你 liked SF 本土街头文化 + authentic 权重 0.9 — Good Mong Kok 不是给游客看的 Grant Ave，是 Stockton 这条 locals 排队的真 Chinatown。$10 吃 5-6 种 dim sum，柜台指着点（没英文 menu），takeaway 去 Portsmouth Square 公园边吃边看大爷下象棋。这一站 *regulates* 你从 Valencia 高密度视觉输入后的状态 — 坐在公园长椅上，手里一笼虾饺，脑子放空 20 分钟，为下一段登顶做缓冲。\n\n**Order**\nMenu: 虾饺 $5/3个 · 叉烧包 $1.50/个 · 糯米鸡 $3/份 · 煎堆 $1/个 · 蛋挞 $1.50/个\n\n**Your picks**: **虾饺 1笼 + 叉烧包 2个 + 糯米鸡 1份 + 蛋挞 1个** = $10 内吃饱。虾饺皮薄馅大开胃，叉烧包糖油烤面是童年记忆锚点，糯米鸡荷叶香当主食，蛋挞收尾。柜台指着玻璃柜点，拿了就走去 Portsmouth Square（1 block 外）坐下吃 — 这才是 SF Chinatown 的正确打开方式。\n\n**Logistics**\n🚗 from Valencia ~12min BART (16th → Powell 换 30/45 bus) · 🅿️ Chinatown 停车难度 extreme，强烈建议 transit · 👶 takeaway 友好 · ⏰ 07:00–18:00，下午 3 点去不排队\n💰 transit estimate: BART + Muni day pass ~$10/人往返\n\n---\n\n*(transition: 市井呼吸 → 登顶眺望 · ~8min walk uphill)*\n\n---\n\n## 17:30 · Top of the Mark\n\n> 19 楼 360° SF 全景酒廊 — 金门大桥、海湾、市中心灯火，赶 golden hour 城市点灯瞬间。\n\n**Why this fits today**\n你的 vibe_weights 里 cinematic 0.95 排第一 — Top of the Mark 17:30 到刚好赶 golden hour，看整个 SF 从日光过渡到华灯初上。这一站是今天的 *peak* — 从街头走到制高点，视角拉开，刚才在 Chinatown 吃的那笼虾饺、Valencia 逛的那家书店，现在都在你脚下那片城市版图里。Reel 拍出来不用滤镜，是你说的\"前沿产品设计师美学敏锐度\"会欣赏的构图。\n\n**Logistics**\n🚗 from Portsmouth Square ~8min walk uphill (California St 爬坡) · 🅿️ Mark Hopkins 酒店有 valet parking $40 · 👶 酒廊允许，但 golden hour 时段人多 · ⏰ 17:00–23:30，17:30 到抢窗边位\n\n💡 *不用消费最低，一杯 cocktail $18 起就能坐窗边。*\n\n---\n\n*(transition: 日落眺望 → 温柔收尾 · ~15min drive/Uber)*\n\n---\n\n## 19:30 · True Laurel\n\n> Lazy Bear 团队开的 Mission 创意鸡尾酒吧 — 黑胡桃吧台、暖灯、bartender 会问你心情然后调一杯对应的酒。\n\n**Why this fits today**\n你 emotional_intent 写了 explore + reconnect — True Laurel 这一杯 *closes the loop*：前面走了街区、吃了港点、看了日落，现在需要一个温柔的、有对话的空间把今天 ground 住。这里不是 loud 的 club，是那种坐下来 bartender 会问\"今天怎么样\"然后给你调一杯 Phone Home（mezcal + 山楂 + 烟熏）的小诗空间。Hip 0.9 但不 pretentious，刚好匹配你\"硬核极客 + 美学敏锐度\"的双重身份。\n\n**Order**\nMenu: Phone Home (mezcal + 山楂 + 烟熏) · Laurel Tree (gin + laurel + 蜂蜜) · Mr. Kotter (rye + 苦艾 + 黑咖啡) · Bar Snacks Trio (炸鸡条 + 腌橄榄 + 焦糖花生)\n\n**Your picks**: **Phone Home** 开场（轻量 highball，喝一口能想起童年某个味道），如果还有 capacity 再来一杯 **Mr. Kotter** 收尾（spirit-forward，深夜适配）。**Bar Snacks Trio** 垫胃但不当正餐 — 你下午吃了 Good Mong Kok，现在只需要脆口零食配酒。两杯 + snacks ~$50，坐 1 小时刚好。\n\n**Logistics**\n🚗 from Top of the Mark ~15min Uber · 🅿️ Alabama St 街趴难，Uber 省事 · ⏰ 17:00–00:00 (closed Mon)，19:30 到 walk-in 不等位\n💰 transit estimate: Uber 单程 ~$18\n\n💡 *坐吧台能看 bartender 调酒全程，比坐桌子有意思。*\n\n---\n\n## 🔀 如果今天有变化\n\n**If 你在 Top of the Mark 看完日落发现 energy 还很高 + 想要更 lively 的收尾**\n→ 跳过 True Laurel，改去 **The Independent** 看一场 indie 音乐现场（19:30 开门，20:30 演出，$20-30 门票）— 500 人 standing room，没 VIP，可能看到下一波 indie rock 明星。提前查 lineup 买票。\n🔗 book: https://www.theindependentsf.com/\n💰 transit estimate: 门票 $25 + Uber 往返 ~$35 = $60 总额\n\n---",
+    "coaching_block": null,
+    "composer_note": null,
+    "score_summary": {
+      "stranger_test": 0,
+      "arc_coherence": 0,
+      "specificity": 0,
+      "avoidance_respect": 0,
+      "adaptive_branch": 0,
+      "notes": "live LLM run — score_summary not computed (Critic Phase 5 pending)"
+    }
+  },
+  "trip_context": {
+    "date_label": "Sat · Jan 10 · 2026",
+    "time_window": "09:00 → 21:00",
+    "origin": "San Francisco",
+    "companions": [
+      "family"
+    ],
+    "vehicle": "transit + walking",
+    "persona_id": "garry",
+    "intake_summary": "YC 开训这周脑子全被 AI 填满了。周六想在 SF 城区里整点真正厉害的拉面或者亚洲融合菜，顺便拍点好看的 Vlog 素材，帮我攒一个带点设计感、足够 local 的充能路线？",
+    "today_is": "2026-01-10"
+  }
+}

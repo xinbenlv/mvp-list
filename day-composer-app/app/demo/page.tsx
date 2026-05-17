@@ -303,6 +303,10 @@ export default function DemoIndex() {
           <Link href="/preview" style={{ color: "#8b4a4a" }}>
             also: /preview switcher
           </Link>
+          {" · "}
+          <Link href="/demo/agent-live" style={{ color: "#8b4a4a" }}>
+            🤖 live from agent (3 plans)
+          </Link>
         </div>
       </footer>
 

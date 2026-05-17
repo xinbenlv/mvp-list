@@ -1,0 +1,155 @@
+{
+  "plan": {
+    "plan_id": "garry_cultural_restorative",
+    "persona_id": "garry",
+    "version": "v1",
+    "day_theme": "街头探索的一天",
+    "theme_anchor": "cultural_restorative",
+    "pitch": "SF 本土文化沉浸版 — 从 Chinatown 烟火到 Mission 街头暴走，最接地气的 cinematic 路线。",
+    "mood_tags": [],
+    "emotional_arc_text": "opening → breathing → peak → closing",
+    "emotional_arc_visual": "",
+    "stops": [
+      {
+        "stop_index": 0,
+        "time": "09:00",
+        "place_id": "",
+        "place_name": "Good Mong Kok Bakery 旺角",
+        "one_liner": "Stockton 街心脏地带的 $1 叉烧包柜台 — 没有座位、没有英文菜单、收银机叮叮响。",
+        "why_fits_today": "你的 taste signature 写了\"极度热爱旧金山本土街头文化\" + \"authentic 0.9\" — Good Mong Kok 就是那种 Grant Avenue 游客永远找不到的真 Chinatown：locals 排队指着柜台点单、蒸笼直出、$10 吃 5-6 种 dim sum。你说要\"信息密度极高的电影感空间\"— 这里早上 9 点的菜市场人流 + 粤语吆喝 + 热气腾腾的虾饺皮，就是一个 long take 能拍完的 SF 本土生活切片。带出去 Portsmouth Square 边吃边看大爷下象棋，*regulates* 你这一周高强度 YC 生态统领后需要的\"真实连接\"。",
+        "logistics": {
+          "raw": "🚗 Stockton St 街趴难 · 🅿️ Portsmouth Square Garage ($3/hr) 走路 2min · ⏰ 07:00–18:00 daily · 💵 cash preferred · 👶 takeaway-only 但公园有长椅",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": {
+          "menu_listed": [
+            "Shrimp Har Gow (虾饺) $5 三个",
+            "BBQ Pork Bun (叉烧包) $1.50 一个",
+            "Sticky Rice in Lotus Leaf (糯米鸡) $3 一份",
+            "Sesame Ball (煎堆) $1 一个",
+            "Egg Tart (蛋挞) $1.50 一个"
+          ],
+          "bold_picks": [],
+          "logic_text": "**虾饺 + 糯米鸡 + 叉烧包 2 个 + 蛋挞 1 个** — $10 内吃饱，虾饺开胃（皮薄馅大）、糯米鸡当主食（荷叶香）、叉烧包是招牌必点、蛋挞收尾。柜台指着点，takeaway 出去公园坐草地边吃，看 Chinatown 早晨的真实节奏。"
+        },
+        "tip": "09:30 前到 — 虾饺刚出笼最好吃，晚了要等下一轮。",
+        "transition_to_next": "华埠烟火 → Mission 独立文化",
+        "transition_drive_min": 18,
+        "image_url": null
+      },
+      {
+        "stop_index": 1,
+        "time": "10:30",
+        "place_id": "valencia_street_corridor",
+        "place_name": "Valencia Street (16th–24th)",
+        "one_liner": "8 个街区的散步路径 — 独立书店、复古店、Heath Ceramics、咖啡馆一条线串起，走着走着自然停三次。",
+        "why_fits_today": "你的 vibe_weights 里 walkable 0.8 + hip 0.85 + cultural 0.85 全部收敛在 Valencia —  这条街是 SF locals 真正的逛街目的地（不是 Union Square）。Dog Eared Books、Borderlands、Paxton Gate 那种独立书店 + 古董标本店的组合，配你\"前沿产品设计师的美学敏锐度\"刚好。你说要 explore + reconnect — Valencia 的节奏是\"不用计划、走着走着自然停三次\"，每家店都能聊、每个转角都有新咖啡馆，这种高信息密度的自由探索 *opens* 你一周被会议切碎的注意力，让你重新用自己的节奏呼吸城市。",
+        "logistics": {
+          "raw": "🚗 street parking 难 · 🅿️ 16th St BART 站走过来免停车 · 👶 stroller 友好 · ⏰ 店铺多 11:00 开门 · 🚶 建议从 16th 往 24th 方向走，顺光拍照",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": null,
+        "tip": "周日是 Valencia Slow Street — 部分路段封车，散步体验最好。",
+        "transition_to_next": "街头呼吸 → 午餐峰值",
+        "transition_drive_min": 8,
+        "image_url": null
+      },
+      {
+        "stop_index": 2,
+        "time": "13:00",
+        "place_id": "",
+        "place_name": "La Taqueria",
+        "one_liner": "Mission 24th 街的 burrito 圣地 — 2017 James Beard America's Classics 得主，no-rice burrito 是 SF 本地人的吃法。",
+        "why_fits_today": "从 Valencia 走到 24th/Mission 刚好饿，La Taqueria 是那种\"你的 taste anchors 里会写进去\"的地方 — authentic 0.95、lively 0.85、$10 吃饱的朴素满足感。你说要\"地道拉面与波霸奶茶\"那种本土食物热爱 — La Taqueria 的 carnitas no-rice dorado 就是 SF 版的同一种信仰：locals 专程过来、排 15 分钟值得、吃完站在街角啃完那种\"这才是这座城市\"的仪式感。这一站 *grounds* 你今天上午的探索节奏，用一个真烟火的午餐把 Mission 的街头能量锚定住。",
+        "logistics": {
+          "raw": "🚗 Mission St 街趴难 · 🅿️ 24th St BART 走路 3min · ⏰ Tue–Sun 11:00–20:45, closed Mon · 💵 cash + card · 👶 takeaway 友好",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": {
+          "menu_listed": [
+            "Carnitas Burrito (no rice, dorado) $10",
+            "Carne Asada Taco $4 一个",
+            "Al Pastor Taco $4",
+            "Agua Fresca (horchata / jamaica) $4 大杯"
+          ],
+          "bold_picks": [],
+          "logic_text": "**Carnitas Burrito no-rice dorado + horchata** — $15 内吃饱，no-rice 是当地人吃法（豆子和肉填满）、加 $1.25 dorado 把外皮煎脆、horchata 解辣。第一次来就点这个组合 — 这是 James Beard 评出的全美最佳 burrito，老 SF 人的共识。"
+        },
+        "tip": "12:30 前到避开午餐 peak，不然排队 20min+。",
+        "transition_to_next": "午餐峰值 → 精调收尾",
+        "transition_drive_min": 12,
+        "image_url": null
+      },
+      {
+        "stop_index": 3,
+        "time": "18:00",
+        "place_id": "true_laurel_mission",
+        "place_name": "True Laurel",
+        "one_liner": "Lazy Bear 团队开的 Mission 创意鸡尾酒吧 — 黑胡桃吧台、温柔暖灯、每一杯都是 menu 上没有的小诗。",
+        "why_fits_today": "你的 cinematic 0.95 + hip 0.85 在 True Laurel 找到完美收尾 — Lazy Bear 团队的审美标准（photogenic 0.85 + polished 0.8）配上 Mission 的松弛感（17:00 到 walk-in 友好）。你说今天要 explore + reconnect — True Laurel 的 bartender 会问你今天的心情然后调一杯对应的酒，这种\"被看见\"的体验 *closes the loop* 给今天上午街头探索 + 午餐烟火气的情绪弧。一杯 Phone Home（mezcal + 山楂 + 烟熏）配 bar snacks，坐在吧台看 bartender 手法，就是你会在 reel 里剪进去的那种 SF 本地生活瞬间。",
+        "logistics": {
+          "raw": "🚗 Alabama St 街趴难 · 🅿️ 16th St BART 走路 8min · ⏰ Tue–Sun 17:00–00:00, closed Mon · 💵 $$$ 一杯 $16-18 · 🔞 21+ only",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": null,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": {
+          "menu_listed": [
+            "Phone Home (mezcal + 山楂 + 烟熏)",
+            "Laurel Tree (gin + laurel + 蜂蜜)",
+            "Mr. Kotter (rye + 苦艾 + 黑咖啡)",
+            "Bar Snacks Trio (炸鸡条 + 腌橄榄 + 焦糖花生)"
+          ],
+          "bold_picks": [],
+          "logic_text": "**Phone Home 开场 + Bar Snacks Trio** — 从一杯轻量 highball 打开味觉（mezcal 的烟熏 + 山楂的童年记忆感配今天街头探索的节奏），bar snacks 垫胃刚好（不是正餐，是收尾的轻盈陪衬）。如果还有 energy，再来一杯 Mr. Kotter spirit-forward 收住。"
+        },
+        "tip": "17:00–19:00 walk-in 友好，19:00 后要等位 — 坐吧台能看到调酒全过程。",
+        "transition_to_next": null,
+        "transition_drive_min": null,
+        "image_url": null
+      }
+    ],
+    "adaptive_branches": [],
+    "markdown_full": "## 街头探索的一天\n\n> **一句话 pitch**: SF 本土文化沉浸版 — 从 Chinatown 烟火到 Mission 街头暴走，最接地气的 cinematic 路线。\n\n> 你今天会从旧金山最真实的华埠早市开始，沿着 Valencia 独立书店和咖啡馆散步，在 Mission 的 burrito 圣地吃午饭，最后在一杯精调鸡尾酒里把这一天的镜头感收住 — 从早到晚都是 locals 真正在用的城市。\n\n**Mood**: authentic · cinematic · lively · grounding · exploratory\n**Pace**: 烟火气开场 → Valencia 街头呼吸 → Mission 午餐峰值 → 精调酒吧收尾\n\n```\n🥟 烟火气开场 ──► 🚶 街头呼吸 ──► 🌯 午餐峰值 ──► 🍸 精调收尾\n   09:00              10:30           13:00           18:00\n```\n\n---\n\n## 09:00 · Good Mong Kok Bakery 旺角\n\n> Stockton 街心脏地带的 $1 叉烧包柜台 — 没有座位、没有英文菜单、收银机叮叮响。\n\n**Why this fits today**\n你的 taste signature 写了\"极度热爱旧金山本土街头文化\" + \"authentic 0.9\" — Good Mong Kok 就是那种 Grant Avenue 游客永远找不到的真 Chinatown：locals 排队指着柜台点单、蒸笼直出、$10 吃 5-6 种 dim sum。你说要\"信息密度极高的电影感空间\"— 这里早上 9 点的菜市场人流 + 粤语吆喝 + 热气腾腾的虾饺皮，就是一个 long take 能拍完的 SF 本土生活切片。带出去 Portsmouth Square 边吃边看大爷下象棋，*regulates* 你这一周高强度 YC 生态统领后需要的\"真实连接\"。\n\n**Logistics**\n🚗 Stockton St 街趴难 · 🅿️ Portsmouth Square Garage ($3/hr) 走路 2min · ⏰ 07:00–18:00 daily · 💵 cash preferred · 👶 takeaway-only 但公园有长椅\n\n**Order**\nMenu: Shrimp Har Gow (虾饺) $5 三个 · BBQ Pork Bun (叉烧包) $1.50 一个 · Sticky Rice in Lotus Leaf (糯米鸡) $3 一份 · Sesame Ball (煎堆) $1 一个 · Egg Tart (蛋挞) $1.50 一个\n\n**Your picks**: **虾饺 + 糯米鸡 + 叉烧包 2 个 + 蛋挞 1 个** — $10 内吃饱，虾饺开胃（皮薄馅大）、糯米鸡当主食（荷叶香）、叉烧包是招牌必点、蛋挞收尾。柜台指着点，takeaway 出去公园坐草地边吃，看 Chinatown 早晨的真实节奏。\n\n💡 *09:30 前到 — 虾饺刚出笼最好吃，晚了要等下一轮。*\n\n---\n\n*(transition: 华埠烟火 → Mission 独立文化 · ~18min drive/Muni)*\n\n---\n\n## 10:30 · Valencia Street (16th–24th)\n\n> 8 个街区的散步路径 — 独立书店、复古店、Heath Ceramics、咖啡馆一条线串起，走着走着自然停三次。\n\n**Why this fits today**\n你的 vibe_weights 里 walkable 0.8 + hip 0.85 + cultural 0.85 全部收敛在 Valencia —  这条街是 SF locals 真正的逛街目的地（不是 Union Square）。Dog Eared Books、Borderlands、Paxton Gate 那种独立书店 + 古董标本店的组合，配你\"前沿产品设计师的美学敏锐度\"刚好。你说要 explore + reconnect — Valencia 的节奏是\"不用计划、走着走着自然停三次\"，每家店都能聊、每个转角都有新咖啡馆，这种高信息密度的自由探索 *opens* 你一周被会议切碎的注意力，让你重新用自己的节奏呼吸城市。\n\n**Logistics**\n🚗 street parking 难 · 🅿️ 16th St BART 站走过来免停车 · 👶 stroller 友好 · ⏰ 店铺多 11:00 开门 · 🚶 建议从 16th 往 24th 方向走，顺光拍照\n\n💡 *周日是 Valencia Slow Street — 部分路段封车，散步体验最好。*\n\n---\n\n*(transition: 街头呼吸 → 午餐峰值 · ~8min walk)*\n\n---\n\n## 13:00 · La Taqueria\n\n> Mission 24th 街的 burrito 圣地 — 2017 James Beard America's Classics 得主，no-rice burrito 是 SF 本地人的吃法。\n\n**Why this fits today**\n从 Valencia 走到 24th/Mission 刚好饿，La Taqueria 是那种\"你的 taste anchors 里会写进去\"的地方 — authentic 0.95、lively 0.85、$10 吃饱的朴素满足感。你说要\"地道拉面与波霸奶茶\"那种本土食物热爱 — La Taqueria 的 carnitas no-rice dorado 就是 SF 版的同一种信仰：locals 专程过来、排 15 分钟值得、吃完站在街角啃完那种\"这才是这座城市\"的仪式感。这一站 *grounds* 你今天上午的探索节奏，用一个真烟火的午餐把 Mission 的街头能量锚定住。\n\n**Logistics**\n🚗 Mission St 街趴难 · 🅿️ 24th St BART 走路 3min · ⏰ Tue–Sun 11:00–20:45, closed Mon · 💵 cash + card · 👶 takeaway 友好\n\n**Order**\nMenu: Carnitas Burrito (no rice, dorado) $10 · Carne Asada Taco $4 一个 · Al Pastor Taco $4 · Agua Fresca (horchata / jamaica) $4 大杯\n\n**Your picks**: **Carnitas Burrito no-rice dorado + horchata** — $15 内吃饱，no-rice 是当地人吃法（豆子和肉填满）、加 $1.25 dorado 把外皮煎脆、horchata 解辣。第一次来就点这个组合 — 这是 James Beard 评出的全美最佳 burrito，老 SF 人的共识。\n\n💡 *12:30 前到避开午餐 peak，不然排队 20min+。*\n\n---\n\n*(transition: 午餐峰值 → 精调收尾 · ~12min walk)*\n\n---\n\n## 18:00 · True Laurel\n\n> Lazy Bear 团队开的 Mission 创意鸡尾酒吧 — 黑胡桃吧台、温柔暖灯、每一杯都是 menu 上没有的小诗。\n\n**Why this fits today**\n你的 cinematic 0.95 + hip 0.85 在 True Laurel 找到完美收尾 — Lazy Bear 团队的审美标准（photogenic 0.85 + polished 0.8）配上 Mission 的松弛感（17:00 到 walk-in 友好）。你说今天要 explore + reconnect — True Laurel 的 bartender 会问你今天的心情然后调一杯对应的酒，这种\"被看见\"的体验 *closes the loop* 给今天上午街头探索 + 午餐烟火气的情绪弧。一杯 Phone Home（mezcal + 山楂 + 烟熏）配 bar snacks，坐在吧台看 bartender 手法，就是你会在 reel 里剪进去的那种 SF 本地生活瞬间。\n\n**Logistics**\n🚗 Alabama St 街趴难 · 🅿️ 16th St BART 走路 8min · ⏰ Tue–Sun 17:00–00:00, closed Mon · 💵 $$$ 一杯 $16-18 · 🔞 21+ only\n\n**Order**\nMenu: Phone Home (mezcal + 山楂 + 烟熏) · Laurel Tree (gin + laurel + 蜂蜜) · Mr. Kotter (rye + 苦艾 + 黑咖啡) · Bar Snacks Trio (炸鸡条 + 腌橄榄 + 焦糖花生)\n\n**Your picks**: **Phone Home 开场 + Bar Snacks Trio** — 从一杯轻量 highball 打开味觉（mezcal 的烟熏 + 山楂的童年记忆感配今天街头探索的节奏），bar snacks 垫胃刚好（不是正餐，是收尾的轻盈陪衬）。如果还有 energy，再来一杯 Mr. Kotter spirit-forward 收住。\n\n💡 *17:00–19:00 walk-in 友好，19:00 后要等位 — 坐吧台能看到调酒全过程。*\n\n---\n\n## 🔀 如果今天有变化\n\n**If Valencia 散步后你发现 energy 比预期高、想要一个真正的夜晚收尾**\n→ 把 True Laurel 换成 **The Independent 现场音乐** (19:30 doors, $20-30 tickets) — 500 人独立音乐场、indie rock/electronic 下一波明星在这儿过路，配你的 novelty appetite high + cinematic 审美。提前查 lineup (theindependentsf.com)，SpotHero 订 Divisadero 附近车位。\n🔗 book: https://www.theindependentsf.com/\n🅿️ pre-pay: https://spothero.com/search · ~$12\n💰 transit estimate: ~$35 总额（门票 + 停车）",
+    "coaching_block": null,
+    "composer_note": null,
+    "score_summary": {
+      "stranger_test": 0,
+      "arc_coherence": 0,
+      "specificity": 0,
+      "avoidance_respect": 0,
+      "adaptive_branch": 0,
+      "notes": "live LLM run — score_summary not computed (Critic Phase 5 pending)"
+    }
+  },
+  "trip_context": {
+    "date_label": "Sat · Jan 10 · 2026",
+    "time_window": "09:00 → 21:00",
+    "origin": "San Francisco",
+    "companions": [
+      "family"
+    ],
+    "vehicle": "transit + walking",
+    "persona_id": "garry",
+    "intake_summary": "YC 开训这周脑子全被 AI 填满了。周六想在 SF 城区里整点真正厉害的拉面或者亚洲融合菜，顺便拍点好看的 Vlog 素材，帮我攒一个带点设计感、足够 local 的充能路线？",
+    "today_is": "2026-01-10"
+  }
+}
