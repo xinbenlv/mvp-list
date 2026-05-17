@@ -2,8 +2,8 @@
   "_meta": {
     "purpose": "10 hand-curated Bay Area places for Day Composer POC demo. Designed to support 2-3 different day shapes (restoration day with baby in South Bay, exploratory urban day in SF, and mixed variants). Schema is a SLIM version of Place v2 — keeps only fields the Composer prompt needs to write magical copy.",
     "schema_note": "Mirrors mvp-list/backend-data-schema-v2.md Place v2, but drops administrative fields (precise lat/lon, ratings sources, sources[], confidence_notes). Friend's real backend would have all v2 fields.",
-    "city_coverage": ["South Bay (Milpitas, San Jose)", "SF", "East Bay (Berkeley)"],
-    "place_count": 10
+    "city_coverage": ["South Bay (Milpitas, San Jose)", "SF (SoMa, Mission, Richmond, Nob Hill)", "East Bay (Berkeley)"],
+    "place_count": 12
   },
 
   "places": [
@@ -418,6 +418,91 @@
         ]
       },
       "narrative_hook": "排队 15 分钟的 Mission 烘焙朝圣地 —— Morning Bun 是 Tartine 的灵魂，11 点前售罄是常态。"
+    },
+
+    {
+      "place_id": "top_of_the_mark",
+      "name": "Top of the Mark",
+      "place_type": "point_of_attraction",
+      "category": "viewpoint",
+      "city": "San Francisco",
+      "address": "999 California St, 19th Floor, San Francisco, CA 94108",
+      "hours_note": "Sun–Thu 17:00–23:30, Fri–Sat 17:00–00:30 — golden hour seating fills fast",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "cinematic", "weight": 0.95 },
+          { "tag": "lively", "weight": 0.7 },
+          { "tag": "hip", "weight": 0.6 },
+          { "tag": "photogenic", "weight": 0.9 },
+          { "tag": "spacious", "weight": 0.7 },
+          { "tag": "polished", "weight": 0.8 }
+        ],
+        "pacing_roles": ["closing"],
+        "emotional_roles": ["feel_alive", "celebrate"],
+        "energy_cost": "medium",
+        "chaos_tolerance": "medium",
+        "social_fit": ["couple", "friends", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": [],
+          "good_before": ["burma_superstar", "dong_que", "sfmoma"]
+        }
+      },
+      "logistics": {
+        "parking": "garage_paid_nearby",
+        "kid_friendly": true,
+        "reservation_model": "walk_in_with_wait",
+        "estimated_duration_minutes": 60,
+        "booking_links": []
+      },
+      "narrative_hook": "19 楼的 360° SF 全景酒廊 —— 金门大桥、海湾、市中心灯火一次看完。傍晚 5–6 点到，赶 golden hour 的城市点灯瞬间，是那种 reel 拍出来不用滤镜的位置。"
+    },
+
+    {
+      "place_id": "true_laurel_mission",
+      "name": "True Laurel",
+      "place_type": "restaurant",
+      "category": "cocktail_bar",
+      "city": "San Francisco",
+      "address": "753 Alabama St, San Francisco, CA 94110",
+      "hours_note": "Tue–Sun 17:00–00:00, closed Mon — walk-in friendly before 19:00",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "cinematic", "weight": 0.85 },
+          { "tag": "lively", "weight": 0.8 },
+          { "tag": "hip", "weight": 0.9 },
+          { "tag": "photogenic", "weight": 0.85 },
+          { "tag": "polished", "weight": 0.8 },
+          { "tag": "social", "weight": 0.7 }
+        ],
+        "pacing_roles": ["closing"],
+        "emotional_roles": ["feel_alive", "celebrate"],
+        "energy_cost": "medium",
+        "chaos_tolerance": "medium",
+        "social_fit": ["couple", "friends"],
+        "compatibility_hints": {
+          "good_after": [],
+          "good_before": ["burma_superstar", "tartine_mission", "sfmoma"]
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": false,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 60,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["cocktails"],
+        "price_range": "$$$",
+        "top_dishes": [
+          { "name": "Phone Home", "note": "招牌 — mezcal + 山楂 + 烟熏，喝一口能想起小时候的某个味道" },
+          { "name": "Laurel Tree", "note": "gin + laurel + 蜂蜜，香气层次像在森林里散步" },
+          { "name": "Mr. Kotter", "note": "rye + 苦艾 + 黑咖啡，深夜适配" },
+          { "name": "Bar Snacks Trio", "note": "炸鸡条 + 腌橄榄 + 焦糖花生，垫胃刚好" }
+        ],
+        "ordering_logic_hint": "从一杯轻量 highball（Phone Home 或 Laurel Tree）开始打开味觉，再来一杯 spirit-forward 收尾（Mr. Kotter）。Bar snacks 不必当正餐，吃了晚饭来这里就一杯 + 一份脆口零食。"
+      },
+      "narrative_hook": "Lazy Bear 团队开的 Mission 创意鸡尾酒吧 —— 黑胡桃吧台、温柔的暖灯、bartender 会问你今天的心情然后调一杯对应的酒。每一杯都是 menu 上没有的小诗。"
     }
 
   ]

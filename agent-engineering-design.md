@@ -170,6 +170,7 @@ mcp-server-ticketmaster   → needs TICKETMASTER_API_KEY (free, 5k/day)
 | `state.serialize_to_experience_request(state) → ExperienceRequest` | Map IntakeState → backend contract; handle the 3 alignment bugs from PRD | Must be exact; LLM would drift |
 | `state.merge_slot_updates(state, updates) → state` | Apply Extractor's slot updates with confidence merge logic | Straightforward dict merge |
 | `format_proposals(plans) → markdown` | Render 2-3 TripPlans into a single response with side-by-side comparison | Pure template; LLM adds no value |
+| `default_concept_from_intake(state, candidates) → Concept` | **POC-only.** Build one structurally valid `Concept` deterministically from `IntakeState` + ranked `PlaceCandidate[]`: `day_theme` is a templated string from the user's dominant `mood_tags` + `emotional_intent`; `pacing_blueprint` is the canonical opening → breathing → peak → closing; `anchor_place_ids` are the top-2 candidates by `fit_score`; `emotional_thesis` is a one-line template referencing the state's primary axis. Lets POC reuse the full Composer prompt unchanged. | POC defers genuine Concept diversity to Phase 4. A deterministic default keeps Composer prompt POC-agnostic — no branching for "no concept" case. |
 
 ---
 
@@ -292,13 +293,20 @@ Total intake-to-3-plans: ~120s. Full demo with refine: ~165s.
 | Layer | POC | Cut |
 |---|---|---|
 | Intake | Intake Orchestrator with 3 tools (vision, extract, qgen) | Critic |
-| Backend | Mock with local JSON (10 places) | Real `/experience` |
+| Backend | Local JSON mock (`demo_places.json`, ~10 places) **with real weighted-vibe overlap ranking against IntakeState** | Real `/experience` HTTP |
 | Enrichment | **Skip entirely** | weather / events / web_search |
-| Composition | **1 Composer call, 1 plan + 1 adaptive branch** | Concepts + parallel ×3 |
+| Composition | **1 Composer call → 1 TripPlan**, fed by `default_concept_from_intake(state, candidates)` (no `generate_concepts` LLM call) | `generate_concepts` + parallel Composer × 2-3 |
 | Critic | none | yes (Phase 4) |
 | Refine | single-shot | full loop |
 
-→ POC: **1 Agent + 4 Tools + 2 pure functions**.
+→ POC: **1 Agent (Intake Orchestrator) + 1 Agent instance (Plan Composer, single call) + 4 tools (vision, extract, qgen, mock search_places) + 3 pure functions (router, serialize, `default_concept_from_intake`)**.
+
+> **POC integrity requirement (hard rule, not aspirational)**: at least ONE end-to-end taste → real-place → why-fits path must be real, not stubbed. Specifically:
+> - **Vision Intake is real**: real Sonnet 4.6 + vision call on real user-supplied screenshots — never canned.
+> - **Backend mock respects IntakeState**: `demo_places.json` is local, but the mock `search_places` MUST do real weighted-vibe overlap ranking (`fit_score` derived from `TasteSignature` × place `mood_tags`). No random ordering, no hard-coded plan.
+> - **`why_fits_today` is real**: Composer's per-stop justification MUST reference real fields from the real `IntakeState` (e.g., user's exact `emotional_intent`, top mood tags, named avoidances). Generic justification = POC fails the demo bar.
+>
+> If any of the three is stubbed, the POC degrades to "generic itinerary generator" and loses the "taste → real-place-that-fits" wow. These three are non-negotiable; everything else in this table can be cut.
 
 ### Full (1–2 weeks post-POC, ~13 hours)
 
@@ -339,11 +347,12 @@ Total intake-to-3-plans: ~120s. Full demo with refine: ~165s.
 **Exit**: Real `/experience` call returns candidates for Mia's persona.
 
 ### Phase 3 — Composer single-plan (2.5 hours)
-- Implement Plan Composer agent
-- Prompt = `poc-demo/composer_prompt.md`
+- Implement `default_concept_from_intake(state, candidates)` pure function (see §6) — produces the single POC Concept deterministically from IntakeState + ranked candidates
+- Implement Plan Composer agent; input = `(default_concept, candidates)` — same shape it will take in Phase 4 from `generate_concepts`
+- Prompt = `poc-demo/composer_prompt.md` (no POC-specific branching — Composer doesn't know the Concept is "default")
 - No tools yet (skip get_route / get_place_details)
 
-**Exit**: One demo-quality TripPlan for Mia's persona.
+**Exit**: One demo-quality TripPlan for Mia's persona, with `why_fits_today` referencing real IntakeState fields (per §10 POC integrity rule).
 
 ### → POC ENDS HERE. ~7 hours total. ShippABLE for hackathon. →
 
@@ -375,7 +384,8 @@ agent/
 │   └── orchestrator.py      # Agent 1: Intake Orchestrator (the loop)
 ├── compose/
 │   ├── composer.py          # Agent 2: Plan Composer
-│   └── concepts.py          # generate_concepts tool
+│   ├── concepts.py          # generate_concepts tool [Phase 4+]
+│   └── default_concept.py   # default_concept_from_intake (POC pure function; see §6)
 ├── critic/
 │   └── critic.py            # [Phase 4+] Plan Critic agent
 ├── tools/
@@ -401,20 +411,20 @@ agent/
     └── critic.md            # [Phase 4+]
 ```
 
-**Module count**: 14 (was 20+ in v1).
+**Module count**: 15 (was 20+ in v1).
 
 ---
 
 ## 13. Open Questions / Decisions
 
-| # | Question | Default |
+| # | Question | Decision / Default |
 |---|---|---|
-| 1 | Should `web_search` be in Intake Orchestrator's tool set too (e.g., to clarify a place the user mentioned)? | **No for POC.** Only Composer uses web_search. |
-| 2 | Cache `IntakeState` across user sessions? | **POC: no.** Full: yes, keyed by user. |
-| 3 | Fixed 3 Concepts/Plans or dynamic 2-4? | Fixed 3 for POC; `generate_concepts` may emit fewer if diversity fails. |
+| 1 ✅ | Should `web_search` be in Intake Orchestrator's tool set too (e.g., to clarify a place the user mentioned)? | **Decision: No.** Only Composer uses `web_search`. Rationale: Orchestrator's job is intake, not fact-checking. If the user mentions an unknown place, Orchestrator infers a vibe descriptor from context and lets Composer verify last-mile. Keeps Orchestrator tool surface minimal. |
+| 2 ✅ | Cache `IntakeState` across user sessions? | **Decision: POC — No. Full — Yes, keyed by `user_id`.** Rationale: POC has no auth/user-id concept; every session is cold. Full version should warm-start from prior `IntakeState` so weekly returning users skip re-intake, surfaced as a "is this still true?" diff confirm (1 turn) instead of full re-elicitation. |
+| 3 ✅ | Fixed 3 Concepts/Plans or dynamic 2-4? | **Decision: POC — 1 default Concept (no diversity), produced by `default_concept_from_intake` (pure function, no LLM). Full — 2–3 dynamic Concepts from `generate_concepts` (LLM); may emit fewer if diversity check fails.** This resolves the prior §10 vs §13 contradiction. |
 | 4 | Refine round cap | 2 rounds, then prompt "lock or restart." |
 | 5 | When intake confidence is low, does Q-Gen assume + flag, or always ask? | Always ask if any dim `<0.5`; otherwise assume + flag in output. |
-| 6 | OpenClaw streaming | **Stream** the Composer output — perceived latency matters. |
+| 6 | OpenClaw streaming | **Open** — depends on OpenClaw runtime capability; defer to friend on the backend side. Preference: stream Composer output for perceived latency. |
 | 7 | Multi-language | Mix Chinese-English by default; bias toward user's input language. |
 
 ---
@@ -428,6 +438,7 @@ agent/
 | Diversity | Pairwise edit distance between plans | ≥40% (no 2 plans share 3+ stops) |
 | Robustness | Survives any single tool failure | Yes (per §9) |
 | Composer quality | "Stranger can't tell who this user is" test on `why_fits_today` | Pass on Mia's persona + 1 contrast persona |
+| POC integrity | Vision intake real (not canned), mock backend does real weighted-vibe ranking on `demo_places.json`, Composer's `why_fits_today` references real IntakeState fields per persona | All 3 real for POC demo; spot-check that swapping persona changes `fit_score` ranking AND `why_fits_today` wording |
 | Cost | Per full session (intake + 3 plans + 1 refine) | ≤ $0.30 |
 
 ---

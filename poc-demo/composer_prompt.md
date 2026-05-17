@@ -130,6 +130,14 @@ If a stop's `why_fits_today` could be cut and pasted into another user's plan un
 - The 4 stops MUST cover the pacing arc — opening / breathing / peak / closing.
 - Do NOT pick two places with the same `pacing_role` unless explicitly justified.
 
+### Pacing role fallback (when candidates don't cover all 4 roles)
+- If the `place_candidates` set lacks ANY place with a needed `pacing_role` (opening / breathing / peak / closing), **name the gap out loud** in the plan rather than silently forcing a wrong-role place into the slot.
+- Acceptable patterns when a role is missing:
+  - **Fold its function into an adjacent stop**: e.g., if no "closing" exists, make the peak dinner do double duty and explicitly close the plan after dinner — don't invent a fake fourth stop. The day_theme should reflect this ("一桌好饭就是收尾").
+  - **Drop the missing role and run a 3-stop arc**: state in the emotional arc that today is a 3-act day, not 4-act. Honest > forced.
+- DO NOT pick a place whose `pacing_role` is wrong just to fill the slot. A wrong-role peak as a "closing" breaks the arc.
+- The user should never see a stop that feels mis-cast for its position in the day.
+
 ### Emotional arc
 - Read the user's `emotional_intent`. If they said `restore` + `slow_down`, the arc should crescendo gently, not aggressively.
 - If they said `explore` + `feel_alive`, the arc can spike at the peak stop.
@@ -139,7 +147,7 @@ If a stop's `why_fits_today` could be cut and pasted into another user's plan un
 - **Reference something specific from the intake.** Bad: "perfect for a relaxing day." Good: "you said today's most-not-want is anything touristy — Alviso's tour holds 8 people, no one is performing for an audience."
 - **Sensory > categorical.** Bad: "historic site with cultural value." Good: "sun-warmed adobe walls, ceiling beams you can touch, 45 minutes and you're done."
 - **Connect to next stop.** End each `why_fits_today` with a half-sentence that anticipates the transition.
-- **Length: 2–3 sentences. Cut everything else.**
+- **Length: 2–3 sentences, ≤50 words by default. Allow up to 80 words / 4 sentences ONLY when the persona has ≥3 intake dimensions worth quoting back (e.g., vibe_signature + avoidance + a specific taste_anchor all converge on this stop).** Cut everything else.
 
 ### Transitions
 - Every transition line must have a **qualitative phrase** (not just minutes). Examples:
@@ -147,6 +155,7 @@ If a stop's `why_fits_today` could be cut and pasted into another user's plan un
   - "slow morning → lunchtime appetite reset"
   - "high-noise dinner → low-key closing"
 - If you can't explain WHY one stop leads to the next, the order is wrong — re-sequence.
+- **Format**: `*(transition: <≤6-word qualitative phrase> · ~Nmin drive/walk)*`. Keep the phrase tight — long transitions break scan-ability. Examples: "indoor narrative → outdoor breathing" (5 words ✓), "slow morning → lunchtime appetite reset" (5 words ✓), "from the museum's quiet contemplation toward dinner's social warmth" (10 words ✗ — too long).
 
 ### Adaptive branch
 - **Exactly one** branch. Not three.
