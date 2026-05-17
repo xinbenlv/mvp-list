@@ -1,6 +1,6 @@
 # MVP List
 
-MVP List is a small project for planning family getaway trips from a growing backlog of restaurants and points of attraction.
+Powered by GBrain and built with GStack, "MVP List" is a small project for planning family getaway trips from a growing backlog of restaurants and points of attraction.
 
 The current focus is the MVP List pipeline: curate candidate places, enrich place Markdown for structured search, propose ranked day plans, and render the chosen plan as a timed agenda.
 
