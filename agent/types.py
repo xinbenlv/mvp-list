@@ -182,14 +182,27 @@ class ExperienceRequest(BaseModel):
 
 
 class PlaceCandidate(BaseModel):
-    """Phase 0 stub — see backend §2.7 for full type."""
+    """Phase 2 — mirrors backend schema §2.7 PlaceCandidate, slimmed to the
+    fields the Composer prompt actually reads.
+
+    Optional fields are nullable so the Phase 0 fake stubs and Phase 2 mock
+    backend can both populate this shape without churn. Future Phase 4 wires
+    the real backend HTTP response into the same fields.
+    """
 
     place_id: str
     name: str
+    place_type: str | None = None
+    city: str | None = None
+    address: str | None = None
+    hours_note: str | None = None
     fit_score: float = 0.0
     fit_reason: str = ""
     composition: dict[str, Any] = Field(default_factory=dict)
+    logistics: dict[str, Any] = Field(default_factory=dict)
+    narrative_hook: str | None = None
     restaurant: dict[str, Any] | None = None
+    hero_image_url: str | None = None
 
 
 # ---------------------------------------------------------------------------
