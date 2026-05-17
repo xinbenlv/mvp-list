@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day Composer · Cinematic Full-Bleed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200;9..144,300;9..144,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+  :root {
+    --white: #FAF7F1;
+    --ink: #0E0B07;
+    --gold: #D9B074;
+    --warm: #EFE3CC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #000; color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body { font-family: 'Inter', sans-serif; }
+  .serif { font-family: 'Fraunces', serif; font-weight: 300; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .variant-label {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    background: rgba(0,0,0,0.7); color: var(--white);
+    padding: 10px 14px; font-size: 11px; letter-spacing: 0.06em;
+    border-radius: 2px; max-width: 240px; line-height: 1.4;
+    backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1);
+  }
+  .variant-label b { font-weight: 600; display: block; margin-bottom: 4px; letter-spacing: 0.12em; text-transform: uppercase; font-size: 10px; color: var(--gold); }
+  .variant-label span { opacity: 0.7; font-size: 10px; }
+
+  /* Full-bleed section base */
+  section.bleed {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover; background-position: center;
+    transform: scale(1.06);
+    animation: kenburns 12s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns { from { transform: scale(1.04) translateY(0); } to { transform: scale(1.12) translateY(-1.5%); } }
+  .scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.45) 70%, rgba(0,0,0,0.85) 100%);
+  }
+  .content { position: relative; z-index: 2; padding: 8vh 7vw; flex: 1; display: flex; flex-direction: column; }
+
+  /* HERO */
+  .hero .content { justify-content: space-between; min-height: 100vh; }
+  .hero .top { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-family: 'JetBrains Mono', monospace; }
+  .hero .top .gold { color: var(--gold); }
+  .hero .middle { max-width: 1100px; }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 200;
+    font-size: clamp(56px, 8.5vw, 128px); line-height: 0.98;
+    letter-spacing: -0.03em; color: var(--white);
+  }
+  .hero h1 em { font-style: italic; font-weight: 300; color: var(--gold); }
+  .hero .moods {
+    margin-top: 36px; display: flex; flex-wrap: wrap; gap: 18px;
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .hero .moods span + span::before { content: "·"; margin-right: 18px; color: var(--gold); }
+  .hero .bottom {
+    display: flex; justify-content: space-between; align-items: end; gap: 30px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: rgba(255,255,255,0.7); letter-spacing: 0.04em;
+  }
+  .hero .scroll {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold);
+  }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(180deg, var(--gold), transparent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+
+  /* ARC SECTION */
+  .arc-section {
+    min-height: 95vh;
+    background: linear-gradient(90deg, #0a0806 0%, #0a0806 100%);
+    position: relative; overflow: hidden;
+  }
+  .arc-strip {
+    position: absolute; inset: 0; z-index: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .arc-strip > div {
+    background-size: cover; background-position: center;
+    opacity: 0.35; filter: saturate(0.7) brightness(0.55);
+  }
+  .arc-strip > div + div { border-left: 1px solid rgba(255,255,255,0.06); }
+  .arc-section .content {
+    padding: 12vh 7vw;
+  }
+  .arc-section .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .arc-section h2 {
+    font-family: 'Fraunces', serif; font-weight: 200; font-style: italic;
+    font-size: clamp(36px, 5vw, 64px); line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--white); max-width: 900px; margin-bottom: 80px;
+  }
+  .arc-svg-wrap { width: 100%; }
+  .arc-svg-wrap svg { width: 100%; height: 240px; overflow: visible; }
+  .arc-curve { fill: none; stroke: var(--gold); stroke-width: 2; stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: draw 2.6s cubic-bezier(0.22,1,0.36,1) 0.4s forwards; filter: drop-shadow(0 0 12px rgba(217,176,116,0.4)); }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .arc-node { fill: var(--gold); filter: drop-shadow(0 0 8px rgba(217,176,116,0.7)); }
+  .arc-labels {
+    display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 32px; gap: 24px;
+  }
+  .arc-labels .col {
+    text-align: center;
+  }
+  .arc-labels .time { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+  .arc-labels .place { font-family: 'Fraunces', serif; font-weight: 300; font-size: 22px; color: var(--white); margin-bottom: 4px; letter-spacing: -0.01em; }
+  .arc-labels .role { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+
+  /* STOP SECTIONS — every one full bleed */
+  .stop .top-meta {
+    display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+  }
+  .stop .top-meta .gold { color: var(--gold); }
+  .stop .body {
+    margin-top: auto;
+    max-width: 760px;
+  }
+  .stop .time-line {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em;
+    color: var(--gold); margin-bottom: 18px;
+  }
+  .stop h3 {
+    font-family: 'Fraunces', serif; font-weight: 200;
+    font-size: clamp(44px, 6.2vw, 96px); line-height: 1.02; letter-spacing: -0.025em;
+    color: var(--white); margin-bottom: 14px;
+  }
+  .stop .place-sub {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 22px; color: var(--gold); margin-bottom: 28px; letter-spacing: 0;
+  }
+  .stop .why {
+    font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.88);
+    max-width: 640px; margin-bottom: 28px; font-weight: 300;
+  }
+  .stop .logistics {
+    display: flex; gap: 30px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: rgba(255,255,255,0.7); letter-spacing: 0.08em; margin-bottom: 24px;
+    padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .stop .logistics span.k { color: var(--gold); margin-right: 8px; }
+  .stop .tip { font-style: italic; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 24px; max-width: 600px; }
+  .stop .book {
+    display: inline-flex; align-items: center; gap: 12px; color: var(--gold);
+    text-decoration: none; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    border-bottom: 1px solid var(--gold); padding-bottom: 4px; width: fit-content;
+    transition: gap 0.4s ease;
+  }
+  .stop .book:hover { gap: 20px; }
+
+  /* RESTAURANT — menu floats lower-third */
+  .restaurant .menu-overlay {
+    position: relative; z-index: 2; margin-top: 60px;
+    background: rgba(0,0,0,0.55); backdrop-filter: blur(14px);
+    border: 1px solid rgba(217,176,116,0.2);
+    padding: 36px 40px; max-width: 900px;
+  }
+  .restaurant .menu-overlay .h {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.24em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .restaurant .menu-overlay .h::after { content: ""; flex: 1; height: 1px; background: var(--gold); margin-left: 18px; opacity: 0.4; }
+  .menu-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 32px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  }
+  .menu-grid .row {
+    display: grid; grid-template-columns: 44px 1fr auto; gap: 12px;
+    padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.08);
+    align-items: baseline; color: var(--white);
+  }
+  .menu-grid .num { color: var(--gold); }
+  .menu-grid .name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 300; }
+  .menu-grid .role { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .ordering-logic {
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.12);
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.85);
+  }
+  .ordering-logic::before {
+    content: "Ordering rhythm"; display: block; font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; font-style: normal;
+  }
+
+  /* TRANSITIONS */
+  .transition {
+    min-height: 30vh; display: flex; align-items: center; justify-content: center;
+    background: #000; padding: 60px 7vw; text-align: center;
+  }
+  .transition span {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 200;
+    font-size: clamp(20px, 2.5vw, 28px); color: rgba(255,255,255,0.6);
+    letter-spacing: 0; max-width: 700px;
+  }
+  .transition .dash { display: block; width: 80px; height: 1px; background: var(--gold); margin: 0 auto 24px; }
+
+  /* BRANCHES */
+  .branches {
+    min-height: 60vh;
+    background: linear-gradient(180deg, #0a0806 0%, #1a1308 100%);
+    padding: 14vh 7vw;
+  }
+  .branches .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  .branches h2 {
+    font-family: 'Fraunces', serif; font-weight: 200; font-style: italic;
+    font-size: clamp(36px, 5vw, 64px); line-height: 1.1; color: var(--white);
+    margin-bottom: 60px; max-width: 800px;
+  }
+  .branch-cinema {
+    display: grid; grid-template-columns: 60px 1fr 30px 1.5fr; gap: 24px; align-items: center;
+    padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .branch-cinema .n { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold); letter-spacing: 0.1em; }
+  .branch-cinema .cond { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 300; color: var(--white); }
+  .branch-cinema .arr { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--gold); text-align: center; }
+  .branch-cinema .alt { font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+
+  /* REFINE BAR */
+  .refine {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+    color: var(--white); padding: 14px 24px;
+    display: flex; align-items: center; gap: 14px;
+    border-top: 1px solid rgba(217,176,116,0.2);
+  }
+  .chips { display: flex; gap: 8px; flex-shrink: 0; }
+  .chip {
+    border: 1px solid rgba(217,176,116,0.4); padding: 8px 14px; border-radius: 999px;
+    font-size: 12px; color: var(--white); cursor: pointer; transition: all 0.4s ease;
+    background: transparent;
+  }
+  .chip:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .refine input {
+    flex: 1; background: transparent; border: none; color: var(--white);
+    font-family: 'Inter', sans-serif; font-size: 14px; padding: 8px 12px; outline: none;
+    border-bottom: 1px solid rgba(217,176,116,0.3);
+  }
+  .refine input::placeholder { color: rgba(255,255,255,0.4); }
+  .recompose {
+    background: var(--gold); color: var(--ink); border: none; padding: 10px 22px;
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+    border-radius: 999px; font-weight: 500; transition: all 0.3s ease;
+  }
+  .recompose:hover { background: var(--white); }
+
+  .end-pad { height: 100px; background: #0a0806; }
+
+  @media (max-width: 880px) {
+    .arc-labels { grid-template-columns: repeat(2, 1fr); }
+    .menu-grid { grid-template-columns: 1fr; }
+    .branch-cinema { grid-template-columns: 1fr; gap: 8px; }
+    .refine { flex-wrap: wrap; }
+    .chips { width: 100%; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="variant-label">
+  <b>Variant 2</b>
+  Cinematic Full-Bleed
+  <span><br/>Every section is a film frame<br/>Aman.com × Apple product page</span>
+</div>
+
+<!-- HERO -->
+<section class="bleed hero">
+  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1568734049547-2bf3eaae9aa2?w=2400&q=80&auto=format')"></div>
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="top">
+      <div>Day Composer / No. 01</div>
+      <div class="gold">SAT · JAN 10 · 2026</div>
+    </div>
+    <div class="middle">
+      <h1>旧湾区<br/>与<em>恢复感</em><br/>的一天</h1>
+      <div class="moods">
+        <span>Reflective</span><span>Warm</span><span>Lightly exploratory</span><span>Not rushed</span>
+      </div>
+    </div>
+    <div class="bottom">
+      <div>14:30 → 22:00 &nbsp;·&nbsp; Sunnyvale 出发 &nbsp;·&nbsp; car &nbsp;·&nbsp; partner + baby</div>
+      <div class="scroll">
+        <span>Begin</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARC -->
+<section class="bleed arc-section">
+  <div class="arc-strip">
+    <div style="background-image:url('https://images.unsplash.com/photo-1568734049547-2bf3eaae9aa2?w=900&q=70&auto=format')"></div>
+    <div style="background-image:url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=900&q=70&auto=format')"></div>
+    <div style="background-image:url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=900&q=70&auto=format')"></div>
+    <div style="background-image:url('https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=900&q=70&auto=format')"></div>
+  </div>
+  <div class="scrim" style="background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.7));"></div>
+  <div class="content">
+    <div class="label">The shape of your day</div>
+    <h2>From quiet to fire,<br/>then gently down.</h2>
+    <div class="arc-svg-wrap">
+      <svg viewBox="0 0 1200 240" preserveAspectRatio="none">
+        <path class="arc-curve" d="M 60 180 C 200 180, 260 160, 360 150 S 600 130, 720 50 S 1020 90, 1140 115" />
+        <circle class="arc-node" cx="60" cy="180" r="7" />
+        <circle class="arc-node" cx="360" cy="150" r="7" />
+        <circle class="arc-node" cx="720" cy="50" r="9" />
+        <circle class="arc-node" cx="1140" cy="115" r="7" />
+      </svg>
+    </div>
+    <div class="arc-labels">
+      <div class="col"><div class="time">14:30</div><div class="place">Alviso Adobe</div><div class="role">Slow opening</div></div>
+      <div class="col"><div class="time">15:00</div><div class="place">Sandy Wool Lake</div><div class="role">Breathing</div></div>
+      <div class="col"><div class="time">18:30</div><div class="place">Dong Que</div><div class="role">Peak</div></div>
+      <div class="col"><div class="time">20:00</div><div class="place">Spaced Out</div><div class="role">Light closing</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STOP 1 -->
+<section class="bleed stop">
+  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1568734049547-2bf3eaae9aa2?w=2400&q=80&auto=format')"></div>
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="top-meta">
+      <div>Stop 01 / 04</div>
+      <div class="gold">OPENING · MILPITAS</div>
+    </div>
+    <div class="body">
+      <div class="time-line">14:30 · SATURDAY</div>
+      <h3>A quiet historical opening</h3>
+      <div class="place-sub">Alviso Adobe — 2087 Alviso Adobe Ct</div>
+      <p class="why">保留于 19 世纪加州早期定居时期的 adobe 古建筑，作为小型历史展示空间对公众开放。今天想 restore 又不想完全静止——adobe 比大型 museum 轻盈，宝宝好带。每月第二个周六免费导览。</p>
+      <div class="logistics">
+        <div><span class="k">Drive</span>arrival</div>
+        <div><span class="k">Parking</span>easy</div>
+        <div><span class="k">With baby</span>yes</div>
+      </div>
+      <p class="tip">免费门票，但要提前在 Eventbrite 预约导览席位。</p>
+      <a class="book" href="https://www.eventbrite.com/e/alviso-adobe-saturday-tours-tickets-1146480567239" target="_blank">Reserve tour →</a>
+    </div>
+  </div>
+</section>
+
+<div class="transition"><div><span class="dash"></span><span>Indoor narrative folds into outdoor breathing.</span></div></div>
+
+<!-- STOP 2 -->
+<section class="bleed stop">
+  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=2400&q=80&auto=format')"></div>
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="top-meta">
+      <div>Stop 02 / 04</div>
+      <div class="gold">BREATHING · MILPITAS</div>
+    </div>
+    <div class="body">
+      <div class="time-line">15:00 · 5 MIN DRIVE</div>
+      <h3>Lakeside breathing</h3>
+      <div class="place-sub">Sandy Wool Lake — 901 Downing Rd</div>
+      <p class="why">距离 Alviso Adobe 很近的湖边公园，适合观鸟、钓鱼、轻徒步和野炊。带孩子接近大自然，下午的湖面安静好看。</p>
+      <div class="logistics">
+        <div><span class="k">Drive</span>5 min</div>
+        <div><span class="k">Parking</span>easy</div>
+        <div><span class="k">Stroller</span>ok</div>
+      </div>
+      <p class="tip">停在湖边圆盘停车场。</p>
+    </div>
+  </div>
+</section>
+
+<div class="transition"><div><span class="dash"></span><span>Outdoor reset opens the appetite.</span></div></div>
+
+<!-- STOP 3 RESTAURANT -->
+<section class="bleed stop restaurant">
+  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=2400&q=80&auto=format')"></div>
+  <div class="scrim" style="background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.85) 100%);"></div>
+  <div class="content">
+    <div class="top-meta">
+      <div>Stop 03 / 04 · Restaurant</div>
+      <div class="gold">PEAK · SAN JOSE · WALK-IN ONLY</div>
+    </div>
+    <div class="body">
+      <div class="time-line">18:30 · 22 MIN DRIVE</div>
+      <h3>Lively neighborhood dinner</h3>
+      <div class="place-sub">Dong Que Restaurant — 2852 Alum Rock Ave</div>
+      <p class="why">你说不想 touristy；这是 walk-in only 的本地越南/广东融合馆，烟火气十足。点了 9 道招牌菜，正好把白天的安静节奏接回到热闹收尾。</p>
+      <div class="logistics">
+        <div><span class="k">Drive</span>22 min</div>
+        <div><span class="k">Parking</span>moderate</div>
+        <div><span class="k">With baby</span>ok</div>
+      </div>
+
+      <div class="menu-overlay">
+        <div class="h">9 dishes recommended</div>
+        <div class="menu-grid">
+          <div class="row"><div class="num">#15</div><div class="name">香松腊肠锅巴饭</div><div class="role">Signature</div></div>
+          <div class="row"><div class="num">#103</div><div class="name">铁板螺丝</div><div class="role">Main</div></div>
+          <div class="row"><div class="num">#88</div><div class="name">烤生蚝</div><div class="role">Appetizer</div></div>
+          <div class="row"><div class="num">#92</div><div class="name">鱼籽扇贝</div><div class="role">Appetizer</div></div>
+          <div class="row"><div class="num">#93</div><div class="name">蛏子烤空心菜</div><div class="role">Side</div></div>
+          <div class="row"><div class="num">#5</div><div class="name">烤鹌鹑</div><div class="role">Main</div></div>
+          <div class="row"><div class="num">#68</div><div class="name">炒牛蛙腿</div><div class="role">Main</div></div>
+          <div class="row"><div class="num">#98</div><div class="name">蒜香海蜗牛</div><div class="role">Appetizer</div></div>
+          <div class="row"><div class="num">#84</div><div class="name">芝士焗蛤蜊</div><div class="role">Appetizer</div></div>
+        </div>
+        <div class="ordering-logic">先开 88/92 两道海鲜小盘开胃，主菜 15/103/68 同时上桌做火候节奏，5/93 收尾。带宝宝的话腊肠锅巴饭最稳。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="transition"><div><span class="dash"></span><span>Warm fullness drifts toward a social, light closing.</span></div></div>
+
+<!-- STOP 4 -->
+<section class="bleed stop">
+  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=2400&q=80&auto=format')"></div>
+  <div class="scrim"></div>
+  <div class="content">
+    <div class="top-meta">
+      <div>Stop 04 / 04</div>
+      <div class="gold">CLOSING · DOWNTOWN SAN JOSE</div>
+    </div>
+    <div class="body">
+      <div class="time-line">20:00 · $12.99 / PERSON</div>
+      <h3>Standup comedy<br/>to close</h3>
+      <div class="place-sub">Spaced Out — Mystérieux Brand · 28 N Almaden Ave</div>
+      <p class="why">Downtown San Jose 小场地脱口秀，12.99/人。把一天从安静→自然→烟火气→社交轻收尾，4 个 mood 走完一个完整的弧。</p>
+      <div class="logistics">
+        <div><span class="k">Drive</span>15 min</div>
+        <div><span class="k">Parking</span>hard</div>
+        <div><span class="k">With baby</span>no</div>
+      </div>
+      <p class="tip">停车去 Almaden Financial Plaza ($8 evening rate)，或打车往返 $40–50。</p>
+      <a class="book" href="https://www.eventbrite.com/e/spaced-out-standup-comedy-in-downtown-san-jose-tickets-1977634803935" target="_blank">Book seats →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BRANCHES -->
+<section class="branches">
+  <div class="label">If things shift</div>
+  <h2>The plan bends quietly.</h2>
+  <div class="branch-cinema">
+    <div class="n">001</div>
+    <div class="cond">宝宝困了 / 状态不好</div>
+    <div class="arr">→</div>
+    <div class="alt">Skip 脱口秀，回家路上附近 dessert（Phin Coffee / Bambu）</div>
+  </div>
+  <div class="branch-cinema">
+    <div class="n">002</div>
+    <div class="cond">Energy 还很高</div>
+    <div class="arr">→</div>
+    <div class="alt">脱口秀后加 downtown wine bar（Cafe Stritch / Paper Plane）</div>
+  </div>
+</section>
+
+<div class="end-pad"></div>
+
+<!-- REFINE BAR -->
+<div class="refine">
+  <div class="chips">
+    <button class="chip">更安静一点</button>
+    <button class="chip">加一个酒吧</button>
+    <button class="chip">宝宝今天很累</button>
+  </div>
+  <input placeholder="Tune this day..." />
+  <button class="recompose">Recompose →</button>
+</div>
+
+<script>
+  const lenis = new Lenis({ lerp: 0.06, smoothWheel: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.stop .body, .branch-cinema, .transition span').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(40px)';
+    el.style.transition = 'opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1)';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>

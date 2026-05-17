@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day Composer · Editorial Monochrome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+  :root {
+    --cream: #F4EFE6;
+    --cream-2: #EDE6D9;
+    --ink: #1A1612;
+    --ink-soft: #2A241D;
+    --stone: #8C7F6B;
+    --hair: #C9BFAD;
+    --accent: #B5663A; /* rust / copper */
+    --accent-deep: #8A4A23;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--cream); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.6; }
+  .serif { font-family: 'Fraunces', serif; font-weight: 300; letter-spacing: -0.015em; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  .cap { text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; font-weight: 500; color: var(--stone); }
+
+  /* Variant label */
+  .variant-label {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    background: var(--ink); color: var(--cream);
+    padding: 10px 14px; font-size: 11px; letter-spacing: 0.06em;
+    border-radius: 2px; max-width: 240px; line-height: 1.4;
+  }
+  .variant-label b { font-weight: 600; display: block; margin-bottom: 4px; letter-spacing: 0.12em; text-transform: uppercase; font-size: 10px; }
+  .variant-label span { opacity: 0.7; font-size: 10px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 7vh 8vw 5vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 6vh;
+    border-bottom: 1px solid var(--hair);
+  }
+  .hero-top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--hair); padding-bottom: 18px;
+  }
+  .hero-top .mark { font-family: 'Fraunces', serif; font-size: 14px; letter-spacing: 0.04em; font-weight: 400; }
+  .hero-top .date { font-size: 11px; letter-spacing: 0.1em; color: var(--stone); }
+  .hero-center {
+    display: flex; flex-direction: column; justify-content: center; max-width: 1100px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(48px, 7.2vw, 104px);
+    line-height: 1.02; letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; font-weight: 300; color: var(--accent-deep); }
+  .hero .moods { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .hero .moods span { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--stone); }
+  .hero .moods span + span::before { content: "·"; margin-right: 24px; color: var(--hair); }
+  .hero-meta {
+    display: flex; justify-content: space-between; align-items: end;
+    padding-top: 30px; border-top: 1px solid var(--hair);
+  }
+  .hero-meta .ctx {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--ink-soft); letter-spacing: 0.02em;
+  }
+  .hero-meta .scroll-cue {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--stone);
+  }
+  .scroll-cue::after {
+    content: ""; display: inline-block; width: 80px; height: 1px; background: var(--ink);
+    animation: stretch 2.4s ease-in-out infinite;
+  }
+  @keyframes stretch { 0%, 100% { transform: scaleX(0.3); transform-origin: left; } 50% { transform: scaleX(1); } }
+
+  /* ARC */
+  .arc-section {
+    padding: 14vh 8vw;
+    border-bottom: 1px solid var(--hair);
+  }
+  .arc-section .label { margin-bottom: 30px; }
+  .arc-section h2 {
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(28px, 3.2vw, 48px);
+    letter-spacing: -0.02em; margin-bottom: 60px; max-width: 720px; line-height: 1.15;
+  }
+  .arc-wrap { position: relative; width: 100%; }
+  .arc-wrap svg { display: block; width: 100%; height: 200px; overflow: visible; }
+  .arc-curve { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 2000; stroke-dashoffset: 2000; animation: draw 2.4s cubic-bezier(0.22,1,0.36,1) 0.3s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .arc-axis { stroke: var(--hair); stroke-width: 1; stroke-dasharray: 2 4; }
+  .arc-node { fill: var(--accent); }
+  .arc-node-outline { fill: var(--cream); stroke: var(--accent); stroke-width: 1.5; }
+  .arc-labels {
+    display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 14px;
+  }
+  .arc-labels .col { padding-right: 18px; border-top: 1px solid var(--ink); padding-top: 14px; }
+  .arc-labels .time { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em; color: var(--stone); margin-bottom: 6px; }
+  .arc-labels .place { font-family: 'Fraunces', serif; font-size: 16px; letter-spacing: -0.01em; line-height: 1.25; margin-bottom: 4px; color: var(--ink); }
+  .arc-labels .role { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+
+  /* CARDS */
+  .cards { display: flex; flex-direction: column; }
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 92vh;
+    border-bottom: 1px solid var(--hair);
+    align-items: stretch;
+  }
+  .card.flip .card-img { order: 2; }
+  .card-img {
+    background: var(--cream-2); position: relative; overflow: hidden;
+    border-right: 1px solid var(--hair);
+  }
+  .card.flip .card-img { border-right: none; border-left: 1px solid var(--hair); }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.85) contrast(0.95); }
+  .card-img .stamp {
+    position: absolute; top: 24px; left: 24px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--cream); background: rgba(26,22,18,0.6);
+    padding: 6px 10px; backdrop-filter: blur(8px);
+  }
+  .card-body {
+    padding: 8vh 5vw; display: flex; flex-direction: column; justify-content: center;
+    max-width: 640px;
+  }
+  .card.flip .card-body { margin-left: auto; }
+  .card-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);
+    letter-spacing: 0.16em; margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+  }
+  .card-num::before { content: ""; width: 20px; height: 1px; background: var(--accent); display: inline-block; }
+  .card-time {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink);
+    letter-spacing: 0.04em; margin-bottom: 16px;
+  }
+  .card h3 {
+    font-family: 'Fraunces', serif; font-weight: 300;
+    font-size: clamp(32px, 3.5vw, 52px); line-height: 1.08; letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .card .place {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
+    color: var(--accent-deep); font-size: 17px; margin-bottom: 28px; letter-spacing: 0;
+  }
+  .card .why {
+    font-size: 17px; line-height: 1.7; color: var(--ink-soft);
+    margin-bottom: 28px; max-width: 520px;
+  }
+  .logistics { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-bottom: 24px; }
+  .logi {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink);
+    letter-spacing: 0.04em; padding: 6px 0; display: flex; align-items: center; gap: 8px;
+  }
+  .logi span.k { color: var(--stone); }
+  .tip {
+    font-style: italic; font-size: 13px; color: var(--stone);
+    border-left: 1px solid var(--accent); padding-left: 14px; margin-bottom: 24px; max-width: 480px;
+  }
+  .book-link {
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    color: var(--ink); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    border-bottom: 1px solid var(--ink); padding-bottom: 4px; width: fit-content; font-weight: 500;
+    transition: color 0.6s ease, border-color 0.6s ease;
+  }
+  .book-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* RESTAURANT (dark inverted card) */
+  .card.restaurant { background: var(--ink); color: var(--cream); border-bottom: 1px solid var(--ink); }
+  .card.restaurant .card-img { border-right-color: rgba(255,255,255,0.08); }
+  .card.restaurant .card-num { color: #D89A6A; }
+  .card.restaurant .card-num::before { background: #D89A6A; }
+  .card.restaurant h3, .card.restaurant .card-time { color: var(--cream); }
+  .card.restaurant .place { color: #E8B98B; }
+  .card.restaurant .why { color: rgba(244,239,230,0.78); }
+  .card.restaurant .logi { color: var(--cream); }
+  .card.restaurant .logi span.k { color: #9B8770; }
+  .card.restaurant .tip { color: rgba(244,239,230,0.7); border-left-color: #D89A6A; }
+  .card.restaurant .book-link { color: var(--cream); border-color: var(--cream); }
+
+  .dishes {
+    margin-top: 28px; border-top: 1px solid rgba(244,239,230,0.15);
+    padding-top: 24px;
+  }
+  .dishes .h {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #D89A6A; margin-bottom: 18px;
+  }
+  .dish-row {
+    display: grid; grid-template-columns: 36px 1fr 90px;
+    padding: 10px 0; border-bottom: 1px solid rgba(244,239,230,0.08);
+    align-items: baseline; gap: 16px;
+  }
+  .dish-row:last-of-type { border-bottom: none; }
+  .dish-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9B8770; }
+  .dish-name { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 400; line-height: 1.3; }
+  .dish-role { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #D89A6A; text-align: right; }
+  .dish-note { display: block; font-family: 'Inter', sans-serif; font-size: 11px; color: #9B8770; font-style: italic; margin-top: 4px; letter-spacing: 0; text-transform: none; }
+  .ordering {
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(244,239,230,0.15);
+    font-style: italic; font-size: 13px; line-height: 1.7; color: rgba(244,239,230,0.78);
+  }
+  .ordering::before { content: "Ordering logic — "; font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; font-size: 10px; color: #D89A6A; display: block; margin-bottom: 8px; }
+
+  /* TRANSITION NOTE */
+  .transition {
+    text-align: center; padding: 60px 8vw;
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 18px; color: var(--stone); border-bottom: 1px solid var(--hair);
+    letter-spacing: 0; line-height: 1.4;
+  }
+  .transition::before, .transition::after { content: "— "; opacity: 0.5; }
+  .transition::after { content: " —"; }
+
+  /* BRANCHES */
+  .branches { padding: 14vh 8vw; background: var(--cream-2); border-bottom: 1px solid var(--hair); }
+  .branches .label { margin-bottom: 18px; }
+  .branches h2 {
+    font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;
+    font-size: clamp(28px, 3vw, 44px); margin-bottom: 50px; letter-spacing: -0.02em;
+  }
+  .branch {
+    display: grid; grid-template-columns: 280px 1fr; gap: 40px;
+    padding: 28px 0 28px 24px; border-left: 2px solid var(--accent);
+    margin-bottom: 18px;
+  }
+  .branch .cond {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .branch .alt { font-family: 'Fraunces', serif; font-size: 18px; color: var(--ink-soft); line-height: 1.4; }
+  .branch .alt::before { content: "→ "; color: var(--accent); font-family: 'Inter', sans-serif; margin-right: 4px; }
+
+  /* REFINE BAR */
+  .refine {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+    background: var(--ink); color: var(--cream);
+    padding: 14px 24px; display: flex; align-items: center; gap: 14px;
+    backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .refine .chips { display: flex; gap: 8px; flex-shrink: 0; }
+  .chip {
+    border: 1px solid rgba(244,239,230,0.3); padding: 8px 14px; border-radius: 999px;
+    font-size: 12px; color: var(--cream); cursor: pointer; transition: all 0.3s ease;
+    background: transparent; font-family: 'Inter', sans-serif;
+  }
+  .chip:hover { background: rgba(244,239,230,0.1); border-color: var(--cream); }
+  .refine input {
+    flex: 1; background: transparent; border: none; color: var(--cream);
+    font-family: 'Inter', sans-serif; font-size: 14px; padding: 8px 12px; outline: none;
+    border-bottom: 1px solid rgba(244,239,230,0.2);
+  }
+  .refine input::placeholder { color: rgba(244,239,230,0.4); }
+  .recompose {
+    background: var(--cream); color: var(--ink); border: none; padding: 10px 20px;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+    border-radius: 999px; font-weight: 500; transition: all 0.3s ease;
+  }
+  .recompose:hover { background: var(--accent); color: var(--cream); }
+
+  /* FOOTER spacer for refine bar */
+  .end-pad { height: 100px; background: var(--cream); }
+
+  /* responsive simplification */
+  @media (max-width: 880px) {
+    .card { grid-template-columns: 1fr; min-height: auto; }
+    .card.flip .card-img { order: 0; border-left: none; border-right: none; }
+    .card-img { min-height: 320px; border-right: none; border-bottom: 1px solid var(--hair); }
+    .card.flip .card-body { margin-left: 0; }
+    .card-body { padding: 8vh 6vw; max-width: 100%; }
+    .arc-labels { grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .branch { grid-template-columns: 1fr; gap: 6px; }
+    .refine { flex-wrap: wrap; padding: 12px; }
+    .refine .chips { width: 100%; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="variant-label">
+  <b>Variant 1</b>
+  Editorial Monochrome
+  <span><br/>Off-white · rust accent · Fraunces<br/>Stripe Press × Aman</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="mark">Day Composer · No. 01</div>
+    <div class="date">SATURDAY · JANUARY 10, 2026</div>
+  </div>
+  <div class="hero-center">
+    <h1>旧湾区<br/>与<em>恢复感</em>的一天</h1>
+    <div class="moods">
+      <span>Reflective</span><span>Warm</span><span>Lightly exploratory</span><span>Not rushed</span>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div class="ctx">14:30 → 22:00 · Sunnyvale 出发 · car · with partner + baby · 4 stops</div>
+    <div class="scroll-cue">Scroll to compose</div>
+  </div>
+</section>
+
+<!-- ARC -->
+<section class="arc-section">
+  <div class="cap label">The shape · 002</div>
+  <h2>从安静到烟火气，再轻轻收尾——一天走完一个完整的情绪弧。</h2>
+  <div class="arc-wrap">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <line class="arc-axis" x1="0" y1="170" x2="1200" y2="170" />
+      <!-- catmull-rom-like smooth path through 4 points -->
+      <path class="arc-curve" d="M 60 145 C 180 145, 250 130, 360 122 S 600 108, 720 40 S 1020 78, 1140 95" />
+      <!-- nodes -->
+      <circle class="arc-node-outline" cx="60" cy="145" r="6" />
+      <circle class="arc-node-outline" cx="360" cy="122" r="6" />
+      <circle class="arc-node" cx="720" cy="40" r="7" />
+      <circle class="arc-node-outline" cx="1140" cy="95" r="6" />
+    </svg>
+  </div>
+  <div class="arc-labels">
+    <div class="col">
+      <div class="time">14:30</div>
+      <div class="place">Alviso Adobe</div>
+      <div class="role">Slow opening</div>
+    </div>
+    <div class="col">
+      <div class="time">15:00</div>
+      <div class="place">Sandy Wool Lake</div>
+      <div class="role">Breathing</div>
+    </div>
+    <div class="col">
+      <div class="time">18:30</div>
+      <div class="place">Dong Que Restaurant</div>
+      <div class="role">Peak</div>
+    </div>
+    <div class="col">
+      <div class="time">20:00</div>
+      <div class="place">Spaced Out Comedy</div>
+      <div class="role">Light closing</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<div class="cards">
+
+  <!-- STOP 1 -->
+  <article class="card">
+    <div class="card-img">
+      <div class="stamp">Stop 01 · 14:30</div>
+      <img src="https://images.unsplash.com/photo-1568734049547-2bf3eaae9aa2?w=1200&q=80&auto=format" alt="Old adobe building" />
+    </div>
+    <div class="card-body">
+      <div class="card-num">01 · OPENING</div>
+      <div class="card-time">14:30 · Milpitas, CA</div>
+      <h3>A quiet historical opening</h3>
+      <div class="place">Alviso Adobe</div>
+      <p class="why">保留于 19 世纪加州早期定居时期的 adobe 古建筑，作为小型历史展示空间对公众开放。今天想 restore 又不想完全静止——adobe 比大型 museum 轻盈，宝宝好带。每月第二个周六免费导览。</p>
+      <div class="logistics">
+        <div class="logi"><span class="k">drive</span> arrival</div>
+        <div class="logi"><span class="k">parking</span> easy</div>
+        <div class="logi"><span class="k">with baby</span> ok</div>
+      </div>
+      <p class="tip">免费门票，但要提前在 Eventbrite 预约导览席位。</p>
+      <a class="book-link" href="https://www.eventbrite.com/e/alviso-adobe-saturday-tours-tickets-1146480567239" target="_blank">Reserve tour →</a>
+    </div>
+  </article>
+
+  <div class="transition">indoor narrative → outdoor breathing</div>
+
+  <!-- STOP 2 -->
+  <article class="card flip">
+    <div class="card-img">
+      <div class="stamp">Stop 02 · 15:00</div>
+      <img src="https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1200&q=80&auto=format" alt="Calm lake afternoon" />
+    </div>
+    <div class="card-body">
+      <div class="card-num">02 · BREATHING</div>
+      <div class="card-time">15:00 · Milpitas, CA</div>
+      <h3>Lakeside breathing</h3>
+      <div class="place">Sandy Wool Lake</div>
+      <p class="why">距离 Alviso Adobe 很近的湖边公园，适合观鸟、钓鱼、轻徒步和野炊。带孩子接近大自然，下午的湖面安静好看。</p>
+      <div class="logistics">
+        <div class="logi"><span class="k">drive</span> 5 min</div>
+        <div class="logi"><span class="k">parking</span> easy</div>
+        <div class="logi"><span class="k">stroller</span> ok</div>
+      </div>
+      <p class="tip">停在湖边圆盘停车场。</p>
+    </div>
+  </article>
+
+  <div class="transition">outdoor reset → appetite-opening</div>
+
+  <!-- STOP 3 — RESTAURANT (inverted) -->
+  <article class="card restaurant">
+    <div class="card-img">
+      <div class="stamp">Stop 03 · 18:30</div>
+      <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&q=80&auto=format" alt="Warm restaurant interior" />
+    </div>
+    <div class="card-body">
+      <div class="card-num">03 · PEAK</div>
+      <div class="card-time">18:30 · San Jose, CA · walk-in only</div>
+      <h3>Lively neighborhood dinner</h3>
+      <div class="place">Dong Que Restaurant</div>
+      <p class="why">你说不想 touristy；这是 walk-in only 的本地越南/广东融合馆，烟火气十足。点了 9 道招牌菜，正好把白天的安静节奏接回到热闹收尾。</p>
+      <div class="logistics">
+        <div class="logi"><span class="k">drive</span> 22 min</div>
+        <div class="logi"><span class="k">parking</span> moderate</div>
+        <div class="logi"><span class="k">with baby</span> ok</div>
+      </div>
+
+      <div class="dishes">
+        <div class="h">Recommended order · 9 dishes</div>
+        <div class="dish-row"><div class="dish-num">#15</div><div class="dish-name">香松腊肠锅巴饭<span class="dish-note">先点，要等</span></div><div class="dish-role">Signature</div></div>
+        <div class="dish-row"><div class="dish-num">#103</div><div class="dish-name">铁板螺丝</div><div class="dish-role">Main</div></div>
+        <div class="dish-row"><div class="dish-num">#88</div><div class="dish-name">烤生蚝<span class="dish-note">开胃</span></div><div class="dish-role">Appetizer</div></div>
+        <div class="dish-row"><div class="dish-num">#92</div><div class="dish-name">鱼籽扇贝</div><div class="dish-role">Appetizer</div></div>
+        <div class="dish-row"><div class="dish-num">#93</div><div class="dish-name">蛏子烤空心菜</div><div class="dish-role">Side</div></div>
+        <div class="dish-row"><div class="dish-num">#5</div><div class="dish-name">烤鹌鹑</div><div class="dish-role">Main</div></div>
+        <div class="dish-row"><div class="dish-num">#68</div><div class="dish-name">炒牛蛙腿</div><div class="dish-role">Main</div></div>
+        <div class="dish-row"><div class="dish-num">#98</div><div class="dish-name">蒜香海蜗牛</div><div class="dish-role">Appetizer</div></div>
+        <div class="dish-row"><div class="dish-num">#84</div><div class="dish-name">芝士焗蛤蜊</div><div class="dish-role">Appetizer</div></div>
+        <div class="ordering">先开 88/92 两道海鲜小盘开胃，主菜 15/103/68 同时上桌做火候节奏，5/93 收尾。带宝宝的话腊肠锅巴饭最稳。</div>
+      </div>
+    </div>
+  </article>
+
+  <div class="transition">warm fullness → social light closing</div>
+
+  <!-- STOP 4 -->
+  <article class="card flip">
+    <div class="card-img">
+      <div class="stamp">Stop 04 · 20:00</div>
+      <img src="https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=1200&q=80&auto=format" alt="Intimate comedy venue" />
+    </div>
+    <div class="card-body">
+      <div class="card-num">04 · CLOSING</div>
+      <div class="card-time">20:00 · Downtown San Jose · $12.99 / person</div>
+      <h3>Standup comedy to close</h3>
+      <div class="place">Spaced Out — Mystérieux Brand</div>
+      <p class="why">Downtown San Jose 小场地脱口秀，12.99/人。把一天从安静→自然→烟火气→社交轻收尾，4 个 mood 走完一个完整的弧。</p>
+      <div class="logistics">
+        <div class="logi"><span class="k">drive</span> 15 min</div>
+        <div class="logi"><span class="k">parking</span> hard</div>
+        <div class="logi"><span class="k">with baby</span> no</div>
+      </div>
+      <p class="tip">停车去 Almaden Financial Plaza ($8 evening rate)，或打车往返 $40–50。</p>
+      <a class="book-link" href="https://www.eventbrite.com/e/spaced-out-standup-comedy-in-downtown-san-jose-tickets-1977634803935" target="_blank">Book seats →</a>
+    </div>
+  </article>
+
+</div>
+
+<!-- BRANCHES -->
+<section class="branches">
+  <div class="cap label">Adaptive · 003</div>
+  <h2>If things shift...</h2>
+  <div class="branch">
+    <div class="cond">宝宝困了 / 状态不好</div>
+    <div class="alt">Skip 脱口秀，回家路上附近 dessert（Phin Coffee / Bambu）</div>
+  </div>
+  <div class="branch">
+    <div class="cond">Energy 还很高</div>
+    <div class="alt">脱口秀后加 downtown wine bar（Cafe Stritch / Paper Plane）</div>
+  </div>
+</section>
+
+<div class="end-pad"></div>
+
+<!-- REFINE BAR -->
+<div class="refine">
+  <div class="chips">
+    <button class="chip">更安静一点</button>
+    <button class="chip">加一个酒吧</button>
+    <button class="chip">宝宝今天很累</button>
+  </div>
+  <input placeholder="调整这一天..." />
+  <button class="recompose">Recompose →</button>
+</div>
+
+<script>
+  // Lenis smooth scroll
+  const lenis = new Lenis({ lerp: 0.06, smoothWheel: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  // Simple intersection observer for fade-up on cards & transitions
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.card, .transition, .branch').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1)';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>

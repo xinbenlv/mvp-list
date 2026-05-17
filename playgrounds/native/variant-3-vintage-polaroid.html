@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Composer — V3 Vintage Polaroid Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Special+Elite&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4ecd8;--paper-warm:#ebe0c5;--ink:#3a2e1e;--ink-soft:#6b5a44;
+  --sepia:#8b6f47;--tealf:#6b8e8e;--red-stamp:#a13d32;--tape:rgba(232,210,150,0.55);
+  --tape-blue:rgba(140,180,200,0.5);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Crimson Pro',serif;font-weight:400;font-size:16px;line-height:1.7;
+  overflow-x:hidden;min-height:100vh;
+  padding:40px 20px 100px;
+  position:relative;
+}
+/* Paper texture */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 30% 20%,rgba(139,111,71,0.08) 0%,transparent 50%),
+    radial-gradient(ellipse at 70% 70%,rgba(107,142,142,0.06) 0%,transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='10'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.18 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.8;
+}
+.variant-label{
+  position:fixed;top:14px;right:14px;background:var(--ink);color:var(--paper);
+  padding:8px 14px;font-family:'Special Elite',serif;font-size:11px;
+  letter-spacing:.12em;z-index:999;text-transform:uppercase;
+  transform:rotate(2deg);box-shadow:2px 2px 0 rgba(58,46,30,.2);
+}
+/* COVER */
+.cover{
+  max-width:760px;margin:0 auto 80px;text-align:center;
+  padding:60px 40px 50px;position:relative;
+  background:rgba(255,250,235,0.5);
+  border:1px solid rgba(58,46,30,0.15);
+  box-shadow:0 6px 30px -10px rgba(58,46,30,.18);
+}
+.cover::before{
+  content:'';position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);
+  width:120px;height:24px;background:var(--tape-blue);
+  box-shadow:0 2px 4px rgba(0,0,0,.08);
+}
+.passport-stamp{
+  position:absolute;top:30px;right:30px;width:110px;height:110px;
+  border:3px solid var(--red-stamp);border-radius:50%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  color:var(--red-stamp);font-family:'Special Elite',serif;
+  transform:rotate(-15deg);opacity:.75;text-align:center;line-height:1.1;
+}
+.passport-stamp .top{font-size:9px;letter-spacing:.3em}
+.passport-stamp .big{font-size:22px;font-weight:700;margin:4px 0;letter-spacing:.05em}
+.passport-stamp .bot{font-size:8px;letter-spacing:.2em}
+.cover-eyebrow{
+  font-family:'Special Elite',serif;font-size:11px;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--sepia);margin-bottom:30px;
+}
+.cover-title{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
+  font-size:64px;line-height:1.05;color:var(--ink);margin-bottom:20px;letter-spacing:-.01em;
+}
+.cover-handwritten{
+  font-family:'Caveat',cursive;font-weight:500;font-size:32px;color:var(--tealf);
+  margin:14px 0 24px;transform:rotate(-1deg);
+}
+.cover-meta{
+  font-family:'Special Elite',serif;font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-soft);
+  padding-top:24px;border-top:1px dashed var(--ink-soft);
+  display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;
+}
+.mood-row{margin:30px 0 20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.mood-row .tag{
+  font-family:'Caveat',cursive;font-weight:500;font-size:20px;color:var(--sepia);
+  padding:0 14px;
+}
+.mood-row .tag:not(:last-child)::after{content:'·';margin-left:14px;opacity:.5}
+/* ARC */
+.arc-wrap{
+  max-width:760px;margin:0 auto 80px;
+  background:rgba(255,250,235,0.55);
+  border:1px solid rgba(58,46,30,0.15);padding:30px 30px 40px;position:relative;
+  transform:rotate(-.4deg);
+  box-shadow:0 6px 24px -10px rgba(58,46,30,.16);
+}
+.arc-wrap::before{
+  content:'';position:absolute;top:-10px;left:30px;transform:rotate(-4deg);
+  width:90px;height:20px;background:var(--tape);
+}
+.arc-wrap::after{
+  content:'';position:absolute;top:-10px;right:30px;transform:rotate(3deg);
+  width:90px;height:20px;background:var(--tape);
+}
+.arc-eyebrow{
+  font-family:'Special Elite',serif;font-size:10px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--sepia);text-align:center;margin-bottom:10px;
+}
+.arc-title{
+  font-family:'Caveat',cursive;font-weight:500;font-size:36px;color:var(--ink);
+  text-align:center;margin-bottom:20px;transform:rotate(-.5deg);
+}
+.arc-svg{width:100%;height:180px;display:block}
+.arc-svg defs filter feTurbulence{stitchTiles:stitch}
+.arc-svg .curve{stroke:var(--sepia);stroke-width:2.2;fill:none;filter:url(#wiggle);stroke-linecap:round;stroke-linejoin:round}
+.arc-svg .dot{fill:var(--red-stamp);stroke:var(--ink);stroke-width:1.5}
+.arc-svg text{font-family:'Special Elite',serif;font-size:10px;fill:var(--ink-soft);letter-spacing:.1em}
+.arc-svg text.lbl{font-family:'Caveat',cursive;font-weight:500;font-size:16px;fill:var(--ink);letter-spacing:0}
+/* POLAROID STOPS */
+.page{
+  max-width:880px;margin:0 auto 120px;position:relative;padding:30px 20px;
+}
+.page-num{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  font-family:'Special Elite',serif;font-size:11px;letter-spacing:.3em;
+  color:var(--ink-soft);background:var(--paper);padding:0 14px;
+  text-transform:uppercase;
+}
+.polaroid-row{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:50px;align-items:flex-start;
+}
+.page:nth-of-type(even) .polaroid-row{grid-template-columns:1.2fr 1fr}
+.page:nth-of-type(even) .polaroid{order:2}
+.polaroid{
+  background:#fff;padding:18px 18px 70px;
+  box-shadow:0 14px 35px -8px rgba(58,46,30,.35),0 0 0 1px rgba(58,46,30,.05);
+  position:relative;transform:rotate(-2.5deg);transition:transform .3s;
+}
+.page:nth-of-type(even) .polaroid{transform:rotate(2deg)}
+.page:nth-of-type(3) .polaroid{transform:rotate(-1.2deg)}
+.page:nth-of-type(5) .polaroid{transform:rotate(1.5deg)}
+.polaroid:hover{transform:rotate(0) scale(1.02)}
+.polaroid::before{
+  content:'';position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(3deg);
+  width:90px;height:22px;background:var(--tape);box-shadow:0 1px 3px rgba(0,0,0,.06);
+}
+.polaroid-img{
+  width:100%;aspect-ratio:1;display:flex;align-items:flex-end;padding:24px;color:#fff;
+  background:linear-gradient(135deg,#8b6f47 0%,#3a2e1e 100%);
+  position:relative;overflow:hidden;
+}
+.polaroid-img.s2{background:linear-gradient(135deg,#6b8e8e 0%,#3a4a4a 70%)}
+.polaroid-img.s3{background:linear-gradient(135deg,#a13d32 0%,#5a1d18 100%)}
+.polaroid-img.s4{background:linear-gradient(135deg,#3a2e1e 0%,#8b6f47 100%)}
+.polaroid-img::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.4) 100%);
+}
+.polaroid-img .ph{
+  position:relative;z-index:2;
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:34px;
+  line-height:1;text-shadow:0 2px 12px rgba(0,0,0,.4);
+}
+.polaroid-img .ph small{display:block;font-family:'Special Elite',serif;font-style:normal;font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;opacity:.95}
+.polaroid-caption{
+  position:absolute;bottom:18px;left:18px;right:18px;
+  font-family:'Caveat',cursive;font-weight:500;font-size:22px;color:var(--ink);
+  text-align:center;line-height:1.2;transform:rotate(-1deg);
+}
+.polaroid-corner{
+  position:absolute;bottom:30px;right:24px;
+  font-family:'Special Elite',serif;font-size:9px;letter-spacing:.2em;
+  color:var(--ink-soft);opacity:.6;text-transform:uppercase;
+}
+.notes{position:relative;padding:14px 6px}
+.notes-time{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:42px;color:var(--ink);
+  margin-bottom:0;letter-spacing:-.02em;line-height:1;display:inline-block;
+}
+.notes-stamp{
+  font-family:'Special Elite',serif;font-size:10px;letter-spacing:.25em;
+  color:var(--red-stamp);text-transform:uppercase;
+  border:1.5px solid var(--red-stamp);padding:3px 8px;margin-left:14px;
+  display:inline-block;vertical-align:middle;transform:rotate(-3deg);opacity:.85;
+}
+.notes h3{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
+  font-size:30px;line-height:1.1;color:var(--ink);margin:14px 0 6px;
+}
+.notes .place{
+  font-family:'Special Elite',serif;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sepia);margin-bottom:18px;
+}
+.notes .place small{display:block;color:var(--ink-soft);font-size:9px;letter-spacing:.1em;margin-top:3px}
+.notes .why{font-size:16px;line-height:1.8;color:var(--ink);margin-bottom:18px;font-weight:400}
+.notes .handwritten{
+  font-family:'Caveat',cursive;font-weight:500;font-size:22px;color:var(--tealf);
+  margin:14px 0;line-height:1.3;transform:rotate(-.6deg);
+}
+.notes .handwritten::before{content:'»  ';color:var(--sepia)}
+.logistics{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.logistics span{
+  font-family:'Special Elite',serif;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink);padding:4px 10px;
+  background:rgba(255,250,235,0.65);border:1px solid var(--ink-soft);
+}
+.book{
+  display:inline-block;font-family:'Caveat',cursive;font-weight:700;font-size:22px;
+  color:var(--red-stamp);text-decoration:underline wavy var(--red-stamp);
+  text-underline-offset:6px;text-decoration-thickness:1px;margin-top:8px;
+  transform:rotate(-1deg);transition:transform .2s;
+}
+.book:hover{transform:rotate(-1deg) translateY(-2px)}
+.book::before{content:'✎ '}
+/* TRANSITION */
+.transit{
+  max-width:600px;margin:30px auto 50px;text-align:center;
+  font-family:'Caveat',cursive;font-weight:500;font-size:22px;color:var(--ink-soft);
+  position:relative;padding:14px 0;line-height:1.3;
+}
+.transit::before,.transit::after{
+  content:'';position:absolute;top:50%;width:80px;height:1px;
+  background:repeating-linear-gradient(90deg,var(--sepia) 0,var(--sepia) 4px,transparent 4px,transparent 8px);
+}
+.transit::before{left:0}.transit::after{right:0}
+.transit .arrow{display:inline-block;margin:0 8px;font-family:'Playfair Display',serif;font-style:italic;font-size:26px;color:var(--sepia)}
+/* MENU as journal page */
+.menu{
+  margin:24px 0 10px;background:rgba(255,250,235,0.5);padding:24px;
+  border:1px dashed var(--ink-soft);position:relative;transform:rotate(.3deg);
+}
+.menu::before{
+  content:'';position:absolute;top:-9px;left:30px;transform:rotate(-2deg);
+  width:80px;height:18px;background:var(--tape);
+}
+.menu-title{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:22px;
+  color:var(--ink);margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline;
+}
+.menu-title small{font-family:'Special Elite',serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sepia);font-style:normal;font-weight:400}
+.dish{
+  display:grid;grid-template-columns:42px 1fr auto;gap:14px;align-items:baseline;
+  padding:8px 0;border-bottom:1px dotted var(--ink-soft);font-size:14px;
+}
+.dish:last-of-type{border-bottom:none}
+.dish-num{font-family:'Special Elite',serif;font-weight:400;color:var(--red-stamp);font-size:13px}
+.dish-name{font-family:'Crimson Pro',serif;font-weight:500;color:var(--ink)}
+.dish-name .note{display:block;font-family:'Caveat',cursive;font-weight:500;font-size:15px;color:var(--tealf)}
+.dish-role{font-family:'Special Elite',serif;font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft)}
+.menu-logic{
+  margin-top:14px;padding-top:12px;border-top:1px dashed var(--ink-soft);
+  font-family:'Caveat',cursive;font-weight:500;font-size:20px;color:var(--ink);
+  line-height:1.4;
+}
+/* BRANCHES */
+.branches{
+  max-width:760px;margin:80px auto 60px;padding:30px;
+  background:rgba(255,250,235,0.45);border:1px solid rgba(58,46,30,.15);
+  position:relative;transform:rotate(.4deg);
+  box-shadow:0 6px 24px -10px rgba(58,46,30,.16);
+}
+.branches::before{
+  content:'';position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);
+  width:110px;height:22px;background:var(--tape);
+}
+.branches-title{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:32px;
+  color:var(--ink);text-align:center;margin-bottom:6px;
+}
+.branches-sub{
+  font-family:'Special Elite',serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--sepia);text-align:center;margin-bottom:24px;
+}
+.branch{
+  padding:18px 0;border-top:1px dashed var(--ink-soft);
+  display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;
+}
+.branch:first-of-type{border-top:none}
+.branch-cond{
+  font-family:'Caveat',cursive;font-weight:600;font-size:24px;color:var(--red-stamp);
+  min-width:170px;line-height:1.2;transform:rotate(-1deg);
+}
+.branch-alt{font-size:15px;line-height:1.6;color:var(--ink);font-family:'Crimson Pro',serif}
+.branch-alt::before{content:'➜  ';color:var(--sepia);font-weight:700;font-size:18px}
+.branch-alt strong{font-style:italic;color:var(--ink);text-decoration:underline wavy var(--tealf);text-underline-offset:3px}
+/* CLOSING NOTE */
+.closing{
+  max-width:560px;margin:0 auto 60px;text-align:center;
+  font-family:'Caveat',cursive;font-weight:500;font-size:30px;color:var(--ink-soft);
+  line-height:1.3;padding:30px 0;transform:rotate(-.6deg);
+}
+.closing small{display:block;font-family:'Special Elite',serif;font-size:11px;letter-spacing:.3em;color:var(--sepia);text-transform:uppercase;margin-top:18px}
+/* REFINE */
+.refine{
+  position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+  background:var(--ink);color:var(--paper);
+  padding:8px 8px 8px 16px;display:flex;gap:8px;align-items:center;z-index:998;
+  border:2px solid var(--ink);box-shadow:0 8px 24px -6px rgba(0,0,0,.3);
+  max-width:calc(100% - 36px);
+}
+.refine::before{
+  content:'';position:absolute;top:-8px;left:30px;transform:rotate(-4deg);
+  width:80px;height:14px;background:var(--tape);
+}
+.refine-label{
+  font-family:'Caveat',cursive;font-weight:700;font-size:18px;color:var(--paper);
+  margin-right:4px;
+}
+.refine-chip{
+  background:transparent;border:1px dashed rgba(244,236,216,.5);color:var(--paper);
+  padding:6px 12px;font-family:'Special Elite',serif;font-size:11px;cursor:pointer;
+  letter-spacing:.05em;
+}
+.refine-chip:hover{background:rgba(244,236,216,.1)}
+.refine-input{
+  flex:1;min-width:160px;background:transparent;border:none;
+  border-bottom:1px dashed var(--paper);color:var(--paper);
+  font-family:'Caveat',cursive;font-weight:500;font-size:18px;outline:none;padding:4px 4px;
+}
+.refine-input::placeholder{color:rgba(244,236,216,.4);font-style:italic}
+.refine-submit{
+  background:var(--paper);color:var(--ink);border:none;
+  padding:8px 16px;font-family:'Caveat',cursive;font-weight:700;font-size:18px;cursor:pointer;
+}
+@media(max-width:780px){
+  .polaroid-row{grid-template-columns:1fr!important;gap:30px}
+  .page:nth-of-type(even) .polaroid{order:0}
+  .cover-title{font-size:42px}
+  .passport-stamp{width:80px;height:80px;top:14px;right:14px}
+  .passport-stamp .big{font-size:16px}
+  .branch{grid-template-columns:1fr;gap:10px}
+  .refine{flex-wrap:wrap;padding:10px 12px}
+  .arc-svg{height:140px}
+}
+</style>
+</head>
+<body>
+<div class="variant-label">V3 / Vintage Polaroid Journal</div>
+
+<section class="cover">
+  <div class="passport-stamp"><div class="top">DAY · NO</div><div class="big">001</div><div class="bot">COMPOSED</div></div>
+  <div class="cover-eyebrow">Travel Journal · Vol. I</div>
+  <h1 class="cover-title">A day in the<br><em>old Bay Area</em></h1>
+  <div class="cover-handwritten">recovering, but alive</div>
+  <div class="mood-row">
+    <span class="tag">reflective</span><span class="tag">warm</span><span class="tag">lightly exploratory</span><span class="tag">not rushed</span>
+  </div>
+  <div class="cover-meta">
+    <span>Sat · Jan 10 · 2026</span><span>14:30 → 22:00</span><span>Sunnyvale → SJ</span><span>+1 +baby</span>
+  </div>
+</section>
+
+<section class="arc-wrap">
+  <div class="arc-eyebrow">The Shape of the Day</div>
+  <h2 class="arc-title">~ how the day rises &amp; falls ~</h2>
+  <svg class="arc-svg" viewBox="0 0 1000 180" preserveAspectRatio="none">
+    <defs>
+      <filter id="wiggle"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3" stitchTiles="stitch"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
+    </defs>
+    <path class="curve" d="M 125,135 C 220,128 290,115 375,108 C 470,100 540,30 625,30 C 720,30 800,72 875,90"/>
+    <circle class="dot" cx="125" cy="135" r="7"/>
+    <circle class="dot" cx="375" cy="108" r="7"/>
+    <circle class="dot" cx="625" cy="30" r="9"/>
+    <circle class="dot" cx="875" cy="90" r="7"/>
+    <text x="125" y="172" text-anchor="middle">14:30</text>
+    <text x="375" y="172" text-anchor="middle">15:00</text>
+    <text x="625" y="172" text-anchor="middle">18:30</text>
+    <text x="875" y="172" text-anchor="middle">20:00</text>
+    <text class="lbl" x="125" y="18" text-anchor="middle">opening</text>
+    <text class="lbl" x="375" y="18" text-anchor="middle">breathing</text>
+    <text class="lbl" x="625" y="18" text-anchor="middle">peak</text>
+    <text class="lbl" x="875" y="18" text-anchor="middle">close</text>
+  </svg>
+</section>
+
+<section class="page">
+  <div class="page-num">— Page 1 —</div>
+  <div class="polaroid-row">
+    <div class="polaroid">
+      <div class="polaroid-img s1"><div class="ph">Alviso<br>Adobe<small>Milpitas · 1837</small></div></div>
+      <div class="polaroid-caption">our quiet opening</div>
+      <div class="polaroid-corner">Jan 10 · 14:30</div>
+    </div>
+    <div class="notes">
+      <span class="notes-time">14:30</span><span class="notes-stamp">opening</span>
+      <h3>A quiet historical opening</h3>
+      <div class="place">Alviso Adobe Saturday Tour<small>2087 Alviso Adobe Ct · Milpitas, CA 95035</small></div>
+      <p class="why">保留于 19 世纪加州早期定居时期的 adobe 古建筑，作为小型历史展示空间对公众开放。今天想 restore 又不想完全静止——adobe 比大型 museum 轻盈，宝宝好带。每月第二个周六免费导览。</p>
+      <p class="handwritten">免费门票，但要提前在 Eventbrite 占位~</p>
+      <div class="logistics"><span>🅿 easy</span><span>👶 friendly</span><span>🎟 free</span></div>
+      <a href="#" class="book">reserve a tour spot</a>
+    </div>
+  </div>
+</section>
+
+<div class="transit">indoor narrative<span class="arrow">~</span>outdoor breathing<span class="arrow">·</span>5 min drive</div>
+
+<section class="page">
+  <div class="page-num">— Page 2 —</div>
+  <div class="polaroid-row">
+    <div class="polaroid">
+      <div class="polaroid-img s2"><div class="ph">Sandy Wool<br>Lake<small>afternoon</small></div></div>
+      <div class="polaroid-caption">birds. ducks. baby giggles.</div>
+      <div class="polaroid-corner">15:00 · 圆盘停车</div>
+    </div>
+    <div class="notes">
+      <span class="notes-time">15:00</span><span class="notes-stamp" style="color:var(--tealf);border-color:var(--tealf)">breathing</span>
+      <h3>Lakeside breathing</h3>
+      <div class="place">Sandy Wool Lake<small>901 Downing Rd · Milpitas, CA 95035</small></div>
+      <p class="why">距离 Alviso Adobe 很近的湖边公园，适合观鸟、钓鱼、轻徒步和野炊。带孩子接近大自然，下午的湖面安静好看。</p>
+      <p class="handwritten">停在湖边圆盘停车场就行</p>
+      <div class="logistics"><span>🅿 easy</span><span>👶 stroller ok</span><span>🚗 5 min</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="transit">outdoor reset<span class="arrow">~</span>appetite-opening<span class="arrow">·</span>22 min drive</div>
+
+<section class="page">
+  <div class="page-num">— Page 3 —</div>
+  <div class="polaroid-row">
+    <div class="polaroid">
+      <div class="polaroid-img s3"><div class="ph">Dong Que<br>晚餐<small>Alum Rock · walk-in</small></div></div>
+      <div class="polaroid-caption">9 dishes, no reservation</div>
+      <div class="polaroid-corner">18:30 · 烟火气</div>
+    </div>
+    <div class="notes">
+      <span class="notes-time">18:30</span><span class="notes-stamp">peak</span>
+      <h3>A lively neighborhood dinner</h3>
+      <div class="place">Dong Que Restaurant<small>2852 Alum Rock Ave · San Jose · WALK-IN ONLY</small></div>
+      <p class="why">你说不想 touristy；这是 walk-in only 的本地越南/广东融合馆，烟火气十足。点了 9 道招牌菜，正好把白天的安静节奏接回到热闹收尾。</p>
+      <div class="logistics"><span>🅿 street/lot</span><span>👶 friendly</span><span>🚗 22 min</span><span>💵 cash ok</span></div>
+      <div class="menu">
+        <div class="menu-title">tonight's menu<small>order of fire ↓</small></div>
+        <div class="dish"><div class="dish-num">N°88</div><div class="dish-name">烤生蚝 / grilled oyster<span class="note">开胃, 先点</span></div><div class="dish-role">apéritif</div></div>
+        <div class="dish"><div class="dish-num">N°92</div><div class="dish-name">鱼籽扇贝 / roe scallop</div><div class="dish-role">apéritif</div></div>
+        <div class="dish"><div class="dish-num">N°98</div><div class="dish-name">蒜香海蜗牛 / garlic conch</div><div class="dish-role">apéritif</div></div>
+        <div class="dish"><div class="dish-num">N°84</div><div class="dish-name">芝士焗蛤蜊 / cheese clam</div><div class="dish-role">apéritif</div></div>
+        <div class="dish"><div class="dish-num">N°15</div><div class="dish-name">香松腊肠锅巴饭 / lap cheong rice<span class="note">★ signature, 要等</span></div><div class="dish-role">star</div></div>
+        <div class="dish"><div class="dish-num">N°103</div><div class="dish-name">铁板螺丝 / iron-plate snail</div><div class="dish-role">main</div></div>
+        <div class="dish"><div class="dish-num">N°5</div><div class="dish-name">烤鹌鹑 / roast quail</div><div class="dish-role">main</div></div>
+        <div class="dish"><div class="dish-num">N°68</div><div class="dish-name">炒牛蛙腿 / frog leg</div><div class="dish-role">main</div></div>
+        <div class="dish"><div class="dish-num">N°93</div><div class="dish-name">蛏子烤空心海菜 / razor clam</div><div class="dish-role">side</div></div>
+        <div class="menu-logic">~ 先开 88 / 92 开胃，主菜 15 / 103 / 68 同时上桌做火候节奏，5 / 93 收尾。带宝宝的话 15 最稳。 ~</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="transit">warm fullness<span class="arrow">~</span>social light closing<span class="arrow">·</span>15 min drive</div>
+
+<section class="page">
+  <div class="page-num">— Page 4 —</div>
+  <div class="polaroid-row">
+    <div class="polaroid">
+      <div class="polaroid-img s4"><div class="ph">Spaced Out<small>downtown · stand-up</small></div></div>
+      <div class="polaroid-caption">last laugh of the day</div>
+      <div class="polaroid-corner">20:00 · $12.99</div>
+    </div>
+    <div class="notes">
+      <span class="notes-time">20:00</span><span class="notes-stamp">closing</span>
+      <h3>Standup comedy to close</h3>
+      <div class="place">Spaced Out · Mystérieux Brand<small>28 N Almaden Ave #30 · Downtown San Jose</small></div>
+      <p class="why">Downtown San Jose 小场地脱口秀，$12.99/人。把一天从安静→自然→烟火气→社交轻收尾，4 个 mood 走完一个完整的弧。</p>
+      <p class="handwritten">停车去 Almaden Financial Plaza ($8 evening)，或打车 $40-50</p>
+      <div class="logistics"><span>🅿 garage</span><span>⚠ no baby</span><span>🎟 $12.99</span><span>🚗 15 min</span></div>
+      <a href="#" class="book">grab a ticket</a>
+    </div>
+  </div>
+</section>
+
+<section class="branches">
+  <h3 class="branches-title">If the day bends</h3>
+  <div class="branches-sub">— adaptive notes —</div>
+  <div class="branch">
+    <div class="branch-cond">if 宝宝困了</div>
+    <div class="branch-alt">skip 脱口秀，回家路上附近 dessert · <strong>Phin Coffee</strong> 或 <strong>Bambu</strong></div>
+  </div>
+  <div class="branch">
+    <div class="branch-cond">if energy 还高</div>
+    <div class="branch-alt">脱口秀后加 downtown wine bar · <strong>Cafe Stritch</strong> 或 <strong>Paper Plane</strong></div>
+  </div>
+</section>
+
+<div class="closing">"一种 day rhythm.<br>不是 4 个独立的地点。"<small>composed · not scheduled</small></div>
+
+<div class="refine">
+  <span class="refine-label">tweak →</span>
+  <button class="refine-chip">更安静</button>
+  <button class="refine-chip">加酒吧</button>
+  <button class="refine-chip">宝宝累了</button>
+  <input class="refine-input" placeholder="adjust this day...">
+  <button class="refine-submit">recompose</button>
+</div>
+
+</body>
+</html>

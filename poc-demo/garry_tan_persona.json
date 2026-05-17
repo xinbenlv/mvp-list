@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "purpose": "Garry Tan persona — a high-contrast 'typical persona' used alongside Mia's persona to stress-test the Day Composer agent across very different intake profiles. If the agent can produce a magical TripPlan for BOTH personas, it's not overfit to one user.",
+    "source": "ChatGPT, extracted 2026-05-16 via the persona-extraction prompt in this folder.",
+    "role_in_test_suite": "typical_persona_b (high-energy SF urban exploration / family-with-baby / vlogger aesthetic)",
+    "schema_note": "Top-level field 'intake_state' here actually holds emotional_intent only (ChatGPT flattened). Other intake dims are siblings, not nested. Composer prompt is flexible enough to read this flat structure."
+  },
+
+  "persona_name": "Garry Tan",
+  "context_one_liner": "45 岁 Y Combinator 首席执行官、资深风险投资人与科技 Vlogger，深耕旧金山核心科技生态与社区治理，寻求高能量、充满电影感与科技审美交织的完美旧金山周六动线。",
+
+  "taste_signature": {
+    "summary": "兼具前沿产品设计师的美学敏锐度与硬核极客的破局思维。极度热爱旧金山本土街头文化、独立咖啡、地道拉面与波霸奶茶，崇尚富有镜头感、信息密度极高且生命力充沛的'电影感'空间氛围。",
+    "vibe_weights": [
+      { "tag": "cinematic", "weight": 0.95 },
+      { "tag": "lively", "weight": 0.90 },
+      { "tag": "authentic", "weight": 0.90 },
+      { "tag": "hip", "weight": 0.85 },
+      { "tag": "cultural", "weight": 0.85 },
+      { "tag": "walkable", "weight": 0.80 },
+      { "tag": "family_oriented", "weight": 0.75 },
+      { "tag": "novel", "weight": 0.70 }
+    ]
+  },
+
+  "intake_state": {
+    "_field_note": "This is emotional_intent (ChatGPT flattened the schema)",
+    "values": ["explore", "reconnect"],
+    "confidence": 0.90,
+    "rationale": "在高强度统领 YC 创投生态及参与城市治理的一周后，需要通过在旧金山街头探索新店并与家庭、社区建立真实连接来全面充能。"
+  },
+
+  "social_config": {
+    "values": ["family_with_baby"],
+    "confidence": 0.85,
+    "rationale": "周末的核心主线是高质量的家庭与亲子陪伴，行程需完美适配带有学龄及学步期孩子的家庭出行特征。"
+  },
+
+  "energy_profile": {
+    "energy_level": "high",
+    "chaos_tolerance": "medium",
+    "novelty_appetite": "high",
+    "confidence": 0.95,
+    "rationale": "天生具备超高能量的输出体质，对高密度信息与新鲜事物抱有强烈好奇，乐于在充满变数与生命力的城市环境中穿梭。"
+  },
+
+  "practical_constraints": {
+    "start_location": "San Francisco, CA",
+    "max_drive_minutes": 30,
+    "time_window": "09:00-21:00",
+    "budget": "flexible",
+    "kid_friendly_required": true,
+    "needs_parking": false,
+    "confidence": 0.90
+  },
+
+  "taste_anchors": {
+    "liked_examples": [
+      {
+        "name": "Mensho Tokyo / SF Boba Spots",
+        "why_i_like_it": "充满匠人精神、热气腾腾且地道的亚洲饮食体验，自带强烈的街头烟火气与 Vlog 镜头美学。"
+      },
+      {
+        "name": "SFMOMA / Mission District",
+        "why_i_like_it": "将顶尖的视觉设计、艺术审美与本地鲜活的社区文化完美融合，既能汲取创意思考又适合随时街拍。"
+      }
+    ],
+    "food_preferences": [
+      "日式拉面",
+      "波霸奶茶",
+      "精品手冲咖啡",
+      "现代亚洲融合菜",
+      "地道粤式中餐"
+    ],
+    "confidence": 0.95
+  },
+
+  "avoidance": {
+    "values": ["touristy", "polished_but_soulless", "rushed"],
+    "rationale": "极度排斥毫无本地灵魂、工业流水线化且只针对游客的平庸网红打卡点。",
+    "confidence": 0.90
+  },
+
+  "ground_truth_expectations": {
+    "ideal_day_theme": "旧金山创投大佬的电影感社区美食与硬核审美充能之旅",
+    "ideal_mood_arc": [
+      "【开场】前沿先锋独立咖啡馆的灵感唤醒与光影捕捉",
+      "【中段】充满镜头感、偶遇可能性与历史文化交织的 SF 潮流街区穿梭",
+      "【晚餐】让人大快朵颐、极致地道的热门亚洲风味主厨餐厅聚会",
+      "【收尾】旧金山绝美城市夜景下的创意思考或家庭温馨长谈"
+    ],
+    "what_would_make_me_say_wow": "行程不仅能发掘极致隐蔽但水准极高的本地先锋小店，还能在动线中自然嵌入最适合拍摄高质量 YouTube Vlog 的绝佳构图与自然光窗口。",
+    "what_would_make_me_reject": "推荐了一个极其平庸、暮气沉沉、充斥着无聊连锁店且远离旧金山核心文化活力的南湾郊区封闭式购物中心一日游方案。"
+  },
+
+  "demo_scenario": {
+    "today_is": "周六 2026-01-10",
+    "what_just_happened": "本周 YC 冬季批次（W26）正式开训，连续面试并指导了大量充满野心的 AI 初创团队，大脑高速过载。同时，作为旧金山城市命运的深度参与者，周中还卷入了几场本地社区治理的激烈交锋。周四晚上终于回到家中，翻看着 YouTube 频道的创作者后台和下周密麻的日程，决定在这个周六彻底回归 SF 的街头巷尾。既渴望带上孩子们感受纯正的城市灵魂，又想寻找能激发新一期 Vlog 创作灵感的地道新地标，让满载的 CPU 换个频率重新起跳。",
+    "my_first_message_to_agent": "YC 开训这周脑子全被 AI 填满了。周六想在 SF 城区里整点真正厉害的拉面或者亚洲融合菜，顺便拍点好看的 Vlog 素材，帮我攒一个带点设计感、足够 local 的充能路线？"
+  }
+}

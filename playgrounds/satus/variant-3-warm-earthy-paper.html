@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day Composer · Warm Earthy Paper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@300;400;500&family=Caveat:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+  :root {
+    --paper: #EAE0C9;
+    --paper-light: #F0E8D4;
+    --paper-dark: #DFD2B5;
+    --ink: #2E2418;
+    --ink-soft: #3D3122;
+    --clay: #B25A38;
+    --clay-light: #D88661;
+    --sage: #6B7F5C;
+    --sage-deep: #4A5A40;
+    --mustard: #B8893A;
+    --warm-stone: #8A7458;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.7;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(178,90,56,0.04) 0%, transparent 30%),
+      radial-gradient(circle at 80% 70%, rgba(107,127,92,0.04) 0%, transparent 35%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.18 0 0 0 0 0.10 0 0 0 0.08 0'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.5'/></svg>");
+    background-size: auto, auto, 200px 200px;
+  }
+  .serif { font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9; font-weight: 400; }
+  .hand { font-family: 'Caveat', cursive; font-weight: 500; }
+
+  /* variant label */
+  .variant-label {
+    position: fixed; top: 16px; right: 16px; z-index: 100;
+    background: var(--ink); color: var(--paper-light);
+    padding: 10px 14px; font-size: 11px; letter-spacing: 0.06em;
+    border-radius: 2px; max-width: 240px; line-height: 1.4;
+    border: 1px solid var(--clay);
+  }
+  .variant-label b { font-weight: 600; display: block; margin-bottom: 4px; letter-spacing: 0.12em; text-transform: uppercase; font-size: 10px; color: var(--clay-light); }
+  .variant-label span { opacity: 0.7; font-size: 10px; }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* HERO — zine cover style */
+  .hero {
+    padding: 12vh 0 8vh; text-align: left;
+    border-bottom: 2px solid var(--ink);
+  }
+  .hero .issue {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--warm-stone); padding-bottom: 12px;
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-size: 13px; letter-spacing: 0.04em; color: var(--ink-soft);
+  }
+  .hero .issue .right { color: var(--clay); }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-weight: 400; font-size: clamp(48px, 7vw, 96px);
+    line-height: 1.04; letter-spacing: -0.015em; margin-top: 60px; color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic; font-weight: 400; color: var(--clay);
+    background: linear-gradient(180deg, transparent 60%, rgba(184,137,58,0.25) 60%);
+    padding: 0 6px;
+  }
+  .hero .scribble {
+    font-family: 'Caveat', cursive; font-size: 26px; color: var(--sage-deep);
+    margin-top: 14px; transform: rotate(-1.5deg); display: inline-block;
+  }
+  .hero .moods {
+    margin-top: 50px; display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .hero .moods .tag {
+    border: 1px solid var(--ink); padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; letter-spacing: 0.06em;
+    background: var(--paper-light); color: var(--ink-soft);
+  }
+  .hero .moods .tag:nth-child(2n) { transform: rotate(-1deg); border-color: var(--clay); color: var(--clay); }
+  .hero .moods .tag:nth-child(3n) { transform: rotate(0.5deg); border-color: var(--sage); color: var(--sage-deep); }
+  .hero .ctx {
+    margin-top: 50px; padding-top: 28px; border-top: 1px solid var(--warm-stone);
+    display: flex; flex-wrap: wrap; gap: 14px 28px; font-size: 13px; color: var(--ink-soft);
+  }
+  .hero .ctx .pair { display: inline-flex; align-items: center; gap: 8px; }
+  .hero .ctx .lab {
+    font-family: 'Fraunces', serif; font-style: italic; color: var(--warm-stone); font-size: 12px;
+  }
+
+  /* ARC */
+  .arc-section { padding: 12vh 0; border-bottom: 2px solid var(--ink); }
+  .arc-section .label {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-style: italic; font-size: 14px; color: var(--clay); margin-bottom: 8px;
+  }
+  .arc-section h2 {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.2;
+    margin-bottom: 56px; max-width: 720px; color: var(--ink); letter-spacing: -0.015em;
+  }
+  .arc-wrap { background: var(--paper-light); border: 1px solid var(--warm-stone); border-radius: 4px; padding: 40px 32px 24px; position: relative; }
+  .arc-wrap::before, .arc-wrap::after {
+    content: ""; position: absolute; width: 18px; height: 18px;
+    border-radius: 50%; background: var(--clay); opacity: 0.5;
+  }
+  .arc-wrap::before { top: -8px; left: 30%; }
+  .arc-wrap::after { bottom: -8px; right: 25%; background: var(--sage); }
+  .arc-wrap svg { display: block; width: 100%; height: 180px; overflow: visible; }
+  .arc-curve {
+    fill: none; stroke: var(--clay); stroke-width: 2.5; stroke-linecap: round;
+    /* hand-drawn jitter */
+    filter: url(#wiggle);
+    stroke-dasharray: 2200; stroke-dashoffset: 2200;
+    animation: draw 2.8s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .arc-node { fill: var(--clay); }
+  .arc-node-2 { fill: var(--sage); }
+  .arc-node-3 { fill: var(--mustard); }
+  .arc-labels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .arc-labels .col { text-align: left; padding-top: 14px; border-top: 1px dashed var(--warm-stone); }
+  .arc-labels .time {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-size: 12px; font-style: italic; color: var(--warm-stone); margin-bottom: 4px;
+  }
+  .arc-labels .place {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-weight: 500; font-size: 15px; color: var(--ink); line-height: 1.3; margin-bottom: 4px;
+  }
+  .arc-labels .role { font-family: 'Caveat', cursive; font-size: 18px; color: var(--clay); }
+
+  /* CARDS — zine page style */
+  .stop-card {
+    margin-top: 80px; background: var(--paper-light);
+    border: 1px solid var(--warm-stone); border-radius: 4px;
+    padding: 0; overflow: hidden;
+    box-shadow: 0 1px 0 var(--paper-dark), 0 6px 16px rgba(46,36,24,0.06);
+    position: relative;
+  }
+  .stop-card:last-of-type { margin-bottom: 60px; }
+  .stop-card .ribbon {
+    position: absolute; top: 22px; left: -2px;
+    background: var(--ink); color: var(--paper-light);
+    padding: 5px 16px; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    z-index: 3;
+  }
+  .stop-card .stop-img {
+    width: 100%; height: 360px; background-size: cover; background-position: center;
+    filter: sepia(0.18) saturate(0.85) contrast(0.95);
+    position: relative;
+  }
+  .stop-card .stop-img::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(46,36,24,0.25) 100%);
+  }
+  .stop-card .stop-body { padding: 36px 40px 40px; }
+  .stop-card .time-place {
+    display: flex; align-items: baseline; gap: 18px; margin-bottom: 12px;
+    border-bottom: 1px dashed var(--warm-stone); padding-bottom: 12px;
+  }
+  .stop-card .time-place .t {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-style: italic; font-size: 18px; color: var(--clay); font-weight: 500;
+  }
+  .stop-card .time-place .p {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-size: 14px; color: var(--warm-stone);
+  }
+  .stop-card h3 {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-weight: 400; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.1; letter-spacing: -0.02em;
+    margin: 16px 0 8px; color: var(--ink);
+  }
+  .stop-card .place-name {
+    font-family: 'Caveat', cursive; font-size: 28px; color: var(--sage-deep);
+    margin-bottom: 22px;
+  }
+  .stop-card .why { font-size: 16px; line-height: 1.75; color: var(--ink-soft); margin-bottom: 24px; max-width: 720px; }
+
+  /* logistics icons row */
+  .logi-row {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 16px 0; border-top: 1px solid var(--paper-dark);
+    border-bottom: 1px solid var(--paper-dark); margin-bottom: 22px;
+  }
+  .logi-item { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-soft); }
+  .logi-item svg { width: 22px; height: 22px; stroke: var(--clay); fill: none; stroke-width: 1.5; }
+  .logi-item .lab { font-family: 'Fraunces', serif; font-style: italic; color: var(--warm-stone); font-size: 12px; margin-right: 4px; }
+
+  .tip-note {
+    background: rgba(216,134,97,0.1); border-left: 3px solid var(--clay);
+    padding: 14px 18px; border-radius: 0 4px 4px 0;
+    font-family: 'Caveat', cursive; font-size: 20px; color: var(--clay);
+    margin-bottom: 22px; line-height: 1.4;
+  }
+  .tip-note::before { content: "✎ "; }
+
+  .book-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--paper-light); text-decoration: none;
+    padding: 12px 22px; font-size: 13px; letter-spacing: 0.06em;
+    border-radius: 999px; font-weight: 500;
+    transition: background 0.6s ease;
+  }
+  .book-link:hover { background: var(--clay); }
+
+  /* transitions between cards */
+  .crossing {
+    text-align: center; padding: 40px 0;
+    font-family: 'Caveat', cursive; font-size: 24px; color: var(--sage-deep);
+  }
+  .crossing::before, .crossing::after { content: "✻"; margin: 0 14px; color: var(--clay); }
+
+  /* RESTAURANT — zine menu look */
+  .stop-card.restaurant { background: #2E2418; color: var(--paper-light); border-color: var(--ink); }
+  .stop-card.restaurant .ribbon { background: var(--clay); color: var(--paper-light); }
+  .stop-card.restaurant .time-place { border-bottom-color: rgba(234,224,201,0.2); }
+  .stop-card.restaurant .time-place .t { color: var(--clay-light); }
+  .stop-card.restaurant .time-place .p { color: rgba(234,224,201,0.7); }
+  .stop-card.restaurant h3 { color: var(--paper-light); }
+  .stop-card.restaurant .place-name { color: var(--clay-light); }
+  .stop-card.restaurant .why { color: rgba(234,224,201,0.85); }
+  .stop-card.restaurant .logi-row { border-color: rgba(234,224,201,0.15); }
+  .stop-card.restaurant .logi-item { color: var(--paper-light); }
+  .stop-card.restaurant .logi-item svg { stroke: var(--clay-light); }
+  .stop-card.restaurant .logi-item .lab { color: rgba(234,224,201,0.6); }
+
+  .menu-zine {
+    margin-top: 30px;
+    background: var(--paper-light); color: var(--ink); border-radius: 4px;
+    padding: 28px 32px; position: relative;
+  }
+  .menu-zine::before {
+    content: "MENU"; position: absolute; top: -12px; left: 24px;
+    background: var(--clay); color: var(--paper-light);
+    padding: 4px 14px; font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-size: 11px; letter-spacing: 0.16em;
+  }
+  .menu-zine h4 {
+    font-family: 'Caveat', cursive; font-size: 28px; color: var(--clay);
+    margin-bottom: 18px;
+  }
+  .menu-item {
+    display: grid; grid-template-columns: 50px 1fr auto; gap: 14px;
+    padding: 12px 0; border-bottom: 1px dotted var(--warm-stone);
+    align-items: baseline;
+  }
+  .menu-item:last-of-type { border-bottom: none; }
+  .menu-item .n {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-style: italic; color: var(--clay); font-size: 16px;
+  }
+  .menu-item .name {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-weight: 500; font-size: 17px; color: var(--ink);
+  }
+  .menu-item .note { font-family: 'Caveat', cursive; font-size: 16px; color: var(--sage-deep); margin-left: 10px; }
+  .menu-item .role {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-style: italic; font-size: 12px; color: var(--warm-stone);
+  }
+  .menu-logic {
+    margin-top: 22px; padding: 16px 18px; background: rgba(178,90,56,0.08);
+    border-radius: 4px; border-left: 3px solid var(--sage);
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-size: 15px; line-height: 1.65; color: var(--ink-soft);
+  }
+  .menu-logic::before {
+    content: "How to order"; display: block; font-family: 'Caveat', cursive;
+    font-size: 20px; color: var(--sage-deep); margin-bottom: 6px;
+  }
+
+  /* BRANCHES */
+  .branches { background: var(--paper-dark); padding: 14vh 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  .branches .label {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-style: italic; font-size: 14px; color: var(--clay); margin-bottom: 8px;
+  }
+  .branches h2 {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.2;
+    margin-bottom: 48px; max-width: 720px; letter-spacing: -0.015em;
+  }
+  .branch-paper {
+    background: var(--paper-light); padding: 22px 28px; border-radius: 4px;
+    border-left: 4px solid var(--clay); margin-bottom: 16px;
+    display: grid; grid-template-columns: 1fr auto 1.5fr; gap: 22px; align-items: center;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  .branch-paper:nth-child(odd) { transform: rotate(-0.3deg); border-left-color: var(--sage); }
+  .branch-paper:nth-child(even) { transform: rotate(0.2deg); }
+  .branch-paper .cond {
+    font-family: 'Fraunces', serif; font-variation-settings: "opsz" 9;
+    font-size: 16px; color: var(--ink);
+  }
+  .branch-paper .arr { font-family: 'Caveat', cursive; font-size: 26px; color: var(--clay); }
+  .branch-paper .alt {
+    font-size: 14px; color: var(--ink-soft); line-height: 1.55;
+  }
+
+  /* REFINE BAR */
+  .refine {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+    background: var(--ink); color: var(--paper-light);
+    padding: 14px 24px; display: flex; align-items: center; gap: 14px;
+    border-top: 4px solid var(--clay);
+  }
+  .chips { display: flex; gap: 8px; flex-shrink: 0; }
+  .chip {
+    border: 1px solid rgba(234,224,201,0.4); padding: 8px 14px; border-radius: 999px;
+    font-size: 12px; color: var(--paper-light); cursor: pointer; transition: all 0.4s ease;
+    background: transparent;
+  }
+  .chip:hover { background: var(--clay); border-color: var(--clay); }
+  .refine input {
+    flex: 1; background: transparent; border: none; color: var(--paper-light);
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 15px;
+    padding: 8px 12px; outline: none;
+    border-bottom: 1px solid rgba(234,224,201,0.25);
+  }
+  .refine input::placeholder { color: rgba(234,224,201,0.5); font-style: italic; }
+  .recompose {
+    background: var(--clay); color: var(--paper-light); border: none; padding: 10px 22px;
+    font-family: 'Fraunces', serif; font-size: 13px; letter-spacing: 0.04em;
+    cursor: pointer; border-radius: 999px; font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  .recompose:hover { background: var(--clay-light); color: var(--ink); }
+
+  .end-pad { height: 100px; }
+
+  @media (max-width: 880px) {
+    .arc-labels { grid-template-columns: repeat(2, 1fr); }
+    .stop-card .stop-body { padding: 28px 22px; }
+    .branch-paper { grid-template-columns: 1fr; gap: 8px; }
+    .refine { flex-wrap: wrap; }
+    .chips { width: 100%; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG filter for hand-drawn jitter -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="wiggle">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" />
+    </filter>
+  </defs>
+</svg>
+
+<div class="variant-label">
+  <b>Variant 3</b>
+  Warm Earthy Paper
+  <span><br/>Recycled paper · sage + clay<br/>Cereal magazine × Kinfolk</span>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="issue">
+      <div>Day Composer · Issue No. 01</div>
+      <div class="right">Sat · Jan 10 · 2026</div>
+    </div>
+    <h1>旧湾区<br/>与<em>恢复感</em>的一天</h1>
+    <div class="scribble">— a slow, lightly-explored Saturday</div>
+    <div class="moods">
+      <span class="tag">reflective</span>
+      <span class="tag">warm</span>
+      <span class="tag">lightly exploratory</span>
+      <span class="tag">not rushed</span>
+    </div>
+    <div class="ctx">
+      <div class="pair"><span class="lab">window</span> 14:30 → 22:00</div>
+      <div class="pair"><span class="lab">from</span> Sunnyvale</div>
+      <div class="pair"><span class="lab">moving</span> by car</div>
+      <div class="pair"><span class="lab">with</span> partner & baby</div>
+      <div class="pair"><span class="lab">stops</span> 4</div>
+    </div>
+  </section>
+
+  <!-- ARC -->
+  <section class="arc-section">
+    <div class="label">— the shape of the day —</div>
+    <h2>From quiet adobe walls to a noisy table, finishing under a small comedy light.</h2>
+    <div class="arc-wrap">
+      <svg viewBox="0 0 1000 180" preserveAspectRatio="none">
+        <path class="arc-curve" d="M 50 130 C 160 130, 220 115, 310 108 S 540 95, 640 38 S 880 75, 960 88" />
+        <circle class="arc-node" cx="50" cy="130" r="6" />
+        <circle class="arc-node-2" cx="310" cy="108" r="6" />
+        <circle class="arc-node" cx="640" cy="38" r="8" />
+        <circle class="arc-node-3" cx="960" cy="88" r="6" />
+      </svg>
+      <div class="arc-labels">
+        <div class="col"><div class="time">14:30</div><div class="place">Alviso Adobe</div><div class="role">slow opening</div></div>
+        <div class="col"><div class="time">15:00</div><div class="place">Sandy Wool Lake</div><div class="role">breathing</div></div>
+        <div class="col"><div class="time">18:30</div><div class="place">Dong Que</div><div class="role">peak</div></div>
+        <div class="col"><div class="time">20:00</div><div class="place">Spaced Out</div><div class="role">light close</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STOP 1 -->
+  <article class="stop-card">
+    <div class="ribbon">Chapter I · Opening</div>
+    <div class="stop-img" style="background-image:url('https://images.unsplash.com/photo-1568734049547-2bf3eaae9aa2?w=1600&q=80&auto=format')"></div>
+    <div class="stop-body">
+      <div class="time-place">
+        <div class="t">14:30</div>
+        <div class="p">2087 Alviso Adobe Ct, Milpitas, CA</div>
+      </div>
+      <h3>A quiet historical opening</h3>
+      <div class="place-name">— Alviso Adobe</div>
+      <p class="why">保留于 19 世纪加州早期定居时期的 adobe 古建筑，作为小型历史展示空间对公众开放。今天想 restore 又不想完全静止——adobe 比大型 museum 轻盈，宝宝好带。每月第二个周六免费导览。</p>
+      <div class="logi-row">
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><path d="M5 16h14M5 16l2-7h10l2 7M5 16v3M19 16v3M7 13h10"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>
+          <span class="lab">drive</span> arrival
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 16V8h4a2.5 2.5 0 0 1 0 5H9"/></svg>
+          <span class="lab">parking</span> easy
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M7 21v-4a5 5 0 0 1 10 0v4"/></svg>
+          <span class="lab">with baby</span> friendly
+        </div>
+      </div>
+      <div class="tip-note">免费门票，但要提前在 Eventbrite 预约导览席位</div>
+      <a class="book-link" href="https://www.eventbrite.com/e/alviso-adobe-saturday-tours-tickets-1146480567239" target="_blank">Reserve a seat →</a>
+    </div>
+  </article>
+
+  <div class="crossing">indoor narrative → outdoor breathing</div>
+
+  <!-- STOP 2 -->
+  <article class="stop-card">
+    <div class="ribbon">Chapter II · Breathing</div>
+    <div class="stop-img" style="background-image:url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?w=1600&q=80&auto=format')"></div>
+    <div class="stop-body">
+      <div class="time-place">
+        <div class="t">15:00</div>
+        <div class="p">901 Downing Rd, Milpitas, CA · 5 min from previous</div>
+      </div>
+      <h3>Lakeside breathing</h3>
+      <div class="place-name">— Sandy Wool Lake</div>
+      <p class="why">距离 Alviso Adobe 很近的湖边公园，适合观鸟、钓鱼、轻徒步和野炊。带孩子接近大自然，下午的湖面安静好看。</p>
+      <div class="logi-row">
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><path d="M5 16h14M5 16l2-7h10l2 7M5 16v3M19 16v3"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>
+          <span class="lab">drive</span> 5 min
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 16V8h4a2.5 2.5 0 0 1 0 5H9"/></svg>
+          <span class="lab">parking</span> easy
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M7 21v-4a5 5 0 0 1 10 0v4"/></svg>
+          <span class="lab">stroller</span> ok
+        </div>
+      </div>
+      <div class="tip-note">停在湖边圆盘停车场</div>
+    </div>
+  </article>
+
+  <div class="crossing">outdoor reset → appetite-opening</div>
+
+  <!-- STOP 3 — RESTAURANT -->
+  <article class="stop-card restaurant">
+    <div class="ribbon">Chapter III · Peak</div>
+    <div class="stop-img" style="background-image:url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1600&q=80&auto=format')"></div>
+    <div class="stop-body">
+      <div class="time-place">
+        <div class="t">18:30</div>
+        <div class="p">2852 Alum Rock Ave, San Jose · walk-in only</div>
+      </div>
+      <h3>Lively neighborhood dinner</h3>
+      <div class="place-name">— Dong Que Restaurant</div>
+      <p class="why">你说不想 touristy；这是 walk-in only 的本地越南/广东融合馆，烟火气十足。点了 9 道招牌菜，正好把白天的安静节奏接回到热闹收尾。</p>
+      <div class="logi-row">
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><path d="M5 16h14M5 16l2-7h10l2 7M5 16v3M19 16v3"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>
+          <span class="lab">drive</span> 22 min
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 16V8h4a2.5 2.5 0 0 1 0 5H9"/></svg>
+          <span class="lab">parking</span> moderate
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M7 21v-4a5 5 0 0 1 10 0v4"/></svg>
+          <span class="lab">with baby</span> ok
+        </div>
+      </div>
+
+      <div class="menu-zine">
+        <h4>9 dishes, in the right order</h4>
+        <div class="menu-item"><div class="n">#15</div><div class="name">香松腊肠锅巴饭<span class="note">— 先点，要等</span></div><div class="role">signature</div></div>
+        <div class="menu-item"><div class="n">#103</div><div class="name">铁板螺丝</div><div class="role">main</div></div>
+        <div class="menu-item"><div class="n">#88</div><div class="name">烤生蚝<span class="note">— 开胃</span></div><div class="role">appetizer</div></div>
+        <div class="menu-item"><div class="n">#92</div><div class="name">鱼籽扇贝</div><div class="role">appetizer</div></div>
+        <div class="menu-item"><div class="n">#93</div><div class="name">蛏子烤空心菜</div><div class="role">side</div></div>
+        <div class="menu-item"><div class="n">#5</div><div class="name">烤鹌鹑</div><div class="role">main</div></div>
+        <div class="menu-item"><div class="n">#68</div><div class="name">炒牛蛙腿</div><div class="role">main</div></div>
+        <div class="menu-item"><div class="n">#98</div><div class="name">蒜香海蜗牛</div><div class="role">appetizer</div></div>
+        <div class="menu-item"><div class="n">#84</div><div class="name">芝士焗蛤蜊</div><div class="role">appetizer</div></div>
+        <div class="menu-logic">先开 88/92 两道海鲜小盘开胃，主菜 15/103/68 同时上桌做火候节奏，5/93 收尾。带宝宝的话腊肠锅巴饭最稳。</div>
+      </div>
+    </div>
+  </article>
+
+  <div class="crossing">warm fullness → social light closing</div>
+
+  <!-- STOP 4 -->
+  <article class="stop-card">
+    <div class="ribbon">Chapter IV · Closing</div>
+    <div class="stop-img" style="background-image:url('https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=1600&q=80&auto=format')"></div>
+    <div class="stop-body">
+      <div class="time-place">
+        <div class="t">20:00</div>
+        <div class="p">28 N Almaden Ave #30, San Jose · $12.99 / person</div>
+      </div>
+      <h3>Standup comedy to close</h3>
+      <div class="place-name">— Spaced Out — Mystérieux Brand</div>
+      <p class="why">Downtown San Jose 小场地脱口秀，12.99/人。把一天从安静→自然→烟火气→社交轻收尾，4 个 mood 走完一个完整的弧。</p>
+      <div class="logi-row">
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><path d="M5 16h14M5 16l2-7h10l2 7M5 16v3M19 16v3"/><circle cx="8" cy="18" r="1.5"/><circle cx="16" cy="18" r="1.5"/></svg>
+          <span class="lab">drive</span> 15 min
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 16V8h4a2.5 2.5 0 0 1 0 5H9"/></svg>
+          <span class="lab">parking</span> hard
+        </div>
+        <div class="logi-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M7 21v-4a5 5 0 0 1 10 0v4"/></svg>
+          <span class="lab">with baby</span> no
+        </div>
+      </div>
+      <div class="tip-note">停车去 Almaden Financial Plaza ($8 evening rate)，或打车往返 $40–50</div>
+      <a class="book-link" href="https://www.eventbrite.com/e/spaced-out-standup-comedy-in-downtown-san-jose-tickets-1977634803935" target="_blank">Book seats →</a>
+    </div>
+  </article>
+
+</div>
+
+<!-- BRANCHES -->
+<section class="branches">
+  <div class="container">
+    <div class="label">— if the wind shifts —</div>
+    <h2>The plan knows how to bend.</h2>
+    <div class="branch-paper">
+      <div class="cond">宝宝困了 / 状态不好</div>
+      <div class="arr">→</div>
+      <div class="alt">Skip 脱口秀，回家路上附近 dessert（Phin Coffee / Bambu）</div>
+    </div>
+    <div class="branch-paper">
+      <div class="cond">Energy 还很高</div>
+      <div class="arr">→</div>
+      <div class="alt">脱口秀后加 downtown wine bar（Cafe Stritch / Paper Plane）</div>
+    </div>
+  </div>
+</section>
+
+<div class="end-pad"></div>
+
+<!-- REFINE BAR -->
+<div class="refine">
+  <div class="chips">
+    <button class="chip">更安静一点</button>
+    <button class="chip">加一个酒吧</button>
+    <button class="chip">宝宝今天很累</button>
+  </div>
+  <input placeholder="reshape this day..." />
+  <button class="recompose">Recompose →</button>
+</div>
+
+<script>
+  const lenis = new Lenis({ lerp: 0.06, smoothWheel: true });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0) rotate(var(--r, 0deg))';
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.stop-card, .branch-paper, .crossing').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1)';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>

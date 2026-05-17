@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Composer — V1 Brutalist Ticket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0a;--paper:#f2eee3;--hazard:#FFD400;--blood:#C8102E;--mute:#777}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.55;overflow-x:hidden}
+body{padding-bottom:90px}
+.variant-label{position:fixed;top:12px;right:12px;background:var(--ink);color:var(--hazard);padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;z-index:999;text-transform:uppercase}
+/* HEADER TICKET */
+.frame{border:4px solid var(--ink);margin:50px 40px 0;padding:36px 40px;position:relative;background:var(--paper)}
+.no{position:absolute;top:-14px;left:30px;background:var(--paper);padding:0 12px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.2em}
+.ticket-grid{display:grid;grid-template-columns:auto 1fr auto;align-items:flex-end;gap:28px;padding-bottom:24px;border-bottom:2px dashed var(--ink);margin-bottom:28px}
+.ticket-numero{font-family:'DM Serif Display',serif;font-size:96px;line-height:.82;letter-spacing:-.04em}
+.ticket-meta{display:grid;grid-template-columns:repeat(3,auto);gap:30px}
+.tk-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;color:var(--mute);text-transform:uppercase;display:block;margin-bottom:4px}
+.tk-value{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.05em}
+.day-theme{font-family:'DM Serif Display',serif;font-size:72px;line-height:.95;letter-spacing:-.02em;margin:8px 0 26px}
+.mood-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.mood-tag{border:2px solid var(--ink);padding:4px 11px;font-size:10px;text-transform:uppercase;letter-spacing:.14em;background:var(--paper);font-weight:500}
+.mood-tag.accent{background:var(--hazard)}
+.trip-summary{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;padding:14px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;gap:30px;flex-wrap:wrap;color:#222}
+.trip-summary b{color:var(--ink);font-weight:700}
+.barcode{display:flex;gap:2px;align-items:flex-end;height:36px;margin-top:24px}
+.barcode i{background:var(--ink);width:2px;display:block}
+/* PERFORATED CONNECTOR */
+.perf{height:24px;margin:0 40px;background:radial-gradient(circle at 12px center,transparent 6px,var(--ink) 6px,var(--ink) 8px,transparent 8px);background-size:24px 24px;background-color:transparent;border-left:4px solid var(--ink);border-right:4px solid var(--ink);position:relative}
+.perf::before,.perf::after{content:'';position:absolute;top:0;bottom:0;width:12px}
+/* ARC */
+.arc-section{border:4px solid var(--ink);border-top:none;margin:0 40px;padding:30px 40px;background:var(--paper);position:relative}
+.arc-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.18em;margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline}
+.arc-title small{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--mute)}
+.arc-svg{width:100%;height:160px;display:block;margin-top:10px}
+.arc-svg .grid{stroke:#d8d4c8;stroke-width:1;stroke-dasharray:2 4}
+.arc-svg path.signal{stroke:var(--blood);stroke-width:2.5;fill:none}
+.arc-svg .pulse{stroke:var(--ink);stroke-width:1.5;fill:none}
+.arc-svg circle{fill:var(--hazard);stroke:var(--ink);stroke-width:2.5}
+.arc-svg text{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--ink);text-transform:uppercase;letter-spacing:.1em}
+.arc-svg text.lbl{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.12em}
+/* STOP */
+.stop{border:4px solid var(--ink);border-top:none;margin:0 40px;display:grid;grid-template-columns:240px 1fr;background:var(--paper);position:relative;overflow:hidden}
+.stop-side{border-right:2px solid var(--ink);padding:28px 22px;background:var(--paper);position:relative}
+.stop-side.hot{background:var(--hazard)}
+.stop-time{font-family:'DM Serif Display',serif;font-size:64px;line-height:.9;letter-spacing:-.03em}
+.stop-num{font-family:'Bebas Neue',sans-serif;font-size:160px;line-height:.78;opacity:.08;position:absolute;top:30px;right:14px;pointer-events:none}
+.stop-side .stop-tag{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.stop-side .pacing{margin-top:6px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.14em}
+.stop-body{padding:28px 32px;position:relative}
+.stop-title{font-family:'DM Serif Display',serif;font-size:34px;line-height:1.05;letter-spacing:-.02em;margin-bottom:6px}
+.stop-place{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--blood);margin-bottom:18px}
+.stop-place .addr{color:var(--mute);font-size:11px;letter-spacing:.08em;display:block;margin-top:2px;font-family:'JetBrains Mono',monospace}
+.stop-why{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;margin-bottom:18px;max-width:620px;color:#222}
+.logistics{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.logistics span{border:1.5px solid var(--ink);padding:4px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;background:var(--paper)}
+.tip{font-family:'JetBrains Mono',monospace;font-style:italic;font-size:12px;border-left:3px solid var(--blood);padding:4px 0 4px 12px;margin-top:10px;color:#444}
+.book{display:inline-block;background:var(--ink);color:var(--hazard);padding:9px 18px;text-decoration:none;font-family:'Bebas Neue',sans-serif;letter-spacing:.18em;margin-top:14px;font-size:13px;border:2px solid var(--ink)}
+.book:hover{background:var(--hazard);color:var(--ink)}
+/* TRANSITION */
+.transition{margin:0 40px;background:var(--ink);color:var(--paper);padding:14px 36px;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.18em;border-left:4px solid var(--ink);border-right:4px solid var(--ink);display:flex;align-items:center;gap:14px}
+.transition::before{content:'→';font-family:'DM Serif Display',serif;font-size:22px;color:var(--hazard)}
+/* MENU as receipt */
+.menu{margin-top:26px;border:2px solid var(--ink);padding:20px 22px;background:#fffef9;position:relative}
+.menu::before{content:'RECEIPT';position:absolute;top:-10px;left:14px;background:#fffef9;padding:0 8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--blood)}
+.menu-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.16em;margin-bottom:14px;border-bottom:1px solid var(--ink);padding-bottom:8px;display:flex;justify-content:space-between}
+.menu-title small{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--mute)}
+.dish{display:grid;grid-template-columns:46px 1fr 90px;gap:14px;align-items:baseline;padding:7px 0;border-bottom:1px dashed #aaa;font-family:'JetBrains Mono',monospace;font-size:13px}
+.dish-num{font-weight:700;color:var(--blood)}
+.dish-name{font-weight:500}
+.dish-name .note{display:block;font-size:10px;color:var(--mute);font-style:italic;letter-spacing:.05em}
+.dish-role{font-size:9px;text-transform:uppercase;opacity:.7;text-align:right;letter-spacing:.14em}
+.menu-logic{margin-top:14px;padding-top:12px;border-top:1px solid var(--ink);font-style:italic;font-size:12px;line-height:1.65;color:#333;font-family:'JetBrains Mono',monospace}
+.menu-foot{margin-top:14px;padding-top:10px;border-top:1px dashed var(--ink);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+/* BRANCHES */
+.branches{border:4px solid var(--ink);border-top:none;margin:0 40px;padding:30px 40px;background:var(--paper)}
+.branches-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.18em;margin-bottom:6px;display:flex;justify-content:space-between;align-items:baseline}
+.branches-title small{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--mute)}
+.branch{display:grid;grid-template-columns:260px 50px 1fr;gap:20px;padding:18px 0;border-top:2px dashed var(--ink);align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px}
+.branch-cond{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;text-transform:uppercase}
+.branch-arrow{font-family:'DM Serif Display',serif;font-size:36px;color:var(--blood);text-align:center}
+.branch-alt{line-height:1.6;color:#222}
+/* REFINE */
+.refine{position:fixed;bottom:0;left:0;right:0;background:var(--ink);color:var(--paper);padding:14px 40px;display:flex;gap:10px;align-items:center;z-index:998;border-top:4px solid var(--hazard);flex-wrap:wrap}
+.refine-label{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.18em;color:var(--hazard);margin-right:6px}
+.refine-chip{border:2px solid var(--paper);padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;letter-spacing:.05em;background:transparent;color:var(--paper)}
+.refine-chip:hover{background:var(--paper);color:var(--ink)}
+.refine-input{flex:1;min-width:200px;background:transparent;border:none;border-bottom:2px solid var(--paper);color:var(--paper);padding:8px 4px;font-family:'JetBrains Mono',monospace;font-size:13px;outline:none}
+.refine-input::placeholder{color:rgba(242,238,227,.4)}
+.refine-submit{background:var(--hazard);color:var(--ink);border:none;padding:9px 18px;font-family:'Bebas Neue',sans-serif;letter-spacing:.18em;cursor:pointer;font-size:14px}
+.refine-submit:hover{background:var(--paper)}
+.bottom-stamp{margin:30px 40px;padding:30px 40px;border:4px solid var(--ink);background:var(--ink);color:var(--paper);text-align:center;font-family:'DM Serif Display',serif;font-size:28px;letter-spacing:-.02em;line-height:1.2}
+.bottom-stamp small{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--hazard);margin-top:14px;text-transform:uppercase}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.frame,.arc-section,.stop,.transition,.branches,.bottom-stamp{animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both}
+.arc-section{animation-delay:.1s}.stop:nth-of-type(3){animation-delay:.2s}.stop:nth-of-type(5){animation-delay:.3s}.stop:nth-of-type(7){animation-delay:.4s}.stop:nth-of-type(9){animation-delay:.5s}.branches{animation-delay:.6s}.bottom-stamp{animation-delay:.7s}
+@media(max-width:780px){.frame,.arc-section,.stop,.transition,.branches,.bottom-stamp{margin-left:16px;margin-right:16px}.frame,.arc-section,.bottom-stamp{padding-left:22px;padding-right:22px}.ticket-grid{grid-template-columns:1fr;gap:20px}.ticket-numero{font-size:64px}.day-theme{font-size:42px}.stop{grid-template-columns:1fr}.stop-side{border-right:none;border-bottom:2px solid var(--ink)}.branch{grid-template-columns:1fr}.branch-arrow{text-align:left}.refine{padding:12px 16px}}
+</style>
+</head>
+<body>
+<div class="variant-label">V1 / Brutalist Ticket Stub</div>
+
+<section class="frame">
+<span class="no">DAY COMPOSER · N°001</span>
+<div class="ticket-grid">
+  <div class="ticket-numero">01.<br>10</div>
+  <div class="ticket-meta">
+    <div><span class="tk-label">Date</span><span class="tk-value">Sat / 2026</span></div>
+    <div><span class="tk-label">Window</span><span class="tk-value">14:30→22:00</span></div>
+    <div><span class="tk-label">Crew</span><span class="tk-value">Mia + 1 + 👶</span></div>
+  </div>
+  <div class="ticket-meta">
+    <div><span class="tk-label">Origin</span><span class="tk-value">Sunnyvale</span></div>
+  </div>
+</div>
+<h1 class="day-theme">旧湾区与<br>恢复感的一天</h1>
+<div class="mood-tags">
+  <span class="mood-tag accent">REFLECTIVE</span>
+  <span class="mood-tag">WARM</span>
+  <span class="mood-tag">LIGHTLY EXPLORATORY</span>
+  <span class="mood-tag">NOT RUSHED</span>
+</div>
+<div class="trip-summary">
+  <span><b>4</b> stops</span><span><b>7.5</b> hrs</span><span><b>2</b> branches</span><span><b>1</b> meal</span><span>transport · <b>car</b></span>
+</div>
+<div class="barcode">
+<i style="height:80%"></i><i style="height:60%"></i><i style="height:90%;width:4px"></i><i style="height:55%"></i><i style="height:75%"></i><i style="height:40%;width:3px"></i><i style="height:95%"></i><i style="height:50%"></i><i style="height:70%;width:5px"></i><i style="height:60%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:78%;width:3px"></i><i style="height:62%"></i><i style="height:50%"></i><i style="height:88%"></i><i style="height:42%"></i><i style="height:70%;width:4px"></i><i style="height:58%"></i><i style="height:90%"></i>
+</div>
+</section>
+
+<section class="arc-section">
+<div class="arc-title">EMOTIONAL ARC <small>SEISMOGRAPH / VIBE OVER TIME</small></div>
+<svg class="arc-svg" viewBox="0 0 1000 160" preserveAspectRatio="none">
+  <line class="grid" x1="0" y1="40" x2="1000" y2="40"/>
+  <line class="grid" x1="0" y1="80" x2="1000" y2="80"/>
+  <line class="grid" x1="0" y1="120" x2="1000" y2="120"/>
+  <polyline class="pulse" points="0,120 80,118 125,118 200,80 375,80 460,40 625,40 700,90 875,90 1000,90"/>
+  <polyline class="signal" points="125,114 375,104 625,30 875,75"/>
+  <circle cx="125" cy="114" r="6"/>
+  <circle cx="375" cy="104" r="6"/>
+  <circle cx="625" cy="30" r="6"/>
+  <circle cx="875" cy="75" r="6"/>
+  <text x="125" y="148" text-anchor="middle">14:30</text>
+  <text x="375" y="148" text-anchor="middle">15:00</text>
+  <text x="625" y="148" text-anchor="middle">18:30</text>
+  <text x="875" y="148" text-anchor="middle">20:00</text>
+  <text class="lbl" x="125" y="20" text-anchor="middle">OPENING</text>
+  <text class="lbl" x="375" y="20" text-anchor="middle">BREATHING</text>
+  <text class="lbl" x="625" y="20" text-anchor="middle">PEAK</text>
+  <text class="lbl" x="875" y="20" text-anchor="middle">CLOSING</text>
+</svg>
+</section>
+
+<section class="stop">
+<div class="stop-side"><div class="stop-num">01</div><div class="stop-time">14:30</div><div class="stop-tag">PACING / ROLE</div><div class="pacing">OPENING</div></div>
+<div class="stop-body">
+  <h2 class="stop-title">A quiet historical opening</h2>
+  <div class="stop-place">ALVISO ADOBE <span class="addr">2087 ALVISO ADOBE CT · MILPITAS</span></div>
+  <p class="stop-why">保留于 19 世纪加州早期定居时期的 adobe 古建筑，作为小型历史展示空间对公众开放。今天想 restore 又不想完全静止——adobe 比大型 museum 轻盈，宝宝好带。每月第二个周六免费导览。</p>
+  <div class="logistics"><span>🅿 EASY PARKING</span><span>👶 KID FRIENDLY</span><span>🎟 FREE</span></div>
+  <div class="tip">免费门票，但要提前在 Eventbrite 预约导览席位</div>
+  <a class="book" href="#" target="_blank">↗ RESERVE TOUR</a>
+</div>
+</section>
+
+<div class="transition">INDOOR NARRATIVE → OUTDOOR BREATHING · 5 MIN DRIVE</div>
+
+<section class="stop">
+<div class="stop-side"><div class="stop-num">02</div><div class="stop-time">15:00</div><div class="stop-tag">PACING / ROLE</div><div class="pacing">BREATHING</div></div>
+<div class="stop-body">
+  <h2 class="stop-title">Lakeside breathing</h2>
+  <div class="stop-place">SANDY WOOL LAKE <span class="addr">901 DOWNING RD · MILPITAS</span></div>
+  <p class="stop-why">距离 Alviso Adobe 很近的湖边公园，适合观鸟、钓鱼、轻徒步和野炊。带孩子接近大自然，下午的湖面安静好看。</p>
+  <div class="logistics"><span>🅿 EASY PARKING</span><span>👶 STROLLER OK</span><span>🚗 5 MIN</span></div>
+  <div class="tip">停在湖边圆盘停车场</div>
+</div>
+</section>
+
+<div class="transition">OUTDOOR RESET → APPETITE-OPENING · 22 MIN DRIVE</div>
+
+<section class="stop">
+<div class="stop-side hot"><div class="stop-num">03</div><div class="stop-time">18:30</div><div class="stop-tag">PACING / ROLE</div><div class="pacing">PEAK</div></div>
+<div class="stop-body">
+  <h2 class="stop-title">Lively neighborhood dinner</h2>
+  <div class="stop-place">DONG QUE RESTAURANT <span class="addr">2852 ALUM ROCK AVE · SAN JOSE · WALK-IN ONLY</span></div>
+  <p class="stop-why">你说不想 touristy；这是 walk-in only 的本地越南/广东融合馆，烟火气十足。点了 9 道招牌菜，正好把白天的安静节奏接回到热闹收尾。</p>
+  <div class="logistics"><span>🅿 STREET / LOT</span><span>👶 KID FRIENDLY</span><span>🚗 22 MIN</span><span>💳 CASH-FRIENDLY</span></div>
+  <div class="menu">
+    <div class="menu-title">9 DISHES · ORDER OF FIRE <small>WALK-IN · NO RESERVATION</small></div>
+    <div class="dish"><div class="dish-num">#88</div><div class="dish-name">烤生蚝 / Grilled Oyster<span class="note">开胃</span></div><div class="dish-role">APPETIZER</div></div>
+    <div class="dish"><div class="dish-num">#92</div><div class="dish-name">鱼籽扇贝 / Roe Scallop</div><div class="dish-role">APPETIZER</div></div>
+    <div class="dish"><div class="dish-num">#98</div><div class="dish-name">蒜香海蜗牛 / Garlic Conch</div><div class="dish-role">APPETIZER</div></div>
+    <div class="dish"><div class="dish-num">#84</div><div class="dish-name">芝士焗蛤蜊 / Cheese Clam</div><div class="dish-role">APPETIZER</div></div>
+    <div class="dish"><div class="dish-num">#15</div><div class="dish-name">香松腊肠锅巴饭 / Lap Cheong Crispy Rice<span class="note">先点，要等</span></div><div class="dish-role">SIGNATURE</div></div>
+    <div class="dish"><div class="dish-num">#103</div><div class="dish-name">铁板螺丝 / Iron-Plate Snail</div><div class="dish-role">MAIN</div></div>
+    <div class="dish"><div class="dish-num">#5</div><div class="dish-name">烤鹌鹑 / Roast Quail</div><div class="dish-role">MAIN</div></div>
+    <div class="dish"><div class="dish-num">#68</div><div class="dish-name">炒牛蛙腿 / Stir-Fried Frog Leg</div><div class="dish-role">MAIN</div></div>
+    <div class="dish"><div class="dish-num">#93</div><div class="dish-name">蛏子烤空心海菜 / Razor Clam Greens</div><div class="dish-role">SIDE</div></div>
+    <div class="menu-logic">先开 88/92 两道海鲜小盘开胃，主菜 15/103/68 同时上桌做火候节奏，5/93 收尾。带宝宝的话腊肠锅巴饭最稳。</div>
+    <div class="menu-foot"><span>9 ITEMS · COMP'D BY DAY COMPOSER</span><span>THANK YOU</span></div>
+  </div>
+</div>
+</section>
+
+<div class="transition">WARM FULLNESS → SOCIAL LIGHT CLOSING · 15 MIN DRIVE</div>
+
+<section class="stop">
+<div class="stop-side"><div class="stop-num">04</div><div class="stop-time">20:00</div><div class="stop-tag">PACING / ROLE</div><div class="pacing">CLOSING</div></div>
+<div class="stop-body">
+  <h2 class="stop-title">Standup comedy to close</h2>
+  <div class="stop-place">SPACED OUT · MYSTÉRIEUX BRAND <span class="addr">28 N ALMADEN AVE #30 · DOWNTOWN SAN JOSE</span></div>
+  <p class="stop-why">Downtown San Jose 小场地脱口秀，$12.99/人。把一天从安静→自然→烟火气→社交轻收尾，4 个 mood 走完一个完整的弧。</p>
+  <div class="logistics"><span>🅿 PAID GARAGE</span><span>⚠ NO BABY</span><span>🎟 $12.99</span><span>🚗 15 MIN</span></div>
+  <div class="tip">停车去 Almaden Financial Plaza ($8 evening rate)，或打车往返 $40-50</div>
+  <a class="book" href="#" target="_blank">↗ BUY TICKET</a>
+</div>
+</section>
+
+<section class="branches">
+<div class="branches-title">CONTINGENCY <small>IF THE DAY BENDS</small></div>
+<div class="branch">
+  <div class="branch-cond">If 宝宝困了 / 状态不好</div>
+  <div class="branch-arrow">→</div>
+  <div class="branch-alt">Skip 脱口秀，回家路上附近 dessert · <b>Phin Coffee</b> 或 <b>Bambu</b></div>
+</div>
+<div class="branch">
+  <div class="branch-cond">If energy 还很高</div>
+  <div class="branch-arrow">→</div>
+  <div class="branch-alt">脱口秀后加 downtown wine bar · <b>Cafe Stritch</b> 或 <b>Paper Plane</b></div>
+</div>
+</section>
+
+<div class="bottom-stamp">"一种 day rhythm，不是 4 个独立的 POI。"<small>COMPOSED · NOT SCHEDULED</small></div>
+
+<div class="refine">
+  <span class="refine-label">REFINE →</span>
+  <button class="refine-chip">更安静一点</button>
+  <button class="refine-chip">加一个酒吧</button>
+  <button class="refine-chip">宝宝今天很累</button>
+  <input class="refine-input" placeholder="或自己说——">
+  <button class="refine-submit">↗ RECOMPOSE</button>
+</div>
+</body>
+</html>

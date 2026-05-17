@@ -1,0 +1,139 @@
+{
+  "_meta": {
+    "purpose": "Mia's actual persona as extracted by ChatGPT from its Memory. Used as demo INPUT (stub for what TasteSignature + IntakeState would look like AFTER vision intake + 3-question conversation completes).",
+    "source": "ChatGPT, extracted 2026-05-16 via the persona-extraction prompt in this folder.",
+    "schema_note": "Top-level field 'intake_state' here actually holds emotional_intent only (ChatGPT flattened). Other intake dims (social_config / energy_profile / etc.) are siblings, not nested under intake_state. Composer prompt is flexible enough to read this flat structure."
+  },
+
+  "persona_name": "Mia",
+  "context_one_liner": "Mia 是住在 Bay Area South Bay、正在从高强度 AI 工作与新手妈妈生活中寻找平衡的 AI Engineer，她会用 Day Composer 来把一个普通周六变成既恢复能量、又有审美和探索感的小型生活作品。",
+
+  "taste_signature": {
+    "summary": "她喜欢的不是标准网红打卡，而是有质感、有空气感、有一点文化或味觉惊喜的行程：自然光、好吃的东西、漂亮但不刻意的空间、可以慢慢展开的体验。她既想被照顾到现实约束，比如宝宝、停车、开车距离、精力有限，也希望计划里有一点'这不是我自己随手能想到的'的灵感。",
+    "vibe_weights": [
+      { "tag": "restorative", "weight": 0.92 },
+      { "tag": "cinematic", "weight": 0.86 },
+      { "tag": "natural_light", "weight": 0.85 },
+      { "tag": "intimate", "weight": 0.82 },
+      { "tag": "photogenic", "weight": 0.80 },
+      { "tag": "cultural", "weight": 0.78 },
+      { "tag": "walkable", "weight": 0.72 },
+      { "tag": "novel", "weight": 0.70 },
+      { "tag": "warm", "weight": 0.69 },
+      { "tag": "kid_friendly", "weight": 0.66 },
+      { "tag": "low_noise", "weight": 0.64 },
+      { "tag": "polished", "weight": 0.62 },
+      { "tag": "outdoor", "weight": 0.60 },
+      { "tag": "spacious", "weight": 0.58 },
+      { "tag": "romantic", "weight": 0.54 },
+      { "tag": "adventurous", "weight": 0.50 }
+    ]
+  },
+
+  "intake_state": {
+    "_field_note": "This is emotional_intent (ChatGPT flattened the schema)",
+    "values": ["restore", "explore", "reconnect", "feel_alive"],
+    "confidence": 0.86,
+    "rationale": "她最近的核心状态是在高密度工作、育儿和自我探索之间寻找恢复感，同时又不想只休息，想要一点新鲜、审美和生命力。"
+  },
+
+  "social_config": {
+    "values": ["couple", "family_with_baby"],
+    "confidence": 0.82,
+    "rationale": "她常见的周末场景是在伴侣和宝宝之间切换：既可能想要一家三口轻松出门，也可能想要和老公短暂 reconnect。"
+  },
+
+  "energy_profile": {
+    "energy_level": "medium",
+    "chaos_tolerance": "low",
+    "novelty_appetite": "high",
+    "confidence": 0.83,
+    "rationale": "她对新鲜体验和高质量推荐很有胃口，但因为工作、宝宝和家庭 logistics，不能接受太混乱、太赶、太不可控的安排。"
+  },
+
+  "practical_constraints": {
+    "start_location": "Bay Area South Bay，大概在 Santa Clara / Sunnyvale / Mountain View 一带出发",
+    "max_drive_minutes": 45,
+    "time_window": "14:00-21:00",
+    "budget": "flexible",
+    "kid_friendly_required": true,
+    "needs_parking": true,
+    "confidence": 0.78,
+    "rationale": "她住在 South Bay，周末可以为好体验开一段车，但因为有宝宝和现实精力限制，停车、距离和节奏必须被认真考虑。"
+  },
+
+  "taste_anchors": {
+    "liked_examples": [
+      {
+        "name": "Napa / Sonoma 式的短途体验",
+        "why_i_like_it": "喜欢 wine、好餐厅、自然光、风景和一点庆祝感的组合，但不想变成赶场式旅行。"
+      },
+      {
+        "name": "SF 或 Peninsula 的小而精餐厅 + 可散步街区",
+        "why_i_like_it": "比起单点打卡，她更喜欢一个可以慢慢走、吃得好、空间有质感、还能顺便观察城市气质的下午。"
+      },
+      {
+        "name": "融合菜 / 有创意的亚洲风味餐厅",
+        "why_i_like_it": "她对食物有 taste，喜欢新酒、新组合和有表达感的菜单，而不是只要评分高或热门。"
+      },
+      {
+        "name": "海边、山景、花园、草坪、自然光强的空间",
+        "why_i_like_it": "能让她从认知高负荷中掉下来，进入更松弛、更有身体感和画面感的状态。"
+      },
+      {
+        "name": "有审美的 cafe、bookstore、museum、design shop",
+        "why_i_like_it": "她会被有策展感和细节的地方吸引，尤其适合作为一天里的低压力灵感补给站。"
+      },
+      {
+        "name": "适合带宝宝但不被宝宝完全定义的地方",
+        "why_i_like_it": "她需要现实上 stroller-friendly、parking-friendly，但心理上仍然想保留自己的审美、浪漫和探索感。"
+      }
+    ],
+    "food_preferences": [
+      "融合菜",
+      "现代亚洲菜",
+      "日式或韩式但不排队的精致小店",
+      "California cuisine",
+      "有自然酒或有趣 wine pairing 的餐厅",
+      "brunch 但不能太普通",
+      "漂亮但不只是网红的 cafe",
+      "有季节感、轻盈、食材好的餐厅"
+    ],
+    "confidence": 0.77
+  },
+
+  "avoidance": {
+    "values": [
+      "touristy",
+      "loud",
+      "queued",
+      "rushed",
+      "crowded",
+      "generic",
+      "logistically_fragile",
+      "over_planned",
+      "parking_uncertain",
+      "baby_unfriendly"
+    ],
+    "rationale": "最不能接受的是看起来很热门但实际又吵、又挤、要排队、停车麻烦、带宝宝尴尬，最后把周六变成执行任务而不是恢复体验。",
+    "confidence": 0.88
+  },
+
+  "ground_truth_expectations": {
+    "ideal_day_theme": "一个 South Bay 出发的低摩擦微度假周六：下午有自然光和轻散步，中间有一点审美/文化灵感，晚上吃一顿有记忆点但不折腾的饭，最后带着被照顾和被理解的感觉回家。",
+    "ideal_mood_arc": [
+      "从混乱的一周里慢慢降噪，先有光、有空气、有一点空间感",
+      "中段进入轻探索：发现一个不太显眼但很有 taste 的地方",
+      "晚餐有小小庆祝感，食物和氛围都让人觉得生活重新变漂亮",
+      "收尾不赶、不狼狈，最好还能买杯热饮或散个短步，带着余韵回家"
+    ],
+    "what_would_make_me_say_wow": "计划不仅推荐了好地方，还准确处理了宝宝、停车、开车距离、精力、审美、餐厅 taste 和 mood arc，让我感觉它不是在搜地点，而是在 compose 我的生活。",
+    "what_would_make_me_reject": "给我一串热门景点、网红 brunch、排队餐厅或需要来回奔波的 itinerary，而且完全没有理解我现在带宝宝、精力有限、讨厌混乱但又想要灵感的状态。"
+  },
+
+  "demo_scenario": {
+    "today_is": "周六 2026-01-10",
+    "what_just_happened": "这个周四晚上，Mia 刚结束一周高密度的 AI 产品和工程工作，脑子里还残留着很多未闭环的想法：NoteGen、agent、eval、职业定位、side project、内容创作。家里也不是完全安静的恢复场，宝宝还小，周末出门需要考虑 nap、stroller、停车、换尿布和大人的体力。她不想再自己打开十几个 tab 做旅行规划，也不想被一个普通推荐系统塞一堆热门地点；她只是想让这个周六变得漂亮一点、轻一点、有一点值得记住，同时不要太累。",
+    "my_first_message_to_agent": "这周有点累，但我不想只是躺平。帮我安排一个周六吧，最好有点漂亮、有点好吃、有点新鲜，但不要太折腾，宝宝也可能一起。"
+  }
+}

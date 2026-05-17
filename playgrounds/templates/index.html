@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Composer · Template System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#F4ECDF;--ink:#1C1814;--mute:#7A6F60;--accent:#8b4a4a;
+  /* template signature colors */
+  --t1-bg:#F4ECDF;--t1-accent:#C28D8A;--t1-deep:#6B3D49;
+  --t2-bg:#0a0a0a;--t2-accent:#d4b896;--t2-deep:#8b4a4a;
+  --t3-bg:#FFF8F0;--t3-accent:#C97B8C;--t3-deep:#3D2E3D;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bone);color:var(--ink);
+  font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;
+  min-height:100vh;padding:60px 40px 80px;
+  background-image:
+    radial-gradient(ellipse at 20% 10%,rgba(194,141,138,.08) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 90%,rgba(212,184,150,.10) 0%,transparent 55%);
+}
+.head{max-width:1280px;margin:0 auto 60px;padding-bottom:40px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--mute);margin-bottom:18px}
+h1{font-family:'Fraunces',serif;font-weight:300;font-size:84px;letter-spacing:-.03em;line-height:.95;margin-bottom:20px}
+h1 em{font-style:italic;color:var(--accent)}
+.sub{font-family:'Fraunces',serif;font-weight:300;font-style:italic;font-size:22px;color:var(--mute);max-width:780px;line-height:1.5}
+.meta{margin-top:24px;display:flex;gap:30px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);flex-wrap:wrap}
+.meta b{color:var(--ink)}
+/* CONCEPT */
+.concept{max-width:1280px;margin:0 auto 70px;background:#fff;border:2px solid var(--ink);padding:36px 40px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:start}
+.concept-num{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:78px;color:var(--accent);line-height:.8}
+.concept h2{font-family:'Fraunces',serif;font-weight:400;font-size:30px;letter-spacing:-.01em;margin-bottom:12px;line-height:1.2}
+.concept h2 em{font-style:italic;color:var(--accent)}
+.concept p{font-size:15.5px;line-height:1.75;color:#333;max-width:720px}
+.concept p + p{margin-top:10px}
+.concept b{color:var(--ink);font-weight:500}
+/* TEMPLATE CARDS */
+.templates{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.card{
+  background:#fff;border:2px solid var(--ink);overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .3s,box-shadow .3s;color:var(--ink);text-decoration:none;
+}
+.card:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
+.preview{height:280px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:24px}
+.preview-label{
+  position:absolute;top:14px;left:14px;font-family:'DM Mono',monospace;font-size:9px;
+  letter-spacing:.24em;text-transform:uppercase;padding:5px 10px;background:rgba(255,255,255,.85);
+  backdrop-filter:blur(8px);color:var(--ink);font-weight:500;
+}
+.preview-title{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:42px;line-height:.95;letter-spacing:-.02em;z-index:2;position:relative}
+/* T1 preview — polaroid keepsake */
+.p1{background:linear-gradient(135deg,#E5B091 0%,#C28D8A 60%,#7E4F4F 100%);color:#fff}
+.p1::before{content:'';position:absolute;top:24px;right:24px;width:100px;height:100px;background:#FAF4EA;transform:rotate(8deg);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.p1::after{content:'';position:absolute;top:30px;right:46px;width:56px;height:14px;background:rgba(194,141,138,.5);transform:rotate(-4deg)}
+/* T2 preview — cinematic editorial (Vogue / AnOther — pure cool, no warmth) */
+.p2{background:linear-gradient(155deg,#1c2028 0%,#0a0d12 55%,#000 100%);color:#F8F6F0}
+.p2::before{content:'I';position:absolute;top:30px;right:36px;font-family:'Fraunces',serif;font-weight:900;font-size:160px;color:#DD0F2C;line-height:.75;letter-spacing:-.06em}
+.p2::after{content:'';position:absolute;top:0;left:0;right:0;height:30px;background:#0a0a0a;border-bottom:3px solid #DD0F2C}
+.p2 .preview-title{color:#F8F6F0;margin-top:20px}
+.p2 .preview-title em{color:#F8F6F0;font-style:italic;font-weight:400;display:block}
+.p2 .preview-label{background:#DD0F2C!important;color:#fff!important}
+/* T3 preview — aurora romance */
+.p3{
+  background:
+    radial-gradient(ellipse at 20% 30%,#FFD3B6 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 70%,#FFBCBC 0%,transparent 60%),
+    radial-gradient(ellipse at 50% 50%,#F8C8DC 0%,transparent 65%),
+    #FFF8F0;
+}
+.p3 .preview-title{color:#3D2E3D;background:linear-gradient(135deg,#3D2E3D,#C97B8C);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:300}
+.p3::before{content:'❀';position:absolute;top:30px;right:40px;color:#C97B8C;font-size:60px;opacity:.4;animation:rotateSlow 24s linear infinite}
+.p3::after{content:'';position:absolute;top:50%;right:20%;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:-30px -20px 0 -2px #fff,40px -50px 0 -1px #fff,-50px 30px 0 -2px #fff;animation:twinkle 3s ease-in-out infinite}
+@keyframes rotateSlow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes twinkle{0%,100%{opacity:.5}50%{opacity:1}}
+/* card body */
+.body{padding:26px 28px 28px;display:flex;flex-direction:column;gap:14px;flex:1}
+.persona{
+  display:flex;flex-direction:column;gap:4px;padding-bottom:14px;border-bottom:1px dashed var(--mute);
+}
+.persona-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.persona-name{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:20px;color:var(--accent);line-height:1.2}
+.tagline{font-family:'Fraunces',serif;font-weight:400;font-size:18px;line-height:1.4;color:var(--ink)}
+.tagline em{font-style:italic;color:var(--accent)}
+.bestfor{font-size:13.5px;line-height:1.65;color:#333}
+.bestfor strong{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);margin-bottom:6px;font-weight:600}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.tags span{font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border:1px solid var(--ink);letter-spacing:.06em;text-transform:lowercase}
+.palette{display:flex;gap:0;margin-top:auto;border:1px solid var(--ink);height:24px}
+.palette div{flex:1}
+.cta{margin-top:14px;padding-top:14px;border-top:1px solid var(--ink);display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);font-weight:600}
+.cta::after{content:'OPEN →';color:var(--accent)}
+/* MATRIX */
+.matrix{max-width:1280px;margin:60px auto 0;background:#fff;border:2px solid var(--ink);padding:36px 40px}
+.matrix h3{font-family:'Fraunces',serif;font-weight:400;font-size:28px;margin-bottom:6px;letter-spacing:-.01em}
+.matrix .matrix-sub{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);margin-bottom:24px}
+.matrix table{width:100%;border-collapse:collapse;font-size:14px}
+.matrix th,.matrix td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--mute);vertical-align:top}
+.matrix th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);font-weight:700;background:var(--bone);border-bottom:2px solid var(--ink)}
+.matrix td:first-child{font-family:'Fraunces',serif;font-weight:500;color:var(--accent);font-size:15px}
+.matrix td em{font-family:'Fraunces',serif;font-style:italic;color:var(--ink)}
+/* NOTE */
+.note{max-width:1280px;margin:40px auto 0;padding:24px 30px;background:#fff;border:1px dashed var(--ink);font-size:13.5px;line-height:1.7}
+.note b{color:var(--accent)}
+.foot{max-width:1280px;margin:60px auto 0;padding-top:30px;border-top:1px solid var(--mute);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.back{display:inline-block;margin-bottom:30px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);text-decoration:none}
+.back:hover{color:var(--accent)}
+.back::before{content:'← '}
+@media(max-width:980px){
+  body{padding:30px 20px}
+  h1{font-size:54px}
+  .templates{grid-template-columns:1fr}
+  .concept{grid-template-columns:1fr}
+  .concept-num{font-size:60px}
+  .matrix{padding:24px 20px}
+  .matrix table{font-size:12px}
+  .matrix th,.matrix td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">All playgrounds</a>
+
+<div class="head">
+  <div class="eyebrow">Day Composer · Template System · v2</div>
+  <h1>Three <em>templates,</em><br>matched to your trip.</h1>
+  <p class="sub">Same Day Composer engine, three visual personalities. Each template's color palette is <em>derived from the trip's mood tags</em>, not fixed — so a "warm reflective" day looks different from a "celebratory peak" day even within the same template.</p>
+  <div class="meta">
+    <span><b>Iteration</b> · v2 (from feedback on B3, A2, B2)</span>
+    <span><b>Sample data</b> · Jan 10 2026 · 4 stops</span>
+    <span><b>Palette derivation</b> · mood × arc × time-of-day</span>
+  </div>
+</div>
+
+<div class="concept">
+  <div class="concept-num">i</div>
+  <div>
+    <h2>The idea: <em>persona × trip-nature → template</em></h2>
+    <p>The 3 templates below cover the spectrum of how a day can <b>feel</b>: a keepsake, a magazine cover, a love poem. At intake time, the composer asks (or infers) what kind of day this is, and matches the right template — no "settings" page required.</p>
+    <p>The <b>same trip</b> rendered in 3 templates would still look different from another user's trip rendered in the same template — because the color palette is parameterized on <em>that day's specific vibe tags + emotional arc shape + time-of-day</em>. The template is the chassis; the day's energy is the paint.</p>
+  </div>
+</div>
+
+<section class="templates">
+
+  <a class="card" href="polaroid-keepsake.html">
+    <div class="preview p1">
+      <div class="preview-label">Template · 01</div>
+      <div class="preview-title">Polaroid<br><em>Keepsake</em></div>
+    </div>
+    <div class="body">
+      <div class="persona">
+        <span class="persona-label">For the</span>
+        <span class="persona-name">Memory-keeper · Slow-traveler</span>
+      </div>
+      <p class="tagline">A day you want to <em>remember</em>, taped into a journal you'd actually keep.</p>
+      <div class="bestfor">
+        <strong>Best for</strong>
+        Family days, parent-child outings, anniversaries, reunions, slow weekends, hometown trips with relatives, anything that's <em>warmth over wow</em>.
+      </div>
+      <div class="tags"><span>family</span><span>nostalgic</span><span>warm</span><span>intimate</span></div>
+      <div class="palette">
+        <div style="background:#F4ECDF"></div>
+        <div style="background:#C28D8A"></div>
+        <div style="background:#9DAD93"></div>
+        <div style="background:#6B3D49"></div>
+        <div style="background:#FAF4EA"></div>
+      </div>
+      <div class="cta">DUSTY ROSE · SAGE · BONE</div>
+    </div>
+  </a>
+
+  <a class="card" href="cinematic-editorial.html">
+    <div class="preview p2">
+      <div class="preview-label">Template · 02</div>
+      <div class="preview-title">Cinematic<br><em>Editorial</em></div>
+    </div>
+    <div class="body">
+      <div class="persona">
+        <span class="persona-label">For the</span>
+        <span class="persona-name">Aesthete · Fashion-mag eye</span>
+      </div>
+      <p class="tagline">A day that should feel like a <em>Vogue spread.</em></p>
+      <div class="bestfor">
+        <strong>Best for</strong>
+        Culture days, fine-dining itineraries, design tourism, food-led weekends, "treat-yourself" Saturdays, hosting a visiting friend, anything <em>high-fashion &amp; cinematic</em>.
+      </div>
+      <div class="tags"><span>fashion</span><span>cinematic</span><span>food-led</span><span>graphic</span></div>
+      <div class="palette">
+        <div style="background:#F8F6F0"></div>
+        <div style="background:#0A0A0A"></div>
+        <div style="background:#DD0F2C"></div>
+        <div style="background:#5A5C60"></div>
+        <div style="background:#15161A"></div>
+      </div>
+      <div class="cta">IVORY · JET · VOGUE RED</div>
+    </div>
+  </a>
+
+  <a class="card" href="aurora-romance.html">
+    <div class="preview p3">
+      <div class="preview-label">Template · 03</div>
+      <div class="preview-title">Aurora<br><em>Romance</em></div>
+    </div>
+    <div class="body">
+      <div class="persona">
+        <span class="persona-label">For the</span>
+        <span class="persona-name">Romantic · Avant-garde explorer</span>
+      </div>
+      <p class="tagline">A day that should feel like <em>a poem you'd want to share.</em></p>
+      <div class="bestfor">
+        <strong>Best for</strong>
+        Date days, art-gallery hops, jazz nights, creative-couple weekends, gallery openings, festivals, intimate birthday celebrations, anything <em>dreamy &amp; emotional</em>.
+      </div>
+      <div class="tags"><span>romantic</span><span>artsy</span><span>dreamy</span><span>poetic</span></div>
+      <div class="palette">
+        <div style="background:#FFD3B6"></div>
+        <div style="background:#FFBCBC"></div>
+        <div style="background:#F8C8DC"></div>
+        <div style="background:#C97B8C"></div>
+        <div style="background:#D4E4D4"></div>
+      </div>
+      <div class="cta">PEACH · BLUSH · ROSE</div>
+    </div>
+  </a>
+
+</section>
+
+<section class="matrix">
+  <h3><em>How</em> the system decides</h3>
+  <div class="matrix-sub">trip signal → template + palette derivation</div>
+  <table>
+    <thead>
+      <tr><th>Trip vibe signal</th><th>Suggested template</th><th>Palette tilts toward</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>reflective + warm + family + low-energy</td><td>01 · <em>Polaroid Keepsake</em></td><td>dusty rose + sage + warm bone</td></tr>
+      <tr><td>celebratory + premium + high-graphic-impact</td><td>02 · <em>Cinematic Editorial</em></td><td>ivory + jet + vogue red</td></tr>
+      <tr><td>romantic + intimate + cultural / artsy</td><td>03 · <em>Aurora Romance</em></td><td>peach + blush + soft rose</td></tr>
+      <tr><td>high-energy + social + late-night peak</td><td>02 → with deeper red</td><td>jet + saturated vogue red + ivory</td></tr>
+      <tr><td>solo + restorative + early-morning</td><td>01 → with cooler sage</td><td>cooler sage + bone + soft teal</td></tr>
+      <tr><td>creative + bold + birthday / launch</td><td>03 → with deeper accents</td><td>magenta + deep rose + violet</td></tr>
+      <tr><td>winter + cozy + indoors-heavy</td><td>01 or 02 → mulled-wine accent</td><td>warm cream + spiced red + amber</td></tr>
+      <tr><td>summer + outdoor + adventure</td><td>03 → with citrus tilt</td><td>peach + coral + sage + lemon</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="note">
+  <b>How this becomes a product:</b> At intake time, the composer reads the inferred mood tags (e.g. <em>reflective + warm + family</em>) and the emotional arc shape (slow-rise-then-fall), then picks the template + tunes the palette. The user can override ("I want it more 02"), but the default is always derived. The 3 chassis don't change; the paint does. ← This is the principle that makes the system scale from 3 templates to feeling like infinite personality.
+</div>
+
+<div class="foot">
+  <span>Iteration · v2 (post Jan 10 feedback)</span>
+  <span>Branch · <b>mia/day-composer-v2-spec-yolo</b></span>
+  <span>Spec · <b>mvp-list/frontend-spec-v2.md</b></span>
+</div>
+
+</body>
+</html>
