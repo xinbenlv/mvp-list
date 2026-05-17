@@ -1,0 +1,617 @@
+{
+  "_meta": {
+    "purpose": "Sample TripPlans for frontend integration. Outputs from the Composer agent (dry-run on Mia + Garry personas, v1 + v2). Use as fixtures for the rendering layer before backend is wired.",
+    "schema_note": "Plans follow PlanResult shape — see agent/types.py and backend-data-schema-v2.md §2.9. Markdown is the literal Composer output; structured fields are parsed from it. Extra fields beyond PlanResult (mood_tags, emotional_arc_visual, stops[], adaptive_branches, score_summary) are carried as fixture-only metadata for the frontend renderer.",
+    "plan_count": 4,
+    "personas_covered": [
+      "mia",
+      "garry"
+    ],
+    "versions_covered": [
+      "v1",
+      "v2"
+    ],
+    "regenerated_from": [
+      "poc-demo/dry-run/",
+      "poc-demo/dry-run-v2/"
+    ],
+    "place_id_source": "poc-demo/demo_places.json",
+    "scoring_provenance": "From dry-run scoring sessions (stranger / arc / specificity / avoidance / adaptive on 0-10)."
+  },
+  "plans": [
+    {
+      "plan_id": "mia_v1",
+      "persona_id": "mia",
+      "version": "v1",
+      "day_theme": "一个被光照过的南湾周六",
+      "pitch": null,
+      "mood_tags": [
+        "restorative",
+        "sun-warmed",
+        "quietly cultural",
+        "low-friction",
+        "有余韵"
+      ],
+      "emotional_arc_text": "慢起有光 → 湖边放空 → 烟火气晚餐 → 顺路收尾",
+      "emotional_arc_visual": "🕰️ 慢起 ──► 🌿 呼吸 ──► 🍜 烟火气 ──► ☕ 余韵\n14:30        15:45         18:00          20:00",
+      "theme_anchor": "cultural_restorative",
+      "stops": [
+        {
+          "stop_index": 0,
+          "time": "14:30",
+          "place_id": "alviso_adobe",
+          "place_name": "Alviso Adobe Park",
+          "one_liner": "一栋 19 世纪的土砖房，被做成一间小小的历史房间。光从西窗斜着进来，屋顶横梁触手可及，45 分钟刚好够你把这一周的脑子放慢。",
+          "why_fits_today": "你说今天想要\"有一点审美/文化灵感，但不要太折腾\"——Alviso 一场 tour 只接 8 个人，没人在 perform 给镜头，刚好踩中你 avoidance 里的 touristy 和 crowded。土砖房的 natural_light 和 quiet 和你 vibe_signature 顶上那两个 weight (restorative 0.92 / cinematic 0.86) 完全对得上，又不会消耗你今天带宝宝出门已经动用过的耐心。",
+          "logistics": {
+            "raw": "🚗 22min from Sunnyvale · 🅿️ 免费停车 · 👶 stroller 友好（走西侧入口避开石板台阶）· 🎟️ free, 每月第二个周六 14:30 tour · ⏰ 45min 刚好",
+            "drive_time_min": 22,
+            "parking": "free",
+            "kid_friendly": true,
+            "reservation_note": "free, 每月第二个周六 14:30 tour",
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": null,
+          "tip": "推婴儿车走西侧入口，避开石板台阶。",
+          "transition_to_next": "indoor narrative → outdoor breathing",
+          "transition_drive_min": 8
+        },
+        {
+          "stop_index": 1,
+          "time": "15:45",
+          "place_id": "sandy_wool_lake",
+          "place_name": "Sandy Wool Lake (Ed Levin Park)",
+          "one_liner": "一个被改造成公园的水库。鸟在飞，几个钓鱼的爷爷，一圈不到 1 英里的散步道，宝宝在车里能直接睡。",
+          "why_fits_today": "你 taste_anchors 里写过\"海边、山景、花园、草坪、自然光强的空间……能让她从认知高负荷中掉下来\"——Sandy Wool 不是海，但是同一种气质：宽敞、无表演、stroller 推得动。宝宝睡着的话你和老公能真的说两句不被打断的话，这是 reconnect 在带娃日里唯一可能发生的窗口。",
+          "logistics": {
+            "raw": "🚗 8min from Alviso · 🅿️ 湖边圆盘停车场免费 · 👶 stroller 友好 · ⏰ sunset 约 17:15，带件外套",
+            "drive_time_min": 8,
+            "parking": "free (湖边圆盘停车场)",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": null,
+          "tip": "西侧那段长椅可以看到 KMTN 起降的小飞机，宝宝醒了就有的看。",
+          "transition_to_next": "outdoor reset → appetite reopening",
+          "transition_drive_min": 25
+        },
+        {
+          "stop_index": 2,
+          "time": "18:00",
+          "place_id": "dong_que",
+          "place_name": "Dong Que 东雀越南菜",
+          "one_liner": "湾区少有的\"像在西贡街边\"的真烟火气越南菜，菜单按编号点单，省得纠结，腊肠锅巴饭是 signature。",
+          "why_fits_today": "前两站是低声调，到了晚饭点你需要一点声音和热气把这一天 ground 住。你 food_preferences 里点了\"融合菜 / 现代亚洲菜 / 有表达感的菜单\"——Dong Que 不是 fine dining，但它有 expression：菜单按编号点完全消除选择疲劳，恰好绕开你 avoidance 里的 over_planned。18:00 到能抢到位子又避开 7 点的 peak，符合你 chaos_tolerance: low。",
+          "logistics": {
+            "raw": "🚗 25min from Sandy Wool · 🅿️ 外围停车场宽敞 · 👶 baby-friendly，自带宝宝椅 · 💵 ~$60 for two · ⏰ walk-in only",
+            "drive_time_min": 25,
+            "parking": "outer lot, spacious",
+            "kid_friendly": true,
+            "reservation_note": "walk-in only",
+            "booking_links": [],
+            "transit_estimate_usd": 60,
+            "transit_estimate_range_usd": [
+              60,
+              60
+            ]
+          },
+          "order_recommendations": {
+            "menu_listed": [
+              "88 烤生蚝",
+              "92 鱼籽扇贝",
+              "15 香松腊肠锅巴饭",
+              "103 铁板螺丝"
+            ],
+            "bold_picks": [
+              "88 烤生蚝",
+              "92 鱼籽扇贝",
+              "15 香松腊肠锅巴饭",
+              "103 铁板螺丝"
+            ],
+            "logic_text": "开胃 **88 烤生蚝** + **92 鱼籽扇贝**（小而精，打开味觉），主食 **15 香松腊肠锅巴饭**（招牌，不点白来，锅巴的烟火气是今天 mood 的转折点），再加 **103 铁板螺丝** 当一道有动静的热炒 —— 前两站太静了，这道菜带声音上桌。两人 + 宝宝分这一桌正好，不剩菜。"
+          },
+          "tip": "点完菜先去前台问要 bib 和 high chair，他们不会主动给。",
+          "transition_to_next": "high-noise dinner → low-key closing",
+          "transition_drive_min": 18
+        },
+        {
+          "stop_index": 3,
+          "time": "20:00",
+          "place_id": "philz_milpitas",
+          "place_name": "Philz Coffee (Milpitas Square)",
+          "one_liner": "一杯回家路上的、热的、不需要再做决定的咖啡。barista 会记得你点过 Mint Mojito。",
+          "why_fits_today": "你说 energy 是 medium 但 chaos_tolerance 是 low，所以这一天不需要一个\"夜晚活动\"来 cap off ——一杯顺路的咖啡比强行去看脱口秀更尊重你今天的状态，也踩住了你 ground_truth_expectations 里那句\"收尾不赶、不狼狈，最好还能买杯热饮\"。Philz 不催你，宝宝在车里也 OK，开回 Sunnyvale 路上正好喝完。",
+          "logistics": {
+            "raw": "🚗 顺路（在 880 回家方向上）· 🅿️ 免费 · 👶 OK · ⏰ 开到 20:00，赶得上 last order",
+            "drive_time_min": null,
+            "parking": "free",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": null,
+          "tip": null,
+          "transition_to_next": null,
+          "transition_drive_min": null
+        }
+      ],
+      "adaptive_branches": [
+        {
+          "condition": "If 宝宝在 Sandy Wool 哭闹 / 错过了 nap window，下午 4 点你已经在车里 reset 模式",
+          "alternative": "跳过 Sandy Wool 剩下的散步，直接 17:00 早 30 分钟到 Dong Que（他们 11:00 起开，17:00 几乎空场），坐靠窗那桌让宝宝看街景，吃完顺势把 Philz 提前到 19:00 —— 整条 arc 压缩 1 小时，回家时间不动，你今晚还能 9 点前洗完澡。"
+        }
+      ],
+      "coaching_block": null,
+      "composer_note": null,
+      "markdown_full": "# 一个被光照过的南湾周六\n\n> 你今天会从一栋安静的土砖房开始，让风把脑子里残留的 agent 和 eval 吹散，然后在一桌真烟火气的越南菜里把生活重新打开。\n\n**Mood**: restorative · sun-warmed · quietly cultural · low-friction · 有余韵\n**Pace**: 慢起有光 → 湖边放空 → 烟火气晚餐 → 顺路收尾\n\n```\n🕰️ 慢起 ──► 🌿 呼吸 ──► 🍜 烟火气 ──► ☕ 余韵\n14:30        15:45         18:00          20:00\n```\n\n---\n\n## 14:30 · Alviso Adobe Park\n\n> 一栋 19 世纪的土砖房，被做成一间小小的历史房间。光从西窗斜着进来，屋顶横梁触手可及，45 分钟刚好够你把这一周的脑子放慢。\n\n**Why this fits today**\n你说今天想要\"有一点审美/文化灵感，但不要太折腾\"——Alviso 一场 tour 只接 8 个人，没人在 perform 给镜头，刚好踩中你 avoidance 里的 touristy 和 crowded。土砖房的 natural_light 和 quiet 和你 vibe_signature 顶上那两个 weight (restorative 0.92 / cinematic 0.86) 完全对得上，又不会消耗你今天带宝宝出门已经动用过的耐心。\n\n**Logistics**\n🚗 22min from Sunnyvale · 🅿️ 免费停车 · 👶 stroller 友好（走西侧入口避开石板台阶）· 🎟️ free, 每月第二个周六 14:30 tour · ⏰ 45min 刚好\n\n💡 *推婴儿车走西侧入口，避开石板台阶。*\n\n---\n\n*(transition: indoor narrative → outdoor breathing · ~8min drive)*\n\n---\n\n## 15:45 · Sandy Wool Lake (Ed Levin Park)\n\n> 一个被改造成公园的水库。鸟在飞，几个钓鱼的爷爷，一圈不到 1 英里的散步道，宝宝在车里能直接睡。\n\n**Why this fits today**\n你 taste_anchors 里写过\"海边、山景、花园、草坪、自然光强的空间……能让她从认知高负荷中掉下来\"——Sandy Wool 不是海，但是同一种气质：宽敞、无表演、stroller 推得动。宝宝睡着的话你和老公能真的说两句不被打断的话，这是 reconnect 在带娃日里唯一可能发生的窗口。\n\n**Logistics**\n🚗 8min from Alviso · 🅿️ 湖边圆盘停车场免费 · 👶 stroller 友好 · ⏰ sunset 约 17:15，带件外套\n\n💡 *西侧那段长椅可以看到 KMTN 起降的小飞机，宝宝醒了就有的看。*\n\n---\n\n*(transition: outdoor reset → appetite reopening · ~25min drive)*\n\n---\n\n## 18:00 · Dong Que 东雀越南菜\n\n> 湾区少有的\"像在西贡街边\"的真烟火气越南菜，菜单按编号点单，省得纠结，腊肠锅巴饭是 signature。\n\n**Why this fits today**\n前两站是低声调，到了晚饭点你需要一点声音和热气把这一天 ground 住。你 food_preferences 里点了\"融合菜 / 现代亚洲菜 / 有表达感的菜单\"——Dong Que 不是 fine dining，但它有 expression：菜单按编号点完全消除选择疲劳，恰好绕开你 avoidance 里的 over_planned。18:00 到能抢到位子又避开 7 点的 peak，符合你 chaos_tolerance: low。\n\n**Order**\n开胃 **88 烤生蚝** + **92 鱼籽扇贝**（小而精，打开味觉），主食 **15 香松腊肠锅巴饭**（招牌，不点白来，锅巴的烟火气是今天 mood 的转折点），再加 **103 铁板螺丝** 当一道有动静的热炒 —— 前两站太静了，这道菜带声音上桌。两人 + 宝宝分这一桌正好，不剩菜。\n\n**Logistics**\n🚗 25min from Sandy Wool · 🅿️ 外围停车场宽敞 · 👶 baby-friendly，自带宝宝椅 · 💵 ~$60 for two · ⏰ walk-in only\n\n💡 *点完菜先去前台问要 bib 和 high chair，他们不会主动给。*\n\n---\n\n*(transition: high-noise dinner → low-key closing · ~18min drive — 顺路)*\n\n---\n\n## 20:00 · Philz Coffee (Milpitas Square)\n\n> 一杯回家路上的、热的、不需要再做决定的咖啡。barista 会记得你点过 Mint Mojito。\n\n**Why this fits today**\n你说 energy 是 medium 但 chaos_tolerance 是 low，所以这一天不需要一个\"夜晚活动\"来 cap off ——一杯顺路的咖啡比强行去看脱口秀更尊重你今天的状态，也踩住了你 ground_truth_expectations 里那句\"收尾不赶、不狼狈，最好还能买杯热饮\"。Philz 不催你，宝宝在车里也 OK，开回 Sunnyvale 路上正好喝完。\n\n**Logistics**\n🚗 顺路（在 880 回家方向上）· 🅿️ 免费 · 👶 OK · ⏰ 开到 20:00，赶得上 last order\n\n---\n\n## 🔀 如果今天有变化\n\n**If 宝宝在 Sandy Wool 哭闹 / 错过了 nap window，下午 4 点你已经在车里 reset 模式**\n→ 跳过 Sandy Wool 剩下的散步，直接 17:00 早 30 分钟到 Dong Que（他们 11:00 起开，17:00 几乎空场），坐靠窗那桌让宝宝看街景，吃完顺势把 Philz 提前到 19:00 —— 整条 arc 压缩 1 小时，回家时间不动，你今晚还能 9 点前洗完澡。\n",
+      "score_summary": {
+        "stranger_test": 9,
+        "arc_coherence": 9,
+        "specificity": 9,
+        "avoidance_respect": 8,
+        "adaptive_branch": 9,
+        "notes": "v1 baseline"
+      }
+    },
+    {
+      "plan_id": "garry_v1",
+      "persona_id": "garry",
+      "version": "v1",
+      "day_theme": "SF 城里的一条电影感动线",
+      "pitch": null,
+      "mood_tags": [
+        "cinematic",
+        "lively",
+        "authentic",
+        "vlog-ready",
+        "一路 walkable"
+      ],
+      "emotional_arc_text": "光影开场 → 视觉峰值 → 草坪喘气 → 烟火气晚餐",
+      "emotional_arc_visual": "☕ 光影 ──► 🎨 视觉峰 ──► 🌿 喘气 ──► 🍜 烟火气\n10:00       11:30          14:00        17:30",
+      "theme_anchor": "cultural_restorative",
+      "stops": [
+        {
+          "stop_index": 0,
+          "time": "10:00",
+          "place_id": "sightglass_sf",
+          "place_name": "Sightglass Coffee (SoMa)",
+          "one_liner": "Double-height 工业仓库，二楼北窗一整面光泻下来，咖啡师在你面前拉花——一个 earn 得起\"feels like Tokyo\"这句陈词滥调的 cafe。",
+          "why_fits_today": "你 vibe_signature 把 cinematic 拉到 0.95，把 hip 拉到 0.85——Sightglass 的 northern light 和清水混凝土就是这两条权重在物理空间里的实体。你说想要\"灵感唤醒与光影捕捉\"，这家 cafe 的 11 点北光是 SF 全城最稳定的 vlog 自然光窗口，10 点到位刚好踩中开窗到爆门客之间的 30 分钟空档。",
+          "logistics": {
+            "raw": "🚗 step out from SF · 🅿️ street_difficult，建议 Uber 或就近 7th St 车库 · 👶 stroller OK 但二楼楼梯无电梯 · ⏰ 周六 11 点后开始排队",
+            "drive_time_min": null,
+            "parking": "street_difficult (Uber 或 7th St 车库)",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": {
+            "menu_listed": [
+              "Pour-over single origin",
+              "Cortado"
+            ],
+            "bold_picks": [
+              "Pour-over single origin",
+              "Cortado"
+            ],
+            "logic_text": "**Pour-over single origin**（让 barista 推今天烘得最浅的那支，画面比味道更适合开机镜头），配一杯 **Cortado** 给孩子的家长（你）打底——前两站没有正餐，咖啡因要够撑到 1 点。skip 任何 frappé 类的，跟今天的视觉调性不符。"
+          },
+          "tip": "Vlog B-roll 拍二楼栏杆向下俯拍 barista 工位，3 秒一段，光最稳。",
+          "transition_to_next": "静态光影 → 视觉密度起飞",
+          "transition_drive_min": null
+        },
+        {
+          "stop_index": 1,
+          "time": "11:30",
+          "place_id": "sfmoma",
+          "place_name": "SFMOMA",
+          "one_liner": "七层当代艺术，但你不必走完——3 楼摄影翼一个小时就足够让你觉得自己\"出过一趟差\"。",
+          "why_fits_today": "你 taste_anchors 里直接写了 SFMOMA + Mission——这站不是给你 introduce 新地方，是给你今天的动线放一个 anchor stop，让前后两段街区漫游有重量。你 energy 是 high，chaos_tolerance 是 medium，3 楼影像墙的密度刚好喂饱你 novelty_appetite，又不会把孩子拖到崩溃。photography wing 几乎是 SF 室内最适合带娃拍 Vlog 的展厅——光低、人少、构图天然。",
+          "logistics": {
+            "raw": "🚗 0min from Sightglass（步行 6 分钟）· 🅿️ 5th & Mission 车库 · 👶 stroller 全馆畅通 · 🎟️ $30，提前 1 小时 online 买跳排队 · ⏰ 周六关门 17:00，1.5 小时刚好",
+            "drive_time_min": 0,
+            "parking": "5th & Mission 车库",
+            "kid_friendly": true,
+            "reservation_note": "$30, 提前 1 小时 online 买跳排队",
+            "booking_links": [
+              {
+                "label": "Tickets ($30)",
+                "url": "https://www.sfmoma.org/visit/tickets/"
+              }
+            ],
+            "transit_estimate_usd": 30,
+            "transit_estimate_range_usd": [
+              30,
+              30
+            ]
+          },
+          "order_recommendations": null,
+          "tip": "直接电梯上 3 楼，跳过 1–2 楼大件装置——人最多、视觉最杂、Vlog 难剪。",
+          "transition_to_next": "indoor 视觉密度 → outdoor 草坪喘气",
+          "transition_drive_min": null
+        },
+        {
+          "stop_index": 2,
+          "time": "14:00",
+          "place_id": "yerba_buena_gardens",
+          "place_name": "Yerba Buena Gardens",
+          "one_liner": "SFMOMA 和 Metreon 之间那块草岛，午后这一片是 SoMa 全区 walkable 的最大 reset 按钮。",
+          "why_fits_today": "你 social_config 是 family_with_baby，能量再高的爸也需要给学步期孩子一个\"撒开跑\"的窗口。Yerba Buena 是这条动线上唯一能 30 分钟内把娃放电、又不打断城市节奏的过渡点——你 ideal_mood_arc 里那句\"偶遇可能性与历史文化交织的 SF 潮流街区穿梭\"，这块草坪就是中场换气位。瀑布墙下午阳光顺光，是 Vlog C-roll 的另一个稳光位。",
+          "logistics": {
+            "raw": "🚗 室外步行 0 min · 🅿️ 共用 Metreon 车库 · 👶 草坪 + 喷泉，娃随便跑 · ⏰ 06:00–22:00 全天免费",
+            "drive_time_min": 0,
+            "parking": "共用 Metreon 车库",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": null,
+          "tip": "孩子跑累了在 MLK 瀑布墙背阴侧那排长椅坐下——风小、声盖城市噪音，适合录 voiceover。",
+          "transition_to_next": "午后喘气 → 烟火气晚餐",
+          "transition_drive_min": 20
+        },
+        {
+          "stop_index": 3,
+          "time": "17:30",
+          "place_id": "burma_superstar",
+          "place_name": "Burma Superstar (Clement Street)",
+          "one_liner": "Clement 街排队 20 年的缅甸馆，茶叶沙拉是桌边现场拌的——别处给不了的仪式感。",
+          "why_fits_today": "你 food_preferences 写了\"日式拉面 / 现代亚洲融合菜 / 地道粤式中餐\"，候选里日料拉面这次缺位，但 Burma Superstar 是 SF 现代亚洲里 authentic 拉满（vibe weight 0.8）的少数几家之一——你 avoidance 顶上写的\"polished_but_soulless\"，这家恰好是反面：有点旧、有点挤、桌边拌沙拉那一下就是 vlog 神镜头。17:30 是 dinner 一开门 walk-in 的黄金 15 分钟，过了 18:00 等位 45 分钟起，带娃就崩了。",
+          "logistics": {
+            "raw": "🚗 ~20min Uber from Yerba Buena · 🅿️ Clement 街 street 难停（强烈建议 Uber）· 👶 kid-friendly，自带 high chair · 💵 ~$80 for two + kid · ⏰ walk_in_with_wait，17:30 到几乎不等",
+            "drive_time_min": 20,
+            "parking": "street_difficult (Uber 建议)",
+            "kid_friendly": true,
+            "reservation_note": "walk_in_with_wait",
+            "booking_links": [],
+            "transit_estimate_usd": 80,
+            "transit_estimate_range_usd": [
+              80,
+              80
+            ]
+          },
+          "order_recommendations": {
+            "menu_listed": [
+              "Tea Leaf Salad",
+              "Samusa Soup",
+              "Coconut Chicken Curry Noodles",
+              "Rainbow Salad"
+            ],
+            "bold_picks": [
+              "Tea Leaf Salad",
+              "Samusa Soup",
+              "Coconut Chicken Curry Noodles",
+              "Rainbow Salad"
+            ],
+            "logic_text": "**Tea Leaf Salad** 必点（来这家不点等于没来，桌边拌的那一下就是今天 vlog 的 hero shot），配 **Samusa Soup** 开胃汤打底。主食一份 **Coconut Chicken Curry Noodles**（椰香重，娃也吃得下），凉拌一份 **Rainbow Salad**（10 种食材现场混，仪式感是双倍的 B-roll）。两大一小这四道刚好，剩一点正好打包当宵夜。"
+          },
+          "tip": "坐进门左手第二桌，光最好、视线对着开放厨房——拌沙拉那 5 秒构图天然。",
+          "transition_to_next": null,
+          "transition_drive_min": null
+        }
+      ],
+      "adaptive_branches": [
+        {
+          "condition": "If SFMOMA 出来发现孩子已经撑不到 5:30 晚饭（典型学步期午后崩溃窗口）",
+          "alternative": "把 Burma Superstar 整体前移到 16:30 早 dinner（他们 lunch 11:00–15:30 + dinner 17:00–21:30 中间有 90 分钟 gap，避开），跳过 Yerba Buena 改成 SFMOMA 出来沿 Mission St 走 10 分钟到 Burma——把 walking 的喘气功能直接合并到通勤里。你 vlog 那条 hero shot 一定要保。"
+        }
+      ],
+      "coaching_block": null,
+      "composer_note": null,
+      "markdown_full": "# SF 城里的一条电影感动线\n\n> 你今天会从一杯北光下的手冲开始，穿过 SFMOMA 三楼的影像墙，让孩子在 Yerba Buena 草坪上跑一段，然后在 Clement 街桌边拌的茶叶沙拉里把一周的 CPU 重新点燃。\n\n**Mood**: cinematic · lively · authentic · vlog-ready · 一路 walkable\n**Pace**: 光影开场 → 视觉峰值 → 草坪喘气 → 烟火气晚餐\n\n```\n☕ 光影 ──► 🎨 视觉峰 ──► 🌿 喘气 ──► 🍜 烟火气\n10:00       11:30          14:00        17:30\n```\n\n---\n\n## 10:00 · Sightglass Coffee (SoMa)\n\n> Double-height 工业仓库，二楼北窗一整面光泻下来，咖啡师在你面前拉花——一个 earn 得起\"feels like Tokyo\"这句陈词滥调的 cafe。\n\n**Why this fits today**\n你 vibe_signature 把 cinematic 拉到 0.95，把 hip 拉到 0.85——Sightglass 的 northern light 和清水混凝土就是这两条权重在物理空间里的实体。你说想要\"灵感唤醒与光影捕捉\"，这家 cafe 的 11 点北光是 SF 全城最稳定的 vlog 自然光窗口，10 点到位刚好踩中开窗到爆门客之间的 30 分钟空档。\n\n**Order**\n**Pour-over single origin**（让 barista 推今天烘得最浅的那支，画面比味道更适合开机镜头），配一杯 **Cortado** 给孩子的家长（你）打底——前两站没有正餐，咖啡因要够撑到 1 点。skip 任何 frappé 类的，跟今天的视觉调性不符。\n\n**Logistics**\n🚗 step out from SF · 🅿️ street_difficult，建议 Uber 或就近 7th St 车库 · 👶 stroller OK 但二楼楼梯无电梯 · ⏰ 周六 11 点后开始排队\n\n💡 *Vlog B-roll 拍二楼栏杆向下俯拍 barista 工位，3 秒一段，光最稳。*\n\n---\n\n*(transition: 静态光影 → 视觉密度起飞 · 6min walk)*\n\n---\n\n## 11:30 · SFMOMA\n\n> 七层当代艺术，但你不必走完——3 楼摄影翼一个小时就足够让你觉得自己\"出过一趟差\"。\n\n**Why this fits today**\n你 taste_anchors 里直接写了 SFMOMA + Mission——这站不是给你 introduce 新地方，是给你今天的动线放一个 anchor stop，让前后两段街区漫游有重量。你 energy 是 high，chaos_tolerance 是 medium，3 楼影像墙的密度刚好喂饱你 novelty_appetite，又不会把孩子拖到崩溃。photography wing 几乎是 SF 室内最适合带娃拍 Vlog 的展厅——光低、人少、构图天然。\n\n**Logistics**\n🚗 0min from Sightglass（步行 6 分钟）· 🅿️ 5th & Mission 车库 · 👶 stroller 全馆畅通 · 🎟️ $30，提前 1 小时 online 买跳排队 · ⏰ 周六关门 17:00，1.5 小时刚好\n\n💡 *直接电梯上 3 楼，跳过 1–2 楼大件装置——人最多、视觉最杂、Vlog 难剪。*\n\n---\n\n*(transition: indoor 视觉密度 → outdoor 草坪喘气 · 2min walk*)*\n\n---\n\n## 14:00 · Yerba Buena Gardens\n\n> SFMOMA 和 Metreon 之间那块草岛，午后这一片是 SoMa 全区 walkable 的最大 reset 按钮。\n\n**Why this fits today**\n你 social_config 是 family_with_baby，能量再高的爸也需要给学步期孩子一个\"撒开跑\"的窗口。Yerba Buena 是这条动线上唯一能 30 分钟内把娃放电、又不打断城市节奏的过渡点——你 ideal_mood_arc 里那句\"偶遇可能性与历史文化交织的 SF 潮流街区穿梭\"，这块草坪就是中场换气位。瀑布墙下午阳光顺光，是 Vlog C-roll 的另一个稳光位。\n\n**Logistics**\n🚗 室外步行 0 min · 🅿️ 共用 Metreon 车库 · 👶 草坪 + 喷泉，娃随便跑 · ⏰ 06:00–22:00 全天免费\n\n💡 *孩子跑累了在 MLK 瀑布墙背阴侧那排长椅坐下——风小、声盖城市噪音，适合录 voiceover。*\n\n---\n\n*(transition: 午后喘气 → 烟火气晚餐 · ~20min Uber 到 Richmond*)*\n\n---\n\n## 17:30 · Burma Superstar (Clement Street)\n\n> Clement 街排队 20 年的缅甸馆，茶叶沙拉是桌边现场拌的——别处给不了的仪式感。\n\n**Why this fits today**\n你 food_preferences 写了\"日式拉面 / 现代亚洲融合菜 / 地道粤式中餐\"，候选里日料拉面这次缺位，但 Burma Superstar 是 SF 现代亚洲里 authentic 拉满（vibe weight 0.8）的少数几家之一——你 avoidance 顶上写的\"polished_but_soulless\"，这家恰好是反面：有点旧、有点挤、桌边拌沙拉那一下就是 vlog 神镜头。17:30 是 dinner 一开门 walk-in 的黄金 15 分钟，过了 18:00 等位 45 分钟起，带娃就崩了。\n\n**Order**\n**Tea Leaf Salad** 必点（来这家不点等于没来，桌边拌的那一下就是今天 vlog 的 hero shot），配 **Samusa Soup** 开胃汤打底。主食一份 **Coconut Chicken Curry Noodles**（椰香重，娃也吃得下），凉拌一份 **Rainbow Salad**（10 种食材现场混，仪式感是双倍的 B-roll）。两大一小这四道刚好，剩一点正好打包当宵夜。\n\n**Logistics**\n🚗 ~20min Uber from Yerba Buena · 🅿️ Clement 街 street 难停（强烈建议 Uber）· 👶 kid-friendly，自带 high chair · 💵 ~$80 for two + kid · ⏰ walk_in_with_wait，17:30 到几乎不等\n\n💡 *坐进门左手第二桌，光最好、视线对着开放厨房——拌沙拉那 5 秒构图天然。*\n\n---\n\n## 🔀 如果今天有变化\n\n**If SFMOMA 出来发现孩子已经撑不到 5:30 晚饭（典型学步期午后崩溃窗口）**\n→ 把 Burma Superstar 整体前移到 16:30 早 dinner（他们 lunch 11:00–15:30 + dinner 17:00–21:30 中间有 90 分钟 gap，避开），跳过 Yerba Buena 改成 SFMOMA 出来沿 Mission St 走 10 分钟到 Burma——把 walking 的喘气功能直接合并到通勤里。你 vlog 那条 hero shot 一定要保。\n",
+      "score_summary": {
+        "stranger_test": 10,
+        "arc_coherence": 7,
+        "specificity": 9,
+        "avoidance_respect": 9,
+        "adaptive_branch": 9,
+        "notes": "v1 baseline"
+      }
+    },
+    {
+      "plan_id": "mia_v2",
+      "persona_id": "mia",
+      "version": "v2",
+      "day_theme": "一个被光照过的南湾周六",
+      "pitch": null,
+      "mood_tags": [
+        "restorative",
+        "sun-warmed",
+        "quietly cultural",
+        "low-friction",
+        "有余韵"
+      ],
+      "emotional_arc_text": "慢起有光 → 湖边放空 → 烟火气晚餐 → 顺路余韵",
+      "emotional_arc_visual": "🕰️ 慢起 ──► 🌿 呼吸 ──► 🍜 烟火气 ──► ☕ 余韵\n14:30        15:45         18:00          20:00",
+      "theme_anchor": "cultural_restorative",
+      "stops": [
+        {
+          "stop_index": 0,
+          "time": "14:30",
+          "place_id": "alviso_adobe",
+          "place_name": "Alviso Adobe Park",
+          "one_liner": "一栋 19 世纪的土砖房，被做成一间小小的历史房间。光从西窗斜着进来，屋顶横梁触手可及，45 分钟刚好够你把这一周的脑子放慢。",
+          "why_fits_today": "你说想要\"有一点审美/文化灵感，但不要太折腾\"——Alviso 一场 tour 只接 8 个人，没人在 perform 给镜头，刚好绕开你 avoidance 顶端的 touristy 和 crowded。土砖房的 natural_light 踩在你 vibe_signature 前三位（restorative 0.92 / cinematic 0.86 / natural_light 0.85）的交点上，又不会消耗你今天带宝宝出门已经动用过的耐心。",
+          "logistics": {
+            "raw": "🚗 22min from Sunnyvale · 🅿️ 免费停车 · 👶 stroller 友好（走西侧入口避开石板台阶）· 🎟️ free, 每月第二个周六 14:30 tour · ⏰ 45min 刚好",
+            "drive_time_min": 22,
+            "parking": "free",
+            "kid_friendly": true,
+            "reservation_note": "free, 每月第二个周六 14:30 tour",
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": null,
+          "tip": "推婴儿车走西侧入口，避开石板台阶。",
+          "transition_to_next": "indoor narrative → outdoor breathing",
+          "transition_drive_min": 8
+        },
+        {
+          "stop_index": 1,
+          "time": "15:45",
+          "place_id": "sandy_wool_lake",
+          "place_name": "Sandy Wool Lake (Ed Levin Park)",
+          "one_liner": "一个被改造成公园的水库。鸟在飞，几个钓鱼的爷爷，一圈不到 1 英里的散步道，宝宝在车里能直接睡。",
+          "why_fits_today": "你 taste_anchors 里写过\"海边、山景、花园、草坪、自然光强的空间……能让她从认知高负荷中掉下来\"——Sandy Wool 不是海，但是同一种气质：宽敞、无表演、stroller 推得动。宝宝睡着的话你和老公能真的说两句不被打断的话，这是 reconnect 在带娃日里唯一可能发生的窗口。",
+          "logistics": {
+            "raw": "🚗 8min from Alviso · 🅿️ 湖边圆盘停车场免费 · 👶 stroller 友好 · ⏰ sunset 约 17:15，带件外套",
+            "drive_time_min": 8,
+            "parking": "free (湖边圆盘停车场)",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": null,
+          "tip": "西侧那段长椅可以看到 KMTN 起降的小飞机，宝宝醒了就有的看。",
+          "transition_to_next": "outdoor reset → appetite reopening",
+          "transition_drive_min": 25
+        },
+        {
+          "stop_index": 2,
+          "time": "18:00",
+          "place_id": "dong_que",
+          "place_name": "Dong Que 东雀越南菜",
+          "one_liner": "湾区少有的\"像在西贡街边\"的真烟火气越南菜，菜单按编号点单，省得纠结，腊肠锅巴饭是 signature。",
+          "why_fits_today": "前两站是低声调，到了晚饭点你需要一点声音和热气把这一天 ground 住。你 food_preferences 里点了\"融合菜 / 现代亚洲菜 / 有表达感的菜单\"——Dong Que 不是 fine dining，但它有 expression：菜单按编号点完全消除选择疲劳，恰好绕开你 avoidance 里的 over_planned 和 logistically_fragile。18:00 到能抢到位子又避开 7 点的 peak，符合你 chaos_tolerance: low。",
+          "logistics": {
+            "raw": "🚗 25min from Sandy Wool · 🅿️ 外围停车场宽敞 · 👶 baby-friendly，自带宝宝椅 · 💵 ~$60 for two · ⏰ walk-in only",
+            "drive_time_min": 25,
+            "parking": "outer lot, spacious",
+            "kid_friendly": true,
+            "reservation_note": "walk-in only",
+            "booking_links": [],
+            "transit_estimate_usd": 60,
+            "transit_estimate_range_usd": [
+              60,
+              60
+            ]
+          },
+          "order_recommendations": {
+            "menu_listed": [
+              "88 烤生蚝",
+              "92 鱼籽扇贝",
+              "15 香松腊肠锅巴饭",
+              "103 铁板螺丝"
+            ],
+            "bold_picks": [
+              "88 烤生蚝",
+              "92 鱼籽扇贝",
+              "15 香松腊肠锅巴饭",
+              "103 铁板螺丝"
+            ],
+            "logic_text": "开胃 **88 烤生蚝** + **92 鱼籽扇贝**（小而精，打开味觉），主食 **15 香松腊肠锅巴饭**（招牌，不点白来，锅巴的烟火气是今天 mood 的转折点），再加 **103 铁板螺丝** 当一道有动静的热炒 —— 前两站太静了，这道菜带声音上桌。两人 + 宝宝分这一桌正好，不剩菜。今晚 Dong Que 既是 peak 也是收尾的重量级，吃完直接 wind down，不再追第二高潮。"
+          },
+          "tip": "点完菜先去前台问要 bib 和 high chair，他们不会主动给。",
+          "transition_to_next": "high-noise dinner → low-key 余韵",
+          "transition_drive_min": 18
+        },
+        {
+          "stop_index": 3,
+          "time": "20:00",
+          "place_id": "philz_milpitas",
+          "place_name": "Philz Coffee (Milpitas Square)",
+          "one_liner": "一杯回家路上的、热的、不需要再做决定的咖啡。barista 会记得你点过 Mint Mojito。",
+          "why_fits_today": "你说 energy 是 medium 但 chaos_tolerance 是 low——这一天的\"closing\"不是再去一个新场景，而是 ground_truth_expectations 里那句\"收尾不赶、不狼狈，最好还能买杯热饮或散个短步\"。Philz 不催你，宝宝在车里也 OK，开回 Sunnyvale 路上正好喝完。这一站功能是 recovery / 余韵，不是 peak after peak。",
+          "logistics": {
+            "raw": "🚗 顺路（在 880 回家方向上）· 🅿️ 免费 · 👶 OK · ⏰ 开到 20:00，赶得上 last order",
+            "drive_time_min": null,
+            "parking": "free",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": null,
+          "tip": null,
+          "transition_to_next": null,
+          "transition_drive_min": null
+        }
+      ],
+      "adaptive_branches": [
+        {
+          "condition": "If 宝宝在 Sandy Wool 哭闹 / 错过了 nap window，下午 4 点你已经在车里 reset 模式",
+          "alternative": "跳过 Sandy Wool 剩下的散步，直接 17:00 早 30 分钟到 Dong Que（他们 11:00 起开，17:00 几乎空场），坐靠窗那桌让宝宝看街景，吃完顺势把 Philz 提前到 19:00 —— 整条 arc 压缩 1 小时，回家时间不动，你今晚还能 9 点前洗完澡。"
+        }
+      ],
+      "coaching_block": null,
+      "composer_note": "候选池里没有适配南湾低 chaos + 带宝宝的真正\"closing\"场——SF 的 Top of the Mark 是 cinematic 但单程 50min 已破你的 45min 半径，Spaced Out 喜剧不接娃。所以今天走\"晚餐做峰值 + Philz 做余韵\"的 4-act 折叠，不为了凑 closing 把你拉进市区夜景里。",
+      "markdown_full": "# 一个被光照过的南湾周六\n\n> 你今天会从一栋安静的土砖房开始，让风把脑子里残留的 agent 和 eval 吹散，然后在一桌真烟火气的越南菜里把生活重新打开。\n\n**Mood**: restorative · sun-warmed · quietly cultural · low-friction · 有余韵\n**Pace**: 慢起有光 → 湖边放空 → 烟火气晚餐 → 顺路余韵\n\n```\n🕰️ 慢起 ──► 🌿 呼吸 ──► 🍜 烟火气 ──► ☕ 余韵\n14:30        15:45         18:00          20:00\n```\n\n> *Composer 备注：候选池里没有适配南湾低 chaos + 带宝宝的真正\"closing\"场——SF 的 Top of the Mark 是 cinematic 但单程 50min 已破你的 45min 半径，Spaced Out 喜剧不接娃。所以今天走\"晚餐做峰值 + Philz 做余韵\"的 4-act 折叠，不为了凑 closing 把你拉进市区夜景里。*\n\n---\n\n## 14:30 · Alviso Adobe Park\n\n> 一栋 19 世纪的土砖房，被做成一间小小的历史房间。光从西窗斜着进来，屋顶横梁触手可及，45 分钟刚好够你把这一周的脑子放慢。\n\n**Why this fits today**\n你说想要\"有一点审美/文化灵感，但不要太折腾\"——Alviso 一场 tour 只接 8 个人，没人在 perform 给镜头，刚好绕开你 avoidance 顶端的 touristy 和 crowded。土砖房的 natural_light 踩在你 vibe_signature 前三位（restorative 0.92 / cinematic 0.86 / natural_light 0.85）的交点上，又不会消耗你今天带宝宝出门已经动用过的耐心。\n\n**Logistics**\n🚗 22min from Sunnyvale · 🅿️ 免费停车 · 👶 stroller 友好（走西侧入口避开石板台阶）· 🎟️ free, 每月第二个周六 14:30 tour · ⏰ 45min 刚好\n\n💡 *推婴儿车走西侧入口，避开石板台阶。*\n\n---\n\n*(transition: indoor narrative → outdoor breathing · ~8min drive)*\n\n---\n\n## 15:45 · Sandy Wool Lake (Ed Levin Park)\n\n> 一个被改造成公园的水库。鸟在飞，几个钓鱼的爷爷，一圈不到 1 英里的散步道，宝宝在车里能直接睡。\n\n**Why this fits today**\n你 taste_anchors 里写过\"海边、山景、花园、草坪、自然光强的空间……能让她从认知高负荷中掉下来\"——Sandy Wool 不是海，但是同一种气质：宽敞、无表演、stroller 推得动。宝宝睡着的话你和老公能真的说两句不被打断的话，这是 reconnect 在带娃日里唯一可能发生的窗口。\n\n**Logistics**\n🚗 8min from Alviso · 🅿️ 湖边圆盘停车场免费 · 👶 stroller 友好 · ⏰ sunset 约 17:15，带件外套\n\n💡 *西侧那段长椅可以看到 KMTN 起降的小飞机，宝宝醒了就有的看。*\n\n---\n\n*(transition: outdoor reset → appetite reopening · ~25min drive)*\n\n---\n\n## 18:00 · Dong Que 东雀越南菜\n\n> 湾区少有的\"像在西贡街边\"的真烟火气越南菜，菜单按编号点单，省得纠结，腊肠锅巴饭是 signature。\n\n**Why this fits today**\n前两站是低声调，到了晚饭点你需要一点声音和热气把这一天 ground 住。你 food_preferences 里点了\"融合菜 / 现代亚洲菜 / 有表达感的菜单\"——Dong Que 不是 fine dining，但它有 expression：菜单按编号点完全消除选择疲劳，恰好绕开你 avoidance 里的 over_planned 和 logistically_fragile。18:00 到能抢到位子又避开 7 点的 peak，符合你 chaos_tolerance: low。\n\n**Order**\n开胃 **88 烤生蚝** + **92 鱼籽扇贝**（小而精，打开味觉），主食 **15 香松腊肠锅巴饭**（招牌，不点白来，锅巴的烟火气是今天 mood 的转折点），再加 **103 铁板螺丝** 当一道有动静的热炒 —— 前两站太静了，这道菜带声音上桌。两人 + 宝宝分这一桌正好，不剩菜。今晚 Dong Que 既是 peak 也是收尾的重量级，吃完直接 wind down，不再追第二高潮。\n\n**Logistics**\n🚗 25min from Sandy Wool · 🅿️ 外围停车场宽敞 · 👶 baby-friendly，自带宝宝椅 · 💵 ~$60 for two · ⏰ walk-in only\n\n💡 *点完菜先去前台问要 bib 和 high chair，他们不会主动给。*\n\n---\n\n*(transition: high-noise dinner → low-key 余韵 · ~18min drive)*\n\n---\n\n## 20:00 · Philz Coffee (Milpitas Square)\n\n> 一杯回家路上的、热的、不需要再做决定的咖啡。barista 会记得你点过 Mint Mojito。\n\n**Why this fits today**\n你说 energy 是 medium 但 chaos_tolerance 是 low——这一天的\"closing\"不是再去一个新场景，而是 ground_truth_expectations 里那句\"收尾不赶、不狼狈，最好还能买杯热饮或散个短步\"。Philz 不催你，宝宝在车里也 OK，开回 Sunnyvale 路上正好喝完。这一站功能是 recovery / 余韵，不是 peak after peak。\n\n**Logistics**\n🚗 顺路（在 880 回家方向上）· 🅿️ 免费 · 👶 OK · ⏰ 开到 20:00，赶得上 last order\n\n---\n\n## 🔀 如果今天有变化\n\n**If 宝宝在 Sandy Wool 哭闹 / 错过了 nap window，下午 4 点你已经在车里 reset 模式**\n→ 跳过 Sandy Wool 剩下的散步，直接 17:00 早 30 分钟到 Dong Que（他们 11:00 起开，17:00 几乎空场），坐靠窗那桌让宝宝看街景，吃完顺势把 Philz 提前到 19:00 —— 整条 arc 压缩 1 小时，回家时间不动，你今晚还能 9 点前洗完澡。\n",
+      "score_summary": {
+        "stranger_test": 9,
+        "arc_coherence": 9,
+        "specificity": 9,
+        "avoidance_respect": 9,
+        "adaptive_branch": 9,
+        "notes": "v2 — added Composer note naming the closing-radius gap"
+      }
+    },
+    {
+      "plan_id": "garry_v2",
+      "persona_id": "garry",
+      "version": "v2",
+      "day_theme": "SF 城里的一条电影感动线",
+      "pitch": null,
+      "mood_tags": [
+        "cinematic",
+        "lively",
+        "authentic",
+        "vlog-ready",
+        "golden-hour closing"
+      ],
+      "emotional_arc_text": "光影开场 → 视觉密度 → 烟火气晚餐 → 城市夜景收尾",
+      "emotional_arc_visual": "☕ 光影 ──► 🎨 视觉密度 ──► 🍜 烟火气 ──► 🌅 城市点灯\n10:00       11:30           17:30          19:30",
+      "theme_anchor": "social_high_energy",
+      "stops": [
+        {
+          "stop_index": 0,
+          "time": "10:00",
+          "place_id": "sightglass_sf",
+          "place_name": "Sightglass Coffee (SoMa)",
+          "one_liner": "Double-height 工业仓库，二楼北窗一整面光泻下来，咖啡师在你面前拉花——一个 earn 得起\"feels like Tokyo\"这句陈词滥调的 cafe。",
+          "why_fits_today": "你 vibe_signature 把 cinematic 拉到 0.95，把 hip 拉到 0.85——Sightglass 的 northern light 和清水混凝土就是这两条权重在物理空间里的实体。你说想要\"灵感唤醒与光影捕捉\"，这家 cafe 的 11 点北光是 SF 全城最稳定的 vlog 自然光窗口，10 点到位刚好踩中开窗到爆门客之间的 30 分钟空档，今天后面三站都需要这杯打底。",
+          "logistics": {
+            "raw": "🚗 step out from SF · 🅿️ street_difficult，建议 Uber 或就近 7th St 车库 · 👶 stroller OK 但二楼楼梯无电梯 · ⏰ 周六 11 点后开始排队",
+            "drive_time_min": null,
+            "parking": "street_difficult (Uber 或 7th St 车库)",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": null
+          },
+          "order_recommendations": {
+            "menu_listed": [
+              "Pour-over single origin",
+              "Cortado"
+            ],
+            "bold_picks": [
+              "Pour-over single origin",
+              "Cortado"
+            ],
+            "logic_text": "**Pour-over single origin**（让 barista 推今天烘得最浅的那支，画面比味道更适合开机镜头），配一杯 **Cortado** 给孩子的家长（你）打底——前两站没有正餐，咖啡因要够撑到 5 点半的晚饭。skip 任何 frappé 类的，跟今天的视觉调性不符。"
+          },
+          "tip": "Vlog B-roll 拍二楼栏杆向下俯拍 barista 工位，3 秒一段，光最稳。",
+          "transition_to_next": "静态光影 → 视觉密度起飞",
+          "transition_drive_min": null
+        },
+        {
+          "stop_index": 1,
+          "time": "11:30",
+          "place_id": "sfmoma",
+          "place_name": "SFMOMA",
+          "one_liner": "七层当代艺术，但你不必走完——3 楼摄影翼一个半小时就足够让你觉得自己\"出过一趟差\"。",
+          "why_fits_today": "你 taste_anchors 里直接写了 SFMOMA + Mission——这站不是给你 introduce 新地方，是给今天的动线放一个 anchor stop，让光影开场和烟火晚餐之间有一段视觉密度填满 novelty_appetite。你 energy 是 high，chaos_tolerance 是 medium，3 楼影像墙的密度刚好喂饱你；photography wing 几乎是 SF 室内最适合带娃拍 Vlog 的展厅——光低、人少、构图天然。SFMOMA 在这里走\"持续 immersion\"位，不是 spike——真正的 spike 留给晚餐。",
+          "logistics": {
+            "raw": "🚗 0min from Sightglass（步行 6 分钟）· 🅿️ 5th & Mission 车库 · 👶 stroller 全馆畅通 · 🎟️ $30，提前 1 小时 online 买跳排队 · ⏰ 周六关门 17:00，1.5 小时刚好",
+            "drive_time_min": 0,
+            "parking": "5th & Mission 车库",
+            "kid_friendly": true,
+            "reservation_note": "$30, 提前 1 小时 online 买跳排队",
+            "booking_links": [
+              {
+                "label": "Tickets ($30)",
+                "url": "https://www.sfmoma.org/visit/tickets/"
+              }
+            ],
+            "transit_estimate_usd": 30,
+            "transit_estimate_range_usd": [
+              30,
+              30
+            ]
+          },
+          "order_recommendations": null,
+          "tip": "直接电梯上 3 楼，跳过 1–2 楼大件装置——人最多、视觉最杂、Vlog 难剪。",
+          "transition_to_next": "visual immersion → street-food peak",
+          "transition_drive_min": 25
+        },
+        {
+          "stop_index": 2,
+          "time": "17:30",
+          "place_id": "burma_superstar",
+          "place_name": "Burma Superstar (Clement Street)",
+          "one_liner": "Clement 街排队 20 年的缅甸馆，茶叶沙拉是桌边现场拌的——别处给不了的仪式感。",
+          "why_fits_today": "你 food_preferences 写了\"日式拉面 / 现代亚洲融合菜 / 地道粤式中餐\"——候选里日料拉面这次缺位，但 Burma Superstar 是 SF 现代亚洲里 authentic 拉满（vibe weight 0.8）的少数几家，你 avoidance 顶上写的\"polished_but_soulless\"，这家恰好是反面：有点旧、有点挤、桌边拌沙拉那一下就是 vlog hero shot。17:30 是 dinner 一开门 walk-in 的黄金 15 分钟，过了 18:00 等位 45 分钟起，带娃就崩了。",
+          "logistics": {
+            "raw": "🚗 ~25min Uber from SFMOMA · 🅿️ Clement 街 street 难停（强烈建议 Uber）· 👶 kid-friendly，自带 high chair · 💵 ~$80 for two + kid · ⏰ walk_in_with_wait，17:30 到几乎不等",
+            "drive_time_min": 25,
+            "parking": "street_difficult (Uber 建议)",
+            "kid_friendly": true,
+            "reservation_note": "walk_in_with_wait",
+            "booking_links": [],
+            "transit_estimate_usd": 80,
+            "transit_estimate_range_usd": [
+              80,
+              80
+            ]
+          },
+          "order_recommendations": {
+            "menu_listed": [
+              "Tea Leaf Salad",
+              "Samusa Soup",
+              "Coconut Chicken Curry Noodles",
+              "Rainbow Salad"
+            ],
+            "bold_picks": [
+              "Tea Leaf Salad",
+              "Samusa Soup",
+              "Coconut Chicken Curry Noodles",
+              "Rainbow Salad"
+            ],
+            "logic_text": "**Tea Leaf Salad** 必点（来这家不点等于没来，桌边拌的那一下就是今天 vlog 的 hero shot），配 **Samusa Soup** 开胃汤打底。主食一份 **Coconut Chicken Curry Noodles**（椰香重，娃也吃得下），凉拌一份 **Rainbow Salad**（10 种食材现场混，仪式感是双倍的 B-roll）。两大一小这四道刚好——留出胃口给一会儿 Top of the Mark 的一杯。"
+          },
+          "tip": "坐进门左手第二桌，光最好、视线对着开放厨房——拌沙拉那 5 秒构图天然。",
+          "transition_to_next": "street-level food → 19 楼城市点灯",
+          "transition_drive_min": 22
+        },
+        {
+          "stop_index": 3,
+          "time": "19:30",
+          "place_id": "top_of_the_mark",
+          "place_name": "Top of the Mark",
+          "one_liner": "Nob Hill 19 楼的 360° 城市酒廊——金门大桥、海湾、市中心灯火一次看完，傍晚到正好赶 golden hour 转夜景的那一下。",
+          "why_fits_today": "你 ideal_mood_arc 第四幕原话：\"旧金山绝美城市夜景下的创意思考或家庭温馨长谈。\"——Top of the Mark 不是兜售给你的，是把你自己写的收尾搭起来。cinematic 0.95、photogenic 0.9、polished 0.8 同时拉满，是今天唯一一个把\"vlog 收尾画面\"和\"带娃可进\"两件事同时解决的位置（19 楼一般 bar 是 21+，但这里 family_with_baby 在 OK 名单上）。前面三站走的是横向街区密度，这一站抬到 19 楼做垂直收束，arc 真正合拢。",
+          "logistics": {
+            "raw": "🚗 ~22min Uber from Clement · 🅿️ Mark Hopkins 酒店代客 ($) 或就近 garage · 👶 kid-friendly，但建议金门桥侧靠窗座 · ⏰ golden hour 大约 18:50 开始，19:30 到正好赶上城市点灯 · 💵 cocktails $18–22",
+            "drive_time_min": 22,
+            "parking": "Mark Hopkins 酒店代客 ($) 或就近 garage",
+            "kid_friendly": true,
+            "reservation_note": null,
+            "booking_links": [],
+            "transit_estimate_usd": 20,
+            "transit_estimate_range_usd": [
+              18,
+              22
+            ]
+          },
+          "order_recommendations": null,
+          "tip": "进门直接和 host 说要\"north window facing Golden Gate\"——那一面比东侧 Bay Bridge 上镜，金桥 silhouette 是今天 vlog 的 closing shot。孩子注意力 30–40 分钟就够，别贪。",
+          "transition_to_next": null,
+          "transition_drive_min": null
+        }
+      ],
+      "adaptive_branches": [
+        {
+          "condition": "If SFMOMA 出来发现孩子已经撑不到 5:30 晚饭（典型学步期午后崩溃窗口）",
+          "alternative": "把 Burma Superstar 整体前移到 16:30 早 dinner（他们 lunch 11:00–15:30 + dinner 17:00–21:30 中间有 90 分钟 gap，避开），跳过 Sightglass→SFMOMA 之间的步行喘气，提前 1 小时到 Top of the Mark 18:30 喝一杯——金门桥点灯时间不变，你今天的 closing shot 一定要保。"
+        }
+      ],
+      "coaching_block": null,
+      "composer_note": null,
+      "markdown_full": "# SF 城里的一条电影感动线\n\n> 你今天会从一杯北光下的手冲开始，穿过 SFMOMA 三楼的影像墙，在 Clement 街桌边拌的茶叶沙拉里把 CPU 重新点燃，最后站到 Nob Hill 19 楼，看金门大桥点灯。\n\n**Mood**: cinematic · lively · authentic · vlog-ready · golden-hour closing\n**Pace**: 光影开场 → 视觉密度 → 烟火气晚餐 → 城市夜景收尾\n\n```\n☕ 光影 ──► 🎨 视觉密度 ──► 🍜 烟火气 ──► 🌅 城市点灯\n10:00       11:30           17:30          19:30\n```\n\n---\n\n## 10:00 · Sightglass Coffee (SoMa)\n\n> Double-height 工业仓库，二楼北窗一整面光泻下来，咖啡师在你面前拉花——一个 earn 得起\"feels like Tokyo\"这句陈词滥调的 cafe。\n\n**Why this fits today**\n你 vibe_signature 把 cinematic 拉到 0.95，把 hip 拉到 0.85——Sightglass 的 northern light 和清水混凝土就是这两条权重在物理空间里的实体。你说想要\"灵感唤醒与光影捕捉\"，这家 cafe 的 11 点北光是 SF 全城最稳定的 vlog 自然光窗口，10 点到位刚好踩中开窗到爆门客之间的 30 分钟空档，今天后面三站都需要这杯打底。\n\n**Order**\n**Pour-over single origin**（让 barista 推今天烘得最浅的那支，画面比味道更适合开机镜头），配一杯 **Cortado** 给孩子的家长（你）打底——前两站没有正餐，咖啡因要够撑到 5 点半的晚饭。skip 任何 frappé 类的，跟今天的视觉调性不符。\n\n**Logistics**\n🚗 step out from SF · 🅿️ street_difficult，建议 Uber 或就近 7th St 车库 · 👶 stroller OK 但二楼楼梯无电梯 · ⏰ 周六 11 点后开始排队\n\n💡 *Vlog B-roll 拍二楼栏杆向下俯拍 barista 工位，3 秒一段，光最稳。*\n\n---\n\n*(transition: 静态光影 → 视觉密度起飞 · ~6min walk)*\n\n---\n\n## 11:30 · SFMOMA\n\n> 七层当代艺术，但你不必走完——3 楼摄影翼一个半小时就足够让你觉得自己\"出过一趟差\"。\n\n**Why this fits today**\n你 taste_anchors 里直接写了 SFMOMA + Mission——这站不是给你 introduce 新地方，是给今天的动线放一个 anchor stop，让光影开场和烟火晚餐之间有一段视觉密度填满 novelty_appetite。你 energy 是 high，chaos_tolerance 是 medium，3 楼影像墙的密度刚好喂饱你；photography wing 几乎是 SF 室内最适合带娃拍 Vlog 的展厅——光低、人少、构图天然。SFMOMA 在这里走\"持续 immersion\"位，不是 spike——真正的 spike 留给晚餐。\n\n**Logistics**\n🚗 0min from Sightglass（步行 6 分钟）· 🅿️ 5th & Mission 车库 · 👶 stroller 全馆畅通 · 🎟️ $30，提前 1 小时 online 买跳排队 · ⏰ 周六关门 17:00，1.5 小时刚好\n\n💡 *直接电梯上 3 楼，跳过 1–2 楼大件装置——人最多、视觉最杂、Vlog 难剪。*\n\n---\n\n*(transition: visual immersion → street-food peak · ~25min Uber)*\n\n---\n\n## 17:30 · Burma Superstar (Clement Street)\n\n> Clement 街排队 20 年的缅甸馆，茶叶沙拉是桌边现场拌的——别处给不了的仪式感。\n\n**Why this fits today**\n你 food_preferences 写了\"日式拉面 / 现代亚洲融合菜 / 地道粤式中餐\"——候选里日料拉面这次缺位，但 Burma Superstar 是 SF 现代亚洲里 authentic 拉满（vibe weight 0.8）的少数几家，你 avoidance 顶上写的\"polished_but_soulless\"，这家恰好是反面：有点旧、有点挤、桌边拌沙拉那一下就是 vlog hero shot。17:30 是 dinner 一开门 walk-in 的黄金 15 分钟，过了 18:00 等位 45 分钟起，带娃就崩了。\n\n**Order**\n**Tea Leaf Salad** 必点（来这家不点等于没来，桌边拌的那一下就是今天 vlog 的 hero shot），配 **Samusa Soup** 开胃汤打底。主食一份 **Coconut Chicken Curry Noodles**（椰香重，娃也吃得下），凉拌一份 **Rainbow Salad**（10 种食材现场混，仪式感是双倍的 B-roll）。两大一小这四道刚好——留出胃口给一会儿 Top of the Mark 的一杯。\n\n**Logistics**\n🚗 ~25min Uber from SFMOMA · 🅿️ Clement 街 street 难停（强烈建议 Uber）· 👶 kid-friendly，自带 high chair · 💵 ~$80 for two + kid · ⏰ walk_in_with_wait，17:30 到几乎不等\n\n💡 *坐进门左手第二桌，光最好、视线对着开放厨房——拌沙拉那 5 秒构图天然。*\n\n---\n\n*(transition: street-level food → 19 楼城市点灯 · ~22min Uber)*\n\n---\n\n## 19:30 · Top of the Mark\n\n> Nob Hill 19 楼的 360° 城市酒廊——金门大桥、海湾、市中心灯火一次看完，傍晚到正好赶 golden hour 转夜景的那一下。\n\n**Why this fits today**\n你 ideal_mood_arc 第四幕原话：\"旧金山绝美城市夜景下的创意思考或家庭温馨长谈。\"——Top of the Mark 不是兜售给你的，是把你自己写的收尾搭起来。cinematic 0.95、photogenic 0.9、polished 0.8 同时拉满，是今天唯一一个把\"vlog 收尾画面\"和\"带娃可进\"两件事同时解决的位置（19 楼一般 bar 是 21+，但这里 family_with_baby 在 OK 名单上）。前面三站走的是横向街区密度，这一站抬到 19 楼做垂直收束，arc 真正合拢。\n\n**Logistics**\n🚗 ~22min Uber from Clement · 🅿️ Mark Hopkins 酒店代客 ($) 或就近 garage · 👶 kid-friendly，但建议金门桥侧靠窗座 · ⏰ golden hour 大约 18:50 开始，19:30 到正好赶上城市点灯 · 💵 cocktails $18–22\n\n💡 *进门直接和 host 说要\"north window facing Golden Gate\"——那一面比东侧 Bay Bridge 上镜，金桥 silhouette 是今天 vlog 的 closing shot。孩子注意力 30–40 分钟就够，别贪。*\n\n---\n\n## 🔀 如果今天有变化\n\n**If SFMOMA 出来发现孩子已经撑不到 5:30 晚饭（典型学步期午后崩溃窗口）**\n→ 把 Burma Superstar 整体前移到 16:30 早 dinner（他们 lunch 11:00–15:30 + dinner 17:00–21:30 中间有 90 分钟 gap，避开），跳过 Sightglass→SFMOMA 之间的步行喘气，提前 1 小时到 Top of the Mark 18:30 喝一杯——金门桥点灯时间不变，你今天的 closing shot 一定要保。\n",
+      "score_summary": {
+        "stranger_test": 10,
+        "arc_coherence": 9,
+        "specificity": 9,
+        "avoidance_respect": 9,
+        "adaptive_branch": 9,
+        "notes": "v2 — added Top of the Mark for proper golden-hour closing"
+      }
+    }
+  ]
+}
