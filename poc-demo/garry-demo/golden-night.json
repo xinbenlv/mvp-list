@@ -1,0 +1,165 @@
+{
+    "plan": {
+        "plan_id": "garry_golden_night",
+        "persona_id": "garry",
+        "version": "v2",
+        "day_theme": "A cinematic line, closing on golden hour",
+        "pitch": null,
+        "mood_tags": [
+            "cinematic",
+            "lively",
+            "authentic",
+            "vlog-ready",
+            "golden-hour closing"
+        ],
+        "emotional_arc_text": "Light & shadow opening \u2192 visual density \u2192 neighborhood-heat dinner \u2192 city-lights close",
+        "emotional_arc_visual": "\u2615 light \u2500\u2500\u25ba \ud83c\udfa8 density \u2500\u2500\u25ba \ud83c\udf5c heat \u2500\u2500\u25ba \ud83c\udf05 city-lights\n10:00      11:30          17:30          19:30",
+        "theme_anchor": "social_high_energy",
+        "stops": [
+            {
+                "stop_index": 0,
+                "time": "10:00",
+                "place_id": "sightglass_sf",
+                "place_name": "Sightglass Coffee (SoMa)",
+                "one_liner": "A double-height industrial warehouse, north light pouring through the second-floor windows, the barista pulling shots in front of you \u2014 a caf\u00e9 that earns the tired \"feels like Tokyo\" comparison.",
+                "why_fits_today": "Your vibe_signature pulls cinematic to 0.95 and hip to 0.85 \u2014 Sightglass's northern light and bare concrete are exactly those two weights made physical. The 11 o'clock north light here is SF's most reliable natural-light window for vlogging; 10:00 lands you in the 30-minute gap between opening and the crush. Today's three later stops all need this cup as the base.",
+                "logistics": {
+                    "raw": "\ud83d\ude97 step out from SF \u00b7 \ud83c\udd7f\ufe0f street parking is rough \u2014 Uber or the 7th St garage \u00b7 \ud83d\udc76 stroller OK but no elevator to the upper floor \u00b7 \u23f0 lines start after 11am Saturday",
+                    "drive_time_min": null,
+                    "parking": "street difficult (Uber or 7th St garage)",
+                    "kid_friendly": true,
+                    "reservation_note": null,
+                    "booking_links": [],
+                    "transit_estimate_usd": null
+                },
+                "order_recommendations": {
+                    "menu_listed": [
+                        "Pour-over single origin",
+                        "Cortado"
+                    ],
+                    "bold_picks": [
+                        "Pour-over single origin",
+                        "Cortado"
+                    ],
+                    "logic_text": "**Pour-over single origin** \u2014 ask the barista for today's lightest roast; the visual reads better on camera than the flavor argues for. Add a **Cortado** for the parent (you) to ground the caffeine \u2014 no real meal until 5:30. Skip anything frapp\u00e9-shaped; it doesn't fit today's palette."
+                },
+                "tip": "B-roll from the upper railing looking down at the barista station \u2014 three seconds at a time, the light holds.",
+                "transition_to_next": "still light \u2192 visual density rising",
+                "transition_drive_min": null,
+                "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Sightglass_Coffee_at_Boot_and_Shoe_Service_Cafe_%285991331999%29.jpg"
+            },
+            {
+                "stop_index": 1,
+                "time": "11:30",
+                "place_id": "sfmoma",
+                "place_name": "SFMOMA",
+                "one_liner": "Seven floors of contemporary art, but you don't need to walk them all \u2014 an hour and a half in the third-floor photography wing is enough to feel like you've \"been somewhere.\"",
+                "why_fits_today": "Your taste_anchors already list SFMOMA + Mission \u2014 this stop isn't a discovery, it's the anchor that fills the visual-density slot between morning light and evening heat. Your energy is high, chaos_tolerance medium; the third-floor image walls feed your novelty_appetite. The photography wing is one of the few SF interiors where you can vlog with a kid \u2014 low light, low crowds, frames that compose themselves. SFMOMA plays the \"sustained immersion\" role here, not the spike \u2014 the spike is saved for the closing.",
+                "logistics": {
+                    "raw": "\ud83d\ude97 0min from Sightglass (6 min walk) \u00b7 \ud83c\udd7f\ufe0f 5th & Mission garage \u00b7 \ud83d\udc76 stroller-accessible throughout \u00b7 \ud83c\udf9f\ufe0f $30, book an hour ahead online to skip the line \u00b7 \u23f0 closes 17:00 Saturday, 1.5 hr is right",
+                    "drive_time_min": 0,
+                    "parking": "5th & Mission garage",
+                    "kid_friendly": true,
+                    "reservation_note": "$30, book online 1 hr ahead",
+                    "booking_links": [
+                        {
+                            "label": "Tickets ($30)",
+                            "url": "https://www.sfmoma.org/visit/tickets/"
+                        }
+                    ],
+                    "transit_estimate_usd": 30
+                },
+                "order_recommendations": null,
+                "tip": "Take the elevator straight to 3 \u2014 skip the big-installation crush on 1\u20132, the visual noise makes it un-cuttable.",
+                "transition_to_next": "visual immersion \u2192 street-food peak",
+                "transition_drive_min": 25,
+                "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/2017_SFMOMA_from_Yerba_Buena_Gardens.jpg"
+            },
+            {
+                "stop_index": 2,
+                "time": "17:30",
+                "place_id": "burma_superstar",
+                "place_name": "Burma Superstar (Clement Street)",
+                "one_liner": "Twenty years of lines on Clement Street, and the tea leaf salad is mixed tableside \u2014 a ritual no other place can hand you.",
+                "why_fits_today": "Your food_preferences read \"Japanese ramen / modern Asian fusion / proper Cantonese\" \u2014 ramen isn't on the board today, but Burma Superstar is one of the few SF modern-Asian spots that maxes out authentic (vibe weight 0.8). Your avoidance lists \"polished_but_soulless\" at the top; this is the opposite \u2014 slightly worn, a little crowded, and the tableside salad mix is your day's hero shot. 17:30 is the golden 15 minutes of walk-in time; past 18:00 it's a 45-min wait and the kid breaks.",
+                "logistics": {
+                    "raw": "\ud83d\ude97 ~25min Uber from SFMOMA \u00b7 \ud83c\udd7f\ufe0f Clement St parking is rough \u2014 Uber strongly recommended \u00b7 \ud83d\udc76 kid-friendly, high chairs on hand \u00b7 \ud83d\udcb5 ~$80 for two + kid \u00b7 \u23f0 walk-in with wait; 17:30 walks straight in",
+                    "drive_time_min": 25,
+                    "parking": "street difficult (Uber recommended)",
+                    "kid_friendly": true,
+                    "reservation_note": "walk-in with wait",
+                    "booking_links": [],
+                    "transit_estimate_usd": 80
+                },
+                "order_recommendations": {
+                    "menu_listed": [
+                        "Tea Leaf Salad",
+                        "Samusa Soup",
+                        "Coconut Chicken Curry Noodles",
+                        "Rainbow Salad"
+                    ],
+                    "bold_picks": [
+                        "Tea Leaf Salad",
+                        "Samusa Soup",
+                        "Coconut Chicken Curry Noodles",
+                        "Rainbow Salad"
+                    ],
+                    "logic_text": "**Tea Leaf Salad** is non-negotiable \u2014 not ordering it means you didn't come; the tableside mix is the hero shot. Add **Samusa Soup** for a warm opener. One main of **Coconut Chicken Curry Noodles** (coconut-forward, the kid can eat it), and a cold **Rainbow Salad** (ten ingredients mixed at the table \u2014 double the B-roll). Two adults + kid, four dishes is exactly right \u2014 leave appetite for the cocktail at Top of the Mark."
+                },
+                "tip": "Ask for the second table on the left as you walk in \u2014 best light, sightline straight into the open kitchen. The five seconds of salad-mixing composes itself.",
+                "transition_to_next": "street-level food \u2192 19th-floor city-lights",
+                "transition_drive_min": 22,
+                "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Fermented_Tea_Leaf_Salad_%289319609945%29.jpg"
+            },
+            {
+                "stop_index": 3,
+                "time": "19:30",
+                "place_id": "top_of_the_mark",
+                "place_name": "Top of the Mark",
+                "one_liner": "Nob Hill's 19th-floor 360\u00b0 lounge \u2014 Golden Gate, the Bay, downtown lights all in one frame, and the evening lands you on the edge of golden hour rolling into night.",
+                "why_fits_today": "Your ideal_mood_arc, fourth act, in your own words: \"creative thought or a warm family talk under SF's gorgeous city lights.\" Top of the Mark isn't being sold to you \u2014 it's the closing you already wrote. cinematic 0.95, photogenic 0.9, polished 0.8 all max out together, and it's the one spot tonight that solves \"vlog closing shot\" and \"kid can come\" at the same time (19th-floor bars are usually 21+, but family-with-baby is on the OK list here). The first three stops worked horizontally across neighborhoods; this one lifts vertically \u2014 the arc actually closes.",
+                "logistics": {
+                    "raw": "\ud83d\ude97 ~22min Uber from Clement \u00b7 \ud83c\udd7f\ufe0f Mark Hopkins valet ($) or nearby garage \u00b7 \ud83d\udc76 kid-friendly, ask for north-window seating toward the Golden Gate \u00b7 \u23f0 golden hour starts ~18:50; 19:30 catches the city lighting up \u00b7 \ud83d\udcb5 cocktails $18\u201322",
+                    "drive_time_min": 22,
+                    "parking": "Mark Hopkins valet ($) or nearby garage",
+                    "kid_friendly": true,
+                    "reservation_note": null,
+                    "booking_links": [],
+                    "transit_estimate_usd": 20
+                },
+                "order_recommendations": null,
+                "tip": "Tell the host at the door: \"north window facing Golden Gate.\" That side films cleaner than the Bay Bridge east; the bridge silhouette is your closing shot. The kid's attention is good for 30\u201340 minutes \u2014 don't push past.",
+                "transition_to_next": null,
+                "transition_drive_min": null,
+                "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Top_of_the_Mark_%2816683414895%29.jpg"
+            }
+        ],
+        "adaptive_branches": [
+            {
+                "condition": "If the kid breaks coming out of SFMOMA and can't hold to 5:30 dinner (the classic toddler late-afternoon crash)",
+                "alternative": "Pull Burma Superstar forward to 16:30 (lunch ends 15:30, dinner opens 17:00). Skip the walking gap between Sightglass and SFMOMA; arrive at Top of the Mark an hour earlier (18:30) for a cocktail. The Golden Gate lighting time doesn't move \u2014 save the closing shot."
+            }
+        ],
+        "coaching_block": null,
+        "composer_note": null,
+        "markdown_full": "",
+        "score_summary": {
+            "stranger_test": 10,
+            "arc_coherence": 9,
+            "specificity": 9,
+            "avoidance_respect": 9,
+            "adaptive_branch": 9,
+            "notes": "Garry golden night \u2014 v2, added Top of the Mark for golden-hour closing"
+        }
+    },
+    "trip_context": {
+        "date_label": "Sat \u00b7 Jan 24 \u00b7 2026",
+        "time_window": "10:00 \u2192 21:00",
+        "origin": "San Francisco",
+        "companions": [
+            "+partner",
+            "+toddler"
+        ],
+        "vehicle": "walk + uber"
+    }
+}
