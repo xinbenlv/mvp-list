@@ -1,0 +1,180 @@
+{
+  "_meta": {
+    "purpose": "Sam Reyes persona — a high-contrast 'typical persona' used alongside Mia, Garry, and Alex to stress-test the Day Composer agent across very different intake profiles. Fills the 'coaching mode + solo + no kids + medical recovery + burnout dip' gap that the GT Plan B analysis exposed as a category gap in the test suite.",
+    "source": "Hand-authored 2026-05-16 to fill coverage gaps in the persona test suite (the first 'very_low chaos tolerance', first 'low novelty appetite', first 'medical recovery constraints', first 'family dynamics avoidance', first 'coaching-mode-needed', first 'top-down systems thinker' fixture).",
+    "role_in_test_suite": "typical_persona_d (burnout-edge solo recovery + coaching mode trigger)",
+    "schema_note": "Follows the same flat structure as Mia / Garry / Alex — top-level 'intake_state' holds emotional_intent only; other intake dims (social_config / energy_profile / etc.) are siblings. Composer prompt reads this flat structure.",
+    "schema_extensions_note": "Uses 3 schema extensions not in backend-data-schema-v2: medical_recovery_context, cognitive_style, family_dynamics_avoidance. For POC, Composer treats these as plain text intake context. Future: promote to schema v3 if Persona D-style coaching mode becomes a product mode."
+  },
+
+  "persona_name": "Sam Reyes",
+  "context_one_liner": "Sam 是 38 岁住在 SF Mission 的 Senior Staff PM，正卡在一段烧穿后的低潮里 —— 这周中刚做完光子嫩肤还在恢复期，又被家人的周末协调请求轰炸了一遍，今天只想把车开过金门大桥，去 Marin 让神经系统离线一天。",
+
+  "taste_signature": {
+    "summary": "她要的不是新鲜也不是密度 —— 是熟悉、安静、可预测的恢复。喜欢自然光、低噪音、不需要做决定的地方。讨厌 polish 和表演感，但 polish 之外的 'rustic-quiet'（牡蛎农场、温泉、森林步道）她会反复回去。审美底层是一个 top-down systems thinker —— 她不要 20 个选项，要一个被理解后开出的处方。",
+    "vibe_weights": [
+      { "tag": "restorative", "weight": 0.98 },
+      { "tag": "quiet", "weight": 0.95 },
+      { "tag": "intimate", "weight": 0.90 },
+      { "tag": "low_noise", "weight": 0.92 },
+      { "tag": "natural_light", "weight": 0.88 },
+      { "tag": "spacious", "weight": 0.82 },
+      { "tag": "slow", "weight": 0.88 },
+      { "tag": "familiar", "weight": 0.85 },
+      { "tag": "outdoor", "weight": 0.80 },
+      { "tag": "contemplative", "weight": 0.80 },
+      { "tag": "warm", "weight": 0.70 },
+      { "tag": "lively", "weight": 0.10 },
+      { "tag": "social", "weight": 0.08 },
+      { "tag": "hip", "weight": 0.10 },
+      { "tag": "novel", "weight": 0.20 },
+      { "tag": "dense", "weight": 0.12 }
+    ]
+  },
+
+  "intake_state": {
+    "_field_note": "This is emotional_intent (flattened schema, matching Mia / Garry / Alex). Values use closest available enum entries (restore, slow_down) plus extension values (decompress, regulate_nervous_system, solo_recovery) flagged for schema v3.",
+    "values": ["restore", "slow_down", "decompress", "regulate_nervous_system", "solo_recovery"],
+    "confidence": 0.95,
+    "rationale": "她在一个非常具体的 burnout dip 里：烧穿后的低潮 + 术后皮肤恢复期 + 家庭协调疲劳累加。今天的核心情绪不是 explore 也不是 reconnect，而是把神经系统从一周的过度激活状态调回 baseline。她不需要灵感，她需要被允许什么都不决定。"
+  },
+
+  "social_config": {
+    "values": ["solo"],
+    "confidence": 0.95,
+    "rationale": "今天明确是 solo —— 但和 Alex 的 solo 是完全不同的 REASON：Alex 是 solo-as-exploration（一个人去 maximize 城市发现），Sam 是 solo-as-recovery（一个人去 minimize 任何需要协调、表演、回应别人的能量支出）。这周明确不想和父母 / 公婆 / 朋友任何 coordination。"
+  },
+
+  "energy_profile": {
+    "energy_level": "low",
+    "chaos_tolerance": "very_low",
+    "novelty_appetite": "low",
+    "confidence": 0.94,
+    "rationale": "energy 在地板上 —— 任何 30 分钟以上的排队、changes-of-plan、'要不要试试这个新地方'都会让她当场放弃整个出行。chaos_tolerance 比 Mia 还低（Mia 是 'low'，Sam 是 'very_low'，是 NEW 维度）。novelty_appetite 是 'low' —— 这是和前三个 persona 最大的区别：她想要的是熟悉 > 新鲜，已知 > 探索。恢复期不是发现期。"
+  },
+
+  "practical_constraints": {
+    "start_location": "Mission, San Francisco（靠近 24th St 和 Valencia）",
+    "max_drive_minutes": 90,
+    "transit_mode": "自己开车 —— 今天明确要开车过桥去 Marin，路线本身就是 ritual 的一部分",
+    "time_window": "09:00-19:00",
+    "budget": "flexible",
+    "budget_note": "钱不是约束，但 'paying for an experience that adds cognitive load' 反而是负价值。宁愿花 $80 在一顿没有 menu choice 的 omakase 上，也不愿意花 $25 在需要从 10 个选项里挑的网红 brunch。",
+    "kid_friendly_required": false,
+    "needs_parking": true,
+    "parking_note": "Marin 大部分地点 parking 是 easy_free，所以 parking 不是约束 —— 但是在 SF 离开时必须能找到出 garage 的明确时间，因为'回来还要找停车'是 last-mile stress",
+    "wants_to_be_home_before_dark": true,
+    "confidence": 0.92,
+    "rationale": "max_drive_minutes 90 是 NEW 维度 —— 比 Mia (45) 还高，因为 'driving to Marin' 在加州文化里本身就是 nervous system reset 的一部分（金门大桥、雾、Mt. Tam 的视野展开过程）。但回程必须在天黑前完成，因为术后皮肤晚上需要早睡和长 routine。"
+  },
+
+  "medical_recovery_context": {
+    "_extension_note": "NEW field, not in backend-data-schema-v2. For POC, Composer reads this as plain text intake context. Future: promote to schema v3.",
+    "procedure": "photofacial (IPL)",
+    "days_since": 12,
+    "constraints": [
+      "no_direct_UV_exposure",
+      "no_chlorine_pools",
+      "no_high_heat_saunas",
+      "gentle_steam_OK_for_facial_circulation",
+      "SPF50_mineral_required_outdoors",
+      "no_intense_cardio_in_sun"
+    ],
+    "rationale": "光子嫩肤 12 天 —— 正处于 'sunburned crust 已经掉完，但新皮肤极度敏感、color-uneven、对 UV 极易反弹色沉' 的窗口。意味着：户外活动必须在树荫下、傍晚、或者云雾 Marin coast；任何 'beach in direct sun' 是 hard no；hot springs 必须是 lukewarm + 非氯水的（mineral spring OK，pool 不行）。"
+  },
+
+  "cognitive_style": {
+    "_extension_note": "NEW field, not in backend-data-schema-v2. Informs the TYPE of advice the agent should give, not the type of place.",
+    "values": ["top_down_systems_thinker"],
+    "rationale": "她不要 'here are 5 options, you decide'，她要 'I read your state, here is the one thing you should do'。给她 enumeration 等于让她继续在 decision fatigue 里。给她 prescription（一个被解释 reasoning 的明确推荐）等于让她终于可以停下来。"
+  },
+
+  "family_dynamics_avoidance": {
+    "_extension_note": "NEW field, not in backend-data-schema-v2. Hard constraint on social configuration this weekend.",
+    "active": true,
+    "note": "this weekend explicit boundary from family coordination requests — do not suggest activities with parents/in-laws/siblings, do not suggest 'maybe invite a friend', do not suggest 'great to do as a couple'. 周三家庭群里已经有 11 条未读关于这周末安排的消息，她明确选择今天不回复。",
+    "duration": "this_weekend_only",
+    "rationale": "这是一个 contextual hard constraint —— 不是她整体的 social preference（她平时和家人关系很好），而是这周特定的 boundary。Agent 推荐里任何 'great to bring your parents'/'why not invite a friend'/'a romantic spot for you and partner' 都会立刻触发 reject。"
+  },
+
+  "taste_anchors": {
+    "liked_examples": [
+      {
+        "name": "Hog Island Oyster Co. (Tomales Bay 农场端) 周中早上",
+        "why_i_like_it": "她去过 4 次，每次都是周中早上去那个 farm 端（不是 Ferry Building 那个网红店）—— 12 个生蚝、一杯白葡萄酒、坐在木桌上看 Tomales Bay 的雾散，旁边只有 retiree 和本地人。无菜单决定、无社交压力、无 chaos。这是她的 baseline restoration ritual。"
+      },
+      {
+        "name": "Muir Woods 早上 9 点前的 Bohemian Grove Trail",
+        "why_i_like_it": "Muir Woods 的旅游团 9:30 才到，9 点前进去整片森林就是空的。她需要的不是看红杉而是被树包住的感觉 —— 'forest canopy as a Faraday cage for the nervous system'。注意：红杉树荫下 = SPF 友好，符合术后约束。"
+      },
+      {
+        "name": "Stinson Beach 周中 off-season（多云日）的北端散步",
+        "why_i_like_it": "她去 Stinson 不是夏天去 sunbathe —— 是 12 月到 3 月雾雨天去走北端那段 1.5 mile 沙滩。海声 + 雾 + 一杯热的、空无一人。'beach without the beach scene'。术后 12 天：必须多云日 + SPF + 帽子。"
+      },
+      {
+        "name": "Mill Valley 的 Equator Coffee 二楼 + 旁边那家小书店（不是 Book Passage）",
+        "why_i_like_it": "Mill Valley downtown 那个小广场 —— 一杯咖啡、一本 paperback、坐 90 分钟没人打扰。比 SF 的网红咖啡 calm 一个量级，因为这里所有人都是本地人在过周末，不是来 'do' SF 的游客。"
+      },
+      {
+        "name": "Mountain Home Inn 或 Tam 路上那个有 view 的 turnout",
+        "why_i_like_it": "她需要一个 'high vantage point' moment —— 从 Tam 半山看下去整个海湾的那个 reframe。Top-down systems thinker 在物理上 literally 想要 top-down view 来重置心理 perspective。"
+      },
+      {
+        "name": "Osmosis Day Spa Sanctuary (Freestone) — cedar enzyme bath",
+        "why_i_like_it": "日式 cedar 浴 + 茶 garden 散步，整个体验是被设计好的 —— 她到了不用做任何决定，只要 follow 现成的 ritual。注意：cedar enzyme 不是水浴所以避开 chlorine 限制；steam 是温和的，对术后皮肤循环 OK。"
+      }
+    ],
+    "food_preferences": [
+      "简单海鲜（生蚝、烤鱼、蛤蜊汤）—— 食材本身好就够了",
+      "粥 / 汤 / 米饭类的 comfort 主食",
+      "无菜单 prix fixe 或 omakase —— 不用决定的餐",
+      "Japanese set meal (teishoku) —— 一份饭一份汤一条鱼，结构清晰",
+      "Marin/Sonoma local farm-to-table 但选最简单那几道",
+      "热饮 —— 抹茶、ginger tea、骨汤"
+    ],
+    "disliked_examples": [
+      "网红 brunch（鸡蛋 20 种做法 + 10 种 toast 配菜，每个 decision 都消耗能量）",
+      "tasting menu with 12 courses 需要回应 server 12 次",
+      "热闹的 wine bar / cocktail lounge",
+      "任何 'instagrammable' aesthetic 的地方 —— 暗示要 perform"
+    ],
+    "confidence": 0.91
+  },
+
+  "avoidance": {
+    "values": [
+      "loud",
+      "rushed",
+      "crowded",
+      "logistically_fragile",
+      "obligation_triggering",
+      "social_performance_required",
+      "decision_fatigue",
+      "direct_sun_exposure",
+      "chlorine_pools",
+      "tourist_concentrated",
+      "anywhere_that_requires_dressing_up",
+      "menus_with_more_than_8_choices"
+    ],
+    "rationale": "最不能接受的不是 'bad places'，而是 'places that demand energy she doesn't have right now'：人多、要排队、要做决定、要假装在享受、要回应 server、要拍照、要选哪条 trail、要决定下一步去哪。也包括术后硬约束：直晒、氯水、高温桑拿。'avoidance' 在这个 persona 里是 nervous system 保护，不是品味。",
+    "confidence": 0.94
+  },
+
+  "ground_truth_expectations": {
+    "ideal_day_theme": "Marin 慢恢复：让神经系统离线一天 —— 一个被设计好的 prescription，不是 itinerary。",
+    "ideal_mood_arc": [
+      "开场：用一段平缓的徒步（Muir Woods 早上 9 点前 / Bohemian Grove Trail）把昨晚没完成的想法 ground 掉 —— 树冠下的 SPF 友好窗口",
+      "中段：在一个有自然光的地方吃一顿不需要决定的饭（Hog Island farm 端的牡蛎 + 一杯白 / 或 Mill Valley 一家有 set lunch 的小店）—— 选项越少越好",
+      "下午：高处俯瞰（Mt. Tam 半山的 turnout 或 Mountain Home Inn 的 deck）让 top-down 系统视角找回掌控感 —— literally 看到全局",
+      "收尾：森林温泉式的低温浴或者一杯热茶 + 短散步（Osmosis cedar enzyme bath 或 Mill Valley downtown 的 90 分钟咖啡 + 书）—— 让皮肤恢复 + 神经系统重启，天黑前回 SF"
+    ],
+    "what_would_make_me_say_wow": "agent 读懂了我的状态（'光子嫩肤 12 天 + 周中处理过家庭协调 + 烧穿后低潮' 这三件事它都看到了），给我**许可**跳过任何让我焦虑的事情（'你不需要回家庭群消息，今天 9 点出门 4 点回'），并且 prescribe nervous-system regulation 而不是 itinerary（'去 Muir Woods Bohemian Grove Trail 走 45 分钟，不要走 Main Trail 因为周末人多 —— 因为你今天需要的是树冠 not novelty'）。它要像一个 somatic therapist 加一个本地老朋友，不像 concierge。",
+    "what_would_make_me_reject": "给我一份 'Top 20 things to do in Marin this weekend' 的 generic concierge itinerary，把我当游客 —— 列了 Sausalito 主街、Muir Woods（不区分时间段）、Stinson Beach（直晒！）、Tiburon ferry、Point Reyes 灯塔（开车 2 小时单程）。或者更糟：建议我'和伴侣一起去'/'叫上朋友'/'打电话给妈妈'。任何 ignore 恢复 + ignore 家庭边界 + 把我当 explorer 而不是 recovering operator 的输出都会让我立刻关掉 app。"
+  },
+
+  "demo_scenario": {
+    "today_is": "周六 2026-01-10",
+    "what_just_happened": "Sam 这周烧穿了 —— 周二一个 cross-functional priority alignment 开了 4 小时还没结论，周三又被叫去 emergency review 一个她不应该 own 的 quarterly plan。中间还挤了一个周一晚上的光子嫩肤治疗，现在第 12 天，皮肤还在那个 'crust 已经掉、但新皮肤碰一下就红' 的脆弱期。雪上加霜的是周三家庭群开始了周末的协调拉锯：父母想她周六回去吃饭、嫂子想带侄女来 SF 让她带去 California Academy of Sciences、闺蜜想 Sunday brunch。11 条未读消息她一条没回。周五晚上她做了一个决定：周六不回任何消息、不见任何人、把车开过金门大桥去 Marin，让神经系统离线一天。她打开这个 app 不是因为想被'推荐'，是因为她不想再做一个决定 —— 她想要被'安排'。",
+    "my_first_message_to_agent": "今天就想去 Marin 走走，最好不用动脑子。脸还在恢复期，能晒就别晒。"
+  }
+}

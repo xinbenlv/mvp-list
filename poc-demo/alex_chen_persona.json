@@ -1,0 +1,133 @@
+{
+  "_meta": {
+    "purpose": "Alex Chen persona — a high-contrast 'typical persona' used alongside Mia and Garry Tan to stress-test the Day Composer agent across very different intake profiles. Completes the contrast triad with a newcomer-to-SF, solo / friends, high-chaos-tolerance, moderate-budget, transit-native profile.",
+    "source": "Hand-authored 2026-05-16 to fill coverage gaps in the persona test suite (the first 'solo / friends', first 'chaos high', first 'budget moderate', first 'transit-native', first 'low local knowledge' fixture).",
+    "role_in_test_suite": "typical_persona_c (newcomer high-energy maximal exploration)",
+    "schema_note": "Follows the same flat structure as Mia / Garry — top-level 'intake_state' holds emotional_intent only; other intake dims (social_config / energy_profile / etc.) are siblings. Composer prompt reads this flat structure."
+  },
+
+  "persona_name": "Alex Chen",
+  "context_one_liner": "Alex 是刚搬到 SF 三周的 24 岁新移民程序员，租在 Lower Haight 一间合租房，对这座城市的所有传说级地方都好奇但还没去过，想用一个周六把'听说过的 SF'变成'我自己去过的 SF'。",
+
+  "taste_signature": {
+    "summary": "他要的不是恢复也不是滤镜，是密度 —— 一个能塞下尽可能多'真的 local 推荐'的周六。喜欢热闹、烟火气、可以随机搭话的地方，对 polished 的网红咖啡店持保留态度（'看着像 NYC 的那种他都觉得有点假'），但对 Reddit 上 r/AskSF 反复出现的'排队也值'的店有强烈兴趣。审美还在形成中，但对 'authentic vs 游客陷阱' 的判断比较敏感。",
+    "vibe_weights": [
+      { "tag": "novel", "weight": 0.95 },
+      { "tag": "lively", "weight": 0.92 },
+      { "tag": "authentic", "weight": 0.90 },
+      { "tag": "walkable", "weight": 0.88 },
+      { "tag": "social", "weight": 0.85 },
+      { "tag": "dense", "weight": 0.80 },
+      { "tag": "hip", "weight": 0.72 },
+      { "tag": "cultural", "weight": 0.70 },
+      { "tag": "outdoor", "weight": 0.60 },
+      { "tag": "cinematic", "weight": 0.35 }
+    ]
+  },
+
+  "intake_state": {
+    "_field_note": "This is emotional_intent (flattened schema, matching Mia / Garry)",
+    "values": ["explore", "feel_alive", "celebrate"],
+    "confidence": 0.92,
+    "rationale": "刚搬来三周还在 honeymoon phase，每个周末都想'解锁'一块新的 SF。今天的核心情绪不是放松而是探索 + 一种'我终于住在这里了'的小型 self-celebration。"
+  },
+
+  "social_config": {
+    "values": ["solo", "friends"],
+    "confidence": 0.80,
+    "rationale": "可能自己一个人出门（更可能），也可能临时拉上室友或一个刚在 SF Tech Week 认识的新朋友。重点是没有家庭 / 宝宝 / 伴侣 logistics 拖累。"
+  },
+
+  "energy_profile": {
+    "energy_level": "high",
+    "chaos_tolerance": "high",
+    "novelty_appetite": "high",
+    "confidence": 0.95,
+    "rationale": "24 岁、单身、刚到一个新城市、没有 commitment。排队 40 分钟 OK，临时换计划 OK，走 3 mile OK，半夜公交回家 OK。怕的不是混乱，是 boring。"
+  },
+
+  "practical_constraints": {
+    "start_location": "Lower Haight, San Francisco（Fillmore 和 Haight 交界，靠近 N-Judah 和 22 Fillmore）",
+    "max_drive_minutes": 0,
+    "transit_mode": "walk + Muni + occasional Lyft（没车，也不打算买车）",
+    "time_window": "09:30-23:30",
+    "budget": "moderate",
+    "budget_note": "新工作刚发第一个月工资，房租吃掉一半多。单餐 $25-35 OK，$60+ 要犹豫。免费 / 便宜的事情（公园、二手书店、街区漫步、Dolores Park 坐着看人）权重很高。",
+    "kid_friendly_required": false,
+    "needs_parking": false,
+    "confidence": 0.88,
+    "rationale": "没车 + 预算紧 + 没有任何 logistics 负担。整天可以靠 Muni + 步行串起来，反而是 'parking_easy' 对他完全没意义，'walkable + transit-accessible' 才是硬约束。"
+  },
+
+  "taste_anchors": {
+    "liked_examples": [
+      {
+        "name": "Dolores Park 周末的草坪（Reddit 反复推荐）",
+        "why_i_like_it": "听说是 SF 周六下午的精神图腾 —— 草坪上各种人、卖墨西哥玉米的小车、可以躺一下午看市中心 skyline。还没去过，想去一次确认是不是真的那么好。"
+      },
+      {
+        "name": "Mission 街的 taqueria（朋友说'去 Taqueria Cancún 别去 La Taqueria 那种网红的'）",
+        "why_i_like_it": "想吃真正 local 的 super burrito，不要 Yelp 4.7 星挂着排队那种。朋友说哪家便宜哪家是真的。"
+      },
+      {
+        "name": "City Lights Bookstore + Chinatown 走一圈",
+        "why_i_like_it": "Beat Generation 那个 City Lights —— 在 SF 不去一次说不过去。Chinatown 不是去 Grant 那条游客街，是想找到本地阿姨买菜的那条 Stockton。"
+      },
+      {
+        "name": "underground / 小型 live music venue（朋友带去过一次 The Independent，想再找类似的）",
+        "why_i_like_it": "几十块的票，能挤到台前那种小场子。不是 Chase Center 那种大体育馆，要的就是吵、挤、出汗、第二天耳鸣的感觉。"
+      },
+      {
+        "name": "Outer Sunset 海边的小咖啡店 + Ocean Beach 走一段",
+        "why_i_like_it": "Twitter 上看到的 'foggy SF aesthetic'，海浪 + 雾 + 一杯咖啡 + 没人认识你。新移民的孤独感和浪漫感都需要被处理一次。"
+      },
+      {
+        "name": "Valencia Street 或 Divisadero 的随机漫步",
+        "why_i_like_it": "听说这两条街是看真实 SF 的两条街 —— 二手店、独立书店、bar、餐厅密度高。不需要 plan，走就行了。"
+      }
+    ],
+    "food_preferences": [
+      "Mission burrito（要 local 不要 hyped 那家）",
+      "dim sum（Chinatown 的早茶，老阿姨推车那种）",
+      "拉面 / 居酒屋（Japantown 周边）",
+      "越南粉 / 三明治 banh mi",
+      "韩餐烤肉",
+      "便宜好吃的越南河粉",
+      "any cheap-eats hidden gem under $15"
+    ],
+    "confidence": 0.85
+  },
+
+  "avoidance": {
+    "values": [
+      "boring_suburbia",
+      "lonely",
+      "feels_old",
+      "chain_restaurant",
+      "too_expensive_for_what_it_is",
+      "closed_early",
+      "polished_but_soulless",
+      "requires_car"
+    ],
+    "rationale": "最怕的是浪费第一个真正的周六去一个又空、又贵、又远、又'明显是给游客准备的'地方。也怕被规划成一个 'reset 系'的恢复周末 —— 他不想恢复，他想 maximize。chain restaurant 和 Cheesecake Factory 那种是底线。",
+    "confidence": 0.92
+  },
+
+  "ground_truth_expectations": {
+    "ideal_day_theme": "新到 SF 的第一个真正 local 的周六 —— 把'听说过的 SF'变成'我自己去过的 SF'，密度拉满但每一站都不是游客陷阱。",
+    "ideal_mood_arc": [
+      "早上一杯 Mission 或 Hayes Valley 的 local 咖啡 + 一个 morning bun，慢慢醒来但已经在路上",
+      "中午穿过两个截然不同的街区（Mission 烟火气 + Chinatown 老移民气），步行 + Muni，吃一顿便宜到不真实但好吃到想哭的午饭",
+      "下午撞进一家独立书店或唱片店、Dolores Park 草坪上躺一下、和陌生人随便聊几句 —— 感觉自己'住在这里'而不是'在 SF 玩'",
+      "晚上一场小 live show 或者一家 hole-in-the-wall 的居酒屋 / cocktail bar，深夜公交回 Lower Haight，第二天朋友圈不发但心里有底了：'SF 我已经站稳了一小块。'"
+    ],
+    "what_would_make_me_say_wow": "推荐的不是 Top 10 Things to Do 那种 listicle 重复一百遍的地方，而是真的有'某个 SF 老 local 才知道'的颗粒度 —— 比如'去 Stockton 那条 Chinatown 不要去 Grant'，'Dolores Park 上午 11 点之前去占南坡'，'Outer Sunset 这家咖啡店 11 月雾季去最对'。",
+    "what_would_make_me_reject": "推荐 Fisherman's Wharf + Pier 39 + Lombard Street + 金门大桥拍照 + Cheesecake Factory + 一个购物中心 —— 我是搬来住的不是来玩三天的，给我这种 itinerary 我会立刻把这个 app 删掉。"
+  },
+
+  "demo_scenario": {
+    "today_is": "周六 2026-05-16",
+    "what_just_happened": "Alex 上个月从 NYC 跳槽到一家 SF 的 Series B startup，三周前刚搬进 Lower Haight 的一个三人合租 flat。周一到周五全在 onboarding、setup 公司 laptop、调时差、和 HR 处理 California 驾照（虽然他打算暂时不开车）。前两个周末都在 IKEA 和 Target 里度过 —— 装床、买锅、办网。今天是真正意义上的 '第一个能出门玩的周六'，他打开手机 notes 里那个'要去的 SF 地方'清单，发现已经攒了 40 多个但一个都没去过，光是排序就让他头大。室友早上出门 hike 了，他想干脆一个人或者拉一个新认识的朋友，把今天用满。",
+    "my_first_message_to_agent": "刚搬来 SF 三周一个地方都还没去，今天想暴走一天，最好是真的 local 会去的那种 —— burrito、live music、随便走走街区什么的都行。预算不要太离谱，没车，从 Lower Haight 出发。"
+  }
+}

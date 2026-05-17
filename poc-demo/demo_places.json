@@ -2,8 +2,8 @@
   "_meta": {
     "purpose": "10 hand-curated Bay Area places for Day Composer POC demo. Designed to support 2-3 different day shapes (restoration day with baby in South Bay, exploratory urban day in SF, and mixed variants). Schema is a SLIM version of Place v2 — keeps only fields the Composer prompt needs to write magical copy.",
     "schema_note": "Mirrors mvp-list/backend-data-schema-v2.md Place v2, but drops administrative fields (precise lat/lon, ratings sources, sources[], confidence_notes). Friend's real backend would have all v2 fields.",
-    "city_coverage": ["South Bay (Milpitas, San Jose)", "SF (SoMa, Mission, Richmond, Nob Hill)", "East Bay (Berkeley)"],
-    "place_count": 12
+    "city_coverage": ["South Bay (Milpitas, San Jose)", "SF (SoMa, Mission, Richmond, Nob Hill, Divisadero/NoPa, Castro, Chinatown)", "East Bay (Berkeley)", "Marin (Stinson Beach, Mill Valley, Tomales Bay/Marshall, Freestone, Mount Tam / Tennessee Valley)"],
+    "place_count": 22
   },
 
   "places": [
@@ -305,7 +305,7 @@
         "chaos_tolerance": "medium",
         "social_fit": ["couple", "friends", "family_with_baby"],
         "compatibility_hints": {
-          "good_after": [],
+          "good_after": ["the_independent_divisadero"],
           "good_before": ["sfmoma", "yerba_buena_gardens"]
         }
       },
@@ -353,7 +353,7 @@
         "chaos_tolerance": "low",
         "social_fit": ["couple", "solo", "friends"],
         "compatibility_hints": {
-          "good_after": ["sfmoma"],
+          "good_after": ["sfmoma", "valencia_street_corridor"],
           "good_before": []
         }
       },
@@ -397,7 +397,7 @@
         "chaos_tolerance": "medium",
         "social_fit": ["family_with_baby", "couple", "solo"],
         "compatibility_hints": {
-          "good_after": ["sfmoma", "yerba_buena_gardens"],
+          "good_after": ["sfmoma", "yerba_buena_gardens", "dolores_park", "valencia_street_corridor"],
           "good_before": []
         }
       },
@@ -503,6 +503,441 @@
         "ordering_logic_hint": "从一杯轻量 highball（Phone Home 或 Laurel Tree）开始打开味觉，再来一杯 spirit-forward 收尾（Mr. Kotter）。Bar snacks 不必当正餐，吃了晚饭来这里就一杯 + 一份脆口零食。"
       },
       "narrative_hook": "Lazy Bear 团队开的 Mission 创意鸡尾酒吧 —— 黑胡桃吧台、温柔的暖灯、bartender 会问你今天的心情然后调一杯对应的酒。每一杯都是 menu 上没有的小诗。"
+    },
+
+    {
+      "place_id": "la_taqueria_mission",
+      "name": "La Taqueria",
+      "place_type": "restaurant",
+      "category": "taqueria",
+      "city": "San Francisco",
+      "address": "2889 Mission St, San Francisco, CA 94110",
+      "hours_note": "Tue–Sun 11:00–20:45, closed Mon — cash + card, walk-in only, lunch line wraps the corner",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "authentic", "weight": 0.95 },
+          { "tag": "lively", "weight": 0.85 },
+          { "tag": "dense", "weight": 0.8 },
+          { "tag": "walkable", "weight": 0.7 },
+          { "tag": "familiar", "weight": 0.7 },
+          { "tag": "polished", "weight": 0.1 }
+        ],
+        "pacing_roles": ["peak", "breathing"],
+        "emotional_roles": ["feel_alive", "explore"],
+        "energy_cost": "low",
+        "chaos_tolerance": "high",
+        "social_fit": ["solo", "friends", "couple", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["dolores_park", "valencia_street_corridor", "the_independent_divisadero"],
+          "good_before": ["tartine_mission"]
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": true,
+        "reservation_model": "walk_in_only",
+        "estimated_duration_minutes": 30,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["mexican", "taqueria"],
+        "price_range": "$",
+        "top_dishes": [
+          { "name": "Carnitas Burrito (no rice, dorado)", "note": "招牌 — James Beard 评为全美最佳 burrito，no-rice 是当地人吃法，加 $1.25 dorado 把外皮煎脆" },
+          { "name": "Carne Asada Taco", "note": "$4 一个，双层 corn tortilla，简单到极致" },
+          { "name": "Al Pastor Taco", "note": "菠萝慢腌猪肉，配 salsa verde" },
+          { "name": "Agua Fresca (horchata / jamaica)", "note": "$4 大杯，配 burrito 解辣" }
+        ],
+        "ordering_logic_hint": "第一次来就点 Carnitas Burrito no-rice dorado + horchata，$15 内吃饱。排 15 分钟值得 —— 这是 Mission 的 burrito 圣地，老 SF 人会专程过来。"
+      },
+      "narrative_hook": "Mission 24th 街的 burrito 圣地 —— 2017 年 James Beard America's Classics 得主，no-rice burrito 是 SF 本地人的吃法。$10 一个塞满 carnitas，吃完站在街角啃完那种朴素的满足。"
+    },
+
+    {
+      "place_id": "the_independent_divisadero",
+      "name": "The Independent",
+      "place_type": "point_of_attraction",
+      "category": "live_music_venue",
+      "city": "San Francisco",
+      "address": "628 Divisadero St, San Francisco, CA 94117",
+      "hours_note": "Doors typically 19:30, show 20:30 — check lineup, 500-cap standing room",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "lively", "weight": 0.95 },
+          { "tag": "hip", "weight": 0.9 },
+          { "tag": "cinematic", "weight": 0.75 },
+          { "tag": "social", "weight": 0.85 },
+          { "tag": "dense", "weight": 0.9 },
+          { "tag": "novel", "weight": 0.8 }
+        ],
+        "pacing_roles": ["closing", "peak"],
+        "emotional_roles": ["feel_alive", "celebrate"],
+        "energy_cost": "high",
+        "chaos_tolerance": "high",
+        "social_fit": ["solo", "couple", "friends"],
+        "compatibility_hints": {
+          "good_after": [],
+          "good_before": ["burma_superstar", "la_taqueria_mission"]
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": false,
+        "reservation_model": "ticket_required",
+        "estimated_duration_minutes": 120,
+        "booking_links": [
+          { "label": "The Independent — calendar & tickets", "url": "https://www.theindependentsf.com/" },
+          { "label": "Bandsintown SF listings", "url": "https://www.bandsintown.com/c/san-francisco-ca" }
+        ]
+      },
+      "narrative_hook": "NoPa 的 500 人独立音乐场 —— 没有座位、没有 VIP，indie rock / electronic / hip-hop 的下一波明星在这儿过路。$20-30 看到的乐队两年后可能在 Fillmore 卖光。SF 真正的现场音乐入门。"
+    },
+
+    {
+      "place_id": "dolores_park",
+      "name": "Mission Dolores Park",
+      "place_type": "point_of_attraction",
+      "category": "urban_park",
+      "city": "San Francisco",
+      "address": "19th St & Dolores St, San Francisco, CA 94114",
+      "hours_note": "06:00–22:00 daily — FREE, sunset slope fills by 17:00 on weekends",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "outdoor", "weight": 0.95 },
+          { "tag": "spacious", "weight": 0.85 },
+          { "tag": "walkable", "weight": 0.9 },
+          { "tag": "lively", "weight": 0.85 },
+          { "tag": "social", "weight": 0.9 },
+          { "tag": "family_oriented", "weight": 0.6 },
+          { "tag": "photogenic", "weight": 0.8 }
+        ],
+        "pacing_roles": ["breathing", "recovery"],
+        "emotional_roles": ["slow_down", "feel_alive"],
+        "energy_cost": "low",
+        "chaos_tolerance": "high",
+        "social_fit": ["solo", "friends", "couple", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["valencia_street_corridor", "true_laurel_mission", "la_taqueria_mission"],
+          "good_before": ["tartine_mission"]
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 60,
+        "booking_links": []
+      },
+      "narrative_hook": "Mission/Castro 交界的山坡公园 —— 西北角斜坡看出去是 downtown skyline + 海湾，傍晚整个 SF 在草地上摊开吃 burrito、遛狗、弹吉他。免费、永远有人、locals 的客厅。"
+    },
+
+    {
+      "place_id": "valencia_street_corridor",
+      "name": "Valencia Street (16th–24th)",
+      "place_type": "point_of_attraction",
+      "category": "walking_street",
+      "city": "San Francisco",
+      "address": "Valencia St between 16th & 24th, San Francisco, CA 94110",
+      "hours_note": "Always open — shops mostly 11:00–19:00, bars/restaurants late; Sundays the street partially closes to cars (Valencia Slow Street)",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "walkable", "weight": 0.95 },
+          { "tag": "lively", "weight": 0.85 },
+          { "tag": "dense", "weight": 0.85 },
+          { "tag": "hip", "weight": 0.9 },
+          { "tag": "authentic", "weight": 0.75 },
+          { "tag": "photogenic", "weight": 0.7 }
+        ],
+        "pacing_roles": ["breathing"],
+        "emotional_roles": ["explore", "feel_alive"],
+        "energy_cost": "medium",
+        "chaos_tolerance": "medium",
+        "social_fit": ["solo", "couple", "friends", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["true_laurel_mission", "dolores_park", "tartine_mission"],
+          "good_before": ["sightglass_sf", "tartine_mission"]
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 45,
+        "booking_links": []
+      },
+      "narrative_hook": "8 个街区的散步路径 —— 独立书店（Dog Eared、Borderlands）、复古店、Heath Ceramics、咖啡、小酒吧、taqueria 一条线串起。不用计划，走着走着自然停三次。Locals 真正的逛街目的地，不是 Union Square。"
+    },
+
+    {
+      "place_id": "good_mong_kok_bakery",
+      "name": "Good Mong Kok Bakery 旺角",
+      "place_type": "restaurant",
+      "category": "dim_sum",
+      "city": "San Francisco",
+      "address": "1039 Stockton St, San Francisco, CA 94108",
+      "hours_note": "07:00–18:00 daily — cash preferred, takeaway-only counter, line moves fast",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "authentic", "weight": 0.95 },
+          { "tag": "dense", "weight": 0.9 },
+          { "tag": "lively", "weight": 0.85 },
+          { "tag": "cultural", "weight": 0.9 },
+          { "tag": "warm", "weight": 0.7 },
+          { "tag": "familiar", "weight": 0.7 },
+          { "tag": "polished", "weight": 0.1 }
+        ],
+        "pacing_roles": ["peak", "breathing"],
+        "emotional_roles": ["explore", "feel_alive"],
+        "energy_cost": "low",
+        "chaos_tolerance": "high",
+        "social_fit": ["solo", "couple", "friends", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["top_of_the_mark"],
+          "good_before": ["tartine_mission"]
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": true,
+        "reservation_model": "walk_in_only",
+        "estimated_duration_minutes": 30,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["chinese", "dim_sum", "cantonese"],
+        "price_range": "$",
+        "top_dishes": [
+          { "name": "Shrimp Har Gow (虾饺)", "note": "$5 三个，皮薄馅大，蒸笼直出" },
+          { "name": "BBQ Pork Bun (叉烧包)", "note": "$1.50 一个，糖油烤面 + 蜜汁叉烧" },
+          { "name": "Sticky Rice in Lotus Leaf (糯米鸡)", "note": "$3 一份，荷叶香渗进糯米" },
+          { "name": "Sesame Ball (煎堆)", "note": "$1 一个，外脆内糯，红豆馅" },
+          { "name": "Egg Tart (蛋挞)", "note": "$1.50 一个，酥皮港式" }
+        ],
+        "ordering_logic_hint": "$10 内吃 5-6 种 dim sum：1 笼 har gow + 2 个叉烧包 + 1 个糯米鸡 + 1 个蛋挞。柜台指着点，takeaway 出去 Portsmouth Square 公园边吃，看 Chinatown 大爷下象棋。"
+      },
+      "narrative_hook": "Stockton 街 Chinatown 心脏地带 —— locals know this 的 $1 叉烧包、$5 三个虾饺。没有座位、英文 menu 都没有、收银机叮叮响。SF Chinatown 不是给游客看的那条 Grant Ave，是 Stockton 这条。"
+    },
+
+    {
+      "place_id": "tennessee_valley_trail",
+      "name": "Tennessee Valley Trail",
+      "place_type": "point_of_attraction",
+      "category": "trail",
+      "city": "Mill Valley (Marin Headlands)",
+      "address": "Tennessee Valley Rd Trailhead, Mill Valley, CA 94941",
+      "hours_note": "Sunrise to sunset — best 07:30–09:30 weekend mornings before lot fills. First 1 mile is flat valley with coastal cypress + bay laurel shade; second half opens to coastal bluff (apply SPF50 mineral before the open section). Marine layer fog through ~11am makes this a UV-safe window for sensitive skin.",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "outdoor", "weight": 0.95 },
+          { "tag": "quiet", "weight": 0.9 },
+          { "tag": "restorative", "weight": 0.92 },
+          { "tag": "natural_light", "weight": 0.85 },
+          { "tag": "spacious", "weight": 0.88 },
+          { "tag": "slow", "weight": 0.8 },
+          { "tag": "low_noise", "weight": 0.85 },
+          { "tag": "shaded", "weight": 0.7 },
+          { "tag": "familiar", "weight": 0.6 }
+        ],
+        "pacing_roles": ["opening", "breathing"],
+        "emotional_roles": ["restore", "slow_down", "feel_alive"],
+        "energy_cost": "medium",
+        "chaos_tolerance": "very_low",
+        "social_fit": ["solo", "couple", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["mill_valley_downtown", "stinson_beach_offseason", "osmosis_freestone"],
+          "good_before": []
+        }
+      },
+      "logistics": {
+        "parking": "easy_free",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 90,
+        "booking_links": [
+          { "label": "NPS — Tennessee Valley Trail", "url": "https://www.nps.gov/goga/planyourvisit/tennessee-valley.htm" }
+        ]
+      },
+      "narrative_hook": "Marin Headlands 最温柔的一条 trail —— 前 1 英里在 coastal cypress 和 bay laurel 树荫下沿溪谷走，marine layer 雾气在头顶过滤掉所有直射 UV。3.4 mile round-trip 一直走可以走到一个隐秘的卵石海滩。对术后皮肤友好：早上 9 点前进去，云雾 + 树冠双层 SPF。"
+    },
+
+    {
+      "place_id": "stinson_beach_offseason",
+      "name": "Stinson Beach (off-season weekday / overcast)",
+      "place_type": "point_of_attraction",
+      "category": "beach",
+      "city": "Stinson Beach",
+      "address": "Stinson Beach, CA 94970 (National Park Service lot at Calle del Mar)",
+      "hours_note": "09:00–sunset — best off-season Oct–Apr or any overcast/foggy day; AVOID summer Saturdays (lot fills 10am). North end (toward Seadrift) is the quiet stretch. UV note: even on overcast Marin coast days, sensitive post-procedure skin needs SPF50 mineral + brimmed hat — fog scatters but does not block UVA.",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "outdoor", "weight": 0.95 },
+          { "tag": "spacious", "weight": 0.95 },
+          { "tag": "quiet", "weight": 0.85 },
+          { "tag": "restorative", "weight": 0.95 },
+          { "tag": "slow", "weight": 0.9 },
+          { "tag": "low_noise", "weight": 0.8 },
+          { "tag": "natural_light", "weight": 0.7 },
+          { "tag": "contemplative", "weight": 0.85 }
+        ],
+        "pacing_roles": ["breathing", "peak"],
+        "emotional_roles": ["restore", "slow_down", "feel_alive"],
+        "energy_cost": "low",
+        "chaos_tolerance": "very_low",
+        "social_fit": ["solo", "couple", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["osmosis_freestone", "mill_valley_downtown"],
+          "good_before": ["tennessee_valley_trail", "mill_valley_downtown"]
+        }
+      },
+      "logistics": {
+        "parking": "easy_free",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 120,
+        "booking_links": [
+          { "label": "NPS — Stinson Beach", "url": "https://www.nps.gov/goga/planyourvisit/stinsonbeach.htm" }
+        ]
+      },
+      "narrative_hook": "翻过 Mt. Tam 那段 panoramic 山路就到了 —— 冬春多云日的 Stinson 是另一个 Stinson：没有夏天的 beach scene，只有海浪声、远处的雾、北端 1.5 mile 几乎空无一人的沙滩。带一杯热的，走到 Seadrift 端折返。post-procedure 友好的前提：必须 overcast 日 + SPF50 mineral + 帽子，避开正午直射。"
+    },
+
+    {
+      "place_id": "mill_valley_downtown",
+      "name": "Mill Valley Downtown (Lytton Square)",
+      "place_type": "point_of_attraction",
+      "category": "town_center",
+      "city": "Mill Valley",
+      "address": "Lytton Square / Throckmorton Ave, Mill Valley, CA 94941",
+      "hours_note": "Most shops 10:00–18:00, cafes from 06:30, Book Passage 09:00–19:00 — town is most still on weekday mornings; Saturdays after 11am gets busier but still local-paced",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "walkable", "weight": 0.9 },
+          { "tag": "quiet", "weight": 0.75 },
+          { "tag": "warm", "weight": 0.75 },
+          { "tag": "slow", "weight": 0.8 },
+          { "tag": "familiar", "weight": 0.7 },
+          { "tag": "intimate", "weight": 0.7 },
+          { "tag": "natural_light", "weight": 0.8 },
+          { "tag": "low_noise", "weight": 0.7 },
+          { "tag": "outdoor", "weight": 0.6 }
+        ],
+        "pacing_roles": ["opening", "breathing", "recovery"],
+        "emotional_roles": ["slow_down", "restore"],
+        "energy_cost": "low",
+        "chaos_tolerance": "low",
+        "social_fit": ["solo", "couple", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["tennessee_valley_trail", "stinson_beach_offseason"],
+          "good_before": ["hog_island_marshall", "stinson_beach_offseason", "osmosis_freestone"]
+        }
+      },
+      "logistics": {
+        "parking": "paid_lot",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 60,
+        "booking_links": [
+          { "label": "Book Passage Corte Madera (sister shop)", "url": "https://www.bookpassage.com/" },
+          { "label": "Equator Coffees Mill Valley", "url": "https://www.equatorcoffees.com/" }
+        ]
+      },
+      "narrative_hook": "金门大桥过去 15 分钟的红杉脚下小镇 —— Lytton Square 那个广场坐下来一杯 Equator 咖啡 + 一本 Book Depot 隔壁拿的 paperback，redwood 树冠下的过滤光、邻桌全是本地人。没有 'do SF' 的游客密度，是 Marin 早午餐 + 慢逛书店那个版本。"
+    },
+
+    {
+      "place_id": "hog_island_marshall",
+      "name": "Hog Island Oyster Co. (Marshall Farm)",
+      "place_type": "restaurant",
+      "category": "oyster_farm",
+      "city": "Marshall (Tomales Bay)",
+      "address": "20215 Shoreline Hwy, Marshall, CA 94940",
+      "hours_note": "Fri–Mon 09:00–17:00, reservation required for picnic tables (Boat Oyster Bar walk-in but small) — weekday late-morning is the locals-only window. Outdoor seating under awnings + bay-side cypress = filtered light, UV-friendly for sensitive skin if you wear a hat.",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "outdoor", "weight": 0.9 },
+          { "tag": "quiet", "weight": 0.75 },
+          { "tag": "restorative", "weight": 0.85 },
+          { "tag": "slow", "weight": 0.85 },
+          { "tag": "natural_light", "weight": 0.8 },
+          { "tag": "spacious", "weight": 0.8 },
+          { "tag": "intimate", "weight": 0.7 },
+          { "tag": "low_noise", "weight": 0.7 },
+          { "tag": "authentic", "weight": 0.85 }
+        ],
+        "pacing_roles": ["peak", "breathing"],
+        "emotional_roles": ["restore", "feel_alive", "slow_down"],
+        "energy_cost": "low",
+        "chaos_tolerance": "very_low",
+        "social_fit": ["solo", "couple", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": ["osmosis_freestone"],
+          "good_before": ["mill_valley_downtown", "tennessee_valley_trail", "stinson_beach_offseason"]
+        }
+      },
+      "logistics": {
+        "parking": "easy_free",
+        "kid_friendly": true,
+        "reservation_model": "reservation_required",
+        "estimated_duration_minutes": 90,
+        "booking_links": [
+          { "label": "Hog Island — book a picnic table", "url": "https://hogislandoysters.com/visit/marshall/" }
+        ]
+      },
+      "restaurant": {
+        "cuisine_type": ["oysters", "seafood"],
+        "price_range": "$$",
+        "top_dishes": [
+          { "name": "Sweetwater Oysters (raw, dozen)", "note": "招牌 — farm 自养，从水里到盘子 20 分钟" },
+          { "name": "Shuck-Your-Own (bag of 25)", "note": "$30 一袋，给你刀和手套，自己在木桌上撬 —— 无需点单决策" },
+          { "name": "BBQ Oysters (chipotle bourbon butter)", "note": "烤生蚝，热的版本配冷白" },
+          { "name": "Clam Chowder", "note": "海湾边喝热汤的仪式" },
+          { "name": "Local White Wine (Sonoma Coast Chardonnay)", "note": "by the glass，配生蚝" }
+        ],
+        "ordering_logic_hint": "选 'Shuck-Your-Own bag of 25 + 一杯 Sonoma white' —— 整顿饭只做一次决定，剩下 90 分钟就是开蚝、看雾散、什么都不想。比 Ferry Building 那家网红店安静一个量级。"
+      },
+      "narrative_hook": "Tomales Bay 东岸的牡蛎农场 —— 木桌沿海湾排开，雾从对岸 Point Reyes 漫过来。Shuck-your-own 模式给你刀和手套，没有 server 没有 menu 反复确认。本地人专程开车 1 小时来这里坐 2 小时，因为这是 'eating slowness itself' 的地方。"
+    },
+
+    {
+      "place_id": "osmosis_freestone",
+      "name": "Osmosis Day Spa Sanctuary",
+      "place_type": "point_of_attraction",
+      "category": "spa",
+      "city": "Freestone",
+      "address": "209 Bohemian Hwy, Freestone, CA 95472",
+      "hours_note": "Daily 09:00–19:30 — cedar enzyme bath sessions every 45 min, reservation required ≥48h ahead. Adult-only sanctuary. UV-safe (indoor + garden under redwood canopy). NO chlorine pools, NO high-heat saunas — cedar enzyme bath is dry, lukewarm (~38°C / 100°F), heated by enzymatic fermentation. Safe for 12+ days post-photofacial.",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "restorative", "weight": 0.98 },
+          { "tag": "quiet", "weight": 0.95 },
+          { "tag": "intimate", "weight": 0.9 },
+          { "tag": "slow", "weight": 0.95 },
+          { "tag": "low_noise", "weight": 0.95 },
+          { "tag": "warm", "weight": 0.85 },
+          { "tag": "natural_light", "weight": 0.75 },
+          { "tag": "contemplative", "weight": 0.92 },
+          { "tag": "outdoor", "weight": 0.6 }
+        ],
+        "pacing_roles": ["closing", "recovery"],
+        "emotional_roles": ["restore", "slow_down"],
+        "energy_cost": "low",
+        "chaos_tolerance": "very_low",
+        "social_fit": ["solo", "couple"],
+        "compatibility_hints": {
+          "good_after": [],
+          "good_before": ["hog_island_marshall", "stinson_beach_offseason", "tennessee_valley_trail", "mill_valley_downtown"]
+        }
+      },
+      "logistics": {
+        "parking": "easy_free",
+        "kid_friendly": false,
+        "reservation_model": "reservation_required",
+        "estimated_duration_minutes": 90,
+        "booking_links": [
+          { "label": "Osmosis — book cedar enzyme bath", "url": "https://www.osmosis.com/" }
+        ]
+      },
+      "narrative_hook": "西 Sonoma 红杉林深处的日式 sanctuary —— signature 是 cedar enzyme bath：埋进发酵的香柏木屑里，体温被 enzymatic heat 温柔升起来（~38°C，不是 sauna 的高温），不是水浴所以没有 chlorine 问题。出来后在 zen tea garden 散步、躺 hammock。整套 ritual 90 分钟从头到尾被设计好，你不用做任何决定。$130/session，adult-only。术后皮肤友好的 closing 选择。"
     }
 
   ]
