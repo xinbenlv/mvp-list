@@ -39,6 +39,55 @@ You will be invoked **2 or 3 times in parallel**, each time with a different `Co
 - Everything else in the output template stays the same.
 - Do not refer to other plans ("Plan B does X") — you don't know what they look like.
 - Reflect the Concept's `theme_anchor` in your tone and stop selection (cultural_restorative vs outdoor_exploratory vs social_high_energy vs quiet_intimate).
+- After the markdown plan, you MUST emit a single-line `<!-- PLAN_META {…} -->` JSON sidecar. The wrapper strips it before rendering, but the **frontend transformer reads `stops` directly from PLAN_META — it does NOT re-parse your markdown**. So whatever you wrote in the markdown body for each stop (one_liner, why_fits_today paragraph, logistics line, order block, tip, transition), mirror it into the `stops[i]` object below. If the two diverge, the frontend will silently lose information.
+
+### PLAN_META schema (mandatory keys)
+
+```jsonc
+{
+  "day_theme": "<str>",
+  "pitch": "<str — the 一句话 pitch verbatim>",
+  "theme_anchor": "cultural_restorative" | "outdoor_exploratory" | "social_high_energy" | "quiet_intimate",
+  "mood_tags": ["<str>", ...],
+  "emotional_arc": ["<pacing label>", "<pacing label>", "<pacing label>", "<pacing label>"],
+  "stop_place_ids": ["<place_id from candidates>", ... 4],
+  "stop_names": ["<display name>", ... 4],
+  "adaptive_branches": [{"condition": "...", "alternative": "..."}],
+  "composer_note": "<empty unless you used the 'name the gap' rule>",
+  "stops": [
+    {
+      "stop_index": 0,                        // 0..3, matches markdown order
+      "time": "HH:MM",
+      "place_id": "<from candidates>",
+      "place_name": "<display name>",
+      "one_liner": "<the > sensory quote line under the stop header>",
+      "why_fits_today": "<full Why this fits today paragraph>",
+      "logistics": {
+        "raw": "<full Logistics line as written, with emoji>",
+        "drive_time_min": 0,                  // int or null
+        "parking": "free | street | $30 garage | null",
+        "kid_friendly": true,                 // bool or null
+        "reservation_note": "<text or null>",
+        "booking_links": [{"label": "Tickets ($30)", "url": "https://..."}],
+        "transit_estimate_usd": 30            // number or null
+      },
+      "order_recommendations": null,          // null for non-restaurants
+      // for restaurants:
+      // "order_recommendations": {
+      //   "menu_listed": ["<dish>", ...],
+      //   "bold_picks": ["<dish subset>", ...],
+      //   "logic_text": "<the ordering reasoning paragraph with **bold** dishes>"
+      // },
+      "tip": "<insider tip or null>",
+      "transition_to_next": "<qualitative phrase or null for last stop>",
+      "transition_drive_min": 8               // int or null
+    }
+    // ... 4 total
+  ]
+}
+```
+
+`stops` MUST be length 4 and MUST mirror the four markdown stops in the same order. If you write a stop in the markdown body, it MUST have a `stops[i]` entry. Missing entries = silently broken frontend.
 
 ---
 

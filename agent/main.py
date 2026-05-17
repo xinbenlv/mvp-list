@@ -27,12 +27,14 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import Any
 
 from agent.compose.composer import PlanComposer
 from agent.compose.concepts import generate_concepts_simple
 from agent.intake.orchestrator import InitialInput, IntakeOrchestrator
 from agent.present.diversity import check_diversity, deduplicate_first_stops
 from agent.present.format import format_proposals
+from agent.present.transformer import build_envelope
 from agent.state import (
     EnergyProfile,
     IntakeState,
@@ -174,8 +176,104 @@ def _load_mock_state_from_persona(persona_id: str = "mia") -> IntakeState:
     return state
 
 
+def _frontend_persona_id(persona_id: str) -> str:
+    """Map CLI persona ID (e.g. `garry_tan`) to the frontend's short id (`garry`).
+
+    Frontend's reference JSONs key on the short first-name form (`garry`,
+    `mia`, etc.) — keep this mapping local since it's purely cosmetic.
+    """
+    if "_" in persona_id:
+        return persona_id.split("_", 1)[0]
+    return persona_id
+
+
+def _write_frontend_json(
+    plans: list[PlanResult],
+    out_dir: Path,
+    *,
+    persona_id: str,
+    initial_text: str,
+) -> list[Path]:
+    """Write one `{plan, trip_context}` JSON per PlanResult into `out_dir`.
+
+    Filename pattern: `<persona_short>_<theme_anchor>.json` so the 3 outputs
+    from a single run don't collide. Returns the list of written paths so
+    main() can report them on stderr.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    short_persona = _frontend_persona_id(persona_id)
+    # Minimum trip_context the frontend templates read — date_label /
+    # time_window / origin / companions / vehicle. The composer doesn't own
+    # any of these today, so they're a deliberate stub; once intake captures
+    # them this function will populate from IntakeState instead.
+    # BLOCKER FIX (reverse-integration audit): frontend templates dereference
+    # trip_context.{date_label, time_window, origin, companions, vehicle}.
+    # Aurora hero.tsx calls companions.join(", ") — undefined → TypeError on
+    # render. Until intake actually populates these fields, ship sensible
+    # per-persona stubs so the demo doesn't crash.
+    _PERSONA_TRIP_CONTEXT_STUBS: dict[str, dict[str, Any]] = {
+        "mia": {
+            "date_label": "Sat · Jan 10 · 2026",
+            "time_window": "14:00 → 21:00",
+            "origin": "Sunnyvale",
+            "companions": ["partner", "baby"],
+            "vehicle": "car",
+        },
+        "garry": {
+            "date_label": "Sat · Jan 10 · 2026",
+            "time_window": "09:00 → 21:00",
+            "origin": "San Francisco",
+            "companions": ["family"],
+            "vehicle": "transit + walking",
+        },
+        "alex": {
+            "date_label": "Sat · Jan 10 · 2026",
+            "time_window": "10:00 → 23:00",
+            "origin": "Lower Haight, SF",
+            "companions": ["friends"],
+            "vehicle": "Muni + walking",
+        },
+        "sam": {
+            "date_label": "Sat · Jan 10 · 2026",
+            "time_window": "09:00 → 19:00",
+            "origin": "SF Mission / Marin-adjacent",
+            "companions": [],
+            "vehicle": "car",
+        },
+    }
+    trip_context_stub: dict[str, Any] = {
+        **_PERSONA_TRIP_CONTEXT_STUBS.get(short_persona, _PERSONA_TRIP_CONTEXT_STUBS["mia"]),
+        # Keep backend-side metadata alongside frontend-expected fields so
+        # downstream consumers (e.g. analytics) can still read them.
+        "persona_id": short_persona,
+        "intake_summary": initial_text.strip()[:240],
+        "today_is": "2026-01-10",
+    }
+    written: list[Path] = []
+    for plan in plans:
+        anchor = plan.theme_anchor.value if plan.theme_anchor else "plan"
+        filename = f"{short_persona}_{anchor}.json"
+        out_path = out_dir / filename
+        envelope = build_envelope(
+            plan,
+            persona_id=short_persona,
+            plan_id=f"{short_persona}_{anchor}",
+            trip_context=trip_context_stub,
+        )
+        out_path.write_text(
+            json.dumps(envelope, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        written.append(out_path)
+    return written
+
+
 async def run_once(
-    initial_text: str, *, mock_intake: bool = False, persona_id: str = "mia"
+    initial_text: str,
+    *,
+    mock_intake: bool = False,
+    persona_id: str = "mia",
+    emit_frontend_json: Path | None = None,
 ) -> str:
     """End-to-end pipeline. Returns the final ProposalSet markdown.
 
@@ -224,6 +322,16 @@ async def run_once(
         for v in violations:
             print(f"#   - {v}", file=sys.stderr)
 
+    if emit_frontend_json is not None:
+        written = _write_frontend_json(
+            plans,
+            emit_frontend_json,
+            persona_id=persona_id,
+            initial_text=initial_text,
+        )
+        for path in written:
+            print(f"# frontend-json: wrote {path}", file=sys.stderr)
+
     intake_summary = f'你说: "{initial_text.strip()[:60]}"'
     if mock_intake:
         intake_summary += f" — mock-intake run ({persona_id} persona)."
@@ -244,12 +352,28 @@ def main() -> None:
         default="mia",
         help="Persona ID for --mock-intake (mia | garry_tan | alex_chen | sam_reyes)",
     )
+    parser.add_argument(
+        "--emit-frontend-json",
+        type=Path,
+        default=None,
+        metavar="DIR",
+        help=(
+            "Also write {plan, trip_context} JSON envelopes per PlanResult "
+            "into DIR (one file per theme_anchor) so the day-composer-app "
+            "frontend can render them."
+        ),
+    )
     args = parser.parse_args()
 
     _load_dotenv()
     initial_text = sys.stdin.read()
     markdown = asyncio.run(
-        run_once(initial_text, mock_intake=args.mock_intake, persona_id=args.persona)
+        run_once(
+            initial_text,
+            mock_intake=args.mock_intake,
+            persona_id=args.persona,
+            emit_frontend_json=args.emit_frontend_json,
+        )
     )
     sys.stdout.write(markdown)
     sys.stdout.write("\n")

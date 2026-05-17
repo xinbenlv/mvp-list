@@ -223,12 +223,79 @@ class Concept(BaseModel):
     theme_anchor: ThemeAnchor
 
 
+class BookingLink(BaseModel):
+    """Booking link mirroring frontend Logistics.booking_links entries.
+
+    Frontend tolerates either a bare URL string OR a `{label, url}` dict; we
+    standardize on the dict form so JSON output is consistent.
+    """
+
+    label: str
+    url: str
+
+
+class Logistics(BaseModel):
+    """Per-stop logistics, mirrors frontend `Logistics` in trip-plan.ts.
+
+    `raw` is the pre-formatted human-readable line with emoji ("🚗 22min · 🅿️
+    free · …"). All other fields are nullable since not every stop surfaces
+    every detail.
+    """
+
+    raw: str = ""
+    drive_time_min: int | None = None
+    parking: str | None = None
+    kid_friendly: bool | None = None
+    reservation_note: str | None = None
+    booking_links: list[BookingLink] = Field(default_factory=list)
+    transit_estimate_usd: float | None = None
+
+
+class OrderRecs(BaseModel):
+    """Per-restaurant ordering recommendations, mirrors frontend `OrderRecs`.
+
+    Set to None on `Stop` for non-restaurant stops.
+    """
+
+    menu_listed: list[str] = Field(default_factory=list)
+    bold_picks: list[str] = Field(default_factory=list)
+    logic_text: str = ""
+
+
+class Stop(BaseModel):
+    """Per-stop structured payload, mirrors frontend `Stop` in trip-plan.ts.
+
+    Composer LLM emits this directly inside the PLAN_META sidecar so we can
+    avoid fragile markdown parsing downstream. `image_url` is optional —
+    Composer doesn't source images today; frontend renders gradient fallbacks
+    when null.
+    """
+
+    stop_index: int
+    time: str = ""
+    place_id: str = ""
+    place_name: str = ""
+    one_liner: str = ""
+    why_fits_today: str = ""
+    logistics: Logistics = Field(default_factory=Logistics)
+    order_recommendations: OrderRecs | None = None
+    tip: str | None = None
+    transition_to_next: str | None = None
+    transition_drive_min: int | None = None
+    image_url: str | None = None
+
+
 class PlanResult(BaseModel):
     """Composer output wrapper (eng design Phase 3a).
 
     `markdown` is the user-facing plan (the wrapper strips the PLAN_META
     sidecar comment before storing). The rest of the fields are parsed
     metadata used by Phase 3b's diversity check + downstream rendering.
+
+    `stops` carries the per-stop structured payload the Composer LLM now
+    emits directly in PLAN_META (so the frontend transformer doesn't have to
+    re-parse markdown). May be empty when the LLM is in stub mode or when
+    the sidecar omitted it.
     """
 
     markdown: str
@@ -239,6 +306,7 @@ class PlanResult(BaseModel):
     emotional_arc: list[str] = Field(default_factory=list)
     stop_place_ids: list[str] = Field(default_factory=list)
     stop_names: list[str] = Field(default_factory=list)
+    stops: list[Stop] = Field(default_factory=list)
     adaptive_branches: list[dict[str, str]] = Field(default_factory=list)
     composer_note: str = ""
     raw_metadata: dict[str, Any] = Field(default_factory=dict)
@@ -400,6 +468,10 @@ __all__ = [
     "ExperienceRequest",
     "PlaceCandidate",
     "Concept",
+    "BookingLink",
+    "Logistics",
+    "OrderRecs",
+    "Stop",
     "PlanResult",
     "CritiqueResult",
     "RouterDecision",
