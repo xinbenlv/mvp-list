@@ -1,49 +1,64 @@
 # Installation
 
-This document explains how to install the `mvp-list` skill from this repository.
+This document explains how to install the MVP List skills from this repository.
 
-The skill package lives at:
+The skill packages live at:
 
 ```text
-skill/mvp-list/
+skill/mvp-list-curate/
+skill/mvp-list-enrich/
+skill/mvp-list-propose/
+skill/mvp-list-render/
 ```
 
 ## Prerequisites
 
 - This repository is available locally.
 - Codex and/or Claude are configured to load local skills.
-- Optional: `gbrain` is installed and configured if you want `/mvp-list add ...` to write indexed places directly into gbrain.
+- Optional: `gbrain` is installed and configured if you want enriched Markdown records to be written directly into gbrain.
 
 ## Install For Codex
 
-Create or update a symlink from Codex's skills directory to this repository's skill package:
+Create or update symlinks from Codex's skills directory to this repository's skill packages:
 
 ```bash
 mkdir -p ~/.codex/skills
-ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list ~/.codex/skills/mvp-list
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-curate ~/.codex/skills/mvp-list-curate
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-enrich ~/.codex/skills/mvp-list-enrich
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-propose ~/.codex/skills/mvp-list-propose
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-render ~/.codex/skills/mvp-list-render
 ```
 
-Verify the skill file exists through the Codex skills path:
+Verify the skill files exist through the Codex skills path:
 
 ```bash
-test -f ~/.codex/skills/mvp-list/SKILL.md
+test -f ~/.codex/skills/mvp-list-curate/SKILL.md
+test -f ~/.codex/skills/mvp-list-enrich/SKILL.md
+test -f ~/.codex/skills/mvp-list-propose/SKILL.md
+test -f ~/.codex/skills/mvp-list-render/SKILL.md
 ```
 
 Restart Codex after installing the symlink so the skill metadata is reloaded.
 
 ## Install For Claude
 
-Create or update a symlink from Claude's skills directory to this repository's skill package:
+Create or update symlinks from Claude's skills directory to this repository's skill packages:
 
 ```bash
 mkdir -p ~/.claude/skills
-ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list ~/.claude/skills/mvp-list
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-curate ~/.claude/skills/mvp-list-curate
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-enrich ~/.claude/skills/mvp-list-enrich
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-propose ~/.claude/skills/mvp-list-propose
+ln -sfn /Users/zzn/ws/@xinbenlv/mvp-list/skill/mvp-list-render ~/.claude/skills/mvp-list-render
 ```
 
-Verify the skill file exists through the Claude skills path:
+Verify the skill files exist through the Claude skills path:
 
 ```bash
-test -f ~/.claude/skills/mvp-list/SKILL.md
+test -f ~/.claude/skills/mvp-list-curate/SKILL.md
+test -f ~/.claude/skills/mvp-list-enrich/SKILL.md
+test -f ~/.claude/skills/mvp-list-propose/SKILL.md
+test -f ~/.claude/skills/mvp-list-render/SKILL.md
 ```
 
 Restart Claude after installing the symlink so the skill metadata is reloaded.
@@ -69,25 +84,27 @@ If gbrain is missing or no Markdown write entrypoint can be found, the skill sho
 Validate the JSON files:
 
 ```bash
-jq empty skill/mvp-list/references/place.schema.json skill/mvp-list/references/place-template.json
+jq empty skill/_shared/references/place.schema.json skill/_shared/references/place-template.json
 ```
 
 Validate the empty template against the schema if Python `jsonschema` is available:
 
 ```bash
-python3 -c "import json, jsonschema; schema=json.load(open('skill/mvp-list/references/place.schema.json')); data=json.load(open('skill/mvp-list/references/place-template.json')); jsonschema.Draft202012Validator(schema).validate(data); print('template validates')"
+python3 -c "import json, jsonschema; schema=json.load(open('skill/_shared/references/place.schema.json')); data=json.load(open('skill/_shared/references/place-template.json')); jsonschema.Draft202012Validator(schema).validate(data); print('template validates')"
 ```
 
 ## Test Invocation
 
-After installing, invoke the skill with:
+After installing, invoke the skills with prompts such as:
 
 ```text
-/mvp-list add <url>
+Use mvp-list-curate to extract places from this itinerary.
 ```
 
-or:
+```text
+Use mvp-list-enrich to enrich this Google Maps URL into ./demo-md-repo.
+```
 
 ```text
-/mvp-list add <image>
+Use mvp-list-propose on ./demo-md-repo for a Saturday infant-friendly plan, then mvp-list-render the selected plan.
 ```
