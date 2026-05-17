@@ -306,20 +306,24 @@ export default function DemoIndex() {
         </div>
       </footer>
 
-      <style>{`
-        .demo-link:hover {
-          transform: translate(-3px,-3px);
-          box-shadow: 6px 6px 0 #1c1814;
-        }
-        @media (max-width: 860px) {
-          .demo-link {
-            grid-template-columns: 1fr !important;
-          }
-          .demo-link > div:nth-child(3) {
-            padding: 18px !important;
-          }
-        }
-      `}</style>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .demo-link:hover {
+              transform: translate(-3px,-3px);
+              box-shadow: 6px 6px 0 #1c1814;
+            }
+            @media (max-width: 860px) {
+              .demo-link {
+                grid-template-columns: 1fr !important;
+              }
+              .demo-link > div:nth-child(3) {
+                padding: 18px !important;
+              }
+            }
+          `,
+        }}
+      />
     </main>
   );
 }
