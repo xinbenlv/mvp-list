@@ -30,6 +30,8 @@ description: 处理 /mvp-list add <url> 或 /mvp-list add <image>，将餐厅或
 - 字段可以为空，但不能编造。无法确认时写 `null`，并在 `confidence_notes` 说明原因。
 - 所有抓取到的事实都要保留来源 URL 和抓取日期，便于后续重索引。
 - 最终产物是 gbrain 可输入的 Markdown，不是 JSON。结构化字段放在 YAML frontmatter，正文用短小标题保存可读摘要、访问信息、来源和置信度说明。
+- 餐厅必须尽力抓取可搜索的热门菜、招牌菜或高频菜单项，写入 `restaurant.top_dishes`。
+- 景点必须尽力抓取可搜索的重点看点、步道、展区、观景点或活动点，写入 `point_of_attraction.attractions`。
 - 如果用户给的是图片，先从图片中识别店名、招牌、地址、菜单、地标或页面文字，再按文本地点继续处理。
 
 ## 工作流
@@ -66,8 +68,12 @@ description: 处理 /mvp-list add <url> 或 /mvp-list add <image>，将餐厅或
    - 生成 Markdown 后，尽量把 frontmatter 解析成对象并用 `references/place.schema.json` 校验；校验失败时不要写入，改为 `needs_review` 并说明失败字段。
    - Markdown 正文至少包含 `Summary`、`Visit Facts`、`Sources`、`Confidence Notes` 小节。
    - 通用字段优先级：规范 ID、名称、地址、坐标、营业时间、地点类型。
-   - 餐厅字段优先级：菜系、评分、价格、招牌菜、氛围。
-   - 景点字段优先级：主要看点数组、适合宝宝/家庭的说明、预计停留时间。
+   - 餐厅字段优先级：菜系、评分、价格、热门菜/招牌菜、氛围。
+     - 热门菜来源优先级：官方菜单、订餐平台、点评平台、公开菜单聚合页；只记录能找到来源的菜名。
+     - 每个 `restaurant.top_dishes[]` 必须包含 `name`、`description`、`source_url`；无法确认描述时 `description: null`，不要编造口味。
+   - 景点字段优先级：重点看点数组、适合宝宝/家庭的说明、预计停留时间。
+     - 重点看点来源优先级：官方公园/场馆页面、官方地图或 brochure、保护组织/旅游机构、路线平台；只记录能找到来源的看点。
+     - 每个 `point_of_attraction.attractions[]` 必须包含 `name`、`description`、`source_url`，用于结构化搜索具体“去看什么”。
 
 5. gbrain Markdown 写入
    - 如果 `$GBRAIN_REPO` 已设置，先读取该仓库的 README、AGENTS、CLAUDE、Codex 或索引脚本，找到现有写入入口。

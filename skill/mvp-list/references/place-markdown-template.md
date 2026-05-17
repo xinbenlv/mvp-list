@@ -45,13 +45,13 @@ Unknown.
 ## Restaurant Notes
 
 - Cuisine: unknown
-- Top dishes: unknown
+- Popular dishes: fill `restaurant.top_dishes` in frontmatter with sourced dish names.
 - Vibe: unknown
 
 ## Point Of Attraction Notes
 
 - Category: unknown
-- Main attractions: unknown
+- Key points of interest: fill `point_of_attraction.attractions` in frontmatter with sourced trail, viewpoint, exhibit, landmark, or activity names.
 - Estimated visit duration: unknown
 - Baby/family notes: unknown
 
