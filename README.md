@@ -1,5 +1,11 @@
 # MVP List
 
+Video:
+
+- Loom: https://www.loom.com/share/ca3b0206677b4876ab366be071eea700
+- YouTube: https://youtu.be/UkfaMJhq5qk
+- Twitter: https://x.com/ZainanZhou/status/2055841420318261731?s=20
+
 Powered by GBrain and built with GStack, "MVP List" is a small project for planning family getaway trips from a growing backlog of restaurants and points of attraction.
 
 The current focus is the MVP List pipeline: curate candidate places, enrich place Markdown for structured search, propose ranked day plans, and render the chosen plan as a timed agenda.
