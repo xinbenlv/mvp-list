@@ -38,6 +38,14 @@ const BUNDLES: Record<string, Bundle> = {
   },
 };
 
+// Required for `output: 'export'` — enumerate every id so the build can
+// prerender each as a static JSON file.
+export function generateStaticParams() {
+  return Object.keys(BUNDLES).map((id) => ({ id }));
+}
+
+export const dynamic = "force-static";
+
 export function GET(
   _req: Request,
   { params }: { params: { id: string } },
