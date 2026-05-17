@@ -69,7 +69,9 @@ export function StopRow({
   const eyebrow = `Movement ${ROMAN[index] ?? index + 1} · ${
     pacingLabel ? PACING_LABEL[pacingLabel] ?? pacingLabel : "Stop"
   }`;
-  const useDarkPoemColor = index >= 2;
+  // With image present, gradient overlay makes everything readable in white.
+  // Without image, dark gradients (i >= 2) also need white; only soft pastels (i < 2) get accent_deep.
+  const useDarkPoemColor = !!stop.image_url || index >= 2;
   const bookingUrl = firstBookingUrl(stop);
 
   return (
@@ -89,22 +91,36 @@ export function StopRow({
             isEven ? "order-2 max-md:order-none" : ""
           }`}
           style={{
-            background: grad,
-            color: index >= 2 ? "#fff" : "var(--ink)",
+            background: stop.image_url
+              ? `url(${stop.image_url}) center/cover`
+              : grad,
+            color: "#fff",
             boxShadow: "0 40px 100px -30px rgba(201,123,140,.5)",
             transform: isEven ? "rotate(2deg)" : "rotate(-1.5deg)",
           }}
         >
+          {stop.image_url && (
+            <div
+              className="pointer-events-none absolute inset-0 rounded-[28px]"
+              style={{
+                background:
+                  "linear-gradient(to bottom,rgba(0,0,0,0) 30%,rgba(0,0,0,.55) 100%)",
+              }}
+            />
+          )}
           <div
             className="absolute left-[30px] right-[30px] top-[30px] z-[2]"
             style={{
               fontFamily: "var(--font-caveat), cursive",
               fontWeight: 500,
               fontSize: 22,
-              opacity: 0.8,
+              opacity: 0.9,
               lineHeight: 1.2,
               transform: "rotate(-1deg)",
-              color: useDarkPoemColor ? undefined : "var(--accent-deep)",
+              color: useDarkPoemColor ? "#fff" : "var(--accent-deep)",
+              textShadow: useDarkPoemColor
+                ? "0 2px 12px rgba(0,0,0,.6)"
+                : undefined,
               whiteSpace: "pre-line",
             }}
           >

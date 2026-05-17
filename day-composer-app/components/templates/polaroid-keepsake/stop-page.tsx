@@ -31,6 +31,7 @@ interface PolaroidProps {
 function Polaroid({ stop, index }: PolaroidProps) {
   const grad = POLAROID_GRADIENTS[index % POLAROID_GRADIENTS.length];
   const rotation = ROTATIONS[index % ROTATIONS.length];
+  const hasImage = !!stop.image_url;
   return (
     <div
       className="relative px-[18px] pb-[70px] pt-[18px] transition-transform duration-300 hover:rotate-0 hover:scale-[1.02]"
@@ -51,13 +52,18 @@ function Polaroid({ stop, index }: PolaroidProps) {
       />
       <div
         className="relative flex aspect-square w-full items-end overflow-hidden p-6 text-white"
-        style={{ background: grad }}
+        style={{
+          background: hasImage
+            ? `url(${stop.image_url}) center/cover`
+            : grad,
+        }}
       >
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background:
-              "radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.35) 100%)",
+            background: hasImage
+              ? "linear-gradient(to bottom,rgba(0,0,0,0) 50%,rgba(0,0,0,.55) 100%)"
+              : "radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.35) 100%)",
           }}
         />
         <div
@@ -67,7 +73,7 @@ function Polaroid({ stop, index }: PolaroidProps) {
             fontStyle: "italic",
             fontSize: 34,
             lineHeight: 1,
-            textShadow: "0 2px 12px rgba(0,0,0,.4)",
+            textShadow: "0 2px 12px rgba(0,0,0,.7)",
           }}
         >
           {stop.place_name}

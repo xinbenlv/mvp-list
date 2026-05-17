@@ -72,6 +72,11 @@ export interface Stop {
   tip: string | null;
   transition_to_next: string | null;
   transition_drive_min: number | null;
+  /**
+   * Optional frontend convenience. Direct image URL (hotlinkable).
+   * Templates fall back to gradient placeholders when null/undefined.
+   */
+  image_url?: string | null;
 }
 
 export interface Logistics {

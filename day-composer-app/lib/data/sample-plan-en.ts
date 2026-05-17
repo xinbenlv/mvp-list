@@ -1,6 +1,35 @@
 import type { TripContext, TripPlan } from "@/lib/types/trip-plan";
 
 /**
+ * Place → image URL map. Stable Wikimedia/Commons hotlinks verified 200 OK.
+ * When the schema later adds image_url upstream, we can drop this map.
+ */
+const IMAGES: Record<string, string> = {
+  alviso_adobe:
+    "https://upload.wikimedia.org/wikipedia/commons/8/82/Alviso_Adobe.JPG",
+  sandy_wool_lake:
+    "https://upload.wikimedia.org/wikipedia/commons/4/46/Sandy_Wool_Lake_in_Ed_R._Levin_Country_Park.JPG",
+  dong_que:
+    "https://upload.wikimedia.org/wikipedia/commons/5/59/Banh_Xeo_with_fish_sauce_and_vegetables.jpg",
+  philz_milpitas:
+    "https://upload.wikimedia.org/wikipedia/commons/a/ae/Philz_Coffee_-_24th-Folsom_-_SF%2C_CA.jpg",
+  sightglass_sf:
+    "https://upload.wikimedia.org/wikipedia/commons/6/65/Sightglass_Coffee_at_Boot_and_Shoe_Service_Cafe_%285991331999%29.jpg",
+  sfmoma:
+    "https://upload.wikimedia.org/wikipedia/commons/5/57/2017_SFMOMA_from_Yerba_Buena_Gardens.jpg",
+  yerba_buena_gardens:
+    "https://upload.wikimedia.org/wikipedia/commons/a/a8/2017_Yerba_Buena_Gardens.jpg",
+  burma_superstar:
+    "https://upload.wikimedia.org/wikipedia/commons/1/1c/Fermented_Tea_Leaf_Salad_%289319609945%29.jpg",
+  top_of_the_mark:
+    "https://upload.wikimedia.org/wikipedia/commons/4/4d/Top_of_the_Mark_%2816683414895%29.jpg",
+};
+
+export function imageForPlace(placeId: string): string | null {
+  return IMAGES[placeId] ?? null;
+}
+
+/**
  * English translation of the `mia_v1` plan from sample-plans.json.
  * Hand-translated for the demo (Aman/Vogue editorial register, not literal).
  *
@@ -658,3 +687,20 @@ export const TRIP_CONTEXT_GARRY_GOLDEN_NIGHT: TripContext = {
   companions: ["+partner", "+toddler"],
   vehicle: "walk + uber",
 };
+
+// ---------- Attach real images to all stops (post-construction) ----------
+// Done here once so each Stop literal above stays readable, and so any future
+// English plans we add automatically pick up images by place_id.
+
+for (const plan of [
+  SAMPLE_PLAN_MIA_V1_EN,
+  SAMPLE_PLAN_GARRY_FAMILY_DAY_EN,
+  SAMPLE_PLAN_GARRY_CULTURAL_DAY_EN,
+  SAMPLE_PLAN_GARRY_GOLDEN_NIGHT_EN,
+]) {
+  for (const stop of plan.stops) {
+    if (stop.image_url == null) {
+      stop.image_url = imageForPlace(stop.place_id);
+    }
+  }
+}

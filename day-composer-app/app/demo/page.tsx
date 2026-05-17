@@ -1,56 +1,56 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Demo — Day Composer",
+  title: "For Garry — Day Composer",
 };
 
 interface DemoEntry {
   href: string;
   number: string;
-  persona: string;
   title: string;
   template: string;
   mood: string;
+  hero: string; // direct image URL
   blurb: string;
-  swatch: string;
+  meta: string;
 }
 
 const DEMOS: DemoEntry[] = [
   {
     href: "/demo/family-day",
-    number: "01",
-    persona: "Garry",
+    number: "I",
     title: "A South Bay decompression",
     template: "Polaroid Keepsake",
     mood: "restorative · sun-warmed · lingering",
     blurb:
-      "After a high-stim week in SF, four slow stops south of the city — adobe, lakeside, Vietnamese walk-in, coffee on the way home.",
-    swatch:
-      "linear-gradient(135deg,#F4ECDF 0%,#C28D8A 50%,#6B3D49 100%)",
+      "When the city week leaves you hollow, drive south. Four slow stops — an adobe in afternoon light, a lakeside park, a walk-in Vietnamese spot you can bring the kid to, and a coffee on the way home.",
+    meta: "Sat · Jan 10 · 14:30–21:00 · with partner + toddler",
+    hero:
+      "https://upload.wikimedia.org/wikipedia/commons/4/46/Sandy_Wool_Lake_in_Ed_R._Levin_Country_Park.JPG",
   },
   {
     href: "/demo/cultural-day",
-    number: "02",
-    persona: "Garry",
+    number: "II",
     title: "A cinematic line through the city",
     template: "Cinematic Editorial",
     mood: "cinematic · vlog-ready · walkable",
     blurb:
-      "Sightglass north light, SFMOMA's third floor, the Yerba Buena lawn, and Burma Superstar's tableside salad mix — one continuous frame.",
-    swatch:
-      "linear-gradient(155deg,#F8F6F0 0%,#0A0A0A 70%,#DD0F2C 100%)",
+      "A Saturday that stays in the frame. Sightglass north light to start, the SFMOMA photography wing for an anchor, Yerba Buena's lawn to let the kid run, and Burma Superstar's tableside tea-leaf salad as the hero shot.",
+    meta: "Sat · Jan 17 · 10:00–19:30 · walk + uber",
+    hero:
+      "https://upload.wikimedia.org/wikipedia/commons/5/57/2017_SFMOMA_from_Yerba_Buena_Gardens.jpg",
   },
   {
     href: "/demo/golden-night",
-    number: "03",
-    persona: "Garry",
-    title: "A line closing on golden hour",
+    number: "III",
+    title: "The same line, closing on golden hour",
     template: "Aurora Romance",
     mood: "cinematic · golden-hour · vertical close",
     blurb:
-      "The cinematic line, recut for night — drops the park, lifts the closing up to Top of the Mark's 19th-floor lights.",
-    swatch:
-      "radial-gradient(circle at 30% 30%,#FFD3B6 0%,transparent 55%),radial-gradient(circle at 70% 70%,#C97B8C 0%,transparent 60%),#FFF8F0",
+      "The cinematic line, recut for the night. Same opening through SFMOMA and Burma, but the closing lifts vertically — nineteen floors up at Top of the Mark, north window facing the Golden Gate as the city lights itself.",
+    meta: "Sat · Jan 24 · 10:00–21:00 · walk + uber",
+    hero:
+      "https://upload.wikimedia.org/wikipedia/commons/4/4d/Top_of_the_Mark_%2816683414895%29.jpg",
   },
 ];
 
@@ -60,12 +60,12 @@ export default function DemoIndex() {
       style={{
         background: "#F4F1E8",
         minHeight: "100vh",
-        padding: "60px 40px",
+        padding: "60px 40px 80px",
         fontFamily: "system-ui, sans-serif",
         color: "#1c1814",
       }}
     >
-      <header style={{ maxWidth: 1100, margin: "0 auto 50px" }}>
+      <header style={{ maxWidth: 1180, margin: "0 auto 56px" }}>
         <div
           style={{
             fontSize: 11,
@@ -75,37 +75,38 @@ export default function DemoIndex() {
             marginBottom: 14,
           }}
         >
-          Day Composer · Demo Set
+          Day Composer · for Garry
         </div>
         <h1
           style={{
-            fontFamily:
-              "var(--font-fraunces), 'Times New Roman', serif",
+            fontFamily: "var(--font-fraunces), 'Times New Roman', serif",
             fontWeight: 300,
-            fontSize: 64,
+            fontSize: 72,
             letterSpacing: "-.03em",
-            lineHeight: 1,
+            lineHeight: 0.95,
             margin: 0,
-            marginBottom: 16,
+            marginBottom: 18,
           }}
         >
-          One persona,{" "}
-          <em style={{ color: "#8b4a4a" }}>three Saturdays.</em>
+          Garry — here are three Saturdays{" "}
+          <em style={{ color: "#8b4a4a" }}>I&apos;ve put together for you.</em>
         </h1>
         <p
           style={{
             fontFamily: "var(--font-fraunces), serif",
             fontStyle: "italic",
             fontWeight: 300,
-            fontSize: 19,
-            color: "#8a8a85",
-            maxWidth: 720,
+            fontSize: 20,
+            color: "#5a554c",
+            maxWidth: 780,
             lineHeight: 1.5,
             margin: 0,
           }}
         >
-          Three different plans for the same person — Garry — each rendered in
-          the template that best fits its mood. Click any to open the full page.
+          Three different days, all built around what you said you wanted —
+          cinematic frames, kid-friendly windows, walkable density, food with
+          opinion. Pick the one that fits the week you&apos;ve had. Open any of
+          them to see the whole thing laid out.
         </p>
       </header>
 
@@ -114,46 +115,50 @@ export default function DemoIndex() {
           listStyle: "none",
           padding: 0,
           margin: "0 auto",
-          maxWidth: 1100,
+          maxWidth: 1180,
           display: "grid",
-          gap: 24,
+          gap: 28,
         }}
       >
         {DEMOS.map((d) => (
           <li key={d.href}>
             <Link
               href={d.href}
+              className="demo-link"
               style={{
                 display: "grid",
-                gridTemplateColumns: "180px 1fr auto",
-                gap: 32,
-                alignItems: "center",
-                padding: 28,
+                gridTemplateColumns: "320px 1fr auto",
+                gap: 36,
+                alignItems: "stretch",
+                padding: 0,
                 background: "#fff",
                 border: "2px solid #1c1814",
                 textDecoration: "none",
                 color: "#1c1814",
                 transition: "transform .2s, box-shadow .2s",
+                overflow: "hidden",
               }}
-              className="demo-link"
             >
               <div
                 style={{
-                  height: 180,
-                  width: "100%",
-                  background: d.swatch,
                   position: "relative",
+                  minHeight: 240,
+                  width: "100%",
+                  background: `url(${d.hero}) center/cover`,
                   display: "flex",
                   alignItems: "flex-end",
-                  padding: 14,
+                  padding: 18,
                   color: "#fff",
-                  fontFamily: "var(--font-fraunces), serif",
-                  fontStyle: "italic",
-                  fontSize: 18,
-                  textShadow: "0 2px 12px rgba(0,0,0,.4)",
-                  lineHeight: 1.1,
                 }}
               >
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,.7) 100%)",
+                  }}
+                />
                 <span
                   style={{
                     position: "absolute",
@@ -163,48 +168,59 @@ export default function DemoIndex() {
                     fontSize: 11,
                     letterSpacing: ".24em",
                     background: "rgba(0,0,0,.55)",
-                    padding: "4px 8px",
+                    padding: "4px 10px",
+                    backdropFilter: "blur(6px)",
                   }}
                 >
                   {d.number}
                 </span>
-                <span style={{ position: "relative", zIndex: 2 }}>
+                <span
+                  style={{
+                    position: "relative",
+                    zIndex: 2,
+                    fontFamily: "var(--font-fraunces), serif",
+                    fontStyle: "italic",
+                    fontSize: 18,
+                    textShadow: "0 2px 12px rgba(0,0,0,.6)",
+                  }}
+                >
                   {d.template}
                 </span>
               </div>
-              <div>
+              <div style={{ padding: "28px 4px 28px 0" }}>
                 <div
                   style={{
                     fontSize: 10,
                     letterSpacing: ".28em",
                     textTransform: "uppercase",
                     color: "#8b4a4a",
-                    marginBottom: 6,
+                    marginBottom: 8,
                     fontWeight: 700,
                   }}
                 >
-                  Plan {d.number} · for {d.persona}
+                  Day {d.number}
                 </div>
                 <h2
                   style={{
                     fontFamily: "var(--font-fraunces), serif",
                     fontWeight: 400,
-                    fontSize: 32,
+                    fontSize: 34,
                     letterSpacing: "-.015em",
                     margin: 0,
-                    marginBottom: 10,
-                    lineHeight: 1.1,
+                    marginBottom: 12,
+                    lineHeight: 1.05,
                   }}
                 >
                   {d.title}
                 </h2>
                 <p
                   style={{
-                    fontSize: 14.5,
-                    lineHeight: 1.65,
-                    color: "#333",
+                    fontSize: 15,
+                    lineHeight: 1.7,
+                    color: "#2c2820",
                     margin: 0,
-                    marginBottom: 10,
+                    marginBottom: 14,
+                    maxWidth: 620,
                   }}
                 >
                   {d.blurb}
@@ -216,13 +232,27 @@ export default function DemoIndex() {
                     letterSpacing: ".14em",
                     textTransform: "uppercase",
                     color: "#8a8a85",
+                    marginBottom: 6,
                   }}
                 >
-                  {d.mood}
+                  {d.meta}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: 10,
+                    letterSpacing: ".24em",
+                    textTransform: "uppercase",
+                    color: "#a8a195",
+                  }}
+                >
+                  mood · {d.mood}
                 </div>
               </div>
               <div
                 style={{
+                  alignSelf: "center",
+                  paddingRight: 28,
                   fontFamily: "monospace",
                   fontSize: 12,
                   letterSpacing: ".24em",
@@ -240,31 +270,54 @@ export default function DemoIndex() {
 
       <footer
         style={{
-          maxWidth: 1100,
-          margin: "50px auto 0",
+          maxWidth: 1180,
+          margin: "60px auto 0",
           paddingTop: 24,
           borderTop: "1px solid #d4d2cc",
-          display: "flex",
-          justifyContent: "space-between",
-          fontFamily: "monospace",
-          fontSize: 11,
-          letterSpacing: ".16em",
-          textTransform: "uppercase",
-          color: "#8a8a85",
-          flexWrap: "wrap",
+          fontFamily: "var(--font-fraunces), serif",
+          fontStyle: "italic",
+          fontWeight: 300,
+          fontSize: 18,
+          color: "#5a554c",
+          lineHeight: 1.6,
+          display: "grid",
           gap: 14,
         }}
       >
-        <span>day-composer-app · demo set</span>
-        <Link href="/preview" style={{ color: "#1c1814" }}>
-          → also see /preview
-        </Link>
+        <p style={{ margin: 0, maxWidth: 720 }}>
+          Each day reads as a single page — no app shell, no controls. The way
+          they look is the way you&apos;d send them to someone. Want me to
+          re-compose any of them, just say which.
+        </p>
+        <div
+          style={{
+            fontFamily: "monospace",
+            fontSize: 10,
+            letterSpacing: ".24em",
+            textTransform: "uppercase",
+            color: "#a8a195",
+            fontStyle: "normal",
+          }}
+        >
+          — Day Composer ·{" "}
+          <Link href="/preview" style={{ color: "#8b4a4a" }}>
+            also: /preview switcher
+          </Link>
+        </div>
       </footer>
 
       <style>{`
         .demo-link:hover {
           transform: translate(-3px,-3px);
           box-shadow: 6px 6px 0 #1c1814;
+        }
+        @media (max-width: 860px) {
+          .demo-link {
+            grid-template-columns: 1fr !important;
+          }
+          .demo-link > div:nth-child(3) {
+            padding: 18px !important;
+          }
         }
       `}</style>
     </main>

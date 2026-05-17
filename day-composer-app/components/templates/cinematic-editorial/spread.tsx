@@ -78,7 +78,9 @@ export function Spread({ stop, index, pacingLabel, arcVibe }: SpreadProps) {
             isFlip ? "md:order-2" : ""
           }`}
           style={{
-            background: IMG_GRADIENTS[index % IMG_GRADIENTS.length],
+            background: stop.image_url
+              ? `url(${stop.image_url}) center/cover`
+              : IMG_GRADIENTS[index % IMG_GRADIENTS.length],
             color: "var(--ivory)",
           }}
         >

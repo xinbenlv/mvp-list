@@ -26,15 +26,18 @@ export function Restaurant({ stop, index, rec }: RestaurantProps) {
       className="relative overflow-hidden px-[50px] py-[100px] max-md:px-6 max-md:py-[50px]"
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(155deg,#7a0a1c 0%,#3a0510 50%,#0a0203 100%)",
+        background: stop.image_url
+          ? `url(${stop.image_url}) center/cover`
+          : "linear-gradient(155deg,#7a0a1c 0%,#3a0510 50%,#0a0203 100%)",
         color: "var(--ivory)",
       }}
     >
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse at 65% 35%,rgba(221,15,44,.22) 0%,transparent 55%)",
+          background: stop.image_url
+            ? "linear-gradient(155deg,rgba(10,2,3,.55) 0%,rgba(58,5,16,.55) 50%,rgba(10,2,3,.85) 100%)"
+            : "radial-gradient(ellipse at 65% 35%,rgba(221,15,44,.22) 0%,transparent 55%)",
         }}
       />
       <div
