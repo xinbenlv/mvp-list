@@ -31,6 +31,7 @@ from pathlib import Path
 from agent.compose.composer import PlanComposer
 from agent.compose.concepts import generate_concepts_simple
 from agent.intake.orchestrator import InitialInput, IntakeOrchestrator
+from agent.present.diversity import check_diversity, deduplicate_first_stops
 from agent.present.format import format_proposals
 from agent.state import (
     EnergyProfile,
@@ -204,9 +205,22 @@ async def run_once(initial_text: str, *, mock_intake: bool = False) -> str:
     concepts = generate_concepts_simple(state, candidates)
 
     composer = PlanComposer(anthropic_client=anthropic_client)
-    plans: list[PlanResult] = await asyncio.gather(
-        *(composer.run(c, candidates, state) for c in concepts)
+    plans: list[PlanResult] = list(
+        await asyncio.gather(*(composer.run(c, candidates, state) for c in concepts))
     )
+
+    # Phase 3b: enforce diversity across the N plans before rendering.
+    # We log violations to stderr (not stdout) so the demo audience sees only
+    # the clean ProposalSet on stdout.
+    violations = check_diversity(plans)
+    if violations:
+        plans = deduplicate_first_stops(plans, candidates)
+        print(
+            f"# diversity: {len(violations)} violation(s) auto-fixed",
+            file=sys.stderr,
+        )
+        for v in violations:
+            print(f"#   - {v}", file=sys.stderr)
 
     intake_summary = f'你说: "{initial_text.strip()[:60]}"'
     if mock_intake:
