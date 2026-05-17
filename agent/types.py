@@ -224,13 +224,23 @@ class Concept(BaseModel):
 
 
 class PlanResult(BaseModel):
-    """Composer output wrapper (eng design Phase 3a)."""
+    """Composer output wrapper (eng design Phase 3a).
+
+    `markdown` is the user-facing plan (the wrapper strips the PLAN_META
+    sidecar comment before storing). The rest of the fields are parsed
+    metadata used by Phase 3b's diversity check + downstream rendering.
+    """
 
     markdown: str
     day_theme: str
-    pitch: str
+    pitch: str = ""
     theme_anchor: ThemeAnchor
+    mood_tags: list[str] = Field(default_factory=list)
+    emotional_arc: list[str] = Field(default_factory=list)
     stop_place_ids: list[str] = Field(default_factory=list)
+    stop_names: list[str] = Field(default_factory=list)
+    adaptive_branches: list[dict[str, str]] = Field(default_factory=list)
+    composer_note: str = ""
     raw_metadata: dict[str, Any] = Field(default_factory=dict)
 
 

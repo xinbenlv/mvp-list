@@ -47,7 +47,6 @@ from agent.types import (
     EnergyLevel,
     NoveltyLevel,
     PlanResult,
-    SocialFit,
     TasteSignature,
     VibeTag,
     VibeWeight,
@@ -175,12 +174,26 @@ def _load_mock_state_from_persona(persona_id: str = "mia") -> IntakeState:
 
 
 async def run_once(initial_text: str, *, mock_intake: bool = False) -> str:
-    """End-to-end pipeline. Returns the final ProposalSet markdown."""
+    """End-to-end pipeline. Returns the final ProposalSet markdown.
+
+    With API key in .env: real intake (when not mock_intake) + real Composer.
+    With --mock-intake AND no key: stub Composer (Phase 0-style placeholder).
+    With --mock-intake AND key present: stub intake (Mia persona) + REAL Composer.
+    """
+
+    # Resolve client once. If missing, run in stub mode for the Composer too.
+    anthropic_client: object | None = None
+    try:
+        anthropic_client = _make_anthropic_client()
+    except SystemExit:
+        if not mock_intake:
+            raise  # live intake requires a key
+        # Mock-intake without key → Composer also runs in stub mode
 
     if mock_intake:
         state = _load_mock_state_from_persona("mia")
     else:
-        anthropic_client = _make_anthropic_client()
+        assert anthropic_client is not None  # guaranteed by branch above
         orchestrator = IntakeOrchestrator(anthropic_client=anthropic_client)
         state = await orchestrator.run(InitialInput(text=initial_text, images=[]))
 
@@ -190,7 +203,7 @@ async def run_once(initial_text: str, *, mock_intake: bool = False) -> str:
 
     concepts = generate_concepts_simple(state, candidates)
 
-    composer = PlanComposer()
+    composer = PlanComposer(anthropic_client=anthropic_client)
     plans: list[PlanResult] = await asyncio.gather(
         *(composer.run(c, candidates, state) for c in concepts)
     )
