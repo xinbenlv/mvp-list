@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App-wide reset extras (Tailwind preflight already handles most) */
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Suppress horizontal scroll caused by transformed/rotated decorative
+   elements inside templates. */
+body {
+  overflow-x: hidden;
+}
+
+/* ===== Template-scoped styles =====
+   Each template sets its own CSS vars at its root via inline style.
+   The classes below are referenced from React components and rely on the
+   vars being defined locally — they DO NOT leak across templates. */
+
+/* ---- Polaroid Keepsake ---- */
+.pk-root {
+  font-family: var(--font-crimson), "Crimson Pro", serif;
+  color: var(--ink);
+  background: var(--bone);
+}
+.pk-noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at 25% 15%,
+      rgba(194, 141, 138, 0.1) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 75% 75%,
+      rgba(157, 173, 147, 0.1) 0%,
+      transparent 60%
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' seed='12'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.28 0 0 0 0 0.30 0 0 0 0 0 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.85;
+}
+
+/* ---- Cinematic Editorial ---- */
+.ce-root {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  color: var(--jet);
+  background: var(--ivory);
+}
+
+/* ---- Aurora Romance ---- */
+.au-root {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  position: relative;
+}
+.au-mesh::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(
+      ellipse 60% 50% at 20% 15%,
+      var(--peach) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 55% 50% at 85% 20%,
+      var(--blush) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 75% 85%,
+      var(--rose) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 10% 75%,
+      var(--lavender-soft) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 50% 50%,
+      var(--sage-mist) 0%,
+      transparent 50%
+    ),
+    var(--cream);
+  animation: au-meshShift 24s ease-in-out infinite alternate;
+}
+.au-mesh::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.24 0 0 0 0 0.18 0 0 0 0 0.24 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.7;
+}
+@keyframes au-meshShift {
+  0% {
+    transform: scale(1) rotate(0deg) translate(0, 0);
+  }
+  33% {
+    transform: scale(1.06) rotate(1.5deg) translate(2%, -1%);
+  }
+  66% {
+    transform: scale(1.04) rotate(-1deg) translate(-1%, 2%);
+  }
+  100% {
+    transform: scale(1) rotate(0.5deg) translate(0, 0);
+  }
+}
+.au-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--cream) 0%, transparent 70%);
+  animation: au-twinkle 4s ease-in-out infinite;
+}
+@keyframes au-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.4);
+  }
+}
+@keyframes au-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+  }
+}
+@keyframes au-bob {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+    opacity: 0.8;
+  }
+}
