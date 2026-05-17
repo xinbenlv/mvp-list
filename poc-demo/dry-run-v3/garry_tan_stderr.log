@@ -1,0 +1,6 @@
+# diversity: 5 violation(s) auto-fixed
+#   - plan[1] shares first stop 'valencia_street_corridor' with plan[0]
+#   - plan[2] shares first stop 'valencia_street_corridor' with plan[0]
+#   - plan[0] and plan[1] share 2 stops (>1): ['good_mong_kok_bakery', 'valencia_street_corridor']
+#   - plan[0] and plan[2] share 3 stops (>1): ['good_mong_kok_bakery', 'true_laurel_mission', 'valencia_street_corridor']
+#   - plan[1] and plan[2] share 2 stops (>1): ['good_mong_kok_bakery', 'valencia_street_corridor']

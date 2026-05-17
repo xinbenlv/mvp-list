@@ -174,12 +174,14 @@ def _load_mock_state_from_persona(persona_id: str = "mia") -> IntakeState:
     return state
 
 
-async def run_once(initial_text: str, *, mock_intake: bool = False) -> str:
+async def run_once(
+    initial_text: str, *, mock_intake: bool = False, persona_id: str = "mia"
+) -> str:
     """End-to-end pipeline. Returns the final ProposalSet markdown.
 
     With API key in .env: real intake (when not mock_intake) + real Composer.
     With --mock-intake AND no key: stub Composer (Phase 0-style placeholder).
-    With --mock-intake AND key present: stub intake (Mia persona) + REAL Composer.
+    With --mock-intake AND key present: stub intake (selected persona) + REAL Composer.
     """
 
     # Resolve client once. If missing, run in stub mode for the Composer too.
@@ -192,7 +194,7 @@ async def run_once(initial_text: str, *, mock_intake: bool = False) -> str:
         # Mock-intake without key → Composer also runs in stub mode
 
     if mock_intake:
-        state = _load_mock_state_from_persona("mia")
+        state = _load_mock_state_from_persona(persona_id)
     else:
         assert anthropic_client is not None  # guaranteed by branch above
         orchestrator = IntakeOrchestrator(anthropic_client=anthropic_client)
@@ -224,7 +226,7 @@ async def run_once(initial_text: str, *, mock_intake: bool = False) -> str:
 
     intake_summary = f'你说: "{initial_text.strip()[:60]}"'
     if mock_intake:
-        intake_summary += " — mock-intake run (Mia persona)."
+        intake_summary += f" — mock-intake run ({persona_id} persona)."
     return format_proposals(plans, intake_summary)
 
 
@@ -235,13 +237,20 @@ def main() -> None:
     parser.add_argument(
         "--mock-intake",
         action="store_true",
-        help="Skip live intake; use Mia persona as default IntakeState",
+        help="Skip live intake; use a persona JSON as default IntakeState",
+    )
+    parser.add_argument(
+        "--persona",
+        default="mia",
+        help="Persona ID for --mock-intake (mia | garry_tan | alex_chen | sam_reyes)",
     )
     args = parser.parse_args()
 
     _load_dotenv()
     initial_text = sys.stdin.read()
-    markdown = asyncio.run(run_once(initial_text, mock_intake=args.mock_intake))
+    markdown = asyncio.run(
+        run_once(initial_text, mock_intake=args.mock_intake, persona_id=args.persona)
+    )
     sys.stdout.write(markdown)
     sys.stdout.write("\n")
 
