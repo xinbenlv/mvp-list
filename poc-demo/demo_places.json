@@ -1,0 +1,424 @@
+{
+  "_meta": {
+    "purpose": "10 hand-curated Bay Area places for Day Composer POC demo. Designed to support 2-3 different day shapes (restoration day with baby in South Bay, exploratory urban day in SF, and mixed variants). Schema is a SLIM version of Place v2 — keeps only fields the Composer prompt needs to write magical copy.",
+    "schema_note": "Mirrors mvp-list/backend-data-schema-v2.md Place v2, but drops administrative fields (precise lat/lon, ratings sources, sources[], confidence_notes). Friend's real backend would have all v2 fields.",
+    "city_coverage": ["South Bay (Milpitas, San Jose)", "SF", "East Bay (Berkeley)"],
+    "place_count": 10
+  },
+
+  "places": [
+
+    {
+      "place_id": "alviso_adobe",
+      "name": "Alviso Adobe Park",
+      "place_type": "point_of_attraction",
+      "category": "historic_site",
+      "city": "Milpitas",
+      "address": "2087 Alviso Adobe Ct, Milpitas, CA 95035",
+      "hours_note": "Tour 14:30 only, 2nd Saturday of each month — FREE",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "quiet", "weight": 0.9 },
+          { "tag": "cultural", "weight": 0.8 },
+          { "tag": "warm", "weight": 0.6 },
+          { "tag": "slow", "weight": 0.8 },
+          { "tag": "authentic", "weight": 0.7 }
+        ],
+        "pacing_roles": ["opening", "breathing"],
+        "emotional_roles": ["restore", "slow_down"],
+        "energy_cost": "low",
+        "chaos_tolerance": "low",
+        "social_fit": ["family_with_baby", "couple"],
+        "compatibility_hints": {
+          "good_after": ["sandy_wool_lake"],
+          "good_before": []
+        }
+      },
+      "logistics": {
+        "parking": "easy_free",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 45,
+        "booking_links": []
+      },
+      "narrative_hook": "A 19th-century adobe house preserved as a small history room — sun-warmed, restrained, and easy to absorb without spending a museum's worth of energy. The Bay Area before it became the Bay Area."
+    },
+
+    {
+      "place_id": "sandy_wool_lake",
+      "name": "Sandy Wool Lake (Ed Levin Park)",
+      "place_type": "point_of_attraction",
+      "category": "park",
+      "city": "Milpitas",
+      "address": "901 Downing Rd, Milpitas, CA 95035",
+      "hours_note": "Sunrise to sunset",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "outdoor", "weight": 0.9 },
+          { "tag": "spacious", "weight": 0.9 },
+          { "tag": "quiet", "weight": 0.7 },
+          { "tag": "restorative", "weight": 0.9 },
+          { "tag": "family_oriented", "weight": 0.8 }
+        ],
+        "pacing_roles": ["breathing", "recovery"],
+        "emotional_roles": ["restore", "slow_down"],
+        "energy_cost": "low",
+        "chaos_tolerance": "low",
+        "social_fit": ["family_with_baby", "couple", "friends"],
+        "compatibility_hints": {
+          "good_after": ["dong_que"],
+          "good_before": ["alviso_adobe"]
+        }
+      },
+      "logistics": {
+        "parking": "easy_free",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 90,
+        "booking_links": []
+      },
+      "narrative_hook": "A reservoir-turned-park with bird-watching, fishing piers, and gentle walking loops. Strollers welcome. The kind of place where you can breathe out the week without an itinerary."
+    },
+
+    {
+      "place_id": "dong_que",
+      "name": "Dong Que Restaurant 东雀越南菜",
+      "place_type": "restaurant",
+      "category": "vietnamese",
+      "city": "San Jose",
+      "address": "2852 Alum Rock Ave, San Jose, CA 95127",
+      "hours_note": "11:00–22:00 daily, walk-in only",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "lively", "weight": 0.9 },
+          { "tag": "authentic", "weight": 0.9 },
+          { "tag": "dense", "weight": 0.8 },
+          { "tag": "warm", "weight": 0.7 },
+          { "tag": "social", "weight": 0.7 }
+        ],
+        "pacing_roles": ["peak"],
+        "emotional_roles": ["celebrate", "feel_alive"],
+        "energy_cost": "medium",
+        "chaos_tolerance": "medium",
+        "social_fit": ["family_with_baby", "couple", "friends"],
+        "compatibility_hints": {
+          "good_after": ["spaced_out_comedy"],
+          "good_before": ["sandy_wool_lake", "alviso_adobe"]
+        }
+      },
+      "logistics": {
+        "parking": "outer_lot_easy",
+        "kid_friendly": true,
+        "reservation_model": "walk_in_only",
+        "estimated_duration_minutes": 75,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["vietnamese", "seafood"],
+        "price_range": "$$",
+        "top_dishes": [
+          { "menu_number": 15, "name": "香松腊肠锅巴饭", "note": "招牌主食，盖锅锅巴的烟火气" },
+          { "menu_number": 103, "name": "铁板螺丝", "note": "热闹下酒，集体气氛拉满" },
+          { "menu_number": 88, "name": "烤生蚝", "note": "开胃必点" },
+          { "menu_number": 92, "name": "鱼籽扇贝", "note": "精致小品" },
+          { "menu_number": 93, "name": "蛏子烤空心菜", "note": "海鲜+绿叶清口" },
+          { "menu_number": 5, "name": "烤鹌鹑", "note": "传统硬菜" },
+          { "menu_number": 68, "name": "炒牛蛙腿", "note": "下饭神器" }
+        ],
+        "ordering_logic_hint": "前菜推荐 88 + 92 开胃，主食 15 锅巴饭垫底，再加 1-2 道热炒（68 或 103）作为烟火气收尾。带宝宝可以早到（17:30）避开 peak。"
+      },
+      "narrative_hook": "湾区越南菜里少有的'像在西贡街边'的真烟火气 —— 菜单按编号点单，省得纠结，腊肠锅巴饭是 signature。"
+    },
+
+    {
+      "place_id": "spaced_out_comedy",
+      "name": "Spaced Out Stand-up Comedy",
+      "place_type": "point_of_attraction",
+      "category": "event_venue",
+      "city": "San Jose",
+      "address": "Mystérieux Brand, 28 N Almaden Ave #30, San Jose, CA 95110",
+      "hours_note": "Saturdays 20:00 — ticket required",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "lively", "weight": 0.7 },
+          { "tag": "social", "weight": 0.6 },
+          { "tag": "hip", "weight": 0.6 },
+          { "tag": "novel", "weight": 0.5 }
+        ],
+        "pacing_roles": ["closing"],
+        "emotional_roles": ["feel_alive", "celebrate"],
+        "energy_cost": "low",
+        "chaos_tolerance": "medium",
+        "social_fit": ["couple", "friends"],
+        "compatibility_hints": {
+          "good_after": [],
+          "good_before": ["dong_que"]
+        }
+      },
+      "logistics": {
+        "parking": "spothero_pre_book_recommended",
+        "kid_friendly": false,
+        "reservation_model": "ticket_required",
+        "estimated_duration_minutes": 90,
+        "booking_links": [
+          { "label": "Eventbrite tickets ($12.99)", "url": "https://www.eventbrite.com/e/spaced-out-standup-comedy-in-downtown-san-jose-tickets-1977634803935" },
+          { "label": "SpotHero parking ($8)", "url": "https://spothero.com/search" }
+        ]
+      },
+      "narrative_hook": "Small-room downtown stand-up — the kind of low-stakes, lightly chaotic energy that closes a quieter day without overspending you."
+    },
+
+    {
+      "place_id": "philz_milpitas",
+      "name": "Philz Coffee (Milpitas Square)",
+      "place_type": "restaurant",
+      "category": "cafe",
+      "city": "Milpitas",
+      "address": "412 Barber Ln, Milpitas, CA 95035",
+      "hours_note": "06:00–20:00",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "warm", "weight": 0.8 },
+          { "tag": "slow", "weight": 0.7 },
+          { "tag": "familiar", "weight": 0.7 },
+          { "tag": "walkable", "weight": 0.5 }
+        ],
+        "pacing_roles": ["opening", "recovery"],
+        "emotional_roles": ["slow_down", "restore"],
+        "energy_cost": "low",
+        "chaos_tolerance": "low",
+        "social_fit": ["family_with_baby", "couple", "solo"],
+        "compatibility_hints": {
+          "good_after": ["alviso_adobe", "sandy_wool_lake"],
+          "good_before": []
+        }
+      },
+      "logistics": {
+        "parking": "easy_free",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 30,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["coffee"],
+        "price_range": "$",
+        "top_dishes": [
+          { "name": "Mint Mojito Iced Coffee", "note": "招牌" },
+          { "name": "Tesora", "note": "经典 hand-poured" }
+        ]
+      },
+      "narrative_hook": "Pre-game caffeine that doesn't feel like a transaction. Hand-poured, slow, the barista will remember you."
+    },
+
+    {
+      "place_id": "sfmoma",
+      "name": "SFMOMA",
+      "place_type": "point_of_attraction",
+      "category": "museum",
+      "city": "San Francisco",
+      "address": "151 3rd St, San Francisco, CA 94103",
+      "hours_note": "10:00–17:00, closed Wed",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "cultural", "weight": 0.95 },
+          { "tag": "cinematic", "weight": 0.7 },
+          { "tag": "dense", "weight": 0.7 },
+          { "tag": "photogenic", "weight": 0.6 },
+          { "tag": "contemplative", "weight": 0.6 }
+        ],
+        "pacing_roles": ["peak", "breathing"],
+        "emotional_roles": ["explore", "feel_alive"],
+        "energy_cost": "high",
+        "chaos_tolerance": "medium",
+        "social_fit": ["couple", "friends", "parents_visiting"],
+        "compatibility_hints": {
+          "good_after": ["yerba_buena_gardens", "sightglass"],
+          "good_before": []
+        }
+      },
+      "logistics": {
+        "parking": "garage_paid",
+        "kid_friendly": true,
+        "reservation_model": "ticket_recommended",
+        "estimated_duration_minutes": 120,
+        "booking_links": [
+          { "label": "Tickets ($30)", "url": "https://www.sfmoma.org/visit/tickets/" }
+        ]
+      },
+      "narrative_hook": "Seven floors of contemporary work, but you don't have to do it all — the 3rd floor photography wing alone is enough to feel like you've traveled somewhere."
+    },
+
+    {
+      "place_id": "yerba_buena_gardens",
+      "name": "Yerba Buena Gardens",
+      "place_type": "point_of_attraction",
+      "category": "park",
+      "city": "San Francisco",
+      "address": "750 Howard St, San Francisco, CA 94103",
+      "hours_note": "06:00–22:00, free",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "outdoor", "weight": 0.8 },
+          { "tag": "walkable", "weight": 0.9 },
+          { "tag": "spacious", "weight": 0.7 },
+          { "tag": "warm", "weight": 0.5 }
+        ],
+        "pacing_roles": ["breathing", "recovery"],
+        "emotional_roles": ["restore", "slow_down"],
+        "energy_cost": "low",
+        "chaos_tolerance": "medium",
+        "social_fit": ["family_with_baby", "couple", "solo"],
+        "compatibility_hints": {
+          "good_after": ["burma_superstar"],
+          "good_before": ["sfmoma"]
+        }
+      },
+      "logistics": {
+        "parking": "garage_nearby_paid",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 30,
+        "booking_links": []
+      },
+      "narrative_hook": "The grass island between SFMOMA and the Metreon — perfect 20-minute reset between indoor stops, especially if there's sun."
+    },
+
+    {
+      "place_id": "burma_superstar",
+      "name": "Burma Superstar",
+      "place_type": "restaurant",
+      "category": "burmese",
+      "city": "San Francisco",
+      "address": "309 Clement St, San Francisco, CA 94118",
+      "hours_note": "Lunch 11:00–15:30, dinner 17:00–21:30, no reservations",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "lively", "weight": 0.8 },
+          { "tag": "authentic", "weight": 0.8 },
+          { "tag": "warm", "weight": 0.7 },
+          { "tag": "dense", "weight": 0.6 }
+        ],
+        "pacing_roles": ["peak"],
+        "emotional_roles": ["explore", "celebrate"],
+        "energy_cost": "medium",
+        "chaos_tolerance": "medium",
+        "social_fit": ["couple", "friends", "family_with_baby"],
+        "compatibility_hints": {
+          "good_after": [],
+          "good_before": ["sfmoma", "yerba_buena_gardens"]
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": true,
+        "reservation_model": "walk_in_with_wait",
+        "estimated_duration_minutes": 75,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["burmese"],
+        "price_range": "$$",
+        "top_dishes": [
+          { "name": "Tea Leaf Salad (signature)", "note": "拌进去现场吃，香脆酸辣" },
+          { "name": "Samusa Soup", "note": "招牌酸辣汤" },
+          { "name": "Coconut Chicken Curry Noodles", "note": "椰香主食" },
+          { "name": "Rainbow Salad", "note": "10 种食材混合，仪式感强" }
+        ],
+        "ordering_logic_hint": "必点 Tea Leaf Salad（来这家不点就白来），配 Samusa Soup 开胃，再选 1 主食 + 1 凉拌。两人吃 4 道刚好。"
+      },
+      "narrative_hook": "Clement Street 上排队 20 年的缅甸馆 —— 茶叶沙拉是 fan-favorite，桌边现场拌的仪式感是别处没有的。"
+    },
+
+    {
+      "place_id": "sightglass_sf",
+      "name": "Sightglass Coffee (SoMa)",
+      "place_type": "restaurant",
+      "category": "cafe",
+      "city": "San Francisco",
+      "address": "270 7th St, San Francisco, CA 94103",
+      "hours_note": "07:00–18:00",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "cinematic", "weight": 0.7 },
+          { "tag": "warm", "weight": 0.7 },
+          { "tag": "hip", "weight": 0.6 },
+          { "tag": "polished", "weight": 0.7 },
+          { "tag": "photogenic", "weight": 0.6 },
+          { "tag": "slow", "weight": 0.5 }
+        ],
+        "pacing_roles": ["opening", "breathing"],
+        "emotional_roles": ["slow_down", "feel_alive"],
+        "energy_cost": "low",
+        "chaos_tolerance": "low",
+        "social_fit": ["couple", "solo", "friends"],
+        "compatibility_hints": {
+          "good_after": ["sfmoma"],
+          "good_before": []
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": true,
+        "reservation_model": "walk_in",
+        "estimated_duration_minutes": 40,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["coffee"],
+        "price_range": "$$",
+        "top_dishes": [
+          { "name": "Pour-over", "note": "single origin 选一支" },
+          { "name": "Cortado", "note": "扎实的奶咖" }
+        ]
+      },
+      "narrative_hook": "Double-height industrial space with northern light pouring in from the second floor — the kind of cafe that earns the cliché 'feels like Tokyo'."
+    },
+
+    {
+      "place_id": "tartine_mission",
+      "name": "Tartine Bakery (Mission)",
+      "place_type": "restaurant",
+      "category": "bakery",
+      "city": "San Francisco",
+      "address": "600 Guerrero St, San Francisco, CA 94110",
+      "hours_note": "08:00–17:00",
+      "composition": {
+        "vibe_tags": [
+          { "tag": "warm", "weight": 0.85 },
+          { "tag": "dense", "weight": 0.7 },
+          { "tag": "classic", "weight": 0.8 },
+          { "tag": "lively", "weight": 0.6 },
+          { "tag": "photogenic", "weight": 0.6 }
+        ],
+        "pacing_roles": ["opening"],
+        "emotional_roles": ["slow_down", "restore"],
+        "energy_cost": "low",
+        "chaos_tolerance": "medium",
+        "social_fit": ["family_with_baby", "couple", "solo"],
+        "compatibility_hints": {
+          "good_after": ["sfmoma", "yerba_buena_gardens"],
+          "good_before": []
+        }
+      },
+      "logistics": {
+        "parking": "street_difficult",
+        "kid_friendly": true,
+        "reservation_model": "walk_in_with_wait",
+        "estimated_duration_minutes": 40,
+        "booking_links": []
+      },
+      "restaurant": {
+        "cuisine_type": ["bakery", "pastry"],
+        "price_range": "$$",
+        "top_dishes": [
+          { "name": "Morning Bun", "note": "Tartine 的灵魂，必抢 11am 前" },
+          { "name": "Country Bread", "note": "全美 best 之一" },
+          { "name": "Croque Monsieur", "note": "正餐替代" }
+        ]
+      },
+      "narrative_hook": "排队 15 分钟的 Mission 烘焙朝圣地 —— Morning Bun 是 Tartine 的灵魂，11 点前售罄是常态。"
+    }
+
+  ]
+}
