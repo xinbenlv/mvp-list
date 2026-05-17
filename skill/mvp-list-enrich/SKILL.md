@@ -57,12 +57,12 @@ When writing to a directory-style Markdown repo:
 ## Output
 
 ```markdown
-已更新 MVP List Place：
+Updated MVP List Place:
 
-- 地点：<name>
-- 类型：<restaurant | point_of_attraction>
-- 文件：<path>
-- 结构化状态：frontmatter 已通过 schema 校验
-- gbrain 状态：<已查询验证 | 已写入 Markdown，未验证查询索引>
-- 主要缺口：<none 或字段列表>
+- Place: <name>
+- Type: <restaurant | point_of_attraction>
+- File: <path>
+- Structured status: frontmatter passed schema validation
+- gbrain status: <query-verified | written to Markdown, query indexing not verified>
+- Main gaps: <none or field list>
 ```
