@@ -1,0 +1,155 @@
+{
+  "plan": {
+    "plan_id": "mia_outdoor_exploratory",
+    "persona_id": "mia",
+    "version": "v1",
+    "day_theme": "户外轻探索的一天 · 慢恢复",
+    "theme_anchor": "outdoor_exploratory",
+    "pitch": "Milpitas 本地户外线，从咖啡开始到湖边恢复，最轻松的 low-key 版本。",
+    "mood_tags": [
+      "restorative",
+      "lightly_exploratory",
+      "warm",
+      "not_rushed",
+      "intimate"
+    ],
+    "emotional_arc_text": "opening → breathing → peak → closing",
+    "emotional_arc_visual": "",
+    "stops": [
+      {
+        "stop_index": 0,
+        "time": "13:00",
+        "place_id": "philz_milpitas",
+        "place_name": "Philz Coffee (Milpitas Square)",
+        "one_liner": "一杯手冲咖啡，barista 会记得你点 Mint Mojito。不是交易，是仪式感的开始。",
+        "why_fits_today": "你的 taste_signature 里 warm 0.69、walkable 0.72 —— Philz 就是这种质感：手冲慢、空间暖、可以坐下来不被催。你说想要 restore + explore 的平衡，这一杯 *regulates* 你从周中高密度切换到周末节奏的那个瞬间，又不消耗你接下来要用的探索精力。Milpitas Square 可以顺便走一圈，warm-up 今天的户外线。",
+        "logistics": {
+          "raw": "🅿️ 免费停车 · 👶 stroller 友好 · ⏰ 开到 20:00",
+          "drive_time_min": null,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": null,
+        "tip": "点 Tesora 如果想要经典 hand-poured，Mint Mojito 如果想要清爽开场。",
+        "transition_to_next": "warm caffeine → sun-warmed history",
+        "transition_drive_min": 5,
+        "image_url": null
+      },
+      {
+        "stop_index": 1,
+        "time": "14:30",
+        "place_id": "alviso_adobe",
+        "place_name": "Alviso Adobe Park",
+        "one_liner": "一栋 19th-century 的土砖房，做成了一个小小的历史展示间。阳光从西窗斜进来，屋顶横梁触手可及。",
+        "why_fits_today": "你 vibe_weights 里 cultural 0.78、intimate 0.82 —— Alviso 是湾区还没被湾区之前的那个版本：安静、真实、不表演。一场 tour 只接 8 个人，45 分钟刚好够 *opens* 你对这片土地的感知，又不会像大博物馆那样消耗你的 medium energy。你说 chaos_tolerance low，这里的节奏就是慢慢走、慢慢看、没人催你拍照打卡。",
+        "logistics": {
+          "raw": "🚗 5min from Philz · 🅿️ 免费停车 · 👶 stroller 友好（西侧入口无台阶）· 🎟️ FREE, 每月第二个周六 14:30 only\n🔗 book: https://www.eventbrite.com/e/alviso-adobe-saturday-tours-tickets-1146480567239",
+          "drive_time_min": 5,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [
+            {
+              "label": "book",
+              "url": "https://www.eventbrite.com/e/alviso-adobe-saturday-tours-tickets-1146480567239"
+            }
+          ],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": null,
+        "tip": "如果今天不是第二个周六，Adobe 外围公园也值得走一圈 —— 同样的阳光和土墙，只是没有室内 tour。",
+        "transition_to_next": "indoor cultural breathing → outdoor wide opening",
+        "transition_drive_min": 8,
+        "image_url": null
+      },
+      {
+        "stop_index": 2,
+        "time": "16:00",
+        "place_id": "sandy_wool_lake",
+        "place_name": "Sandy Wool Lake (Ed Levin Park)",
+        "one_liner": "一个被改造成公园的水库。鸟在飞，几个钓鱼的人，一圈不到 1 英里的散步道。宽敞、无表演、可以什么都不想。",
+        "why_fits_today": "你 emotional_intent 里 restore + feel_alive 并存 —— Sandy Wool 就是这种矛盾的解：户外、spacious 0.58、但又 quiet 不 rush。你 vibe_weights 里 cinematic 0.86 排第一，湖边那个光线（尤其 16:00-17:30 这个时段）会给你那种\"我在自己的电影里\"的感觉，又不需要你 perform 什么。这一站 *grounds* 你前面文化吸收后的状态，把你重新放回身体和呼吸里。",
+        "logistics": {
+          "raw": "🚗 8min from Alviso · 🅿️ 湖边圆盘停车场免费 · 👶 stroller 友好 · ⏰ sunset ~17:30 (冬季)，带件外套",
+          "drive_time_min": 8,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": null,
+        "tip": "西侧长椅能看到飞机起降 —— 如果带宝宝出门，这个 visual 够看 20 分钟。",
+        "transition_to_next": "outdoor breathing → appetite reopening",
+        "transition_drive_min": 20,
+        "image_url": null
+      },
+      {
+        "stop_index": 3,
+        "time": "18:00",
+        "place_id": "dong_que",
+        "place_name": "Dong Que Restaurant 东雀越南菜",
+        "one_liner": "湾区越南菜里少有的\"真烟火气\" —— 菜单按编号点单，省得纠结。腊肠锅巴饭是 signature，热气和声音把你从下午的安静里拉回人间。",
+        "why_fits_today": "前面三站都是 low-noise、restorative —— 到了晚饭点你需要一点声音和热度把今天 *closes the loop*。你 taste_signature 里 warm 0.69、你 emotional_intent 里 feel_alive —— Dong Que 的烟火气就是这个 feel_alive 的具体化：不优雅但真实，walk-in 不预约，18:00 到能抢到位子又避开 peak。你 chaos_tolerance low，所以早到（避开 19:00 人潮）+ 按编号点单（不需要决策疲劳）就刚好把这个 peak 控制在你能享受的范围内。",
+        "logistics": {
+          "raw": "🚗 20min from Sandy Wool · 🅿️ 外围停车场免费 · 👶 自带宝宝椅 · 💵 ~$60 for two",
+          "drive_time_min": 20,
+          "parking": null,
+          "kid_friendly": true,
+          "reservation_note": null,
+          "booking_links": [],
+          "transit_estimate_usd": null
+        },
+        "order_recommendations": {
+          "menu_listed": [
+            "15 香松腊肠锅巴饭",
+            "88 烤生蚝",
+            "92 鱼籽扇贝",
+            "93 蛏子烤空心菜",
+            "103 铁板螺丝",
+            "5 烤鹌鹑",
+            "68 炒牛蛙腿"
+          ],
+          "bold_picks": [
+            "88 烤生蚝 + 92 鱼籽扇贝",
+            "15 香松腊肠锅巴饭",
+            "93 蛏子烤空心菜"
+          ],
+          "logic_text": "**88 烤生蚝 + 92 鱼籽扇贝** 开胃（cool & clean，前面湖边吹了一下午刚好重新打开味觉）；**15 香松腊肠锅巴饭** 当 grounding 主食（招牌，盖锅的那个烟火气是今天唯一的 peak moment）；**93 蛏子烤空心菜** 一道海鲜+绿叶平衡油腻。跳过 103 铁板螺丝（声音会拉到你承受不了的 chaos level）和 68 炒牛蛙腿（太下饭会吃撑）。两人 ~$50-60 刚好。"
+        },
+        "tip": "18:00 到，跟前台说要靠窗安静角落 —— 他们会懂。",
+        "transition_to_next": null,
+        "transition_drive_min": null,
+        "image_url": null
+      }
+    ],
+    "adaptive_branches": [],
+    "markdown_full": "## 户外轻探索的一天 · 慢恢复\n\n> **一句话 pitch**: Milpitas 本地户外线，从咖啡开始到湖边恢复，最轻松的 low-key 版本。\n\n> 你今天会从一杯手冲咖啡慢慢醒过来，走进一段被时间晒透的土砖房历史，然后在湖边把这一周的紧绷吹散 —— 晚餐的烟火气把你重新 ground 回人间。\n\n**Mood**: restorative · lightly_exploratory · warm · not_rushed · intimate\n**Pace**: 慢起咖啡 → 文化呼吸 → 湖边恢复 → 烟火气晚餐\n\n```\n☕ 慢起 ──► 🏛️ 文化呼吸 ──► 🌿 湖边恢复 ──► 🍜 烟火气收尾\n   13:00       14:30            16:00           18:00\n```\n\n---\n\n## 13:00 · Philz Coffee (Milpitas Square)\n\n> 一杯手冲咖啡，barista 会记得你点 Mint Mojito。不是交易，是仪式感的开始。\n\n**Why this fits today**\n你的 taste_signature 里 warm 0.69、walkable 0.72 —— Philz 就是这种质感：手冲慢、空间暖、可以坐下来不被催。你说想要 restore + explore 的平衡，这一杯 *regulates* 你从周中高密度切换到周末节奏的那个瞬间，又不消耗你接下来要用的探索精力。Milpitas Square 可以顺便走一圈，warm-up 今天的户外线。\n\n**Logistics**\n🅿️ 免费停车 · 👶 stroller 友好 · ⏰ 开到 20:00\n\n💡 *点 Tesora 如果想要经典 hand-poured，Mint Mojito 如果想要清爽开场。*\n\n---\n\n*(transition: warm caffeine → sun-warmed history · ~5min drive)*\n\n---\n\n## 14:30 · Alviso Adobe Park\n\n> 一栋 19th-century 的土砖房，做成了一个小小的历史展示间。阳光从西窗斜进来，屋顶横梁触手可及。\n\n**Why this fits today**\n你 vibe_weights 里 cultural 0.78、intimate 0.82 —— Alviso 是湾区还没被湾区之前的那个版本：安静、真实、不表演。一场 tour 只接 8 个人，45 分钟刚好够 *opens* 你对这片土地的感知，又不会像大博物馆那样消耗你的 medium energy。你说 chaos_tolerance low，这里的节奏就是慢慢走、慢慢看、没人催你拍照打卡。\n\n**Logistics**\n🚗 5min from Philz · 🅿️ 免费停车 · 👶 stroller 友好（西侧入口无台阶）· 🎟️ FREE, 每月第二个周六 14:30 only\n🔗 book: https://www.eventbrite.com/e/alviso-adobe-saturday-tours-tickets-1146480567239\n\n💡 *如果今天不是第二个周六，Adobe 外围公园也值得走一圈 —— 同样的阳光和土墙，只是没有室内 tour。*\n\n---\n\n*(transition: indoor cultural breathing → outdoor wide opening · ~8min drive)*\n\n---\n\n## 16:00 · Sandy Wool Lake (Ed Levin Park)\n\n> 一个被改造成公园的水库。鸟在飞，几个钓鱼的人，一圈不到 1 英里的散步道。宽敞、无表演、可以什么都不想。\n\n**Why this fits today**\n你 emotional_intent 里 restore + feel_alive 并存 —— Sandy Wool 就是这种矛盾的解：户外、spacious 0.58、但又 quiet 不 rush。你 vibe_weights 里 cinematic 0.86 排第一，湖边那个光线（尤其 16:00-17:30 这个时段）会给你那种\"我在自己的电影里\"的感觉，又不需要你 perform 什么。这一站 *grounds* 你前面文化吸收后的状态，把你重新放回身体和呼吸里。\n\n**Logistics**\n🚗 8min from Alviso · 🅿️ 湖边圆盘停车场免费 · 👶 stroller 友好 · ⏰ sunset ~17:30 (冬季)，带件外套\n\n💡 *西侧长椅能看到飞机起降 —— 如果带宝宝出门，这个 visual 够看 20 分钟。*\n\n---\n\n*(transition: outdoor breathing → appetite reopening · ~20min drive)*\n\n---\n\n## 18:00 · Dong Que Restaurant 东雀越南菜\n\n> 湾区越南菜里少有的\"真烟火气\" —— 菜单按编号点单，省得纠结。腊肠锅巴饭是 signature，热气和声音把你从下午的安静里拉回人间。\n\n**Why this fits today**\n前面三站都是 low-noise、restorative —— 到了晚饭点你需要一点声音和热度把今天 *closes the loop*。你 taste_signature 里 warm 0.69、你 emotional_intent 里 feel_alive —— Dong Que 的烟火气就是这个 feel_alive 的具体化：不优雅但真实，walk-in 不预约，18:00 到能抢到位子又避开 peak。你 chaos_tolerance low，所以早到（避开 19:00 人潮）+ 按编号点单（不需要决策疲劳）就刚好把这个 peak 控制在你能享受的范围内。\n\n**Order**\nMenu: 15 香松腊肠锅巴饭 · 88 烤生蚝 · 92 鱼籽扇贝 · 93 蛏子烤空心菜 · 103 铁板螺丝 · 5 烤鹌鹑 · 68 炒牛蛙腿\n\n**Your picks**: **88 烤生蚝 + 92 鱼籽扇贝** 开胃（cool & clean，前面湖边吹了一下午刚好重新打开味觉）；**15 香松腊肠锅巴饭** 当 grounding 主食（招牌，盖锅的那个烟火气是今天唯一的 peak moment）；**93 蛏子烤空心菜** 一道海鲜+绿叶平衡油腻。跳过 103 铁板螺丝（声音会拉到你承受不了的 chaos level）和 68 炒牛蛙腿（太下饭会吃撑）。两人 ~$50-60 刚好。\n\n**Logistics**\n🚗 20min from Sandy Wool · 🅿️ 外围停车场免费 · 👶 自带宝宝椅 · 💵 ~$60 for two\n\n💡 *18:00 到，跟前台说要靠窗安静角落 —— 他们会懂。*\n\n---\n\n## 🔀 如果今天有变化\n\n**If 吃完晚饭还有 energy + 想要一个真正的 closing（而不是直接回家）**\n→ 开 25min 去 downtown San Jose 看 **Spaced Out 喜剧**（20:00 场，$12.99）—— 90min 小剧场，low-stakes 的笑声把今天收尾。SpotHero 提前订车位 ~$8。\n🔗 book: https://www.eventbrite.com/e/spaced-out-standup-comedy-in-downtown-san-jose-tickets-1977634803935\n🅿️ pre-pay: https://spothero.com/search\n💰 transit estimate: ~$21 总额（票 + 停车）\n\n---\n\n## 🫧 给今天的你\n\n- **物理断网**: Sandy Wool 那段 cell signal 弱 —— 当成系统主动离线，inbox 可以等到明天。\n- **放弃完整**: Adobe tour 如果累了就只走外围，45 分钟的室内 tour 不是必选项 —— 今天的目标是恢复，不是收集体验。\n- **提前收**: Dong Que 如果 19:00 前吃完就直接回家 —— 不需要再找个地方\"把今天填满\"，一桌好饭就是收尾。",
+    "coaching_block": null,
+    "composer_note": null,
+    "score_summary": {
+      "stranger_test": 0,
+      "arc_coherence": 0,
+      "specificity": 0,
+      "avoidance_respect": 0,
+      "adaptive_branch": 0,
+      "notes": "live LLM run — score_summary not computed (Critic Phase 5 pending)"
+    }
+  },
+  "trip_context": {
+    "date_label": "Sat · Jan 10 · 2026",
+    "time_window": "14:00 → 21:00",
+    "origin": "Sunnyvale",
+    "companions": [
+      "partner",
+      "baby"
+    ],
+    "vehicle": "car",
+    "persona_id": "mia",
+    "intake_summary": "明天周日想一个人出门走走，不带宝宝。最近脑子累，想找一些自然光好、慢一点、能让自己安静下来的地方。我住 Sunnyvale，**最多开车 30 分钟**，不要去 Marin 或 SF（太远）。South Bay 或 Peninsula 附近就行。给我几个完全不同 shape 的选项 — 一个文化、一个户外、一个慢生活类，每个都要在不同的城市或类型场景里。",
+    "today_is": "2026-01-10"
+  }
+}

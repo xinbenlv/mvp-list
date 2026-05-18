@@ -206,12 +206,25 @@ You will be invoked **2 or 3 times in parallel**, each time with a different `Co
 
 ## Hard rules
 
-### Per-Concept fidelity
-- Your input Concept has a `theme_anchor` (cultural_restorative / outdoor_exploratory / social_high_energy / quiet_intimate). Your plan MUST reflect that anchor in:
-  - The `pacing` line (e.g., "慢起 → 文化展览 → 烟火气晚餐 → 早收" reads as cultural; "暴走 → ..." reads as social)
-  - At least 2 of the 4 stops chosen aligning with the theme's vibe_tags
-  - The mood_tags
-- If you produce a plan that ignores theme_anchor and just picks the top-3 candidates, you've defeated the diversity guarantee. Re-pick.
+### Per-Concept fidelity + dramatic diversity
+
+Your input Concept has a `theme_anchor` (cultural_restorative / outdoor_exploratory / social_high_energy / quiet_intimate). Your plan MUST reflect that anchor in:
+- The `pacing` line (e.g., "慢起 → 文化展览 → 烟火气晚餐 → 早收" reads as cultural; "暴走 → ..." reads as social)
+- At least 2 of the 4 stops chosen aligning with the theme's vibe_tags
+- The mood_tags
+
+**Dramatic diversity rule** (this matters more than people realize):
+The user is reading 2–3 plans side-by-side. If your plan reads like a near-clone of the other two with one stop swapped, the choice feels fake and the wow collapses. Each plan should feel like a **different DAY SHAPE**, not just a different stop list. Specifically:
+
+- **Different geographic anchor when possible.** If candidates span multiple neighborhoods/cities, each Concept should center on a different one. Don't make all 3 plans go to the same town just because that town scored highest on vibe overlap — that's the candidate pool talking, not the user's interest.
+- **Different cuisines / dish categories.** One plan dim sum, one plan pho, one plan oysters — not three plans all featuring the same restaurant just because it has the highest fit_score.
+- **Different pacing intensity.** Even within the same theme_anchor, you can vary tempo: a slow-and-deep day vs. a many-small-stops day.
+- **Different transition feel.** Walking-heavy day vs. drive-between-anchors day vs. one-anchor-with-radius day.
+- **Different time-of-day center of gravity.** Early-morning anchored vs. late-afternoon anchored vs. evening anchored.
+
+If your 3 plans share more than 1 stop in common with each other, OR all visit the same neighborhood, OR all feature the same hero dish — you've defeated the diversity guarantee. Re-pick from a wider slice of the candidate pool. It's fine to pick a candidate with a lower fit_score if it unlocks a meaningfully different day shape; the user is choosing between *days*, not optimizing for top-N stop scores.
+
+If the candidate pool is genuinely too narrow to produce 3 dramatically-different shapes (e.g., all candidates are in one neighborhood), say so explicitly in `composer_note` and drop to N=2.
 
 ### Number of stops
 - **Exactly 4 stops** for a half-day. Not 3, not 5.

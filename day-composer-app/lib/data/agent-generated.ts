@@ -77,3 +77,28 @@ export const AGENT_GARRY_PLANS: AgentPlanBundle[] = [
   AGENT_GARRY_OUTDOOR,
   AGENT_GARRY_SOCIAL,
 ];
+
+// ---------------------------------------------------------------------------
+// Mia — solo Sunday plans (generated 2026-05-17 from /tmp/mia_solo_sunday.txt)
+// Marin-centric: Mill Valley / Hog Island / Osmosis. Post-photofacial-style
+// constraints (no chlorine, adult-only spa) read from message context.
+// ---------------------------------------------------------------------------
+import miaCulturalRaw from "./agent-v3-mia/mia_cultural_restorative.json";
+import miaOutdoorRaw from "./agent-v3-mia/mia_outdoor_exploratory.json";
+import miaQuietRaw from "./agent-v3-mia/mia_quiet_intimate.json";
+
+export const AGENT_MIA_CULTURAL: AgentPlanBundle = adoptBundle(
+  miaCulturalRaw as RawBundle,
+);
+export const AGENT_MIA_OUTDOOR: AgentPlanBundle = adoptBundle(
+  miaOutdoorRaw as RawBundle,
+);
+export const AGENT_MIA_QUIET: AgentPlanBundle = adoptBundle(
+  miaQuietRaw as RawBundle,
+);
+
+export const AGENT_MIA_PLANS: AgentPlanBundle[] = [
+  AGENT_MIA_CULTURAL,
+  AGENT_MIA_OUTDOOR,
+  AGENT_MIA_QUIET,
+];

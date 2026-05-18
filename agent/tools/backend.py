@@ -154,6 +154,18 @@ def _passes_hard_filters(place: dict[str, Any], request: ExperienceRequest) -> b
         if parking in _NO_PARKING_VALUES:
             return False
 
+    # Geographic exclusion via env var (POC stopgap until max_drive_minutes
+    # is wired with real driving distances). Example:
+    #   EXCLUDE_CITIES="Marin,SF" filters out any place whose `city` field
+    #   contains either token (case-insensitive substring match).
+    excl = os.environ.get("EXCLUDE_CITIES", "").strip()
+    if excl:
+        place_city = (place.get("city") or "").lower()
+        for token in excl.split(","):
+            t = token.strip().lower()
+            if t and t in place_city:
+                return False
+
     # TODO(phase4): apply `constraints.max_drive_minutes` once real
     # driving-distance signals are available from backend. POC has no
     # lat/lon-grade distance, so geographic fit is implicit in ranking.
