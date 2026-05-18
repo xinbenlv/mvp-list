@@ -1,0 +1,14 @@
+PLAN_META JSON parse failed (likely token truncation — bump _MAX_TOKENS or trim prompt): Expecting ',' delimiter: line 1 column 1032 (char 1031); raw_len=9768, sidecar_excerpt='{"day_theme": "户外轻探索的一天", "pitch": "Valencia 街区暴走 + Chinatown 烟火气 + 19 楼城市点灯，cinematic 节奏最强的一版。", "theme_anchor": "outdoor_exploratory", "mood_tags": ["cinematic", "lively", "exploratory", "dense"], "'
+Composer response unusable; retrying once
+PLAN_META JSON parse failed (likely token truncation — bump _MAX_TOKENS or trim prompt): Expecting ',' delimiter: line 1 column 1024 (char 1023); raw_len=9315, sidecar_excerpt='{"day_theme": "文化慢恢复的一天 · 探索", "pitch": "Valencia 街区漫步 + Chinatown 烟火气 + 创意鸡尾酒收尾，最有 SF 本地灵魂的一版。", "theme_anchor": "cultural_restorative", "mood_tags": ["cinematic", "lively", "authentic", "intimate", '
+Composer response unusable; retrying once
+PLAN_META JSON parse failed (likely token truncation — bump _MAX_TOKENS or trim prompt): Expecting ',' delimiter: line 1 column 2101 (char 2100); raw_len=9987, sidecar_excerpt='{"day_theme": "户外轻探索的一天", "pitch": "Valencia 暴走 → Chinatown 烟火 → 旧金山天际线收尾，最 cinematic 的街区节奏。", "theme_anchor": "outdoor_exploratory", "mood_tags": ["cinematic", "lively", "authentic", "walkable"], "em'
+PLAN_META JSON parse failed (likely token truncation — bump _MAX_TOKENS or trim prompt): Expecting ',' delimiter: line 1 column 1015 (char 1014); raw_len=9816, sidecar_excerpt='{"day_theme": "文化慢恢复的一天 · 探索", "pitch": "从 Chinatown 叉烧包开始，在 Mission 街区散步中呼吸，用一桌越南烟火气收尾 —— 最接地气的 SF 文化线。", "theme_anchor": "cultural_restorative", "mood_tags": ["authentic", "lively", "grounding", "ci'
+# diversity: 4 violation(s) auto-fixed
+#   - plan[2] shares first stop 'good_mong_kok_bakery' with plan[0]
+#   - plan[0] and plan[1] share 2 stops (>1): ['good_mong_kok_bakery', 'valencia_street_corridor']
+#   - plan[0] and plan[2] share 2 stops (>1): ['good_mong_kok_bakery', 'valencia_street_corridor']
+#   - plan[1] and plan[2] share 3 stops (>1): ['good_mong_kok_bakery', 'true_laurel_mission', 'valencia_street_corridor']
+# frontend-json: wrote poc-demo/garry-demo/v3/garry_social_high_energy.json
+# frontend-json: wrote poc-demo/garry-demo/v3/garry_outdoor_exploratory.json
+# frontend-json: wrote poc-demo/garry-demo/v3/garry_cultural_restorative.json
